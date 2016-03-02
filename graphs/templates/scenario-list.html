@@ -1,0 +1,28 @@
+{% extends "teacher-base.html" %}
+{% block content %}
+
+    	<div class="row">
+
+			<h2>Existing scenarios</h2>
+
+			<div class="table-responsive">
+				<table class="table table-striped">
+				<tr>
+				<th>Scenario group</th><th>Scenario</th><th>Avg. learning gain</th><th>Avg time</th><th># students</th><th>Actions</th>
+				</tr>
+{% for scenario in object_list %} 
+				<tr>
+				  <td>{{ scenario.group }}</td>
+				  <td>{{ scenario.name }}</td>
+				  <td>{{ scenario.avg_learning }}</td>
+				  <td>{{ scenario.avg_time }}</td>
+				  <td>{{ scenario.num_students }}</td>
+				  <td><a href="{% url 'scenario' scenario.id %}">Preview</a> | <!--a href="/">Edit</a> |--> <form style="display: inline;" action='{% url 'scenario-delete' scenario.id %}' method='post'>{% csrf_token %}<a href="javascript:;" onclick="parentNode.submit();">Delete</a></form></td>
+				</tr>
+{% endfor %} 
+				</table>
+
+			</div>
+		</div>
+
+{% endblock %}

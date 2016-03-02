@@ -1,0 +1,114 @@
+<style>
+#container {position:relative;width:800px;height:546px;}
+
+#map-basel {position:absolute;left:208px;top:2px;}
+#map-davos {position:absolute;left:655px;top:202px;}
+#map-neuchatel {position:absolute;left:5px;top:170px;}
+#map-geneve {position:absolute;left:3px;top:352px;}
+#map-lausanne {position:absolute;left:105px;top:310px;}
+#map-fribourg {position:absolute;left:202px;top:248px;}
+#map-zurich {position:absolute;left:402px;top:1px;}
+
+#city-form  {position:absolute;top:420px;left:600px;width:100px;height:60px;}
+
+#options td {padding-right: 90px; vertical-align: top; text-align: left;}
+.map-input {width: 180px;}
+</style>
+<script>
+
+var chooseFrom = true;
+
+var ticket = [];
+
+$( document ).ready(function() {
+    $('#container input, #container img, #options img').each(function(){
+        //Change the src of each img
+        var path = $(this).attr('src');
+        $(this).attr('src', STATIC_URL + 'img/train/' + path);
+    });
+});
+
+
+function chooseCity(name) 
+{
+    if (chooseFrom){
+        $("#from").val(name)
+    	ticket['from'] = name;
+    }
+    else {
+        $("#to").val(name)
+    	ticket['to'] = name;
+    }
+    chooseFrom = !chooseFrom;
+}
+
+function setTicketVar(key, val)
+{
+    ticket[key] = val;
+}
+
+$("#submit").click(function(event)
+{
+    var variables = ['travel','travelClass','fare'];
+    for (var i = 0; i < variables.length; i++){
+        var v = variables[i];
+        ticket[v] = $('input[name=' + v + ']:checked').val()
+    }
+    ticket['bike'] = $('#bike').prop('checked') ? true : false;
+    interface_result(ticket);
+    return false;
+});
+
+</script>
+
+<div id="container">
+
+
+<div><img id="map" src="Swiss_Map.jpg" width="800" height="546"></div>
+
+<div id="map-basel"><input type="image" src="mapbasel.png" width="106" height="98" onClick = "chooseCity('Basel')"></div>
+<div id="map-davos"><input type="image" src="mapdavos.png" width="141" height="110" onClick = "chooseCity('Davos')"></div>
+<div id="map-neuchatel"><input type="image" src="mapneuchatel.png" width="196" height="77" onClick = "chooseCity('Neuchatel')"></div>
+<div id="map-fribourg"><input type="image" src="mapfribourg.png" width="125" height="62" onClick = "chooseCity('Fribourg')"></div>
+<div id="map-geneve"><input type="image" src="mapgeneva.png" width="101" height="190" onClick = "chooseCity('Geneve')"></div>
+<div id="map-lausanne"><input type="image" src="maplausanne.png" width="107" height="42" onClick = "chooseCity('Lausanne')"></div>
+<div id="map-zurich"><input type="image" src="mapzurich.png" width="109" height="135" onClick = "chooseCity('Zurich')"></div>
+
+<div id="city-form">
+From: <input class="form-control map-input" type="text" id="from" readonly>
+To: <input class="form-control map-input" type="text" id="to" readonly>
+</div>
+
+</div>
+
+
+<table id="options">
+<tr>
+<td style="padding-left:100px;">
+<h3>Travel</h3>
+<input type="radio" id="travel-one-way" name="travel" value="one-way" checked> <label for="travel-one-way"><image src="maponeway.png" width="35" height="20"></label><br />
+<input type="radio" id="travel-return" name="travel" value="return"> <label for="travel-return"><image src="mapreturn.png" width="55" height="20"></label>
+</td>
+<td>
+<h3>Fare</h3>
+<input type="radio" id="fare-standard" name="fare" value="standard" checked> <label for="fare-standard">standard</label><br />
+<input type="radio" id="fare-half" name="fare" value="half-fare"> <label for="fare-half">1/2 fare</label><br />
+<input type="radio" id="fare-young" name="fare" value="young"> <label for="fare-young">young</label><br />
+</td>
+<td>
+<h3>Class</h3>
+<input type="radio" id="class-1" name="travelClass" value="1"> <label for="class-1">1st</label><br />
+<input type="radio" id="class-2" name="travelClass" value="2" checked> <label for="class-2">2nd</label>
+</td>
+<td>
+<h3>Bike</h3>
+<input type="checkbox" id="bike" name="bike" value="yes"> <label for="travel-one-way">Bike</label><br />
+</td>
+<td style="vertical-align: middle">
+<!--input type="button" id="submit" value = "Buy" class="btn btn-default"-->
+  <a class="btn btn-success" id="submit" href="#" role="button">Buy</a>
+
+</td>
+</tr>
+</table>
+

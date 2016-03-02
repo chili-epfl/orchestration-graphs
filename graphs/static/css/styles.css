@@ -1,0 +1,87 @@
+.khodaya{
+    float: right;
+}
+.icon{
+    height: 40;
+    width: 40;
+}
+.smallCell{
+    width: 10;
+}
+.messageBody{
+    font-size: 30;
+}
+#avatar{
+    margin: 10px;
+}
+#avatarIcon{
+    height: 50;
+    width: 60;
+}
+
+.container{
+	display: inline-block;
+	vertical-align: top;
+	margin: 1%;
+	width: 50%;
+}
+#slides{
+   
+}
+
+#explore{
+    display: inline-block;
+    vertical-align: top;
+    margin-top: 1%;
+    //margin-left: 10%;
+}
+#signup{
+	display: inline-block;
+	vertical-align: top;
+	margin-top: 1%;
+	margin-left: 10%;
+}
+
+#online{
+    display: inline-block;
+    vertical-align: top;
+    margin-top: 1%;
+    margin-left: 10%;
+}
+
+
+#signup h2{
+background: none;
+}
+#explore h2{
+background: none;
+}
+
+#ex_navbar{
+    height: 33px;
+    background-color: #333333;
+}
+
+#ex_navbar ul {
+    margin: 0;
+    padding: 10px;
+    list-style: none;
+    width: 100%;
+    display: block;
+    float: left;
+}
+
+#ex_navbar ul li {
+    float: left;
+    margin: 0 10px 0 0;
+    padding: 0 10px;
+}
+
+#ex_navbar ul li a {
+    text-decoration: none;
+    color: #fff;
+}
+
+#ex_navbar ul li a:hover {
+    color: #ffff00;
+}

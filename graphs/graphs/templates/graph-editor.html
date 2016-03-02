@@ -1,0 +1,78 @@
+{% extends "teacher-base.html" %}
+{% load staticfiles %}
+    {% block css-files %}
+    <style>
+        body {
+        background: #eee;
+	margin: 0;
+        }
+	#graph {
+	    width: 100%;
+	    height: 300px;
+	}
+	.main {
+	padding: 20px;
+	padding-top: 10px;
+	}
+	line
+	{
+	    pointer-events: none;
+	}
+	#activity-form {
+	margin: 10px;
+	float: left;
+	text-align: center;
+	width: 40%;
+	}
+	#scenario-form-div {
+	margin: 10px;
+	float: right;
+	text-align: center;
+	width: 40%;
+	}
+    </style>
+    <link rel="stylesheet" type="text/css" href="http://medialize.github.io/jQuery-contextMenu/src/jquery.contextMenu.css" />
+    {% endblock %}
+    {% block content %}
+        <svg id="graph" class="context-menu-one box menu-1"> </svg>
+
+	<div id="activity-form">
+	Activity: <select id="activity-choice" name="activity-choice">
+	  <option value="-">Choose activity</option>
+	</select>
+	</div>
+
+	<div id="scenario-form-div">
+	  <form action="" method="post" id="scenario-form" name="scenario-form">
+	    {% csrf_token %}{{ form.as_p }}
+	    <input type="submit" value="Save scenario" id="save-scenario" name="save-scenario">
+	  </form>
+	</div>
+    {% endblock %}
+    {% block extra-scripts %}
+        <script src="/static/js/snap/dist/snap.svg-min.js"></script>
+	<script src="http://medialize.github.io/jQuery-contextMenu/src/jquery.contextMenu.js" type="text/javascript"></script>
+<script src="{% static 'js/graph.js' %}"></script>
+	<script>
+	var possibleActivities = [
+	            {title: "Overview", link: "/activity/1/"},
+	            {title: "Pre-test", link: "/activity/2/"},
+	            {title: "Definitions", link: "http://en.wikipedia.org/wiki/Archimedes'_principle"},
+	            {title: "Simulator", link: "http://phet.colorado.edu/sims/density-and-buoyancy/buoyancy_en.html"},
+	            {title: "Story", link: "https://www.youtube.com/embed/ijj58xD5fDI"},
+
+	            {title: "Exercises", link: "http://scienceuniverse101.blogspot.ch/2012/01/archimedes-principle-worked-examples.html#.VTi06OTh6DA"},
+	            {title: "Group exercise", link: "/activity/4/"},
+	            {title: "Summary", link: "/activity/5/"},
+	            {title: "Post-test", link: "/activity/2/"},
+	            {title: "Feedback", link: "/activity/6/"},
+	       ];
+	possibleActivities.forEach(function(a){
+	$('#activity-choice').append($('<option>', {
+	value: a.link,
+	text: a.title
+	}));
+	});
+
+	</script>
+    {% endblock %}

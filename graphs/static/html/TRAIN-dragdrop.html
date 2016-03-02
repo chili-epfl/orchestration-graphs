@@ -1,0 +1,152 @@
+<style>
+
+#container {text-align: center; }
+#container table {margin: 0 auto; margin-bottom: 10px;border-spacing: 10px;border-collapse: separate;}
+#container table tr td {width: 200px; border: 1px solid; border-radius: 10px; border: 1px solid #888888; }
+
+.dragable {
+ display: inline-block;
+ width: 100px;
+ font-size: 14px;
+ background-color: #DDFFFF;
+ text-align: center;
+ padding: 5px;
+ -moz-border-radius: 10px;
+ border-radius: 10px;
+ border: 1px solid #999999;
+ font-weight: bold;
+ margin: 3px
+}
+#container td {
+ text-align: center;
+ vertical-align: middle;
+}
+.dropable {
+ display: block;
+ height: 70px;
+ padding: 3px;
+ background-color: #FFFFBB;
+}
+h3 {
+ font-size: 18px;
+} 
+td {
+ font-family: Arial;
+}
+</style>
+<script>
+var ticket = [];
+
+ticket['from'] = null;
+ticket['to'] = null;
+ticket['travel'] = null;
+ticket['travelClass'] = null;
+ticket['bike'] = null;
+ticket['fare'] = null;
+
+var curval = "";
+
+function allowDrop(ev) {
+    ev.preventDefault();
+}
+
+function drag(ev, obj) {
+    ev.dataTransfer.setData("text", ev.target.id);
+    curval = obj.id;
+}
+
+function dropValue(ev, obj) {
+    ev.preventDefault();
+    var data = ev.dataTransfer.getData("text");
+    if (ticket[obj.id] == null){
+        ticket[obj.id] = curval;
+        ev.target.appendChild(document.getElementById(data));
+    }
+}
+
+$( document ).ready(function() {
+    $('#div0 img, #div0 input').each(function(){
+        //Change the src of each img
+        var path = $(this).attr('src');
+        $(this).attr('src', STATIC_URL + 'img/train/' + path);
+    });
+});
+
+  $("#submit").click(function(event){
+    if (ticket['from'] == null)
+        ticket['from'] = "";
+    if (ticket['to'] == null)
+        ticket['to'] = "";
+    if (ticket['travel'] == null)
+        ticket['travel'] = "one-way";
+    if (ticket['travelClass'] == null)
+        ticket['travelClass'] = "2";
+    if (ticket['bike'] == null)
+        ticket['bike'] = false;
+    if (ticket['fare'] == null)
+        ticket['fare'] = "standard";
+
+    if (ticket['bike'] == "yes")
+      ticket['bike'] = true;
+    if (ticket['travelClass'] == "1")
+      ticket['travelClass'] = 1;
+    if (ticket['travelClass'] == "2")
+      ticket['travelClass'] = 2;
+    interface_result(ticket);
+    return false;
+  });
+
+</script>
+
+<table><tr><td style="vertical-align: top; padding-right: 20px;">
+<div id="container">
+<h3>Your ticket</h3>
+<table><tr><td>
+<div class="dropable" id="from" ondrop="dropValue(event, this)" ondragover="allowDrop(event)">From:<br /></div>
+</td><td>
+<div class="dropable" id="to" ondrop="dropValue(event, this)" ondragover="allowDrop(event)">To:<br /></div>
+</td></tr>
+<tr><td>
+<div class="dropable" id="travel" ondrop="dropValue(event, this)" ondragover="allowDrop(event)">Travel:<br /></div>
+</td><td>
+<div class="dropable" id="travelClass" ondrop="dropValue(event, this)" ondragover="allowDrop(event)">Class:<br /></div>
+</td></tr>
+<tr><td>
+<div class="dropable" id="fare" ondrop="dropValue(event, this)" ondragover="allowDrop(event)">Fare:<br /></div>
+</td><td>
+<div class="dropable" id="bike" ondrop="dropValue(event, this)" ondragover="allowDrop(event)">Other:<br /></div>
+</td></tr>
+</table>
+  <!--input type="submit" value="Buy" class="btn btn-default" id="submit" width="106" height="98"-->
+  <a class="btn btn-success" id="submit" href="#" role="button">Buy</a>
+</td><td>
+
+<div id="choices">
+
+
+<h3>Cities</h3>
+<div id="Lausanne" class="dragable" draggable="true" ondragstart="drag(event, this)">Lausanne</div>
+<div id="Davos" class="dragable" draggable="true" ondragstart="drag(event, this)">Davos</div>
+<div id="Basel" class="dragable" draggable="true" ondragstart="drag(event, this)">Basel</div><br />
+<div id="Zurich" class="dragable" draggable="true" ondragstart="drag(event, this)">Zurich</div>
+<div id="Fribourg" class="dragable" draggable="true" ondragstart="drag(event, this)">Fribourg</div>
+<div id="Neuchatel" class="dragable" draggable="true" ondragstart="drag(event, this)">Neuchatel</div><br />
+<div id="Geneve" class="dragable" draggable="true" ondragstart="drag(event, this)">Geneve</div>
+
+<h3>Travel</h3>
+<div id="one-way" class="dragable" draggable="true" ondragstart="drag(event, this)">One Way</div>
+<div id="return" class="dragable" draggable="true" ondragstart="drag(event, this)">Return</div>
+
+<h3>Class</h3>
+<div id="1" class="dragable" draggable="true" ondragstart="drag(event, this)">1st</div>
+<div id="2" class="dragable" draggable="true" ondragstart="drag(event, this)">2nd</div>
+
+<h3>Fare</h3>
+<div id="standard" class="dragable" draggable="true" ondragstart="drag(event, this)">Standard</div>
+<div id="half-fare" class="dragable" draggable="true" ondragstart="drag(event, this)">Half-fare</div>
+<div id="young" class="dragable" draggable="true" ondragstart="drag(event, this)">Young</div>
+
+<h3>Bike</h3>
+<div id="yes" class="dragable" draggable="true" ondragstart="drag(event, this)">BIKE</div>
+
+</td></tr></table>

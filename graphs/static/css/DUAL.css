@@ -1,0 +1,40 @@
+
+#pauseStimulus {
+  padding: 100px;
+}
+
+#stimulus {
+	text-align: center;
+}
+
+#shape-left {
+	width: 200px;
+    /*background-color: blue;*/
+    display: inline-block;
+}
+
+#shape-right {
+	/*background-color: red;*/
+	width: 200px;
+    display: inline-block;
+}
+
+#stimulus-game {
+	background-color: white;
+	width: 400px;
+	/*height: 600px;*/
+    display: inline-block;
+}
+
+
+#stimulus-buttons {
+	padding-top: 0px;
+}
+
+#image1 {
+	max-height: 200px;
+}
+
+#image2 {
+	max-height: 200px;
+}

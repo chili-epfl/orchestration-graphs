@@ -1,0 +1,101 @@
+{% extends "meta-base.html" %}
+
+{% load staticfiles %}
+{% block css-files %}
+<style>
+        body {
+        padding: 0;
+        }
+        .panel {
+        border: 0;
+        }
+    h1 {
+    margin-top: 3px;
+    }
+</style>
+{% endblock %}
+{% block meta-body %}
+
+	<div id="introExperimentModal" class="modal fade">
+	    <div class="modal-dialog">
+	        <div class="modal-content">
+	            <div class="modal-header">
+	                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+	                <h2 class="modal-title">{% block experiment-intro-title %}{% endblock %}</h2>
+	            </div>
+	            <div class="modal-body">
+	            	{% block experiment-intro-text %}{% endblock %}
+
+	            </div>
+
+	            <div id="modalProfile" class="modal-body modal-hidden">
+	                <h5 class="modal-title">But first, let us know a bit about you...</h5>
+	                <form id="userProfileForm" class="form-signin" action="javascript:storeProfile();">
+	                	
+	                	{% block experiment-profile-form %}{% endblock %}
+
+	                </form>
+	            </div>
+	            <div class="modal-footer">
+	                <button type="button" class="btn btn-default" data-dismiss="modal">Start/Continue experiment</button>
+	            </div>
+	        </div>
+	    </div>
+	</div>
+
+	<div id="endModal" class="modal fade">
+	    <div class="modal-dialog">
+	        <div class="modal-content">
+	            <div class="modal-header">
+	                <button id="closetrbutton" type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+	                <h2 class="modal-title">{% block experiment-end-title %}{% endblock %}</h2>
+	            </div>
+	            <div class="modal-body">
+	            	{% block experiment-end-text %}{% endblock %}
+
+	            </div>
+
+	            <div class="modal-footer">
+	                <button type="button" class="btn btn-default" id="endBackHome" data-loading-text="Sending your results to our servers..." data-dismiss="modal">Back to home</button>
+	            </div>
+	        </div>
+	    </div>
+	</div>
+
+
+		<div class="panel panel-default">
+            <!--div class="panel-heading">
+              <h2 class="panel-title text-center">{% block experiment-title %}{% endblock %}</h2>
+            </div-->
+            <div class="panel-body">
+
+			  {% block content %}{% endblock %}
+
+            </div>
+          </div>
+
+
+
+
+{% endblock %}
+
+
+{% block scripts %}
+	<script src="{% static 'js/experiment-base.js' %}"></script>
+
+	{% block experiment-script %}
+	{% endblock %}
+    
+    <script src="{% static 'jquery/js/jquery.plugin.min.js' %}"></script>
+    <script src="{% static 'jquery/js/jquery.countdown.js' %}"></script>
+
+    <script type="text/javascript">
+	//We do the initial setup of the task
+	$(document).ready(function(){
+			init();
+		});
+
+	var user_id = {{ user_id }};
+    </script>
+
+{% endblock %}

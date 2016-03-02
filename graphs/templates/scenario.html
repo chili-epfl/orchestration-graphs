@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+
+{% load staticfiles %}
+
+{% block content %}
+
+	  <object id="workspace" data="" style="width: 100%; height: 870px; border: 0px;"></object>
+
+{% endblock %}
+
+
+	{% block extra-scripts %}
+    <script type="text/javascript">
+	//We do the initial setup of the task
+	var scenario = {{ object.json|safe }};
+
+	var activities = scenario['activities'];
+	var edges = scenario[edges];
+
+	$(document).ready(function(){
+	       //init();
+
+	       var scenario = activities; 
+
+	       $.each(scenario, function(index, element){
+	            $("#scenario-menu").append('<li><a class="workspace-link" href="' + element['link'] + '">' + element['title'] + '</a></li>');
+	       });
+	       $(".workspace-link").click(function(event){
+	            event.preventDefault();
+	            $("#workspace").attr("data", $(this).attr("href"));
+               });
+	       $("#workspace").attr("data", scenario[0].link);
+	});
+
+	//var user_id = {{ user_id }};
+    </script>
+    {% endblock %}

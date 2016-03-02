@@ -1,0 +1,94 @@
+header,footer{
+	/*padding: 10px;*/
+	/*padding-left: 15%;
+	padding-right: 15%;*/
+	background-color: #3B5998;
+	overflow: auto;
+}
+header a,footer a{
+color: white;
+	text-decoration: none;
+	cursor: pointer;
+}
+#logo{
+	float: left;
+	}
+#login_container{
+	float: right;
+	color: white;
+}
+#login_container *{
+	margin-right: 5px;
+	margin-left: 1px;
+}
+footer{
+	clear: both;
+	text-align: right;
+}
+#login_container input{
+	font-size: small;
+	border: none;
+	padding: 0;
+}
+#login_container table{
+	color: white;
+	margin: 0;
+}
+#login_container .input{
+	color: white;
+	margin: 0;
+}
+#login_container table tr td {
+	border: none;
+	margin: 0;
+	padding: 0;
+}
+#login_form table tr:nth-child(2n){
+	background: none;
+}
+#login_form .submit input[type="submit"]{
+	padding: 0;
+}
+#login_form div.submit{
+	margin: 0;
+}
+#login_form div{
+	padding: 0;
+}
+
+
+body{
+	color: #000000;
+	background:none repeat scroll 0 0 #EDF0F5;
+}
+/*#login_form table{
+	color: white;
+
+}
+#login_form table tr td{
+	border: none;
+	padding: 0;
+
+}
+
+#login_form table tr:nth-child(2n){
+	background: none;
+}
+#login_form table tr td input{
+	font-size: small;
+	padding: 0;
+	width: 100%;
+}
+#login_form table tr td label{
+	font-size: small;
+	padding: 0;
+	width: 100%;
+}*/
+#east-center{
+	position: absolute;
+}
+
+
+#canvas{
+	height: 500px;
+}

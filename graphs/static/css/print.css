@@ -1,0 +1,53 @@
+
+ /* body{
+    display:none;
+  }
+  body .printable {
+    display:block;
+  }*/
+
+  /*not(svg){
+  	display: none;
+  }*/
+/*body *{
+	display: none;
+}
+body #editor{
+	display: block;
+
+}*/
+#body {
+    width: 2000px;
+    height: 100px;
+  }
+/*#editor {
+    width: 2000px;
+    height: 400px;
+  }*/
+body *{
+	display: none;
+}
+#body{
+	display: block;
+}
+#innerBody{
+	display: block;
+}
+#innerBody #editor-center{
+	display: block;
+}
+/*#innerBody #tabs{
+	display: block;
+}*/
+.ui-tabs-nav{
+	visibility: hidden;
+}
+#editor-center *{
+	display: block;
+	width: 
+
+}
+/*
+I got what the problem is: I neeed to do sth to save the ul thing!
+*/
+

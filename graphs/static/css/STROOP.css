@@ -1,0 +1,26 @@
+
+/*STROOP effect styles*/
+.red {
+  color: red;
+}
+
+.blue {
+  color: blue;
+}
+
+.green {
+  color: green;
+}
+
+.brown {
+  color: maroon;
+}
+
+.yellow {
+  color: yellow;
+  background-color: gray;
+}
+
+#pauseStimulus {
+  padding: 125px;
+}

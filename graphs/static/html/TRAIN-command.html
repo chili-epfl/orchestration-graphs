@@ -1,0 +1,75 @@
+<script>
+ function submit_ticket(event){
+   var ticket = [];
+   var cmd = $("#command").val();
+   console.log(cmd);
+
+   ticket['from'] = "";
+   ticket['to'] = "";
+   ticket['travel'] = "one-way";
+   ticket['travelClass'] = "1";
+   ticket['bike'] = false;
+   ticket['fare'] = "standard";
+
+   var res = cmd.split(" ");
+
+   var mapCommand = {};
+   mapCommand["f"] = "from";
+   mapCommand["from"] = "from";
+   mapCommand["t"] = "to";
+   mapCommand["to"] = "to";
+
+   var fieldByValue = {}
+   fieldByValue["one-way"] = "travel";
+   fieldByValue["return"] = "travel";
+
+   fieldByValue["C1"] = "travelClass";
+   fieldByValue["C2"] = "travelClass";
+
+   fieldByValue["bike"] = "bike";
+
+   fieldByValue["standard"] = "fare";
+   fieldByValue["half-fare"] = "fare";
+   fieldByValue["young"] = "fare";
+
+   for (var i = 0; i < res.length; i++){
+      if ($.inArray(res[i], Object.keys(mapCommand)) != -1){
+	 if (i+1 >= res.length)
+            break;
+         ticket[mapCommand[res[i]]] = res[i+1];
+         i = i+1;
+      }
+      else if ($.inArray(res[i], Object.keys(fieldByValue)) != -1){
+         var k = fieldByValue[res[i]];
+         console.log("key: " + k);
+         ticket[k] = res[i];
+      }
+   }
+   if (ticket["bike"] == "bike")
+      ticket["bike"] = true;
+   else
+      ticket["bike"] = false;
+
+   if (ticket["travelClass"] == "C1")
+      ticket["travelClass"] = 1;
+   else
+      ticket["travelClass"] = 2;
+ 
+   interface_result(ticket);
+ }
+
+  $("#submit").click(submit_ticket);
+
+$(document).keypress(function(e) {
+    if(e.which == 13) {
+        submit_ticket(e);
+    }
+});
+</script>
+
+
+<input type="edit" name="command" id="command" class="form-control" style="width: 300px; display: inline-block;">
+<!--input type="button" id="submit" value = "Buy" class="btn btn-default"-->
+  <a class="btn btn-success" id="submit" href="#" role="button">Buy</a>
+
+<a class="btn btn-default text-right" class="help-button" href="javascript:showHelp();" role="button">Help »</a>

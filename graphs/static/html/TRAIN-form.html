@@ -1,0 +1,70 @@
+<style>
+  label { display: inline-block; width: 140px; text-align: right; }
+  select { width: 150px;}
+</style>
+<script>
+  $("#dropDown").submit(customSubmit);
+
+  function customSubmit(event){
+    var ticket = [];
+    ticket['from'] = $("#from").val();
+    ticket['to'] = $("#to").val();
+    ticket['travel'] = $("#travel").val();
+    ticket['travelClass'] = $("#travelClass").val();
+    ticket['fare'] = $("#fare").val();
+    ticket['bike'] = $("#bike").val() == "yes";
+    interface_result(ticket);
+    //return false;
+  }
+</script>
+
+<form id = "dropDown" name="dropDown" action="#" >
+
+
+<label for="from">From:</label>  <select class="selectpicker" id = "from" name="from">
+	<option value="-">------</option>
+	<option value="Basel">Basel</option>
+	<option value="Davos">Davos</option>
+	<option value="Fribourg">Fribourg</option>
+	<option value="Geneve">Geneve</option>
+	<option value="Lausanne">Lausanne</option>
+	<option value="Neuchatel">Neuchatel</option>
+	<option value="Zurich">Zurich</option>
+</select>
+<br>
+<label for="to">To:</label>  <select class="selectpicker" id = "to" name="to">
+	<option value="-">------</option>
+	<option value="Basel">Basel</option>
+	<option value="Davos">Davos</option>
+	<option value="Fribourg">Fribourg</option>
+	<option value="Geneve">Geneve</option>
+	<option value="Lausanne">Lausanne</option>
+	<option value="Neuchatel">Neuchatel</option>
+	<option value="Zurich">Zurich</option>
+</select>
+<br>
+<label for="travel">Travel:</label>  <select class="selectpicker" id = "travel" name="travel">
+	<option value="one-way">One way</option>
+	<option value="return">Return</option>
+</select>
+<br>
+<label for="travelClass">Class:</label>  <select class="selectpicker" id = "travelClass" name="travelClass">
+	<option value="2">2nd</option>
+	<option value="1">1st</option>
+</select>
+<br>
+<label for="fare">Fare:</label>  <select class="selectpicker" id = "fare" name="fare">
+	<option value="standard">Standard</option>
+	<option value="half-fare">1/2 fare</option>
+	<option value="young">Young</option>
+</select>
+<br>
+<label for="bike">Bike:</label>  <select class="selectpicker" id = "bike" name="bike">
+	<option value="no">No</option>
+	<option value="yes">Yes</option>
+</select>
+<br>
+<!--input type="submit" value="Buy"-->
+  <a class="btn btn-success" id="submit" href="javascript:customSubmit();" role="button">Buy</a>
+
+</form>
