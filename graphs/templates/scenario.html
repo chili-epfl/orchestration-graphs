@@ -12,7 +12,7 @@
 	{% block extra-scripts %}
     <script type="text/javascript">
 	//We do the initial setup of the task
-	var scenario = {{ object.json|safe }};
+	var scenario = {{ scenario.json|safe }};
 
 	var activities = scenario['activities'];
 	var edges = scenario[edges];
