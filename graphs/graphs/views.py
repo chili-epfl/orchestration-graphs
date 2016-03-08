@@ -28,5 +28,5 @@ class ScenarioDetailView(DetailView):
 
     def get_context_data(self, **kwargs):
         context = super(ScenarioDetailView, self).get_context_data(**kwargs)
-        context["activity"] = Activity.objects.all()
+        context["activities"] = Activity.objects.all()
         return context

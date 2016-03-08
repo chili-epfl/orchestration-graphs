@@ -13,17 +13,24 @@
     <script type="text/javascript">
 	//We do the initial setup of the task
 	var scenario = {{ scenario.json|safe }};
-
-	var activities = scenario['activities'];
+	var scenario_activities = scenario['activities'];
 	var edges = scenario[edges];
+
+    var all_activities = {};
+
+    //Building a dictionary of activities
+    {% for act in activities %}
+        all_activities["{{ act.pk }}"] = ["{{ act.name|safe }}", "{{ act.source|safe }}"];
+    {% endfor %}
 
 	$(document).ready(function(){
 	       //init();
 
-	       var scenario = activities; 
+	       var scenario = scenario_activities;
 
 	       $.each(scenario, function(index, element){
-	            $("#scenario-menu").append('<li><a class="workspace-link" href="' + element['link'] + '">' + element['title'] + '</a></li>');
+               var activity = all_activities[element['id']];
+	            $("#scenario-menu").append('<li><a class="workspace-link" href="' + activity[1] + '">' + activity[0] + '</a></li>');
 	       });
 	       $(".workspace-link").click(function(event){
 	            event.preventDefault();
