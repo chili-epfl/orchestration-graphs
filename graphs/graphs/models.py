@@ -16,7 +16,7 @@ class Scenario(models.Model):
         return "N/A"
 
     def num_students(self):
-        return Student.objects.filter(scenario=self.pk).len()
+        return len(Student.objects.filter(scenario=self.pk))
 
 
 class Activity(models.Model):
