@@ -27,3 +27,4 @@ class Activity(models.Model):
 
 class Student(models.Model):
     email = models.EmailField(max_length=50, unique=True)
+    scenario = models.ForeignKey(Scenario, null=True, on_delete=models.SET_NULL)

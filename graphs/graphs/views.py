@@ -1,8 +1,12 @@
 from django.views.generic.edit import CreateView, DeleteView
 from django.views.generic.detail import DetailView
-from graphs.models import Scenario, Activity
+from graphs.models import Scenario, Activity, Student
 from django import forms
+from django.shortcuts import render
 from django.core.urlresolvers import reverse_lazy
+from graphs.forms import StudentRegistrationForm
+from django.http import HttpResponse
+import random
 
 
 class ScenarioCreateView(CreateView):
@@ -30,3 +34,19 @@ class ScenarioDetailView(DetailView):
         context = super(ScenarioDetailView, self).get_context_data(**kwargs)
         context["activities"] = Activity.objects.all()
         return context
+
+
+def student_registration(request):
+    form = StudentRegistrationForm(request.POST)
+    if form.is_valid():
+        form.save()
+        student = Student.objects.get(email=form.cleaned_data['email'])
+        random_id = random.randint(0, Scenario.objects.count() - 1)
+        student.scenario = Scenario.objects.all()[random_id]
+        student.save()
+
+        return HttpResponse('test')
+    else:
+        form = StudentRegistrationForm()
+
+    return render(request, 'registration/student-registration.html', {'form': form})
