@@ -6,12 +6,13 @@ from django.shortcuts import render
 from django.core.urlresolvers import reverse_lazy
 from graphs.forms import StudentRegistrationForm
 from django.http import HttpResponse
+from django.core.exceptions import ObjectDoesNotExist
 import random
 
 
 class ScenarioCreateView(CreateView):
     model = Scenario
-    fields = ['name','group','json']
+    fields = ['name', 'group', 'json']
     template_name = 'graph-editor.html'
     success_url = reverse_lazy("scenario-list")
 
@@ -45,8 +46,18 @@ def student_registration(request):
         student.scenario = Scenario.objects.all()[random_id]
         student.save()
 
-        return HttpResponse('test')
+        return student_learning(request, str(student.pk))
     else:
         form = StudentRegistrationForm()
 
     return render(request, 'registration/student-registration.html', {'form': form})
+
+
+def student_learning(request, user_id):
+    # TODO: Provide the student's learning scenario
+    try:
+        user = Student.objects.get(pk=user_id)
+        scenario = user.scenario
+        return HttpResponse('Showing scenario ' + scenario.name + ' for ' + user.email)
+    except ObjectDoesNotExist:
+        return HttpResponse('Student not found!')
