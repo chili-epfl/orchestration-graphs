@@ -5,8 +5,9 @@ from django import forms
 from django.shortcuts import render
 from django.core.urlresolvers import reverse_lazy
 from graphs.forms import StudentRegistrationForm
-from django.http import HttpResponse
+from django.http import HttpResponse, HttpResponseRedirect
 from django.core.exceptions import ObjectDoesNotExist
+from activities.views import ActivityView
 import random
 
 
@@ -45,19 +46,25 @@ def student_registration(request):
         random_id = random.randint(0, Scenario.objects.count() - 1)
         student.scenario = Scenario.objects.all()[random_id]
         student.save()
+        request.session['user_id'] = student.pk
 
-        return student_learning(request, str(student.pk))
+        return student_learning(request)
     else:
         form = StudentRegistrationForm()
 
     return render(request, 'registration/student-registration.html', {'form': form})
 
 
-def student_learning(request, user_id):
+def student_learning(request):
     # TODO: Provide the student's learning scenario
-    try:
-        user = Student.objects.get(pk=user_id)
-        scenario = user.scenario
-        return HttpResponse('Showing scenario ' + scenario.name + ' for ' + user.email)
-    except ObjectDoesNotExist:
-        return HttpResponse('Student not found!')
+    if 'user_id' in request.session:
+        try:
+            user_id = request.session['user_id']
+            user = Student.objects.get(pk=user_id)
+            scenario = user.scenario
+            return HttpResponse('Showing scenario ' + scenario.name + ' for ' + user.email)
+            #return HttpResponseRedirect(ActivityView.as_view(), args=[user.current_activity_id])
+        except ObjectDoesNotExist:
+            return HttpResponseRedirect('/student/register/')
+    else:
+        return HttpResponseRedirect('/student/register/')

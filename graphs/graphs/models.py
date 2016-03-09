@@ -28,3 +28,6 @@ class Activity(models.Model):
 class Student(models.Model):
     email = models.EmailField(max_length=50, unique=True)
     scenario = models.ForeignKey(Scenario, null=True, on_delete=models.SET_NULL)
+    current_activity = models.ForeignKey(Activity, null=True, on_delete=models.SET_NULL)
+    start_date = models.DateTimeField
+    completion_date = models.DateTimeField

@@ -20,7 +20,7 @@ urlpatterns = patterns('',
     url(r'^teacher/scenario/list/$', ListView.as_view(template_name='scenario-list.html', model=Scenario), name="scenario-list"),
 
     url(r'^student/register/$', student_registration, name="student-registration"),
-    url(r'^student/(?P<user_id>\d+)/$', student_learning, name="student-learning"),
+    url(r'^student/$', student_learning, name="student-learning"),
 
     url(r'^activity/(?P<id>\w+)/$', ActivityView.as_view(), name="scenario-save"),
     # url(r'^blog/', include('blog.urls')),
