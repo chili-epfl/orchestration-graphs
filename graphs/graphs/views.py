@@ -59,13 +59,7 @@ def student_registration(request):
 
 
 def student_learning(request):
-    # TODO: Provide the student's learning scenario
     if 'user_id' in request.session:
-        try:
-            user_id = request.session['user_id']
-            user = Student.objects.get(pk=user_id)
-            return user_activity(request)
-        except ObjectDoesNotExist:
-            return HttpResponseRedirect('/student/register/')
+        return user_activity(request)
     else:
         return HttpResponseRedirect('/student/register/')

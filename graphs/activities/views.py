@@ -3,6 +3,7 @@ from django.http import HttpResponseRedirect, HttpResponse
 from graphs.models import Student, Activity
 from django.core.exceptions import ObjectDoesNotExist
 from django.shortcuts import render
+from datetime import datetime
 import json
 
 
@@ -62,14 +63,22 @@ def next_activity(request):
         scenario = json.loads(student.scenario.json)
         next_act = student.current_activity
         edges = scenario['edges']
+        has_next = False
 
         for e in edges:
             if e['a1'] == student.current_activity_id:
                 next_act = Activity.objects.get(pk=e['a2'])
+                has_next = True
 
-        student.current_activity = next_act
-        student.save()
-        return user_activity(request)
+        if has_next:
+            student.current_activity = next_act
+            student.save()
+            return user_activity(request)
+        else:
+            if student.completion_date is None:
+                student.completion_date = datetime.now()
+                student.save()
+            return render(request, 'completion.html')
 
     except ObjectDoesNotExist:
         return HttpResponseRedirect('/student/register/')
