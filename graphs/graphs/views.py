@@ -5,9 +5,9 @@ from django import forms
 from django.shortcuts import render
 from django.core.urlresolvers import reverse_lazy
 from graphs.forms import StudentRegistrationForm
-from django.http import HttpResponseRedirect, HttpResponse
+from django.http import HttpResponseRedirect
 from django.core.exceptions import ObjectDoesNotExist
-from activities.views import ActivityView
+from activities.views import user_activity
 import random
 import json
 
@@ -64,8 +64,7 @@ def student_learning(request):
         try:
             user_id = request.session['user_id']
             user = Student.objects.get(pk=user_id)
-            scenario = user.scenario
-            return HttpResponseRedirect('/activity/' + str(user.current_activity_id))
+            return user_activity(request)
         except ObjectDoesNotExist:
             return HttpResponseRedirect('/student/register/')
     else:
