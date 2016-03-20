@@ -1,16 +1,24 @@
 from django.db import models
 from django import forms
 from django.forms.extras import widgets
-
+from datetime import timedelta
 
 class Scenario(models.Model):
     group = models.CharField(max_length=50)
     name = models.CharField(max_length=50)
     json = models.TextField()
     date = models.DateField(auto_now_add=True)
-    
+
     def avg_time(self):
-        return "N/A"
+        times = []
+        for student in Student.objects.filter(scenario=self):
+            if student.completion_date is not None:
+                times.append(student.completion_date - student.start_date)
+
+        if times:
+            return str(sum(times, timedelta())/len(times))
+        else:
+            return "N/A"
 
     def avg_learning(self):
         return "N/A"
