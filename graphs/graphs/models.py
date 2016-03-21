@@ -40,3 +40,10 @@ class Student(models.Model):
     current_activity = models.ForeignKey(Activity, null=True, on_delete=models.SET_NULL)
     start_date = models.DateTimeField(auto_now_add=True)
     completion_date = models.DateTimeField(null=True)
+
+
+class Question(models.Model):
+    text = models.CharField(max_length=200)
+    choices = models.CharField(max_length=1000)
+    correct_answer = models.CharField(max_length=50)
+    activity = models.ForeignKey(Activity, on_delete=models.CASCADE)
