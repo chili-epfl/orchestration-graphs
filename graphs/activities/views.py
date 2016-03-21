@@ -5,6 +5,7 @@ from django.core.exceptions import ObjectDoesNotExist
 from django.shortcuts import render
 from datetime import datetime
 import json
+import random
 
 
 class ActivityView(TemplateView):
@@ -61,17 +62,15 @@ def next_activity(request):
     try:
         student = Student.objects.get(pk=request.session['user_id'])
         scenario = json.loads(student.scenario.json)
-        next_act = student.current_activity
+        next_act = []
         edges = scenario['edges']
-        has_next = False
 
         for e in edges:
             if e['a1'] == student.current_activity_id:
-                next_act = Activity.objects.get(pk=e['a2'])
-                has_next = True
+                next_act.append(Activity.objects.get(pk=e['a2']))
 
-        if has_next:
-            student.current_activity = next_act
+        if next_act:
+            student.current_activity = random.choice(next_act)
             student.save()
             return user_activity(request)
         else:

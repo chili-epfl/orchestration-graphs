@@ -3,6 +3,7 @@ from django import forms
 from django.forms.extras import widgets
 from datetime import timedelta
 
+
 class Scenario(models.Model):
     group = models.CharField(max_length=50)
     name = models.CharField(max_length=50)
