@@ -43,7 +43,7 @@ class Student(models.Model):
 
 
 class Question(models.Model):
-    text = models.CharField(max_length=200)
+    text = models.CharField(max_length=1000)
     choices = models.CharField(max_length=1000)
     correct_answer = models.CharField(max_length=50)
     activity = models.ForeignKey(Activity, on_delete=models.CASCADE)
