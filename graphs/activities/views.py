@@ -72,7 +72,7 @@ def next_activity(request):
         if next_act:
             student.current_activity = random.choice(next_act)
             student.save()
-            return user_activity(request)
+            return HttpResponseRedirect('/student/')
         else:
             if student.completion_date is None:
                 student.completion_date = datetime.now()

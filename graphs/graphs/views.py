@@ -50,7 +50,7 @@ def student_registration(request):
         student.save()
         request.session['user_id'] = student.pk
 
-        return student_learning(request)
+        return HttpResponseRedirect('/student/')
     else:
         form = StudentRegistrationForm()
 
