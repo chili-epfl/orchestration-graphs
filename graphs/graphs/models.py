@@ -21,7 +21,17 @@ class Scenario(models.Model):
             return "N/A"
 
     def avg_learning(self):
-        return "N/A"
+        progress_list = []
+        for student in Student.objects.filter(scenario=self):
+            results = student.get_results()
+            if results.count() >= 2:
+                progress = results.get(quiz_id=11).score - results.get(quiz_id=2).score
+                progress_list.append(progress)
+
+        if progress_list:
+            return str(100*sum(progress_list)/len(progress_list)) + "%"
+        else:
+            return "N/A"
 
     def num_students(self):
         return len(Student.objects.filter(scenario=self.pk))
@@ -39,6 +49,9 @@ class Student(models.Model):
     current_activity = models.ForeignKey(Activity, null=True, on_delete=models.SET_NULL)
     start_date = models.DateTimeField(auto_now_add=True)
     completion_date = models.DateTimeField(null=True)
+
+    def get_results(self):
+        return Result.objects.filter(student=self)
 
 
 class Question(models.Model):
