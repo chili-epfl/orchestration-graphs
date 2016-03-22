@@ -17,7 +17,7 @@ class QuizForm(ModelForm):
     def __init__(self, *args, **kwargs):
         self.quiz = kwargs.pop('quiz')
         self.student = kwargs.pop('student')
-        self.questions = Question.objects.filter(activity=self.quiz)
+        self.questions = Question.objects.filter(activity__in=[self.quiz])
         super(QuizForm, self).__init__(*args, **kwargs)
 
         data = kwargs.get('data')
@@ -28,7 +28,6 @@ class QuizForm(ModelForm):
             self.fields[field_name] = ChoiceField(label=question.text, required=True, choices=choices, widget=RadioSelect)
             if data:
                 self.fields[field_name].initial = data.get(field_name)
-        #return super(QuizForm, self).__init__(*args, **kwargs)
 
     def save(self, commit=True):
         result = Result.create(self.student, self.quiz)

@@ -47,7 +47,7 @@ class Question(models.Model):
     text = models.CharField(max_length=1000)
     choices = models.CharField(max_length=1000)
     correct_answer = models.CharField(max_length=50)
-    activity = models.ForeignKey(Activity, on_delete=models.CASCADE)
+    activity = models.ManyToManyField(Activity)
 
     def get_choices(self):
         choices_list = []
