@@ -14,7 +14,7 @@
 				<tr>
 				  <td>{{ scenario.group }}</td>
 				  <td>{{ scenario.name }}</td>
-				  <td>{{ scenario.avg_learning }}</td>
+				  <td title="Standard deviation: {{ scenario.learning_stdev }} | Variance: {{ scenario.learning_variance }}">{{ scenario.avg_learning }}</td>
 				  <td>{{ scenario.avg_time }}</td>
 				  <td>{{ scenario.num_students }}</td>
 				  <td><a href="{% url 'scenario' scenario.id %}">Preview</a> | <!--a href="/">Edit</a> |--> <form style="display: inline;" action='{% url 'scenario-delete' scenario.id %}' method='post'>{% csrf_token %}<a href="javascript:;" onclick="parentNode.submit();">Delete</a></form></td>

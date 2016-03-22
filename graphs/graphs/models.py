@@ -1,6 +1,7 @@
 from django.db import models
 from datetime import timedelta
 import json
+from statistics import mean, pstdev, pvariance
 
 
 class Scenario(models.Model):
@@ -20,21 +21,41 @@ class Scenario(models.Model):
         else:
             return "N/A"
 
-    def avg_learning(self):
+    def progress_data(self):
         progress_list = []
         for student in Student.objects.filter(scenario=self):
             results = student.get_results()
             if results.count() >= 2:
                 progress = results.get(quiz_id=11).score - results.get(quiz_id=2).score
                 progress_list.append(progress)
+        return progress_list
+
+    def avg_learning(self):
+        progress_list = self.progress_data()
 
         if progress_list:
-            return str(100*sum(progress_list)/len(progress_list)) + "%"
+            return str(100*mean(progress_list)) + "%"
         else:
             return "N/A"
 
     def num_students(self):
         return len(Student.objects.filter(scenario=self.pk))
+
+    def learning_stdev(self):
+        progress_list = self.progress_data()
+
+        if progress_list:
+            return round(pstdev(progress_list), 4)
+        else:
+            return "N/A"
+
+    def learning_variance(self):
+        progress_list = self.progress_data()
+
+        if progress_list:
+            return round(pvariance(progress_list), 4)
+        else:
+            return "N/A"
 
 
 class Activity(models.Model):
