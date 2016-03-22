@@ -1,6 +1,4 @@
 from django.db import models
-from django import forms
-from django.forms.extras import widgets
 from datetime import timedelta
 import json
 

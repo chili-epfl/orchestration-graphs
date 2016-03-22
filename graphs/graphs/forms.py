@@ -1,6 +1,5 @@
-from django.forms import ModelForm, Form, ChoiceField, RadioSelect
+from django.forms import ModelForm, ChoiceField, RadioSelect
 from graphs.models import Student, Question, Result
-import json
 
 
 class StudentRegistrationForm(ModelForm):
@@ -32,7 +31,6 @@ class QuizForm(ModelForm):
     def save(self, commit=True):
         result = Result.create(self.student, self.quiz)
         results = []
-        print(self.cleaned_data)
 
         for field_name, field_value in self.cleaned_data.items():
             if field_name.startswith("question_"):

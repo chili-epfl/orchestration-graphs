@@ -6,7 +6,6 @@ from django.shortcuts import render
 from django.core.urlresolvers import reverse_lazy
 from graphs.forms import StudentRegistrationForm
 from django.http import HttpResponseRedirect
-from django.core.exceptions import ObjectDoesNotExist
 from activities.views import user_activity
 import random
 import json

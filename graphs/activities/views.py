@@ -1,5 +1,5 @@
 from django.views.generic import TemplateView
-from django.http import HttpResponseRedirect, HttpResponse
+from django.http import HttpResponseRedirect
 from graphs.models import Student, Activity
 from graphs.forms import QuizForm
 from django.core.exceptions import ObjectDoesNotExist
