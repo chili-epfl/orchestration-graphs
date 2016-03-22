@@ -1,6 +1,7 @@
 from django.views.generic import TemplateView
 from django.http import HttpResponseRedirect, HttpResponse
 from graphs.models import Student, Activity
+from graphs.forms import QuizForm
 from django.core.exceptions import ObjectDoesNotExist
 from django.shortcuts import render
 from datetime import datetime
@@ -45,8 +46,7 @@ def user_activity(request):
             ctx = {'activity_template': activity.source}
             return render(request, 'text-activity.html', context=ctx)
         elif tpe == 'Quiz':
-            ctx = {'activity_template': activity.source}
-            return render(request, 'quiz-activity.html', context=ctx)
+            return quiz_activity(request, activity, student)
         elif tpe == 'Link':
             ctx = {'link': activity.source}
             return render(request, 'link-activity.html', context=ctx)
@@ -81,3 +81,16 @@ def next_activity(request):
 
     except ObjectDoesNotExist:
         return HttpResponseRedirect('/student/register/')
+
+
+def quiz_activity(request, activity, student):
+    if request.method == 'POST':
+        form = QuizForm(request.POST, quiz=activity, student=student)
+        if form.is_valid():
+            form.save()
+            return next_activity(request)
+    else:
+        form = QuizForm(quiz=activity, student=student)
+    return render(request, 'quiz-activity.html', {'form': form})
+
+

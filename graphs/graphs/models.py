@@ -2,6 +2,7 @@ from django.db import models
 from django import forms
 from django.forms.extras import widgets
 from datetime import timedelta
+import json
 
 
 class Scenario(models.Model):
@@ -47,3 +48,20 @@ class Question(models.Model):
     choices = models.CharField(max_length=1000)
     correct_answer = models.CharField(max_length=50)
     activity = models.ForeignKey(Activity, on_delete=models.CASCADE)
+
+    def get_choices(self):
+        choices_list = []
+        for c in json.loads(self.choices):
+            choices_list.append((c, c,))
+        return choices_list
+
+
+class Result(models.Model):
+    student = models.ForeignKey(Student, on_delete=models.CASCADE)
+    quiz = models.ForeignKey(Activity, on_delete=models.CASCADE)
+    score = models.FloatField()
+
+    @classmethod
+    def create(cls, student, quiz):
+        result = cls(student=student, quiz=quiz)
+        return result
