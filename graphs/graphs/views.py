@@ -52,9 +52,7 @@ def student_registration(request):
 
         return HttpResponseRedirect('/student/')
     else:
-        form = StudentRegistrationForm()
-
-    return render(request, 'registration/student-registration.html', {'form': form})
+        return render(request, 'registration/student-registration.html', {'form': form})
 
 
 def student_learning(request):

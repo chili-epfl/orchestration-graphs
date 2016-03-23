@@ -2,8 +2,8 @@
 
 
 {% block content %}
-
-<h1>Register to participate</h1>
+<div class="container">
+    <h1>Register to participate</h1>
     <form method="post" action="{% url 'student-registration' %}">
         {% csrf_token %}
         {{ form.as_p }}
@@ -11,5 +11,5 @@
             <input type="submit" value="Validate"/>
         </p>
     </form>
-
+</div>
 {% endblock %}

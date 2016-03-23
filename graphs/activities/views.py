@@ -36,8 +36,8 @@ class ActivityView(TemplateView):
             return ["activities/" + self.kwargs['id'] + ".html"]
 
 
-def activity_view(request, activity_id):
-    activity = Activity.objects.get(pk=activity_id)
+def activity_view(request, pk):
+    activity = Activity.objects.get(pk=pk)
     tpe = activity.type
 
     if tpe == 'text':
@@ -101,6 +101,4 @@ def quiz_activity(request, activity):
             return next_activity(request)
     else:
         form = QuizForm(quiz=activity, student=student)
-    return render(request, 'quiz-activity.html', {'form': form, 'title': activity.name})
-
-
+    return render(request, 'quiz-activity.html', {'form': form, 'title': activity.name, 'base_template': 'base.html'})
