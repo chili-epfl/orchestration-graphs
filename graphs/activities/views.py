@@ -42,7 +42,9 @@ def user_activity(request):
         activity = student.current_activity
         tpe = activity.type
 
-        if tpe == 'text':
+        if student.completion_date is not None:
+            return render(request, 'completion.html')
+        elif tpe == 'text':
             ctx = {'activity_template': activity.source}
             return render(request, 'text-activity.html', context=ctx)
         elif tpe == 'quiz':

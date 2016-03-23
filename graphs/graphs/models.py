@@ -24,9 +24,9 @@ class Scenario(models.Model):
     def progress_data(self):
         progress_list = []
         for student in Student.objects.filter(scenario=self):
-            results = student.get_results()
+            results = student.get_results().order_by('timestamp')
             if results.count() >= 2:
-                progress = results.get(quiz_id=11).score - results.get(quiz_id=2).score
+                progress = results.last().score - results.first().score
                 progress_list.append(progress)
         return progress_list
 
@@ -98,6 +98,7 @@ class Result(models.Model):
     student = models.ForeignKey(Student, on_delete=models.CASCADE)
     quiz = models.ForeignKey(Activity, on_delete=models.CASCADE)
     score = models.FloatField()
+    timestamp = models.DateTimeField(auto_now_add=True)
 
     @classmethod
     def create(cls, student, quiz):
