@@ -69,6 +69,10 @@ class Activity(models.Model):
     type = models.CharField(max_length=4, choices=TYPE_CHOICES)
     source = models.CharField(max_length=1000)
 
+    def get_questions(self):
+        """Returns the questions that are part of this activity"""
+        return Question.objects.filter(activity=self)
+
 
 class Student(models.Model):
     email = models.EmailField(max_length=50, unique=True)

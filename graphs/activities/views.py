@@ -102,6 +102,7 @@ def next_activity(request):
 
 
 def quiz_activity(request, activity, simple_layout=False):
+    # TODO find a way to display quiz when there's no student in session
     student = Student.objects.get(pk=request.session['user_id'])
     ctx = {'title': activity.name}
     base_template = 'base.html'
@@ -122,3 +123,9 @@ def quiz_activity(request, activity, simple_layout=False):
         form = QuizForm(quiz=activity, student=student)
         ctx['form'] = form
     return render(request, 'quiz-activity.html', ctx)
+
+
+def quiz_preview(request, activity):
+    """Displays a quiz activity as text rather than as a radio button form"""
+    ctx = {'title': activity.name, 'questions': activity.get_questions()}
+    return render(request, 'quiz-preview.html', ctx)
