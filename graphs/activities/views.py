@@ -26,11 +26,11 @@ class ActivityView(TemplateView):
         activity = Activity.objects.get(pk=self.kwargs['id'])
         tpe = activity.type
 
-        if tpe == 'Text':
+        if tpe == 'text':
             return ["activities/" + self.kwargs['id'] + ".html"]
-        elif tpe == 'Quiz':
+        elif tpe == 'quiz':
             return ["activities/" + self.kwargs['id'] + ".html"]
-        elif tpe == 'Link':
+        elif tpe == 'link':
             return ["activities/" + self.kwargs['id'] + ".html"]
         else:
             return ["activities/" + self.kwargs['id'] + ".html"]
@@ -42,12 +42,12 @@ def user_activity(request):
         activity = student.current_activity
         tpe = activity.type
 
-        if tpe == 'Text':
+        if tpe == 'text':
             ctx = {'activity_template': activity.source}
             return render(request, 'text-activity.html', context=ctx)
-        elif tpe == 'Quiz':
+        elif tpe == 'quiz':
             return quiz_activity(request, activity, student)
-        elif tpe == 'Link':
+        elif tpe == 'link':
             ctx = {'link': activity.source}
             return render(request, 'link-activity.html', context=ctx)
         else:

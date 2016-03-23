@@ -34,7 +34,7 @@ class Scenario(models.Model):
         progress_list = self.progress_data()
 
         if progress_list:
-            return str(100*mean(progress_list)) + "%"
+            return str(round(100*mean(progress_list), 2)) + "%"
         else:
             return "N/A"
 
@@ -59,8 +59,14 @@ class Scenario(models.Model):
 
 
 class Activity(models.Model):
+    TYPE_CHOICES = (
+        ('text', 'Text'),
+        ('quiz', 'Quiz'),
+        ('link', 'Link'),
+    )
+
     name = models.CharField(max_length=50)
-    type = models.CharField(max_length=50)
+    type = models.CharField(max_length=4, choices=TYPE_CHOICES)
     source = models.CharField(max_length=1000)
 
 
