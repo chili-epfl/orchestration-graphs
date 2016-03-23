@@ -1,4 +1,4 @@
-{% extends "base.html" %}
+{% extends base_template %}
 
 {% block content %}
 <div class="container">
@@ -9,7 +9,9 @@
             {{ field.label }}
             {{ field }}
         {% endfor %}
+    {% if not simple %}
         <input type="submit" value="Submit"/>
+    {% endif %}
     </form>
 </div>
 {% endblock content %}

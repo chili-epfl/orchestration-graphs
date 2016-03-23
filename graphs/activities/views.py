@@ -36,21 +36,30 @@ class ActivityView(TemplateView):
             return ["activities/" + self.kwargs['id'] + ".html"]
 
 
-def activity_view(request, pk):
+def activity_view(request, pk, simple_layout=False):
     activity = Activity.objects.get(pk=pk)
     tpe = activity.type
+    ctx = {'source': activity.source, 'title': activity.name}
+    base_template = 'base.html'
+
+    if simple_layout:
+        base_template = 'simple-base.html'
+        ctx['simple'] = True
+
+    ctx['base_template'] = base_template
 
     if tpe == 'text':
-        ctx = {'activity_template': activity.source, 'title': activity.name}
         return render(request, 'text-activity.html', context=ctx)
     elif tpe == 'quiz':
-        return quiz_activity(request, activity)
+        return quiz_activity(request, activity, simple_layout)
     elif tpe == 'link':
-        ctx = {'link': activity.source}
         return render(request, 'link-activity.html', context=ctx)
     else:
-        ctx = {'activity_template': activity.source}
         return render(request, 'text-activity.html', context=ctx)
+
+
+def simple_activity(request, pk):
+    return activity_view(request, pk, simple_layout=True)
 
 
 def user_activity(request):
@@ -92,13 +101,24 @@ def next_activity(request):
         return HttpResponseRedirect('/student/register/')
 
 
-def quiz_activity(request, activity):
+def quiz_activity(request, activity, simple_layout=False):
     student = Student.objects.get(pk=request.session['user_id'])
+    ctx = {'title': activity.name}
+    base_template = 'base.html'
+
+    if simple_layout:
+        base_template = 'simple-base.html'
+        ctx['simple'] = True
+
+    ctx['base_template'] = base_template
+
     if request.method == 'POST':
         form = QuizForm(request.POST, quiz=activity, student=student)
+        ctx['form'] = form
         if form.is_valid():
             form.save()
             return next_activity(request)
     else:
         form = QuizForm(quiz=activity, student=student)
-    return render(request, 'quiz-activity.html', {'form': form, 'title': activity.name, 'base_template': 'base.html'})
+        ctx['form'] = form
+    return render(request, 'quiz-activity.html', ctx)
