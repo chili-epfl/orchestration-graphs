@@ -36,25 +36,32 @@ class ActivityView(TemplateView):
             return ["activities/" + self.kwargs['id'] + ".html"]
 
 
+def activity_view(request, activity_id):
+    activity = Activity.objects.get(pk=activity_id)
+    tpe = activity.type
+
+    if tpe == 'text':
+        ctx = {'activity_template': activity.source, 'title': activity.name}
+        return render(request, 'text-activity.html', context=ctx)
+    elif tpe == 'quiz':
+        return quiz_activity(request, activity)
+    elif tpe == 'link':
+        ctx = {'link': activity.source}
+        return render(request, 'link-activity.html', context=ctx)
+    else:
+        ctx = {'activity_template': activity.source}
+        return render(request, 'text-activity.html', context=ctx)
+
+
 def user_activity(request):
     try:
         student = Student.objects.get(pk=request.session['user_id'])
-        activity = student.current_activity
-        tpe = activity.type
+        activity_id = student.current_activity_id
 
         if student.completion_date is not None:
             return render(request, 'completion.html')
-        elif tpe == 'text':
-            ctx = {'activity_template': activity.source}
-            return render(request, 'text-activity.html', context=ctx)
-        elif tpe == 'quiz':
-            return quiz_activity(request, activity, student)
-        elif tpe == 'link':
-            ctx = {'link': activity.source}
-            return render(request, 'link-activity.html', context=ctx)
         else:
-            ctx = {'activity_template': activity.source}
-            return render(request, 'text-activity.html', context=ctx)
+            return activity_view(request, activity_id)
 
     except ObjectDoesNotExist:
         return HttpResponseRedirect('/student/register/')
@@ -85,7 +92,8 @@ def next_activity(request):
         return HttpResponseRedirect('/student/register/')
 
 
-def quiz_activity(request, activity, student):
+def quiz_activity(request, activity):
+    student = Student.objects.get(pk=request.session['user_id'])
     if request.method == 'POST':
         form = QuizForm(request.POST, quiz=activity, student=student)
         if form.is_valid():

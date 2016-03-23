@@ -2,7 +2,7 @@ from django.conf.urls import patterns, include, url
 from django.views.generic import TemplateView
 from django.conf.urls.static import static
 from django.conf import settings
-from activities.views import ActivityView, next_activity
+from activities.views import ActivityView, next_activity, activity_view
 from graphs.views import ScenarioCreateView, ScenarioDeleteView, ScenarioDetailView, student_registration, student_learning
 from django.views.generic.list import ListView
 from graphs.models import Scenario
@@ -23,7 +23,7 @@ urlpatterns = patterns('',
     url(r'^student/$', student_learning, name="student-learning"),
     url(r'^student/activity/next/$', next_activity, name="next-activity"),
 
-    url(r'^activity/(?P<id>\w+)/$', ActivityView.as_view(), name="activity"),
+    url(r'^activity/(?P<activity_id>\w+)/$', activity_view, name="activity"),
     # url(r'^blog/', include('blog.urls')),
 
     url(r'^accounts/login/$', 'django.contrib.auth.views.login', name='login'),
