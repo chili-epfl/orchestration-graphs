@@ -2,7 +2,7 @@
 
 {% block content %}
     <div class="container">
-    <h1>Quiz</h1>
+    <h1>{{ title }}</h1>
 <form method="POST" class="post-form">
     {% csrf_token %}
     {% for field in form %}

@@ -93,6 +93,6 @@ def quiz_activity(request, activity, student):
             return next_activity(request)
     else:
         form = QuizForm(quiz=activity, student=student)
-    return render(request, 'quiz-activity.html', {'form': form})
+    return render(request, 'quiz-activity.html', {'form': form, 'title': activity.name})
 
 
