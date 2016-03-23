@@ -39,7 +39,7 @@ class Scenario(models.Model):
             return "N/A"
 
     def num_students(self):
-        return len(Student.objects.filter(scenario=self.pk))
+        return Student.objects.filter(scenario=self.pk).count()
 
     def learning_stdev(self):
         progress_list = self.progress_data()
