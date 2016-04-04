@@ -94,7 +94,7 @@ class Question(models.Model):
     def get_choices(self):
         choices_list = []
         for c in json.loads(self.choices):
-            choices_list.append((c, c,))
+            choices_list.append(c)
         return choices_list
 
 

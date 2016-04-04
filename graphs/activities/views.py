@@ -51,7 +51,10 @@ def activity_view(request, pk, simple_layout=False):
     if tpe == 'text':
         return render(request, 'text-activity.html', context=ctx)
     elif tpe == 'quiz':
-        return quiz_activity(request, activity, simple_layout)
+        if simple_layout:
+            return quiz_preview(request, activity)
+        else:
+            return quiz_activity(request, activity, simple_layout)
     elif tpe == 'link':
         return render(request, 'link-activity.html', context=ctx)
     else:

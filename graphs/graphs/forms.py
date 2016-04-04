@@ -22,7 +22,7 @@ class QuizForm(ModelForm):
         data = kwargs.get('data')
         for question in self.questions:
             field_name = "question_%d" % question.pk
-            choices = question.get_choices()
+            choices = tuple((c, c) for c in question.get_choices())
 
             self.fields[field_name] = ChoiceField(label=question.text, required=True, choices=choices, widget=RadioSelect)
             if data:

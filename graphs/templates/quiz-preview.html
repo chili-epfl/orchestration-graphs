@@ -3,6 +3,15 @@
 {% block content %}
 <div class="container">
     <h1>{{ title }}</h1>
-    <p></p>
+    <div>
+        {% for question in questions %}
+            <p>{{ question.text }}</p>
+            <ul>
+            {% for choice in question.get_choices %}
+                <li>{{ choice }}</li>
+            {% endfor %}
+            </ul>
+        {% endfor %}
+    </div>
 </div>
 {% endblock content %}
