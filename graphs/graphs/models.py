@@ -63,10 +63,11 @@ class Activity(models.Model):
         ('text', 'Text'),
         ('quiz', 'Quiz'),
         ('link', 'Link'),
+        ('psycho', 'Psycho'),
     )
 
     name = models.CharField(max_length=50)
-    type = models.CharField(max_length=4, choices=TYPE_CHOICES)
+    type = models.CharField(max_length=8, choices=TYPE_CHOICES)
     source = models.CharField(max_length=1000)
 
     def get_questions(self):
