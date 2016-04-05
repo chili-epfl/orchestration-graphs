@@ -77,12 +77,20 @@ class Activity(models.Model):
 class Student(models.Model):
     email = models.EmailField(max_length=50, unique=True)
     scenario = models.ForeignKey(Scenario, null=True, on_delete=models.SET_NULL)
-    current_activity = models.ForeignKey(Activity, null=True, on_delete=models.SET_NULL)
+    current_activity = models.IntegerField(default=0)  # index of current activity in the path
+    path = models.CharField(max_length=1000, null=True)  # sequence of activities in JSON format
     start_date = models.DateTimeField(auto_now_add=True)
     completion_date = models.DateTimeField(null=True)
 
     def get_results(self):
         return Result.objects.filter(student=self)
+
+    def get_current_activity(self):
+        act_id = json.loads(self.path)[self.current_activity]
+        return Activity.objects.get(pk=act_id)
+
+    def path_list(self):
+        return json.loads(self.path)
 
 
 class Question(models.Model):

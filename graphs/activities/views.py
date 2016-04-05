@@ -68,12 +68,12 @@ def simple_activity(request, pk):
 def user_activity(request):
     try:
         student = Student.objects.get(pk=request.session['user_id'])
-        activity_id = student.current_activity_id
+        activity = student.get_current_activity()
 
         if student.completion_date is not None:
             return render(request, 'completion.html')
         else:
-            return activity_view(request, activity_id)
+            return activity_view(request, activity.pk)
 
     except ObjectDoesNotExist:
         return HttpResponseRedirect('/student/register/')
@@ -82,30 +82,23 @@ def user_activity(request):
 def next_activity(request):
     try:
         student = Student.objects.get(pk=request.session['user_id'])
-        scenario = json.loads(student.scenario.json)
-        next_act = []
-        edges = scenario['edges']
 
-        for e in edges:
-            if e['a1'] == student.current_activity_id:
-                next_act.append(Activity.objects.get(pk=e['a2']))
-
-        if next_act:
-            student.current_activity = random.choice(next_act)
-            student.save()
-            return HttpResponseRedirect('/student/')
-        else:
+        if student.current_activity + 1 >= len(student.path_list()):
             if student.completion_date is None:
                 student.completion_date = datetime.now()
                 student.save()
             return render(request, 'completion.html')
+
+        else:
+            student.current_activity += 1
+            student.save()
+            return HttpResponseRedirect('/student/')
 
     except ObjectDoesNotExist:
         return HttpResponseRedirect('/student/register/')
 
 
 def quiz_activity(request, activity, simple_layout=False):
-    # TODO find a way to display quiz when there's no student in session
     student = Student.objects.get(pk=request.session['user_id'])
     ctx = {'title': activity.name}
     base_template = 'base.html'
