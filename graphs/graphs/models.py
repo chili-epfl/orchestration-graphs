@@ -5,14 +5,23 @@ from statistics import mean, pstdev, pvariance
 
 
 class Scenario(models.Model):
+    ALL_PATHS = 'all'
     group = models.CharField(max_length=50)
     name = models.CharField(max_length=50)
     json = models.TextField()
     date = models.DateField(auto_now_add=True)
 
-    def avg_time(self):
+    def avg_time(self, path=ALL_PATHS):
+        """Computes the average time spent by students to complete the scenario.
+
+        :param path: if specified, restricts the computation to student that have followed this specific json path
+        :return: average time taken by students to complete the scenario
+        """
         times = []
-        for student in Student.objects.filter(scenario=self):
+        students = Student.objects.filter(scenario=self)
+        if path != self.ALL_PATHS:
+            students = students.filter(path=path)
+        for student in students:
             if student.completion_date is not None:
                 times.append(student.completion_date - student.start_date)
 
@@ -21,36 +30,67 @@ class Scenario(models.Model):
         else:
             return "N/A"
 
-    def progress_data(self):
+    def progress_data(self, path=ALL_PATHS):
+        """Computes each student's progress on this scenario
+
+        :param path: if specified, restricts the computation to student that have followed this specific json path
+        :return: a list of all students' progress
+        """
         progress_list = []
-        for student in Student.objects.filter(scenario=self):
+        students = Student.objects.filter(scenario=self)
+        if path != self.ALL_PATHS:
+            students = students.filter(path=path)
+        for student in students:
             results = student.get_results().order_by('timestamp')
             if results.count() >= 2:
                 progress = results.last().score - results.first().score
                 progress_list.append(progress)
         return progress_list
 
-    def avg_learning(self):
-        progress_list = self.progress_data()
+    def avg_learning(self, path=ALL_PATHS):
+        """Computes the average progress made by students on this scenario
+
+        :param path: if specified, restricts the computation to student that have followed this specific json path
+        :return: average student progress
+        """
+        progress_list = self.progress_data(path=path)
 
         if progress_list:
             return str(round(100*mean(progress_list), 2)) + "%"
         else:
             return "N/A"
 
-    def num_students(self):
-        return Student.objects.filter(scenario=self.pk).count()
+    def num_students(self, path=ALL_PATHS):
+        """Computes the number of students taking part in this scenario
 
-    def learning_stdev(self):
-        progress_list = self.progress_data()
+        :param path: if specified, restricts the computation to student that have followed this specific json path
+        :return: number of students who take part in this scenario
+        """
+        students = Student.objects.filter(scenario=self)
+        if path != self.ALL_PATHS:
+            students = students.filter(path=path)
+        return students.count()
+
+    def learning_stdev(self, path=ALL_PATHS):
+        """Computes the standard deviation of the students' learning gain
+
+        :param path: if specified, restricts the computation to student that have followed this specific json path
+        :return: standard deviation of the students' learning gain
+        """
+        progress_list = self.progress_data(path=path)
 
         if progress_list:
             return round(pstdev(progress_list), 4)
         else:
             return "N/A"
 
-    def learning_variance(self):
-        progress_list = self.progress_data()
+    def learning_variance(self, path=ALL_PATHS):
+        """Computes the variance of the students' learning gain
+
+        :param path: if specified, restricts the computation to student that have followed this specific json path
+        :return: variance of the students' learning gain
+        """
+        progress_list = self.progress_data(path=path)
 
         if progress_list:
             return round(pvariance(progress_list), 4)
