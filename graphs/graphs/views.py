@@ -75,3 +75,8 @@ def student_learning(request):
         return user_activity(request)
     else:
         return HttpResponseRedirect('/student/register/')
+
+
+def stats_view(request, pk):
+    scenario = Scenario.objects.get(pk=pk)
+    return render(request, 'scenario-stats.html', context={'scenario': scenario})

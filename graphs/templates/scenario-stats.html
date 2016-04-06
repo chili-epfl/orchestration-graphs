@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container">
+    <h1>{{ scenario.name }}</h1>
+    <p>Number of students: {{ scenario.num_students }}</p>
+    <p>Average time: {{ scenario.avg_time }}</p>
+    <p>Average learning gain: {{ scenario.avg_learning }}</p>
+    <ul>
+        <li>Standard deviation: {{ scenario.learning_stdev }}</li>
+        <li>Variance: {{ scenario.learning_variance }}</li>
+    </ul>
+</div>
+    <button type="button" onclick="window.location.href='/teacher/scenario/list/'">Back</button>
+{% endblock content %}

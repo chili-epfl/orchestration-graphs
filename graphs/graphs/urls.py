@@ -3,7 +3,7 @@ from django.views.generic import TemplateView
 from django.conf.urls.static import static
 from django.conf import settings
 from activities.views import next_activity, activity_view, simple_activity
-from graphs.views import ScenarioCreateView, ScenarioDeleteView, ScenarioDetailView, student_registration, student_learning
+from graphs.views import ScenarioCreateView, ScenarioDeleteView, ScenarioDetailView, student_registration, student_learning, stats_view
 from django.views.generic.list import ListView
 from graphs.models import Scenario
 
@@ -16,6 +16,7 @@ urlpatterns = patterns('',
     url(r'^teacher/scenario/delete/(?P<pk>\w+)/$', ScenarioDeleteView.as_view(), name="scenario-delete"),
 
     url(r'^scenario/(?P<pk>\w+)/$', ScenarioDetailView.as_view(template_name='scenario.html'), name="scenario"),
+    url(r'^scenario/(?P<pk>\w+)/stats/$', stats_view, name="scenario-stats"),
     url(r'^teacher/$', TemplateView.as_view(template_name='teacher-base.html'), name="teacher-dashboard"),
     url(r'^teacher/scenario/list/$', ListView.as_view(template_name='scenario-list.html', model=Scenario), name="scenario-list"),
 
