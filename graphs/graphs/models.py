@@ -97,7 +97,7 @@ class Student(models.Model):
 class Question(models.Model):
     text = models.CharField(max_length=1000)
     choices = models.CharField(max_length=1000)
-    correct_answer = models.CharField(max_length=50)
+    correct_answer = models.CharField(max_length=100)
     activity = models.ManyToManyField(Activity)
 
     def get_choices(self):
@@ -105,6 +105,26 @@ class Question(models.Model):
         for c in json.loads(self.choices):
             choices_list.append(c)
         return choices_list
+
+
+class Answer(models.Model):
+    student = models.ForeignKey(Student, on_delete=models.CASCADE)
+    activity = models.ForeignKey(Activity, on_delete=models.CASCADE)
+    question = models.ForeignKey(Question, on_delete=models.CASCADE)
+    given_answer = models.CharField(max_length=100)
+    timestamp = models.DateTimeField(auto_now_add=True)
+
+    @classmethod
+    def create(cls, student, activity, question):
+        answer = cls(student=student, activity=activity, question=question)
+        return answer
+
+    def is_correct(self):
+        if self.activity.type == 'quiz':
+            return self.given_answer == self.question.correct_answer
+        else:
+            # i.e. the activity is a psychological test
+            return True
 
 
 class Result(models.Model):

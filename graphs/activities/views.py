@@ -1,12 +1,10 @@
 from django.views.generic import TemplateView
 from django.http import HttpResponseRedirect
 from graphs.models import Student, Activity
-from graphs.forms import QuizForm
+from graphs.forms import QuizForm, PsychoForm
 from django.core.exceptions import ObjectDoesNotExist
 from django.shortcuts import render
 from datetime import datetime
-import json
-import random
 
 
 class ActivityView(TemplateView):
@@ -58,7 +56,7 @@ def activity_view(request, pk, simple_layout=False):
     elif tpe == 'link':
         return render(request, 'link-activity.html', context=ctx)
     elif tpe == 'psycho':
-        return quiz_activity(request, activity, simple_layout)
+        return psycho_activity(request, activity, simple_layout)
     else:
         return render(request, 'text-activity.html', context=ctx)
 
@@ -119,6 +117,29 @@ def quiz_activity(request, activity, simple_layout=False):
             return next_activity(request)
     else:
         form = QuizForm(quiz=activity, student=student)
+        ctx['form'] = form
+    return render(request, 'quiz-activity.html', ctx)
+
+
+def psycho_activity(request, activity, simple_layout=False):
+    student = Student.objects.get(pk=request.session['user_id'])
+    ctx = {'title': activity.name}
+    base_template = 'base.html'
+
+    if simple_layout:
+        base_template = 'simple-base.html'
+        ctx['simple'] = True
+
+    ctx['base_template'] = base_template
+
+    if request.method == 'POST':
+        form = PsychoForm(request.POST, test=activity, student=student)
+        ctx['form'] = form
+        if form.is_valid():
+            form.save()
+            return next_activity(request)
+    else:
+        form = PsychoForm(test=activity, student=student)
         ctx['form'] = form
     return render(request, 'quiz-activity.html', ctx)
 
