@@ -93,6 +93,10 @@ class Student(models.Model):
     def path_list(self):
         return json.loads(self.path)
 
+    def get_psycho_answers(self):
+        tests = Activity.objects.filter(type='psycho')
+        return Answer.objects.filter(student=self, activity__in=tests)
+
 
 class Question(models.Model):
     text = models.CharField(max_length=1000)
