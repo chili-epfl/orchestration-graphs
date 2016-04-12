@@ -10,6 +10,12 @@
         <li>Standard deviation: {{ scenario.learning_stdev }}</li>
         <li>Variance: {{ scenario.learning_variance }}</li>
     </ul>
+    {% for item in data %}
+        <h3>Group {{ forloop.counter }}</h3>
+        {% for name, value in item %}
+            <p>{{ name }}: {{ value }}</p>
+        {% endfor %}
+    {% endfor %}
 </div>
     <button type="button" onclick="window.location.href='/teacher/scenario/list/'">Back</button>
 {% endblock content %}
