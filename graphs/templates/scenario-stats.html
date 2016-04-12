@@ -16,6 +16,8 @@
             <p>{{ name }}: {{ value }}</p>
         {% endfor %}
     {% endfor %}
-</div>
+    <br>
+    <button type="button" onclick="window.location.href='/scenario/csv/' + {{ scenario.pk }}">Download CSV</button>
     <button type="button" onclick="window.location.href='/teacher/scenario/list/'">Back</button>
+</div>
 {% endblock content %}

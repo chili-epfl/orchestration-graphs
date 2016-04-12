@@ -5,10 +5,11 @@ from django import forms
 from django.shortcuts import render
 from django.core.urlresolvers import reverse_lazy
 from graphs.forms import StudentRegistrationForm
-from django.http import HttpResponseRedirect
+from django.http import HttpResponseRedirect, HttpResponse
 from activities.views import user_activity
 import random
 import json
+import csv
 
 
 class ScenarioCreateView(CreateView):
@@ -90,3 +91,20 @@ def stats_view(request, pk):
                      ('Variance', scenario.learning_variance(path))])
 
     return render(request, 'scenario-stats.html', context={'scenario': scenario, 'data': data})
+
+
+def get_csv(request, pk):
+    """Export scenario data as a CSV file$
+
+    :param pk: Scenario primary key
+    """
+    # TODO export useful data
+    scenario = Scenario.objects.get(pk=pk)
+    students = Student.objects.filter(scenario=scenario).order_by('path')
+    filename = 'scenario_' + str(scenario.pk) + '.csv'
+    response = HttpResponse(content_type='text/csv')
+    response['Content-Disposition'] = 'attachment; filename=' + filename
+    writer = csv.writer(response)
+    for student in students:
+        writer.writerow([student.path, student.email, student.start_date, student.completion_date])
+    return response
