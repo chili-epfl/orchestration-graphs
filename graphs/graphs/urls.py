@@ -23,6 +23,7 @@ urlpatterns = patterns('',
     url(r'^teacher/$', TemplateView.as_view(template_name='teacher-base.html'), name="teacher-dashboard"),
     url(r'^teacher/scenario/list/$', login_required(ListView.as_view(template_name='scenario-list.html', model=Scenario)), name="scenario-list"),
 
+    url(r'^student/register/scenario/(?P<pk>\w+)/$', student_registration, name="student-registration"),
     url(r'^student/register/$', student_registration, name="student-registration"),
     url(r'^student/$', student_learning, name="student-learning"),
     url(r'^student/activity/next/$', next_activity, name="next-activity"),

@@ -65,18 +65,23 @@ def path_from_edges(scenario):
     return json.dumps(path)
 
 
-def student_registration(request):
+def student_registration(request, pk=0):
     """Handles a new user's registration. Gives them a random scenario and path.
 
     :param pk: Primary key of the scenario to register in. Random if not provided.
     """
     form = StudentRegistrationForm(request.POST)
+
     if form.is_valid():
+        print(pk)
         form.save()
         student = Student.objects.get(email=form.cleaned_data['email'])
 
-        random_id = random.randint(0, Scenario.objects.count() - 1)
-        student.scenario = Scenario.objects.all()[random_id]
+        if pk == 0:
+            random_id = random.randint(0, Scenario.objects.count() - 1)
+            student.scenario = Scenario.objects.all()[random_id]
+        else:
+            student.scenario = Scenario.objects.get(pk=pk)
 
         student.path = path_from_edges(student.scenario)
         student.save()
@@ -84,7 +89,7 @@ def student_registration(request):
 
         return HttpResponseRedirect('/student/')
     else:
-        return render(request, 'registration/student-registration.html', {'form': form})
+        return render(request, 'registration/student-registration.html', {'form': form, 'scenario_id': pk})
 
 
 def student_learning(request):
