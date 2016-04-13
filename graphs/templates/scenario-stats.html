@@ -19,6 +19,7 @@
     {% endfor %}
     <br>
     <button type="button" onclick="window.location.href='/scenario/csv/' + {{ scenario.pk }}">Download CSV</button>
+    <button type="button" onclick="window.location.href='/scenario/csv/psycho/' + {{ scenario.pk }}">Download psychological results CSV</button>
     <button type="button" onclick="window.location.href='/teacher/scenario/list/'">Back</button>
 </div>
 {% endblock content %}

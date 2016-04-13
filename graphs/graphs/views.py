@@ -1,6 +1,6 @@
 from django.views.generic.edit import CreateView, DeleteView
 from django.views.generic.detail import DetailView
-from graphs.models import Scenario, Activity, Student, Result
+from graphs.models import Scenario, Activity, Student, Result, Answer
 from django import forms
 from django.shortcuts import render
 from django.core.urlresolvers import reverse_lazy
@@ -37,21 +37,6 @@ class ScenarioDetailView(DetailView):
         context = super(ScenarioDetailView, self).get_context_data(**kwargs)
         context["activities"] = Activity.objects.all()
         return context
-
-
-def path_from_sets():
-    """Picks one random activity from set A and one from set B to generate a learning path
-
-    :return: A path like the following:  Psychological test, pre-test, A, B, post-test.
-    """
-    set_a = Activity.objects.filter(set='A')
-    set_b = Activity.objects.filter(set='B')
-    a_id = random.randint(0, set_a.count() - 1)
-    b_id = random.randint(0, set_b.count() - 1)
-    psycho_test = Activity.objects.get(type='psycho')
-    pre_test = Activity.objects.get(name='Pre-test')
-    post_test = Activity.objects.get(name='Post-test')
-    return [psycho_test.pk, pre_test.pk, set_a[a_id].pk, set_b[b_id].pk, post_test.pk]
 
 
 def path_from_edges(scenario):
@@ -128,7 +113,6 @@ def get_csv(request, pk):
 
     :param pk: Scenario primary key
     """
-    # TODO export useful data
     scenario = Scenario.objects.get(pk=pk)
     students = Student.objects.filter(scenario=scenario)
     results = Result.objects.filter(student__in=students).order_by('student', 'timestamp')
@@ -138,4 +122,22 @@ def get_csv(request, pk):
     writer = csv.writer(response)
     for result in results:
         writer.writerow([result.student.email, result.timestamp, result.quiz.name, result.score])
+    return response
+
+
+def get_psycho_csv(request, pk):
+    """Export psychological results as a CSV file
+
+    :param pk: Primary key of the scenario results should be pulled from
+    """
+    scenario = Scenario.objects.get(pk=pk)
+    students = Student.objects.filter(scenario=scenario)
+    tests = Activity.objects.filter(type='psycho')
+    answers = Answer.objects.filter(student__in=students, activity__in=tests).order_by('student', 'question')
+    filename = 'psycho_scenario_' + str(scenario.pk) + '.csv'
+    response = HttpResponse(content_type='text/csv')
+    response['Content-Disposition'] = 'attachment; filename=' + filename
+    writer = csv.writer(response)
+    for answer in answers:
+        writer.writerow([answer.student.email, answer.question_id, answer.given_answer])
     return response
