@@ -109,6 +109,7 @@ class Activity(models.Model):
     name = models.CharField(max_length=50)
     type = models.CharField(max_length=8, choices=TYPE_CHOICES)
     source = models.CharField(max_length=1000)
+    set = models.CharField(max_length=16, null=True)
 
     def get_questions(self):
         """Returns the questions that are part of this activity"""

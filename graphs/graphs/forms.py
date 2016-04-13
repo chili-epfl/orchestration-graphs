@@ -9,6 +9,7 @@ class StudentRegistrationForm(ModelForm):
 
 
 class QuizForm(ModelForm):
+    """Form for quizzes. Stores a score based on the percentage of correct answers."""
     class Meta:
         model = Result
         fields = []
@@ -49,6 +50,9 @@ class QuizForm(ModelForm):
 
 
 class PsychoForm(Form):
+    """Form for psychological test. Saves the answers as is instead of computing a score since there are no right or
+    wrong answers.
+    """
     def __init__(self, *args, **kwargs):
         self.test = kwargs.pop('test')
         self.student = kwargs.pop('student')

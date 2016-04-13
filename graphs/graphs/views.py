@@ -1,6 +1,6 @@
 from django.views.generic.edit import CreateView, DeleteView
 from django.views.generic.detail import DetailView
-from graphs.models import Scenario, Activity, Student
+from graphs.models import Scenario, Activity, Student, Result
 from django import forms
 from django.shortcuts import render
 from django.core.urlresolvers import reverse_lazy
@@ -39,6 +39,35 @@ class ScenarioDetailView(DetailView):
         return context
 
 
+def path_from_sets():
+    """Picks one random activity from set A and one from set B"""
+    set_a = Activity.objects.filter(set='A')
+    set_b = Activity.objects.filter(set='B')
+    a_id = random.randint(0, set_a.count() - 1)
+    b_id = random.randint(0, set_b.count() - 1)
+    return [set_a[a_id].pk, set_b[b_id].pk]
+
+
+def path_from_edges(scenario):
+    json_data = json.loads(scenario.json)
+    edges = json_data['edges']
+    act = json_data['start']
+    path = [act]
+
+    while True:
+        next_act = []
+        for e in edges:
+            if e['a1'] == path[-1]:
+                next_act.append(e['a2'])
+
+        if next_act:
+            path.append(random.choice(next_act))
+        else:
+            break
+
+    return json.dumps(path)
+
+
 def student_registration(request):
     form = StudentRegistrationForm(request.POST)
     if form.is_valid():
@@ -46,23 +75,8 @@ def student_registration(request):
         student = Student.objects.get(email=form.cleaned_data['email'])
         random_id = random.randint(0, Scenario.objects.count() - 1)
         student.scenario = Scenario.objects.all()[random_id]
-        json_data = json.loads(student.scenario.json)
-        edges = json_data['edges']
-        act = json_data['start']
-        path = [act]
 
-        while True:
-            next_act = []
-            for e in edges:
-                if e['a1'] == path[-1]:
-                    next_act.append(e['a2'])
-
-            if next_act:
-                path.append(random.choice(next_act))
-            else:
-                break
-
-        student.path = json.dumps(path)
+        student.path = path_from_edges(student.scenario)
         student.save()
         request.session['user_id'] = student.pk
 
@@ -94,17 +108,18 @@ def stats_view(request, pk):
 
 
 def get_csv(request, pk):
-    """Export scenario data as a CSV file$
+    """Export scenario data as a CSV file
 
     :param pk: Scenario primary key
     """
     # TODO export useful data
     scenario = Scenario.objects.get(pk=pk)
-    students = Student.objects.filter(scenario=scenario).order_by('path')
+    students = Student.objects.filter(scenario=scenario)
+    results = Result.objects.filter(student__in=students).order_by('student', 'timestamp')
     filename = 'scenario_' + str(scenario.pk) + '.csv'
     response = HttpResponse(content_type='text/csv')
     response['Content-Disposition'] = 'attachment; filename=' + filename
     writer = csv.writer(response)
-    for student in students:
-        writer.writerow([student.path, student.email, student.start_date, student.completion_date])
+    for result in results:
+        writer.writerow([result.student.email, result.timestamp, result.quiz.name, result.score])
     return response
