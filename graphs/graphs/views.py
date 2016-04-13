@@ -40,15 +40,25 @@ class ScenarioDetailView(DetailView):
 
 
 def path_from_sets():
-    """Picks one random activity from set A and one from set B"""
+    """Picks one random activity from set A and one from set B to generate a learning path
+
+    :return: A path like the following:  Psychological test, pre-test, A, B, post-test.
+    """
     set_a = Activity.objects.filter(set='A')
     set_b = Activity.objects.filter(set='B')
     a_id = random.randint(0, set_a.count() - 1)
     b_id = random.randint(0, set_b.count() - 1)
-    return [set_a[a_id].pk, set_b[b_id].pk]
+    psycho_test = Activity.objects.get(type='psycho')
+    pre_test = Activity.objects.get(name='Pre-test')
+    post_test = Activity.objects.get(name='Post-test')
+    return [psycho_test.pk, pre_test.pk, set_a[a_id].pk, set_b[b_id].pk, post_test.pk]
 
 
 def path_from_edges(scenario):
+    """Picks a random learning path based on the scenario graph
+
+    :param scenario: The scenario from which you want a random path
+    """
     json_data = json.loads(scenario.json)
     edges = json_data['edges']
     act = json_data['start']
@@ -69,6 +79,7 @@ def path_from_edges(scenario):
 
 
 def student_registration(request):
+    """Handles a new user's registration. Gives them a random scenario and path."""
     form = StudentRegistrationForm(request.POST)
     if form.is_valid():
         form.save()
@@ -86,6 +97,7 @@ def student_registration(request):
 
 
 def student_learning(request):
+    """Redirects to current activity if a student is logged in, otherwise redirects to registration page"""
     if 'user_id' in request.session:
         return user_activity(request)
     else:
@@ -93,6 +105,10 @@ def student_learning(request):
 
 
 def stats_view(request, pk):
+    """Shows some statistics.
+
+    :param pk: Primary key of the scenario being viewed.
+    """
     scenario = Scenario.objects.get(pk=pk)
     paths = Student.objects.filter(scenario=scenario).order_by('path').values_list('path', flat=True).distinct()
     data = []

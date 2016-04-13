@@ -68,7 +68,7 @@ class PsychoForm(Form):
             if data:
                 self.fields[field_name].initial = data.get(field_name)
 
-    def save(self, commit=True):
+    def save(self):
         for field_name, field_value in self.cleaned_data.items():
             if field_name.startswith("question_"):
                 q_id = int(field_name.split("_")[1])

@@ -5,6 +5,7 @@ from statistics import mean, pstdev, pvariance
 
 
 class Scenario(models.Model):
+    """Models a scenario and its graph of activities"""
     ALL_PATHS = 'all'
     group = models.CharField(max_length=50)
     name = models.CharField(max_length=50)
@@ -140,6 +141,7 @@ class Student(models.Model):
 
 
 class Question(models.Model):
+    """Models a question, which is part of one or more quiz/test activity"""
     text = models.CharField(max_length=1000)
     choices = models.CharField(max_length=1000)
     correct_answer = models.CharField(max_length=100)
@@ -153,6 +155,7 @@ class Question(models.Model):
 
 
 class Answer(models.Model):
+    """Models a student's answer to a question"""
     student = models.ForeignKey(Student, on_delete=models.CASCADE)
     activity = models.ForeignKey(Activity, on_delete=models.CASCADE)
     question = models.ForeignKey(Question, on_delete=models.CASCADE)
@@ -173,6 +176,7 @@ class Answer(models.Model):
 
 
 class Result(models.Model):
+    """Models a student's score (percentage) on a quiz"""
     student = models.ForeignKey(Student, on_delete=models.CASCADE)
     quiz = models.ForeignKey(Activity, on_delete=models.CASCADE)
     score = models.FloatField()

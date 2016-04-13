@@ -35,6 +35,11 @@ class ActivityView(TemplateView):
 
 
 def activity_view(request, pk, simple_layout=False):
+    """Displays an activity
+
+    :param pk: The activity's primary key
+    :param simple_layout: Whether the activity should be displayed in a basic way or with the header, buttons, etc.
+    """
     activity = Activity.objects.get(pk=pk)
     tpe = activity.type
     ctx = {'source': activity.source, 'title': activity.name}
@@ -66,6 +71,7 @@ def simple_activity(request, pk):
 
 
 def user_activity(request):
+    """Displays the current user's current activity"""
     try:
         student = Student.objects.get(pk=request.session['user_id'])
         activity = student.get_current_activity()
@@ -80,6 +86,7 @@ def user_activity(request):
 
 
 def next_activity(request):
+    """Makes the current user proceed to their next activity"""
     try:
         student = Student.objects.get(pk=request.session['user_id'])
 
@@ -99,6 +106,11 @@ def next_activity(request):
 
 
 def quiz_activity(request, activity, simple_layout=False):
+    """Displays a submittable quiz form
+
+    :param activity: The quiz activity to display
+    :param simple_layout: If true, displays the quiz as plain text instead of a form (default false)
+    """
     student = Student.objects.get(pk=request.session['user_id'])
     ctx = {'title': activity.name}
     base_template = 'base.html'
@@ -122,6 +134,11 @@ def quiz_activity(request, activity, simple_layout=False):
 
 
 def psycho_activity(request, activity, simple_layout=False):
+    """Displays a submittable psychological test form
+
+    :param activity: The test activity to display
+    :param simple_layout: If true, displays the test as plain text instead of a form (default false)
+    """
     student = Student.objects.get(pk=request.session['user_id'])
     ctx = {'title': activity.name}
     base_template = 'base.html'
@@ -145,6 +162,8 @@ def psycho_activity(request, activity, simple_layout=False):
 
 
 def quiz_preview(request, activity):
-    """Displays a quiz activity as text rather than as a radio button form"""
+    """Displays a quiz activity as text rather than as a radio button form
+
+    :param activity: The quiz to display"""
     ctx = {'title': activity.name, 'questions': activity.get_questions()}
     return render(request, 'quiz-preview.html', ctx)
