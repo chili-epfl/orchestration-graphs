@@ -2,9 +2,10 @@
 Workflow engine for orchestration graphs
 
 How to run the server:
-* Make yure you're running Python 3
+* Make sure you're running Python 3
 * Install Django (easiest way using pip: 'pip install django')
 * Run 'manage.py runserver' (in the graphs directory)
+* Now you can connect to e.g. localhost:8000/student
 
 
 You can create accounts to access the teacher area using the following manage.py command:
