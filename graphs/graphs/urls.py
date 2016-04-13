@@ -3,7 +3,9 @@ from django.views.generic import TemplateView
 from django.conf.urls.static import static
 from django.conf import settings
 from activities.views import next_activity, activity_view, simple_activity
-from graphs.views import ScenarioCreateView, ScenarioDeleteView, ScenarioDetailView, student_registration, student_learning, stats_view, get_csv, get_psycho_csv
+from graphs.views import ScenarioCreateView, ScenarioDeleteView, ScenarioDetailView, student_registration,\
+    student_learning, stats_view, get_csv, get_psycho_csv
+from django.contrib.auth.decorators import login_required
 from django.views.generic.list import ListView
 from graphs.models import Scenario
 
@@ -19,7 +21,7 @@ urlpatterns = patterns('',
     url(r'^scenario/csv/(?P<pk>\w+)/$', get_csv, name="scenario-csv"),
     url(r'^scenario/csv/psycho/(?P<pk>\w+)/$', get_psycho_csv, name="scenario-psycho-csv"),
     url(r'^teacher/$', TemplateView.as_view(template_name='teacher-base.html'), name="teacher-dashboard"),
-    url(r'^teacher/scenario/list/$', ListView.as_view(template_name='scenario-list.html', model=Scenario), name="scenario-list"),
+    url(r'^teacher/scenario/list/$', login_required(ListView.as_view(template_name='scenario-list.html', model=Scenario)), name="scenario-list"),
 
     url(r'^student/register/$', student_registration, name="student-registration"),
     url(r'^student/$', student_learning, name="student-learning"),
@@ -30,7 +32,7 @@ urlpatterns = patterns('',
     # url(r'^blog/', include('blog.urls')),
 
     url(r'^accounts/login/$', 'django.contrib.auth.views.login', name='login'),
-    url(r'^accounts/logout/$', 'django.contrib.auth.views.logout', {'next_page': '/teacher/'}, name='logout'),
+    url(r'^accounts/logout/$', 'django.contrib.auth.views.logout', {'next_page': '/teacher/scenario/list/'}, name='logout'),
 
     url(r'^admin/', include(admin.site.urls)),
 ) + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

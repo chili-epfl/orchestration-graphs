@@ -4,6 +4,8 @@ from graphs.models import Scenario, Activity, Student, Result, Answer
 from django import forms
 from django.shortcuts import render
 from django.core.urlresolvers import reverse_lazy
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth.mixins import LoginRequiredMixin
 from graphs.forms import StudentRegistrationForm
 from django.http import HttpResponseRedirect, HttpResponse
 from activities.views import user_activity
@@ -12,7 +14,7 @@ import json
 import csv
 
 
-class ScenarioCreateView(CreateView):
+class ScenarioCreateView(LoginRequiredMixin, CreateView):
     model = Scenario
     fields = ['name', 'group', 'json']
     template_name = 'graph-editor.html'
@@ -24,12 +26,12 @@ class ScenarioCreateView(CreateView):
         return form
 
 
-class ScenarioDeleteView(DeleteView):
+class ScenarioDeleteView(LoginRequiredMixin, DeleteView):
     model = Scenario
     success_url = reverse_lazy("scenario-list")
 
 
-class ScenarioDetailView(DetailView):
+class ScenarioDetailView(LoginRequiredMixin, DetailView):
     """DetailView subclass used to use multiple models in the template"""
     model = Scenario
 
@@ -64,11 +66,15 @@ def path_from_edges(scenario):
 
 
 def student_registration(request):
-    """Handles a new user's registration. Gives them a random scenario and path."""
+    """Handles a new user's registration. Gives them a random scenario and path.
+
+    :param pk: Primary key of the scenario to register in. Random if not provided.
+    """
     form = StudentRegistrationForm(request.POST)
     if form.is_valid():
         form.save()
         student = Student.objects.get(email=form.cleaned_data['email'])
+
         random_id = random.randint(0, Scenario.objects.count() - 1)
         student.scenario = Scenario.objects.all()[random_id]
 
