@@ -1,6 +1,6 @@
 from django.views.generic import TemplateView
 from django.http import HttpResponseRedirect
-from graphs.models import Student, Activity
+from graphs.models import Student, Activity, TimeLog
 from graphs.forms import QuizForm, PsychoForm
 from django.core.exceptions import ObjectDoesNotExist
 from django.shortcuts import render
@@ -89,6 +89,9 @@ def next_activity(request):
     """Makes the current user proceed to their next activity"""
     try:
         student = Student.objects.get(pk=request.session['user_id'])
+        log = TimeLog.objects.get(student=student, activity=student.get_current_activity())
+        log.end_time = datetime.now()
+        log.save()
 
         if student.current_activity + 1 >= len(student.path_list()):
             if student.completion_date is None:
@@ -99,6 +102,8 @@ def next_activity(request):
         else:
             student.current_activity += 1
             student.save()
+            log = TimeLog.create(student=student, activity=student.get_current_activity())
+            log.save()
             return HttpResponseRedirect('/student/')
 
     except ObjectDoesNotExist:

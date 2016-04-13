@@ -185,3 +185,19 @@ class Result(models.Model):
     def create(cls, student, quiz):
         result = cls(student=student, quiz=quiz)
         return result
+
+
+class TimeLog(models.Model):
+    """Records the times at which each student starts/ends an activity"""
+    student = models.ForeignKey(Student, on_delete=models.CASCADE)
+    activity = models.ForeignKey(Activity, on_delete=models.CASCADE)
+    start_time = models.DateTimeField(auto_now_add=True)
+    end_time = models.DateTimeField(null=True)
+
+    class Meta:
+        unique_together = ('student', 'activity',)
+
+    @classmethod
+    def create(cls, student, activity):
+        time_log = cls(student=student, activity=activity)
+        return time_log

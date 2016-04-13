@@ -1,6 +1,6 @@
 from django.views.generic.edit import CreateView, DeleteView
 from django.views.generic.detail import DetailView
-from graphs.models import Scenario, Activity, Student, Result, Answer
+from graphs.models import Scenario, Activity, Student, Result, Answer, TimeLog
 from django import forms
 from django.shortcuts import render
 from django.core.urlresolvers import reverse_lazy
@@ -73,7 +73,6 @@ def student_registration(request, pk=0):
     form = StudentRegistrationForm(request.POST)
 
     if form.is_valid():
-        print(pk)
         form.save()
         student = Student.objects.get(email=form.cleaned_data['email'])
 
@@ -85,6 +84,8 @@ def student_registration(request, pk=0):
 
         student.path = path_from_edges(student.scenario)
         student.save()
+        log = TimeLog.create(student=student, activity=student.get_current_activity())
+        log.save()
         request.session['user_id'] = student.pk
 
         return HttpResponseRedirect('/student/')
@@ -100,6 +101,7 @@ def student_learning(request):
         return HttpResponseRedirect('/student/register/')
 
 
+@login_required
 def stats_view(request, pk):
     """Shows some statistics.
 
@@ -119,6 +121,7 @@ def stats_view(request, pk):
     return render(request, 'scenario-stats.html', context={'scenario': scenario, 'data': data})
 
 
+@login_required
 def get_csv(request, pk):
     """Export scenario data as a CSV file
 
@@ -136,6 +139,7 @@ def get_csv(request, pk):
     return response
 
 
+@login_required
 def get_psycho_csv(request, pk):
     """Export psychological results as a CSV file
 
