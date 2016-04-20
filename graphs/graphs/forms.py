@@ -24,7 +24,7 @@ class QuizForm(ModelForm):
         data = kwargs.get('data')
         for question in self.questions:
             field_name = "question_%d" % question.pk
-            choices = tuple((c.pk, c.text) for c in question.get_choices())
+            choices = tuple((c.pk, mark_safe(c.get_html())) for c in question.get_choices())
 
             if question.image_source is not None:
                 label = "<img src='" + question.image_source + "' height='250' ><br>" + question.text
@@ -69,7 +69,7 @@ class PsychoForm(Form):
         data = kwargs.get('data')
         for question in self.questions:
             field_name = "question_%d" % question.pk
-            choices = tuple((c.pk, c.text) for c in question.get_choices())
+            choices = tuple((c.pk, mark_safe(c.get_html())) for c in question.get_choices())
 
             if question.image_source is not None:
                 label = "<img src='" + question.image_source + "' height='250' ><br>" + question.text

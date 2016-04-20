@@ -145,6 +145,12 @@ class Choice(models.Model):
     text = models.CharField(max_length=100)
     image_source = models.CharField(max_length=100)
 
+    def get_html(self):
+        if self.image_source is not None and self.image_source != "":
+            return "<img src='" + self.image_source + "' height='128' > " + self.text
+        else:
+            return self.text
+
 
 class Question(models.Model):
     """Models a question, which is part of one or more quiz/test activity"""
