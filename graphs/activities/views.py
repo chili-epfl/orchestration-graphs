@@ -1,6 +1,6 @@
 from django.views.generic import TemplateView
 from django.http import HttpResponseRedirect
-from graphs.models import Student, Activity, TimeLog
+from graphs.models import Student, Activity, TimeLog, Question
 from graphs.forms import QuizForm, PsychoForm
 from django.core.exceptions import ObjectDoesNotExist
 from django.shortcuts import render

@@ -142,6 +142,7 @@ class Student(models.Model):
 class Question(models.Model):
     """Models a question, which is part of one or more quiz/test activity"""
     text = models.CharField(max_length=1000)
+    image_source = models.CharField(max_length=100, null=True)
     choices = models.CharField(max_length=1000)
     correct_answer = models.CharField(max_length=100)
     activity = models.ManyToManyField(Activity)
