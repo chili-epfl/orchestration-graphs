@@ -123,7 +123,7 @@ def stats_view(request, pk):
 
 @login_required
 def get_csv(request, pk):
-    """Export scenario data as a CSV file
+    """Exports scenario data as a CSV file
 
     :param pk: Scenario primary key
     """
@@ -141,7 +141,7 @@ def get_csv(request, pk):
 
 @login_required
 def get_psycho_csv(request, pk):
-    """Export psychological results as a CSV file
+    """Exports psychological results as a CSV file
 
     :param pk: Primary key of the scenario results should be pulled from
     """
@@ -160,7 +160,7 @@ def get_psycho_csv(request, pk):
 
 @login_required
 def get_time_csv(request, pk):
-    """Export activities time logs as a CSV file
+    """Exports activities time logs as a CSV file
 
     :param pk: Primary key of the scenario logs should be pulled from
     """
