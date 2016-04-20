@@ -1,6 +1,6 @@
 from django.views.generic import TemplateView
 from django.http import HttpResponseRedirect
-from graphs.models import Student, Activity, TimeLog, Question
+from graphs.models import Student, Activity, TimeLog
 from graphs.forms import QuizForm, PsychoForm
 from django.core.exceptions import ObjectDoesNotExist
 from django.shortcuts import render
@@ -9,6 +9,8 @@ from datetime import datetime
 
 class ActivityView(TemplateView):
     """
+    Unused?
+
     Default page seen by the user. Form to create the
     experiment instance within the session
     """

@@ -3,7 +3,7 @@
 {% block content %}
     <h1>{{ title }}</h1>
     <div class="container">
-{% include source %}
+    {{ source }}
     </div>
     {% if not simple %}
 <button type="button" onclick="window.location.href='/student/activity/next/'" class="btn btn-lg btn-primary">Next activity</button>
