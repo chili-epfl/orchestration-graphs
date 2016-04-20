@@ -135,7 +135,7 @@ def get_csv(request, pk):
     response['Content-Disposition'] = 'attachment; filename=' + filename
     writer = csv.writer(response)
     for result in results:
-        writer.writerow([result.student.email, result.timestamp, result.quiz.name, result.score])
+        writer.writerow([result.student.email, result.timestamp, result.quiz_id, result.quiz.name, result.score])
     return response
 
 
