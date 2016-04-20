@@ -76,9 +76,9 @@ def student_registration(request, pk=0):
         form.save()
         student = Student.objects.get(email=form.cleaned_data['email'])
 
-        if pk == 0:
-            random_id = random.randint(0, Scenario.objects.count() - 1)
-            student.scenario = Scenario.objects.all()[random_id]
+        if str(pk) == '0':
+            scenario_id = random.randint(0, Scenario.objects.count() - 1)
+            student.scenario = Scenario.objects.all()[scenario_id]
         else:
             student.scenario = Scenario.objects.get(pk=pk)
 
@@ -154,7 +154,7 @@ def get_psycho_csv(request, pk):
     response['Content-Disposition'] = 'attachment; filename=' + filename
     writer = csv.writer(response)
     for answer in answers:
-        writer.writerow([answer.student.email, answer.question_id, answer.given_answer])
+        writer.writerow([answer.student.email, answer.question_id, answer.given_answer_id])
     return response
 
 
