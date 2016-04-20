@@ -2,6 +2,7 @@ from django.db import models
 from datetime import timedelta
 import json
 from statistics import mean, pstdev, pvariance
+from django.utils.safestring import mark_safe
 
 
 class Scenario(models.Model):
@@ -148,7 +149,7 @@ class Choice(models.Model):
     def get_html(self):
         """Returns a string containing the image (if there is one) in an HTML tag, followed by the text"""
         if self.image_source is not None and self.image_source != "":
-            return "<img src='" + self.image_source + "' height='128' > " + self.text
+            return mark_safe("<img src='" + self.image_source + "' height='128' > " + self.text)
         else:
             return self.text
 
@@ -162,6 +163,12 @@ class Question(models.Model):
 
     def get_choices(self):
         return Choice.objects.filter(question=self)
+
+    def get_html(self, img_height=250):
+        if self.image_source is not None and self.image_source != "":
+            return mark_safe("<img src='" + self.image_source + "' height='" + str(img_height) + "' > <p>" + self.text + "</p>")
+        else:
+            return self.text
 
 
 class Answer(models.Model):

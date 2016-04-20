@@ -5,10 +5,10 @@
     <h1>{{ title }}</h1>
     <div>
         {% for question in questions %}
-            <p>{{ question.text }}</p>
+            {{ question.get_html }}
             <ul>
             {% for choice in question.get_choices %}
-                <li>{{ choice }}</li>
+                <li>{{ choice.get_html }}</li>
             {% endfor %}
             </ul>
         {% endfor %}
