@@ -146,6 +146,7 @@ class Choice(models.Model):
     image_source = models.CharField(max_length=100)
 
     def get_html(self):
+        """Returns a string containing the image (if there is one) in an HTML tag, followed by the text"""
         if self.image_source is not None and self.image_source != "":
             return "<img src='" + self.image_source + "' height='128' > " + self.text
         else:

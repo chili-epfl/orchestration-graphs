@@ -154,7 +154,7 @@ def get_psycho_csv(request, pk):
     response['Content-Disposition'] = 'attachment; filename=' + filename
     writer = csv.writer(response)
     for answer in answers:
-        writer.writerow([answer.student.email, answer.question_id, answer.given_answer_id])
+        writer.writerow([answer.student.email, answer.question_id, answer.question.text, answer.given_answer_id, answer.given_answer.text])
     return response
 
 
@@ -172,5 +172,5 @@ def get_time_csv(request, pk):
     response['Content-Disposition'] = 'attachment; filename=' + filename
     writer = csv.writer(response)
     for log in time_logs:
-        writer.writerow([log.student.email, log.activity_id, log.start_time, log.end_time])
+        writer.writerow([log.student.email, log.activity_id, log.activity.name, log.start_time, log.end_time])
     return response
