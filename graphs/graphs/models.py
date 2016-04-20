@@ -139,19 +139,22 @@ class Student(models.Model):
         return Answer.objects.filter(student=self, activity__in=tests)
 
 
+class Choice(models.Model):
+    """Models a possible answer"""
+    question = models.ForeignKey('Question', on_delete=models.CASCADE)
+    text = models.CharField(max_length=100)
+    image_source = models.CharField(max_length=100)
+
+
 class Question(models.Model):
     """Models a question, which is part of one or more quiz/test activity"""
     text = models.CharField(max_length=1000)
     image_source = models.CharField(max_length=100, null=True)
-    choices = models.CharField(max_length=1000)
-    correct_answer = models.CharField(max_length=100)
+    correct_answer = models.ForeignKey(Choice, related_name='+')
     activity = models.ManyToManyField(Activity)
 
     def get_choices(self):
-        choices_list = []
-        for c in json.loads(self.choices):
-            choices_list.append(c)
-        return choices_list
+        return Choice.objects.filter(question=self)
 
 
 class Answer(models.Model):
@@ -159,7 +162,7 @@ class Answer(models.Model):
     student = models.ForeignKey(Student, on_delete=models.CASCADE)
     activity = models.ForeignKey(Activity, on_delete=models.CASCADE)
     question = models.ForeignKey(Question, on_delete=models.CASCADE)
-    given_answer = models.CharField(max_length=100)
+    given_answer = models.ForeignKey(Choice)
     timestamp = models.DateTimeField(auto_now_add=True)
 
     @classmethod

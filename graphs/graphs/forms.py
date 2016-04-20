@@ -24,7 +24,7 @@ class QuizForm(ModelForm):
         data = kwargs.get('data')
         for question in self.questions:
             field_name = "question_%d" % question.pk
-            choices = tuple((c, c) for c in question.get_choices())
+            choices = tuple((c.pk, c.text) for c in question.get_choices())
 
             if question.image_source is not None:
                 label = "<img src='" + question.image_source + "' height='250' ><br>" + question.text
@@ -44,7 +44,8 @@ class QuizForm(ModelForm):
                 q_id = int(field_name.split("_")[1])
                 q = Question.objects.get(pk=q_id)
 
-                if field_value == q.correct_answer:
+                print(field_value)
+                if field_value == str(q.correct_answer_id):
                     results.append(1)
                 else:
                     results.append(0)
@@ -68,7 +69,7 @@ class PsychoForm(Form):
         data = kwargs.get('data')
         for question in self.questions:
             field_name = "question_%d" % question.pk
-            choices = tuple((c, c) for c in question.get_choices())
+            choices = tuple((c.pk, c.text) for c in question.get_choices())
 
             if question.image_source is not None:
                 label = "<img src='" + question.image_source + "' height='250' ><br>" + question.text
@@ -85,5 +86,5 @@ class PsychoForm(Form):
                 q_id = int(field_name.split("_")[1])
                 q = Question.objects.get(pk=q_id)
                 answer = Answer.create(self.student, self.test, q)
-                answer.given_answer = field_value
+                answer.given_answer_id = field_value
                 answer.save()
