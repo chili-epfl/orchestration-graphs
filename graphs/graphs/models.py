@@ -110,7 +110,12 @@ class Activity(models.Model):
 
     name = models.CharField(max_length=50)
     type = models.CharField(max_length=8, choices=TYPE_CHOICES)
-    source = models.CharField(max_length=1000)
+    source = models.CharField(max_length=1000, null=True)
+
+    @classmethod
+    def create(cls, name, tpe):
+        activity = cls(name=name, type=tpe)
+        return activity
 
     def get_questions(self):
         """Returns the questions that are part of this activity"""
