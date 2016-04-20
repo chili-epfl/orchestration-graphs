@@ -156,3 +156,21 @@ def get_psycho_csv(request, pk):
     for answer in answers:
         writer.writerow([answer.student.email, answer.question_id, answer.given_answer])
     return response
+
+
+@login_required
+def get_time_csv(request, pk):
+    """Export activities time logs as a CSV file
+
+    :param pk: Primary key of the scenario logs should be pulled from
+    """
+    scenario = Scenario.objects.get(pk=pk)
+    students = Student.objects.filter(scenario=scenario)
+    time_logs = TimeLog.objects.filter(student__in=students)
+    filename = 'time_scenario_' + str(scenario.pk) + '.csv'
+    response = HttpResponse(content_type='text/csv')
+    response['Content-Disposition'] = 'attachment; filename=' + filename
+    writer = csv.writer(response)
+    for log in time_logs:
+        writer.writerow([log.student.email, log.activity_id, log.start_time, log.end_time])
+    return response

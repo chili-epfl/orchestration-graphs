@@ -4,7 +4,7 @@ from django.conf.urls.static import static
 from django.conf import settings
 from activities.views import next_activity, activity_view, simple_activity
 from graphs.views import ScenarioCreateView, ScenarioDeleteView, ScenarioDetailView, student_registration,\
-    student_learning, stats_view, get_csv, get_psycho_csv
+    student_learning, stats_view, get_csv, get_psycho_csv, get_time_csv
 from django.contrib.auth.decorators import login_required
 from django.views.generic.list import ListView
 from graphs.models import Scenario
@@ -20,6 +20,7 @@ urlpatterns = patterns('',
     url(r'^scenario/(?P<pk>\w+)/stats/$', stats_view, name="scenario-stats"),
     url(r'^scenario/csv/(?P<pk>\w+)/$', get_csv, name="scenario-csv"),
     url(r'^scenario/csv/psycho/(?P<pk>\w+)/$', get_psycho_csv, name="scenario-psycho-csv"),
+    url(r'^scenario/csv/time/(?P<pk>\w+)/$', get_time_csv, name="scenario-time-csv"),
     url(r'^teacher/$', TemplateView.as_view(template_name='teacher-base.html'), name="teacher-dashboard"),
     url(r'^teacher/scenario/list/$', login_required(ListView.as_view(template_name='scenario-list.html', model=Scenario)), name="scenario-list"),
 
