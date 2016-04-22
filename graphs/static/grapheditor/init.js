@@ -18,6 +18,9 @@ window.onload = function () {
     // Creates a new graph
     graph = Raphael("graph", 640, 525);
     graphJson = {};
+    graphJson["activities"] = [];
+    graphJson["edges"] = [];
+    graphJson["start"] = -1;
 
     $('#activitySelector').on('change', function() {
         activityId = this.value;

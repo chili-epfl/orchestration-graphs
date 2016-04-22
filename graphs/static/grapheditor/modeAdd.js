@@ -1,22 +1,27 @@
 /**
  * Constructs a new activity set and adds it to the current graph
  * x, y                     position of the new activity on the graph
- * name, description, url   of the activity defined in the activity form
+ * name, type, url, dbid    of the activity defined in the activity form
  * 
  */
-function activity(x, y, name, description, url) {
+function activity(x, y, name, type, url, dbid) {
     // Creates a set containing a new Raphael rectangle and a new Raphael text
     var activitySet = graph.set();
     var activityRect = graph.rect(x - 30, reposition(y - 20), 60, 40);
     activityRect.attr({
         fill: activityFill,
         "stroke-width": 0,
-        title: description,
+        title: type,
         href: url
     });
+    activityRect.dbid = dbid;
+
     var activityText = graph.text(x, reposition(y - 20) + 20, correctTextSize(name));
     activityText.attr({fill: "#FFF"});
     activitySet.push(activityRect, activityText);
+
+    // Add activity to the graphJson description of the graph
+    graphJson["activities"].push({"id": dbid});
 
     // Add custom attributes to Raphael elements
     activitySet.forEach(function(elem) {
@@ -63,7 +68,11 @@ function newActivityForm(x, y) {
 function submitNewActivityForm() {
     if ($('#activitySelector').val() !== 'choose') {  
         $('#activityForm').modal('hide');
-        activity(newActivityX, newActivityY, $('#newActivityName')[0].value, $('#newActivityType')[0].value, $('#newActivityUrl')[0].value);
+        activity(newActivityX, newActivityY,    // position
+            $('#newActivityName')[0].value,     // name
+            $('#newActivityType')[0].value,     // type
+            $('#newActivityUrl')[0].value,      // source
+            parseInt($('#activitySelector').val()));      // dbid
         $('#newActivityName')[0].value = '';
         $('#newActivityType')[0].value = '';
         $('#newActivityUrl')[0].value = '';

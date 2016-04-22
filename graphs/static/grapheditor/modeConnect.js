@@ -60,6 +60,9 @@ function connectActivities(description) {
     newConnection.line.startingRect = selectedActRect[0].id;
     newConnection.line.endingRect = selectedActRect[1].id;
     connections.push(newConnection);
+    
+    graphJson["edges"].push({"a1": selectedActRect[0].dbid, "a2": selectedActRect[1].dbid});
+
     newConnection.line.click(function (event) {
         handleClickOnConnection(event, this);  // ERASE mode
     });

@@ -36,7 +36,7 @@
 {% for act in activities %}
 				<option value="{{act.pk}}" href="#">{{ act.name }}</option>
 {% endfor %}
-				<option value="other" href="#">Other</option>
+				<option value="other" disabled href="#">Other</option>
 			</select>
 			
 			<div id="newActivityForm" style="display: none;">

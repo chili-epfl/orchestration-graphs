@@ -6,7 +6,9 @@ var inspectedActivity;
  */
 function editActivityForm(activitySet) {
 	inspectedActivity = activitySet;
-	// TODO: $('#activitySelector').val() must be set to the db id of the inspectedActivity
+
+    $('#activitySelector').val(activitySet[0].dbid);
+
 	$('#newActivityName')[0].value = activitySet[1].attr('text');
     $('#newActivityType')[0].value = activitySet[0].attr('title');
     $('#newActivityUrl')[0].value = activitySet[0].attr('href');
@@ -19,6 +21,8 @@ function editActivityForm(activitySet) {
  */
 function submitEditedActivityForm() {
     $('#activityForm').modal('hide');
+    inspectedActivity[0].dbid = $('#activitySelector').val();
+    // TODO: update graphJson with the new dbid ! (pbm when the same activity is more than once in the graph?)
     inspectedActivity[1].attr('text', $('#newActivityName')[0].value);
     inspectedActivity[0].attr('title', $('#newActivityType')[0].value);
     inspectedActivity[0].attr('href', $('#newActivityUrl')[0].value);
