@@ -55,14 +55,14 @@
 	      </div>
 	      <div class="modal-footer">
 	        <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
-	        <button type="button" class="btn btn-primary" onclick="submitActivityForm()">Create activity</button>
+	        <button type="button" class="btn btn-primary" onclick="submitActivityForm()">Confirm</button>
 	      </div>
 	    </div>
 	  </div>
 	</div>
 
 	<!-- Modal -->
-	<div class="modal fade" id="connectionForm" tabindex="-1" role="dialog" data-backdrop="static">
+<!--	<div class="modal fade" id="connectionForm" tabindex="-1" role="dialog" data-backdrop="static">
 	  <div class="modal-dialog" role="document">
 	    <div class="modal-content">
 	      <div class="modal-body">
@@ -77,7 +77,7 @@
 	      </div>
 	    </div>
 	  </div>
-	</div>
+	</div>-->
 
     {% endblock %}
     {% block extra-scripts %}
@@ -93,8 +93,7 @@
     {% for act in activities %}
         all_activities["{{ act.pk }}"] = ["{{ act.name|safe }}", "{{ act.type|safe }}", "{{ act.source|safe }}"];
     {% endfor %}
-    console.log(all_activities);
-    //Building a dictionary of activities
+    //Building a dictionary of scenarios
     {% for sce in scenarios %}
         all_scenarios["{{ sce.pk }}"] = ["{{ sce }}"];
     {% endfor %}
@@ -103,8 +102,6 @@
 	<script src="{% static 'grapheditor/modeConnect.js' %}"></script>
 	<script src="{% static 'grapheditor/modeErase.js' %}"></script>
 	<script src="{% static 'grapheditor/modeMove.js' %}"></script>
-	<script src="{% static 'grapheditor/modeImport.js' %}"></script>
-	<script src="{% static 'grapheditor/modeExport.js' %}"></script>
 	<script src="{% static 'grapheditor/modeAdd.js' %}"></script>
 	<script src="{% static 'grapheditor/modeInspect.js' %}"></script>
 

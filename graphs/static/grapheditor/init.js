@@ -20,6 +20,7 @@ window.onload = function () {
     graphJson = {};
 
     $('#activitySelector').on('change', function() {
+        console.log(this.value);
         activityId = this.value;
         if (activityId === "other") {
             $('#newActivityForm').css('display', 'block');
@@ -29,8 +30,6 @@ window.onload = function () {
         } else {
             $('#newActivityForm').css('display', 'none');
             activitytmp = all_activities[activityId];
-            console.log(activitytmp);
-            console.log(activitytmp[0]);
             $('#newActivityName')[0].value = activitytmp[0];
             $('#newActivityType')[0].value = activitytmp[1];
             $('#newActivityUrl')[0].value = '/' + activitytmp[2];
@@ -58,8 +57,6 @@ window.onload = function () {
     $(".mode-btn").on("click", function(e) {
         changeMode(e.target.id);
     });
-
-    $("#EXPORT").on("click", exportFile);
 
     changeMode('ADD');
 };

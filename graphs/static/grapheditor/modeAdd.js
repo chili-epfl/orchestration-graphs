@@ -37,8 +37,6 @@ function activity(x, y, name, description, url) {
         }
     });
 
-    console.log('creating activity');
-
     // Adds the new set to the global set of activities
     activities.push(activitySet);
 
