@@ -15,15 +15,22 @@ import csv
 
 
 class ScenarioCreateView(LoginRequiredMixin, CreateView):
+    """CreateView subclass for the graph editor"""
     model = Scenario
     fields = ['name', 'group', 'json']
     template_name = 'graph-editor.html'
-    success_url = reverse_lazy("scenario-list")
 
-    def get_form(self, form_class):
-        form = super(ScenarioCreateView, self).get_form(form_class)
-        form.fields['json'].widget = forms.HiddenInput()
-        return form
+    # success_url = reverse_lazy("scenario-list")
+    # def get_form(self, form_class):
+    #     form = super(ScenarioCreateView, self).get_form(form_class)
+    #     form.fields['json'].widget = forms.HiddenInput()
+    #     return form
+    
+    def get_context_data(self, **kwargs):
+        context = super(ScenarioCreateView, self).get_context_data(**kwargs)
+        context["activities"] = Activity.objects.all()
+        context["scenarios"] = Scenario.objects.all()
+        return context
 
 
 class ScenarioDeleteView(LoginRequiredMixin, DeleteView):
