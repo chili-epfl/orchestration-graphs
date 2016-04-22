@@ -6,6 +6,7 @@ var inspectedActivity;
  */
 function editActivityForm(activitySet) {
 	inspectedActivity = activitySet;
+	// TODO: $('#activitySelector').val() must be set to the db id of the inspectedActivity
 	$('#newActivityName')[0].value = activitySet[1].attr('text');
     $('#newActivityType')[0].value = activitySet[0].attr('title');
     $('#newActivityUrl')[0].value = activitySet[0].attr('href');

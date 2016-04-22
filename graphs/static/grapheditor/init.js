@@ -20,9 +20,8 @@ window.onload = function () {
     graphJson = {};
 
     $('#activitySelector').on('change', function() {
-        console.log(this.value);
         activityId = this.value;
-        if (activityId === "other") {
+        if (activityId === "choose" || activityId === "other") {
             $('#newActivityForm').css('display', 'block');
             $('#newActivityName')[0].value = '';
             $('#newActivityType')[0].value = '';

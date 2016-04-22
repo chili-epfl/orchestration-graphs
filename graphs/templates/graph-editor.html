@@ -32,6 +32,7 @@
 	      <div class="modal-body">
 	      	<label>Activity</label>
 	      	<select id="activitySelector" class="form-control">
+				<option value="choose" href="#">Choose an activity...</option>
 {% for act in activities %}
 				<option value="{{act.pk}}" href="#">{{ act.name }}</option>
 {% endfor %}
@@ -60,24 +61,6 @@
 	    </div>
 	  </div>
 	</div>
-
-	<!-- Modal -->
-<!--	<div class="modal fade" id="connectionForm" tabindex="-1" role="dialog" data-backdrop="static">
-	  <div class="modal-dialog" role="document">
-	    <div class="modal-content">
-	      <div class="modal-body">
-			  <div class="form-group">
-			    <label for="newConnectionDesc">Description</label>
-			    <input type="text" class="form-control" id="newConnectionDesc">
-			  </div>
-	      </div>
-	      <div class="modal-footer">
-	        <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
-	        <button type="button" class="btn btn-primary" onclick="submitConnectionForm()">Create connection</button>
-	      </div>
-	    </div>
-	  </div>
-	</div>-->
 
     {% endblock %}
     {% block extra-scripts %}

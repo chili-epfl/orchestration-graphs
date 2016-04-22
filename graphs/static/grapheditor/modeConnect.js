@@ -17,7 +17,8 @@ function selectActivity(activitySet) {
     }
     // When two activities are selected and not already connected, connect them
     if (selectedActRect.length == 2 && checkConnection) {
-        $('#connectionForm').modal('show');
+        connectActivities();
+        deselectAllActivities();
     }
 }
 
@@ -47,17 +48,6 @@ function checkConnection() {
         }
     }
     return existingConnections == 0;
-}
-
-/**
- * Processes information about a new connection from the connection form
- *
- */
-function submitConnectionForm() {
-    $('#connectionForm').modal('hide');
-    connectActivities($('#newConnectionDesc')[0].value);
-    deselectAllActivities();
-    $('#newConnectionDesc')[0].value = '';
 }
 
 /**

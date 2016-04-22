@@ -61,11 +61,14 @@ function newActivityForm(x, y) {
  *
  */
 function submitNewActivityForm() {
-    $('#activityForm').modal('hide');
-    activity(newActivityX, newActivityY, $('#newActivityName')[0].value, $('#newActivityType')[0].value, $('#newActivityUrl')[0].value);
-    $('#newActivityName')[0].value = '';
-    $('#newActivityType')[0].value = '';
-    $('#newActivityUrl')[0].value = '';
+    if ($('#activitySelector').val() !== 'choose') {  
+        $('#activityForm').modal('hide');
+        activity(newActivityX, newActivityY, $('#newActivityName')[0].value, $('#newActivityType')[0].value, $('#newActivityUrl')[0].value);
+        $('#newActivityName')[0].value = '';
+        $('#newActivityType')[0].value = '';
+        $('#newActivityUrl')[0].value = '';
+        $('#activitySelector option[value="choose"]').attr('selected','selected');
+    }
 }
 
 /**
