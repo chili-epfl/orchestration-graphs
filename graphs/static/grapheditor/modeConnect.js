@@ -61,7 +61,16 @@ function connectActivities(description) {
     newConnection.line.endingRect = selectedActRect[1].id;
     connections.push(newConnection);
     
-    graphJson["edges"].push({"a1": selectedActRect[0].dbid, "a2": selectedActRect[1].dbid});
+    graphJson["edges"].push({
+        "a1": {
+            "id": selectedActRect[0].dbid,
+            "counter": selectedActRect[0].counter
+        }, 
+        "a2": {
+            "id": selectedActRect[1].dbid,
+            "counter": selectedActRect[1].counter
+        }
+    });
 
     newConnection.line.click(function (event) {
         handleClickOnConnection(event, this);  // ERASE mode

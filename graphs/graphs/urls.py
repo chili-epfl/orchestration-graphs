@@ -3,7 +3,7 @@ from django.views.generic import TemplateView
 from django.conf.urls.static import static
 from django.conf import settings
 from activities.views import next_activity, activity_view, simple_activity
-from graphs.views import ScenarioCreateView, ScenarioDeleteView, ScenarioDetailView, student_registration,\
+from graphs.views import ScenarioCreateView, ScenarioUpdateView, ScenarioDeleteView, ScenarioDetailView, student_registration,\
     student_learning, stats_view, get_csv, get_psycho_csv, get_time_csv
 from django.contrib.auth.decorators import login_required
 from django.views.generic.list import ListView
@@ -13,7 +13,8 @@ from django.contrib import admin
 admin.autodiscover()
 
 urlpatterns = patterns('',
-    url(r'^teacher/scenario/editor/$', ScenarioCreateView.as_view(), name="scenario-editor"),
+    url(r'^teacher/scenario/editor/$', ScenarioCreateView.as_view(), name="scenario-creator"),
+    url(r'^teacher/scenario/editor/(?P<pk>\d+)/$', ScenarioUpdateView.as_view(), name='scenario-editor',),
     url(r'^teacher/scenario/delete/(?P<pk>\w+)/$', ScenarioDeleteView.as_view(), name="scenario-delete"),
 
     url(r'^scenario/(?P<pk>\w+)/$', ScenarioDetailView.as_view(template_name='scenario.html'), name="scenario"),

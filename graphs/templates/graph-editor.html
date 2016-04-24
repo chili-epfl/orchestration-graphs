@@ -7,10 +7,15 @@
     {% endblock %}
     {% block content %}
 
-<!--<form action="" method="post">{% csrf_token %}
+	{% if scenario.id %}
+	<h1>Edit Scenario {{ scenario.id }}</h1>
+	{% else %}
+	<h1>Add Scenario</h1>
+	{% endif %}
+
+	<form id="scenarioForm" action="{{ action }}" method="post">{% csrf_token %}
 	    {{ form.as_p }}
-	    <input type="submit" value="Save" />
-	</form> -->
+	</form>
 
 	<div class="button-group">
 		<button type="button" class="btn btn-default mode-btn glyphicon glyphicon-plus" id="ADD">Add</button>
@@ -18,7 +23,7 @@
 		<button type="button" class="btn btn-default mode-btn glyphicon glyphicon-log-in" id="CONNECT">Connect</button>
 		<button type="button" class="btn btn-default mode-btn glyphicon glyphicon-erase" id="ERASE">Eraser</button>
 		<button type="button" class="btn btn-default mode-btn glyphicon glyphicon-hand-up" id="INSPECT">Inspector</button>
-		<button type="button" class="btn btn-default glyphicon glyphicon-import" id="SAVE" onchange="saveScenario">Save</button>
+		<button type="button" class="btn btn-default glyphicon glyphicon-import" id="SAVE" onclick="saveScenario()">Save</button>
 	</div>
 
 	<div id="container" class="col-md-10">
@@ -36,7 +41,7 @@
 {% for act in activities %}
 				<option value="{{act.pk}}" href="#">{{ act.name }}</option>
 {% endfor %}
-				<option value="other" disabled href="#">Other</option>
+				<option value="other" href="#">Other</option>
 			</select>
 			
 			<div id="newActivityForm" style="display: none;">

@@ -14,14 +14,17 @@ function activity(x, y, name, type, url, dbid) {
         title: type,
         href: url
     });
-    activityRect.dbid = dbid;
 
     var activityText = graph.text(x, reposition(y - 20) + 20, correctTextSize(name));
     activityText.attr({fill: "#FFF"});
     activitySet.push(activityRect, activityText);
 
     // Add activity to the graphJson description of the graph
-    graphJson["activities"].push({"id": dbid});
+    activityRect.dbid = dbid;
+    counterMap[dbid] = counterMap[dbid] + 1 || 1;
+    activityRect.counter = counterMap[dbid];
+    console.log(counterMap);
+    graphJson["activities"].push({"id": dbid, "counter": counterMap[dbid]});
 
     // Add custom attributes to Raphael elements
     activitySet.forEach(function(elem) {

@@ -4,6 +4,8 @@ var selectedActRect;
 var newActivityX, newActivityY;
 var all_activities = {};
 var all_scenarios = {};
+var counterMap = {};
+var form;
 
 // Global design variables
 var activityFill = "#428BCA";
@@ -96,6 +98,16 @@ function changeMode(newMode) {
             break;
     }
 };
+
+function saveScenario() {
+    console.log($('#scenarioForm #id_json').val());
+    $('#scenarioForm #id_json').val(JSON.stringify(graphJson));
+    console.log($('#scenarioForm #id_json').val());
+
+    // TODO: find leftest activity
+    document.getElementById('scenarioForm').submit();
+    
+}
 
 
 /**
