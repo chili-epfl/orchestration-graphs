@@ -1,0 +1,23 @@
+{% extends "teacher-base.html" %}
+{% load staticfiles %}
+    {% block css-files %}
+    <style>
+    </style>
+    <!--<link rel="stylesheet" type="text/css" href="http://medialize.github.io/jQuery-contextMenu/src/jquery.contextMenu.css" />-->
+    {% endblock %}
+    {% block content %}
+
+	{% if activity.id %}
+	<h1>Edit Activity {{ activity.id }}</h1>
+	{% else %}
+	<h1>Create Activity</h1>
+	{% endif %}
+
+	<form id="activityForm" action="{{ action }}" method="post">{% csrf_token %}
+	    {{ form.as_p }}
+	    <input type="submit" value="Save">
+	</form>
+
+    {% endblock %}
+    {% block extra-scripts %}
+    {% endblock %}

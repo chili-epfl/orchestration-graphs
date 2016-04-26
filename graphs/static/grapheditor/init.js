@@ -1,9 +1,7 @@
-var graph, MODE, activities;
+var graph, MODE, graphActivities;
 var connections = [];
 var selectedActRect;
 var newActivityX, newActivityY;
-var all_activities = {};
-var all_scenarios = {};
 var counterMap = {};
 var form;
 
@@ -18,43 +16,23 @@ var activitySelectFill = "#23527B";
  */
 window.onload = function () {
     // Creates a new graph
-    graph = Raphael("graph", 640, 525);
-    graphJson = {};
-    graphJson["activities"] = [];
-    graphJson["edges"] = [];
-    graphJson["start"] = -1;
+    graph = Raphael("graph", 1000, 525); // creates graph with x=1000
 
-    $('#activitySelector').on('change', function() {
-        activityId = this.value;
-        if (activityId === "choose" || activityId === "other") {
-            $('#newActivityForm').css('display', 'block');
-            $('#newActivityName')[0].value = '';
-            $('#newActivityType')[0].value = '';
-            $('#newActivityUrl')[0].value = '';
-        } else {
-            $('#newActivityForm').css('display', 'none');
-            activitytmp = all_activities[activityId];
-            $('#newActivityName')[0].value = activitytmp[0];
-            $('#newActivityType')[0].value = activitytmp[1];
-            $('#newActivityUrl')[0].value = '/' + activitytmp[2];
-        }
-    });
-
-    activities = graph.set();
+    graphActivities = graph.set();
     selectedActRect = graph.set();
-    planes = [  graph.path("M0 425 L640 425"),
-                graph.path("M0 350 L640 350"),
-                graph.path("M0 275 L640 275"),
-                graph.path("M0 200 L640 200"),
-                graph.path("M0 125 L640 125"),
-                graph.path("M0  50 L640  50") ];
+    planes = [  graph.path("M0 425 L1000 425"),
+                graph.path("M0 350 L1000 350"),
+                graph.path("M0 275 L1000 275"),
+                graph.path("M0 200 L1000 200"),
+                graph.path("M0 125 L1000 125"),
+                graph.path("M0  50 L1000  50") ];
 
     // On click on the graph in ADD mode, display activity creation form
     $("#graph").on('click', function (e) {
         switch(MODE) {
             case 'ADD':
                 var parentPos = getPosition(e.currentTarget);
-                newActivityForm(e.clientX - parentPos.x, e.clientY - parentPos.y);
+                newActivityChoice(e.clientX - parentPos.x, e.clientY - parentPos.y);
         }
     });
 
@@ -78,35 +56,62 @@ function changeMode(newMode) {
     switch(MODE) {
         case 'ADD':
             $('#graph').css({cursor: 'cell'});
-            activities.forEach(function(activity) { activity.attr({cursor: 'not-allowed'}); });
+            graphActivities.forEach(function(activity) { activity.attr({cursor: 'not-allowed'}); });
             break;
         case 'MOVE':
             $('#graph').css({cursor: 'default'});
-            activities.forEach(function(activity) { activity.attr({cursor: 'move'}); });
+            graphActivities.forEach(function(activity) { activity.attr({cursor: 'move'}); });
             break;
         case 'CONNECT':
             $('#graph').css({cursor: 'default'});
-            activities.forEach(function(activity) { activity.attr({cursor: 'e-resize'}); });
+            graphActivities.forEach(function(activity) { activity.attr({cursor: 'e-resize'}); });
             break;
         case 'ERASE':
             $('#graph').css({cursor: 'default'});
-            activities.forEach(function(activity) { activity.attr({cursor: 'pointer'}); });
+            graphActivities.forEach(function(activity) { activity.attr({cursor: 'pointer'}); });
             break;
-        case 'INSPECT':
+        case 'EDIT':
             $('#graph').css({cursor: 'default'});
-            activities.forEach(function(activity) { activity.attr({cursor: 'pointer'}); });
+            graphActivities.forEach(function(activity) { activity.attr({cursor: 'pointer'}); });
             break;
     }
 };
 
 function saveScenario() {
-    console.log($('#scenarioForm #id_json').val());
+    graphJson = {};
+    graphJson["activities"] = [];
+    graphActivities.forEach(function(actSet) {
+        graphJson["activities"].push({"id": actSet[0].dbid, "counter": actSet[0].counter});
+    });
+    graphJson["edges"] = [];
+    connections.forEach(function(connection) {
+        graphJson["edges"].push({
+            "a1": {
+                "id": connection.from.dbid,
+                "counter": connection.from.counter
+            }, 
+            "a2": {
+                "id": connection.to.dbid,
+                "counter": connection.to.counter
+            }
+        });
+    });
+    graphJson["start"] = getStartActivityId();
     $('#scenarioForm #id_json').val(JSON.stringify(graphJson));
-    console.log($('#scenarioForm #id_json').val());
-
-    // TODO: find leftest activity
     document.getElementById('scenarioForm').submit();
-    
+}
+
+function getStartActivityId() {
+    leftActId = 0; // init, is the id of an activitySet in graphActivities
+    leftActX = graphActivities[leftActId][0].attr("x"); // init to first activity's position
+    graphActivities.forEach(function(actSet, actSetId) {
+        if (actSet[0].attr("x") < leftActX) {
+            // Another activity found on the left, update
+            leftActId = actSetId;
+            leftActX = actSet[0].attr("x")
+        }
+    });
+    return {"id": graphActivities[leftActId][0].dbid, "counter": graphActivities[leftActId][0].counter};
 }
 
 
@@ -119,7 +124,7 @@ function handleClickOnActivity(event, actSet) {
     switch(MODE) {
         case 'CONNECT': selectActivity(actSet); break;
         case 'ERASE':   eraseActivity(actSet); break;
-        case 'INSPECT': editActivityForm(actSet); break;
+        case 'EDIT': editActivityChoice(actSet); break;
         default:        break;
     }
 }
@@ -134,10 +139,10 @@ function handleClickOnConnection(event, line) {
     }
 }
 
-function submitActivityForm() {
+function submitActivityChoice() {
     switch(MODE) {
-        case 'ADD': submitNewActivityForm(); break;
-        case 'INSPECT': submitEditedActivityForm(); break;
+        case 'ADD': submitNewGraphActivity(); break;
+        case 'EDIT': submitEditedGraphActivity(); break;
         default:        break;
     }
 }

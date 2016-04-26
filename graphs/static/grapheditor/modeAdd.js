@@ -19,14 +19,11 @@ function activity(x, y, name, type, url, dbid) {
     activityText.attr({fill: "#FFF"});
     activitySet.push(activityRect, activityText);
 
-    // Add activity to the graphJson description of the graph
+    // Add custom attributes to Raphael elements
     activityRect.dbid = dbid;
     counterMap[dbid] = counterMap[dbid] + 1 || 1;
     activityRect.counter = counterMap[dbid];
-    console.log(counterMap);
-    graphJson["activities"].push({"id": dbid, "counter": counterMap[dbid]});
 
-    // Add custom attributes to Raphael elements
     activitySet.forEach(function(elem) {
         elem.activitySet = activitySet; // allows the drag method to apply on the whole set
         elem.selected = false;          // allows to (de)select an activity
@@ -46,7 +43,7 @@ function activity(x, y, name, type, url, dbid) {
     });
 
     // Adds the new set to the global set of activities
-    activities.push(activitySet);
+    graphActivities.push(activitySet);
 
     // Default return to MOVE mode
     changeMode("MOVE");
@@ -58,28 +55,27 @@ function activity(x, y, name, type, url, dbid) {
  * x, y     position of the new activity on the graph
  *
  */
-function newActivityForm(x, y) {
+function newActivityChoice(x, y) {
     newActivityX = x;
     newActivityY = y;
-    $('#activityForm').modal('show');
+    $('#activityChoice').modal('show');
 }
 
 /**
  * Processes information about a new activity from the activity form
  *
  */
-function submitNewActivityForm() {
+function submitNewGraphActivity() {
     if ($('#activitySelector').val() !== 'choose') {  
-        $('#activityForm').modal('hide');
+        chosenActivity = dbActivities[$('#activitySelector').val()]
+
+        $('#activityChoice').modal('hide');
         activity(newActivityX, newActivityY,    // position
-            $('#newActivityName')[0].value,     // name
-            $('#newActivityType')[0].value,     // type
-            $('#newActivityUrl')[0].value,      // source
+            chosenActivity[0],                        // name
+            chosenActivity[1],                        // type
+            chosenActivity[2],                        // source
             parseInt($('#activitySelector').val()));      // dbid
-        $('#newActivityName')[0].value = '';
-        $('#newActivityType')[0].value = '';
-        $('#newActivityUrl')[0].value = '';
-        $('#activitySelector option[value="choose"]').attr('selected','selected');
+        $('#activitySelector').val('choose');
     }
 }
 

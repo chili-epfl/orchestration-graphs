@@ -15,9 +15,7 @@ function eraseActivity(activitySet) {
         elem.remove();
     });
     // Delete activitySet
-    activities.exclude(activitySet);
-
-    // TODO: update graphJson !
+    graphActivities.exclude(activitySet);
 }
 
 /**
@@ -29,6 +27,4 @@ function eraseActivity(activitySet) {
 function eraseConnection(connection, index) {
     connection.line.remove();
     connections.splice(index, 1);
-
-    // TODO: update graphJson !
 }

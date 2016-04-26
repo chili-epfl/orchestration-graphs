@@ -27,7 +27,6 @@ class ScenarioUpdateView(LoginRequiredMixin, UpdateView):
     def get_context_data(self, **kwargs):
         context = super(ScenarioUpdateView, self).get_context_data(**kwargs)
         context["activities"] = Activity.objects.all()
-        context["scenarios"] = Scenario.objects.all()
         context["action"] = reverse_lazy('scenario-editor',
                                     kwargs={'pk': self.get_object().id})
 
@@ -39,48 +38,62 @@ class ScenarioCreateView(LoginRequiredMixin, CreateView):
     template_name = 'graph-editor.html'
     fields = ['name', 'group', 'json']
     success_url = reverse_lazy('scenario-list')
+    def get_form(self, form_class):
+        form = super(ScenarioCreateView, self).get_form(form_class)
+        form.fields['json'].widget = forms.HiddenInput()
+        return form
 
     def get_context_data(self, **kwargs):
         context = super(ScenarioCreateView, self).get_context_data(**kwargs)
         context["activities"] = Activity.objects.all()
-        context["scenarios"] = Scenario.objects.all()
         context["action"] = reverse_lazy('scenario-creator')
 
         return context
 
-# class ScenarioCreateView(LoginRequiredMixin, CreateView):
-#     model = Scenario
-#     fields = ['name', 'group', 'json']
-#     template_name = 'graph-editor.html'
+class ActivityUpdateView(LoginRequiredMixin, UpdateView):
+    """UpdateView subclass for the activity editor"""
+    model = Activity
+    template_name = 'activity-editor.html'
+    fields = ['name', 'type', 'source']
+    success_url = reverse_lazy("activity-list")
 
-#     success_url = reverse_lazy("scenario-list")
-#     def get_form(self, form_class):
-#         form = super(ScenarioCreateView, self).get_form(form_class)
-#         # form.fields['json'].widget = forms.HiddenInput()
-#         return form
-    
-#     def get_context_data(self, **kwargs):
-#         context = super(ScenarioCreateView, self).get_context_data(**kwargs)
-#         context["activities"] = Activity.objects.all()
-#         context["scenarios"] = Scenario.objects.all()
-#         return context
+    def get_form(self, form_class):
+        form = super(ActivityUpdateView, self).get_form(form_class)
+        return form
 
+    def get_context_data(self, **kwargs):
+        context = super(ActivityUpdateView, self).get_context_data(**kwargs)
+        context["activities"] = Activity.objects.all()
+        context["action"] = reverse_lazy('activity-editor',
+                                    kwargs={'pk': self.get_object().id})
+
+        return context
 
 class ActivityCreateView(LoginRequiredMixin, CreateView):
-    """CreateView subclass for the graph editor"""
+    """CreateView subclass for the activity editor"""
     model = Activity
+    template_name = 'activity-editor.html'
     fields = ['name', 'type', 'source']
-    template_name = 'graph-editor.html'
+    success_url = reverse_lazy('activity-list')
 
     def get_form(self, form_class):
         form = super(ActivityCreateView, self).get_form(form_class)
-        form.fields['source'].widget = forms.HiddenInput()
         return form
 
+    def get_context_data(self, **kwargs):
+        context = super(ActivityCreateView, self).get_context_data(**kwargs)
+        context["activities"] = Activity.objects.all()
+        context["action"] = reverse_lazy('activity-creator')
+
+        return context
 
 class ScenarioDeleteView(LoginRequiredMixin, DeleteView):
     model = Scenario
     success_url = reverse_lazy("scenario-list")
+
+class ActivityDeleteView(LoginRequiredMixin, DeleteView):
+    model = Activity
+    success_url = reverse_lazy("activity-list")
 
 class ScenarioDetailView(LoginRequiredMixin, DetailView):
     """DetailView subclass used to use multiple models in the template"""

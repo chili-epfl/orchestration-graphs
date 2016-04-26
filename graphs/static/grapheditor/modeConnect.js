@@ -60,17 +60,6 @@ function connectActivities(description) {
     newConnection.line.startingRect = selectedActRect[0].id;
     newConnection.line.endingRect = selectedActRect[1].id;
     connections.push(newConnection);
-    
-    graphJson["edges"].push({
-        "a1": {
-            "id": selectedActRect[0].dbid,
-            "counter": selectedActRect[0].counter
-        }, 
-        "a2": {
-            "id": selectedActRect[1].dbid,
-            "counter": selectedActRect[1].counter
-        }
-    });
 
     newConnection.line.click(function (event) {
         handleClickOnConnection(event, this);  // ERASE mode
@@ -83,7 +72,7 @@ function connectActivities(description) {
  *
  */
 function deselectAllActivities() {
-    activities.forEach(function(activitySet) {
+    graphActivities.forEach(function(activitySet) {
         deselectActivity(activitySet);
     });
 }
@@ -142,7 +131,7 @@ Raphael.fn.connection = function (obj1, obj2, line, bg) {
         var color = typeof line == "string" ? line : "#000";
         return {
             bg: bg && bg.split && this.path(path).attr({stroke: bg.split("|")[0], fill: "none", "stroke-width": bg.split("|")[1] || 3}),
-            line: this.path(path).attr({"arrow-end": "classic-wide-long", stroke: color, "stroke-width": 3, fill: "none"}),
+            line: this.path(path).attr({stroke: color, "stroke-width": 3, fill: "none"}),
             from: obj1,
             to: obj2
         };
