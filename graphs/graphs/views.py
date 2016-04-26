@@ -110,6 +110,7 @@ def stats_view(request, pk):
     scenario = Scenario.objects.get(pk=pk)
     paths = Student.objects.filter(scenario=scenario).order_by('path').values_list('path', flat=True).distinct()
     data = []
+    path_learning = []
     for path in paths:
         data.append([('Path', path),
                      ('Number of students', scenario.num_students(path)),
@@ -117,8 +118,9 @@ def stats_view(request, pk):
                      ('Average learning gain', scenario.avg_learning(path)),
                      ('Standard deviation', scenario.learning_stdev(path)),
                      ('Variance', scenario.learning_variance(path))])
+        path_learning.append((path, scenario.avg_learning_num(path)))
 
-    return render(request, 'scenario-stats.html', context={'scenario': scenario, 'data': data})
+    return render(request, 'scenario-stats.html', context={'scenario': scenario, 'data': data, 'path_learning': path_learning})
 
 
 @login_required

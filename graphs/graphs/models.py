@@ -71,7 +71,7 @@ class Scenario(models.Model):
         progress_list = self.progress_data(path=path)
 
         if progress_list:
-            return round(100*mean(progress_list), 2)
+            return round(100*mean(progress_list))
         else:
             return 0
 

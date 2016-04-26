@@ -1,5 +1,40 @@
 {% extends 'teacher-base.html' %}
 {% block meta-head %}
+    <!--Load the AJAX API-->
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script type="text/javascript">
+
+      // Load the Visualization API and the corechart package.
+      google.charts.load('current', {'packages':['corechart']});
+
+      // Set a callback to run when the Google Visualization API is loaded.
+      google.charts.setOnLoadCallback(drawChart);
+
+      // Callback that creates and populates a data table,
+      // instantiates the pie chart, passes in the data and
+      // draws it.
+      function drawChart() {
+
+        // Create the data table.
+        var data = new google.visualization.DataTable();
+        data.addColumn('string', 'Path');
+        data.addColumn('number', 'Gain %');
+
+        {% for path, gain in path_learning %}
+            data.addRows([['Group {{ forloop.counter }}', {{ gain }}]]);
+        {% endfor %}
+
+
+        // Set chart options
+        var options = {'title':'Learning gain per path',
+                       'width':800,
+                       'height':300};
+
+        // Instantiate and draw our chart, passing in some options.
+        var chart = new google.visualization.ColumnChart(document.getElementById('chart_div'));
+        chart.draw(data, options);
+      }
+    </script>
 {% endblock meta-head %}
 {% block content %}
 <div class="container">
@@ -8,10 +43,10 @@
     <p>Number of students: {{ scenario.num_students }}</p>
     <p>Average time: {{ scenario.avg_time }}</p>
     <p>Average learning gain: {{ scenario.avg_learning }}</p>
-    <ul>
-        <li>Standard deviation: {{ scenario.learning_stdev }}</li>
-        <li>Variance: {{ scenario.learning_variance }}</li>
-    </ul>
+    <p>Standard deviation: {{ scenario.learning_stdev }}</p>
+    <p>Variance: {{ scenario.learning_variance }}</p>
+    <!--Div that will hold the chart-->
+    <div id="chart_div"></div>
     {% for item in data %}
         <h3>Group {{ forloop.counter }}</h3>
         {% for name, value in item %}
