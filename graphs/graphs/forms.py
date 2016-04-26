@@ -39,7 +39,6 @@ class QuizForm(ModelForm):
                 q_id = int(field_name.split("_")[1])
                 q = Question.objects.get(pk=q_id)
 
-                print(field_value)
                 if field_value == str(q.correct_answer_id):
                     results.append(1)
                 else:

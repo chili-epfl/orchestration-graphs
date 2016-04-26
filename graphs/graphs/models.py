@@ -62,6 +62,19 @@ class Scenario(models.Model):
         else:
             return "N/A"
 
+    def avg_learning_num(self, path=ALL_PATHS):
+        """Computes the average progress made by students on this scenario
+
+        :param path: if specified, restricts the computation to student that have followed this specific json path
+        :return: average student progress
+        """
+        progress_list = self.progress_data(path=path)
+
+        if progress_list:
+            return round(100*mean(progress_list), 2)
+        else:
+            return 0
+
     def num_students(self, path=ALL_PATHS):
         """Computes the number of students taking part in this scenario
 
@@ -216,9 +229,6 @@ class TimeLog(models.Model):
     activity = models.ForeignKey(Activity, on_delete=models.CASCADE)
     start_time = models.DateTimeField(auto_now_add=True)
     end_time = models.DateTimeField(null=True)
-
-    class Meta:
-        unique_together = ('student', 'activity',)
 
     @classmethod
     def create(cls, student, activity):
