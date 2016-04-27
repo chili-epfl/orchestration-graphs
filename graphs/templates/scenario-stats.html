@@ -9,6 +9,7 @@
 
       // Set a callback to run when the Google Visualization API is loaded.
       google.charts.setOnLoadCallback(drawChart);
+      google.charts.setOnLoadCallback(drawGainChart);
 
       // Callback that creates and populates a data table,
       // instantiates the pie chart, passes in the data and
@@ -26,11 +27,31 @@
 
         // Set chart options
         var options = {'title':'Learning gain by path',
-                       'width':800,
+                       'width':500,
                        'height':300};
 
         // Instantiate and draw our chart, passing in some options.
         var chart = new google.visualization.ColumnChart(document.getElementById('chart_div'));
+        chart.draw(data, options);
+      }
+      function drawGainChart() {
+
+        // Create the data table.
+        var data = new google.visualization.DataTable();
+        data.addColumn('string', 'Gain');
+        data.addColumn('number', 'Students');
+
+        {% for percent, number in scenario.num_by_gain %}
+            data.addRows([['{{ percent }}', {{ number }}]]);
+        {% endfor %}
+
+        // Set chart options
+        var options = {'title':'Progress distribution',
+                       'width':700,
+                       'height':300};
+
+        // Instantiate and draw our chart, passing in some options.
+        var chart = new google.visualization.ColumnChart(document.getElementById('gain_chart_div'));
         chart.draw(data, options);
       }
     </script>
@@ -45,7 +66,12 @@
     <p>Standard deviation: {{ scenario.learning_stdev }}</p>
     <p>Variance: {{ scenario.learning_variance }}</p>
     <!--Div that will hold the chart-->
-    <div id="chart_div"></div>
+    <table>
+        <tr>
+            <td><div id="chart_div"></div></td>
+            <td><div id="gain_chart_div"></div></td>
+        </tr>
+    </table>
     {% for item in data %}
         <h3>Group {{ forloop.counter }}</h3>
         {% for name, value in item %}

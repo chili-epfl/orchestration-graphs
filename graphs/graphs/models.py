@@ -49,6 +49,20 @@ class Scenario(models.Model):
                 progress_list.append(progress)
         return progress_list
 
+    def num_by_gain(self, path=ALL_PATHS):
+        """Computes the number of students in each gain bracket
+        """
+        progress_list = [round(p, 1)*100 for p in self.progress_data(path)]
+        gain_data = []
+        start_found = False
+
+        for i in range(-10, 10):
+            count = progress_list.count(i*10)
+            if start_found or count > 0 or i >= 0:
+                gain_data.append((str(i*10) + '%', count))
+                start_found = True
+        return gain_data
+
     def avg_learning(self, path=ALL_PATHS):
         """Computes the average progress made by students on this scenario
 
