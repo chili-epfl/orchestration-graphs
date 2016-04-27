@@ -94,7 +94,7 @@ def next_activity(request):
     """Makes the current user proceed to their next activity"""
     try:
         student = Student.objects.get(pk=request.session['user_id'])
-        log = TimeLog.objects.get(student=student, activity=student.get_current_activity())
+        log = TimeLog.objects.get(student=student, activity=student.get_current_activity(), end_time__isnull=True)
         log.end_time = datetime.now()
         log.save()
 
@@ -105,10 +105,12 @@ def next_activity(request):
             return render(request, 'completion.html')
 
         else:
-            student.current_activity += 1
-            student.save()
-            log = TimeLog.create(student=student, activity=student.get_current_activity())
-            log.save()
+            # We make sure we're not creating duplicate logs
+            if not TimeLog.objects.filter(student=student, activity=student.get_current_activity(), end_time__isnull=True).exists():
+                student.current_activity += 1
+                student.save()
+                log = TimeLog.create(student=student, activity=student.get_current_activity())
+                log.save()
             return HttpResponseRedirect('/student/')
 
     except ObjectDoesNotExist:
