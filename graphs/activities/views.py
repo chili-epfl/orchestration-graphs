@@ -1,4 +1,3 @@
-from django.views.generic import TemplateView
 from django.http import HttpResponseRedirect
 from graphs.models import Student, Activity, TimeLog
 from graphs.forms import QuizForm, PsychoForm
