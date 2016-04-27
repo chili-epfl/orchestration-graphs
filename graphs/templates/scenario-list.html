@@ -23,8 +23,7 @@
         {% for scenario in object_list %}
             data.addRows([['{{ scenario.name }}', {{ scenario.avg_learning_num }}]]);
         {% endfor %}
-
-
+      
         // Set chart options
         var options = {'title':'Learning gain',
                        'width':800,

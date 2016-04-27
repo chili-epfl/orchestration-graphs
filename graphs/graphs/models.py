@@ -63,7 +63,7 @@ class Scenario(models.Model):
             return "N/A"
 
     def avg_learning_num(self, path=ALL_PATHS):
-        """Computes the average progress made by students on this scenario
+        """Computes the average progress made by students on this scenario, as an integer between -100 and +100
 
         :param path: if specified, restricts the computation to student that have followed this specific json path
         :return: average student progress
