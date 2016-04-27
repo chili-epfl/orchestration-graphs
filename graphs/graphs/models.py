@@ -28,7 +28,7 @@ class Scenario(models.Model):
                 times.append(student.completion_date - student.start_date)
 
         if times:
-            return str(sum(times, timedelta())/len(times))
+            return str(sum(times, timedelta())/len(times)).split('.')[0]
         else:
             return "N/A"
 
