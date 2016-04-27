@@ -7,35 +7,6 @@ from django.shortcuts import render
 from datetime import datetime
 
 
-class ActivityView(TemplateView):
-    """
-    Unused?
-
-    Default page seen by the user. Form to create the
-    experiment instance within the session
-    """
-
-    model = Activity
-
-#    def get_context_data(self, *args, **kwargs):
-#        context = super(ExperimentView, self).get_context_data(**kwargs)
-#        context['user_id'] = self.request.session["user_id"]
-#        return context
-
-    def get_template_names(self):
-        activity = Activity.objects.get(pk=self.kwargs['id'])
-        tpe = activity.type
-
-        if tpe == 'text':
-            return ["activities/" + self.kwargs['id'] + ".html"]
-        elif tpe == 'quiz':
-            return ["activities/" + self.kwargs['id'] + ".html"]
-        elif tpe == 'link':
-            return ["activities/" + self.kwargs['id'] + ".html"]
-        else:
-            return ["activities/" + self.kwargs['id'] + ".html"]
-
-
 def activity_view(request, pk, simple_layout=False):
     """Displays an activity
 
