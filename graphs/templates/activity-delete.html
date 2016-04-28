@@ -1,0 +1,45 @@
+{% extends 'teacher-base.html' %}
+{% block title %}{{object_name}} Confirm delete?{% endblock %}
+
+{% block content %}
+    <div id="content-container" class="container p-none">
+        <div class="side-p">
+            <h3>Are you sure?</h3>
+            <p>You're about to delete the following activity:</p>
+            <ul>
+            	<li>Name: {{ object.name }}</li>
+            	<li>Type: {{ object.type }}</li>
+            	<li>Source: {{ object.source }}</li>
+            </ul>
+
+            <div id="impactedScenarios"></div>
+
+            <form action="" method="post">
+                {% csrf_token %}
+                <input class="btn btn-link" 
+                       type="button" value="Cancel" 
+                       onclick="window.history.go(-1);"/>
+                <input class="btn btn-danger" type="submit" value="Confirm"/>
+            </form>
+        </div>
+    </div>
+
+	<script>
+		var impactedScenarios = '';
+		{% for sce in scenarios %}
+		sceJson = {{ sce.json | safe }};
+		sceJson.activities.forEach(function(act) {
+			if (act.id == {{ object.pk }}) {
+				impactedScenarios += '<li>{{ sce.name }}</li>';
+			}
+		});
+        {% endfor %}
+
+        if (impactedScenarios == '') {
+        	impactedScenarios = '<p>This activity was not used in any scenario. Are you sure?</p>';
+        } else {
+        	impactedScenarios = '<p>This activity was found in the following scenarios:</p><ul>' + impactedScenarios + '</ul><p>Deleting the activity will damage these scenarios. Are you sure?</p>';
+        }
+    	document.getElementById('impactedScenarios').innerHTML = impactedScenarios;
+	</script>
+{% endblock %}

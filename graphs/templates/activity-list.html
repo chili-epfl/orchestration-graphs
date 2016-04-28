@@ -21,8 +21,8 @@
 				  <td>{{ activity.source }}</td>
 				  <td><a href="{% url 'activity' activity.id %}">Preview</a>
                       | <a href="{% url 'activity-editor' activity.id %}">Edit</a>
-                      <!--| <form style="display: inline;" action='{% url 'activity-delete' activity.id %}' method='post'>{% csrf_token %}
-                          <a href="javascript:;" onclick="parentNode.submit();">Delete</a></form></td>-->
+                      | <form style="display: inline;" action='{% url 'activity-delete' activity.id %}' method='get'>{% csrf_token %}
+                          <a href="javascript:;" onclick="parentNode.submit();">Delete</a></form></td>
 				</tr>
 {% endfor %} 
 				</table>

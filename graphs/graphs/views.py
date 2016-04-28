@@ -93,7 +93,15 @@ class ScenarioDeleteView(LoginRequiredMixin, DeleteView):
 
 class ActivityDeleteView(LoginRequiredMixin, DeleteView):
     model = Activity
+    template_name = 'activity-delete.html'
     success_url = reverse_lazy("activity-list")
+
+    def get_context_data(self, **kwargs):
+        context = super(ActivityDeleteView, self).get_context_data(**kwargs)
+        context["scenarios"] = Scenario.objects.all()
+
+        return context
+
 
 class ScenarioDetailView(LoginRequiredMixin, DetailView):
     """DetailView subclass used to use multiple models in the template"""
