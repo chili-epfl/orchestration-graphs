@@ -20,11 +20,10 @@ function activity(x, y, name, type, url, dbid) {
     activitySet.push(activityRect, activityText);
 
     // Add custom attributes to Raphael elements
-    activityRect.dbid = dbid;
     counterMap[dbid] = counterMap[dbid] + 1 || 1;
-    activityRect.counter = counterMap[dbid];
-
     activitySet.forEach(function(elem) {
+        elem.dbid = dbid;
+        elem.counter = counterMap[dbid];
         elem.activitySet = activitySet; // allows the drag method to apply on the whole set
         elem.selected = false;          // allows to (de)select an activity
     });
@@ -33,13 +32,6 @@ function activity(x, y, name, type, url, dbid) {
     activitySet.drag(move, dragger, up);            // MOVE mode
     activitySet.click(function(event) {
         handleClickOnActivity(event, activitySet);  // SELECT/ERASE mode
-    });
-
-    // Double click on activity opens the url in new tab
-    activitySet.dblclick(function(event) {
-        if (activityRect.attr('href')) {
-            window.open(activityRect.attr('href'), '_blank');
-        }
     });
 
     // Adds the new set to the global set of activities

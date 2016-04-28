@@ -58,20 +58,28 @@
 	<!--<script src="{% static 'js/graph.js' %}"></script>-->
 
 	<script src="{% static 'js/raphael.js' %}"></script>
-
-	<script>
-	var dbActivities = {};
-    //Building a dictionary of activities
-    {% for act in activities %}
-        dbActivities["{{ act.pk }}"] = ["{{ act.name|safe }}", "{{ act.type|safe }}", "{{ act.source|safe }}"];
-    {% endfor %}
-	</script>
-
+	<script src="{% static 'js/raphael.json.js' %}"></script>
 	<script src="{% static 'grapheditor/init.js' %}"></script>
+	<script src="{% static 'grapheditor/modeSave.js' %}"></script>
+	<script src="{% static 'grapheditor/modeLoad.js' %}"></script>
 	<script src="{% static 'grapheditor/modeConnect.js' %}"></script>
 	<script src="{% static 'grapheditor/modeErase.js' %}"></script>
 	<script src="{% static 'grapheditor/modeMove.js' %}"></script>
 	<script src="{% static 'grapheditor/modeAdd.js' %}"></script>
 	<script src="{% static 'grapheditor/modeEdit.js' %}"></script>
+	<script>
+	var dbActivities = {};
+	var oldScenario = null;
+
+    //Building a dictionary of activities
+    {% for act in activities %}
+        dbActivities["{{ act.pk }}"] = ["{{ act.name|safe }}", "{{ act.type|safe }}", "{{ act.source|safe }}"];
+    {% endfor %}
+
+    {% if scenario.id %}
+		oldScenario = "{{ scenario.raphaelJson }}";
+	{% endif %}
+	</script>
+
 
     {% endblock %}

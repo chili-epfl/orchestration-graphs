@@ -2,7 +2,7 @@ var graph, MODE, graphActivities;
 var connections = [];
 var selectedActRect;
 var newActivityX, newActivityY;
-var counterMap = {};
+var counterMap;
 var form;
 
 // Global design variables
@@ -40,6 +40,12 @@ window.onload = function () {
         changeMode(e.target.id);
     });
 
+    if (oldScenario != null) {
+        loadScenario(oldScenario);
+    } else {
+        counterMap = {};
+    }
+
     changeMode('ADD');
 };
 
@@ -76,30 +82,6 @@ function changeMode(newMode) {
             break;
     }
 };
-
-function saveScenario() {
-    graphJson = {};
-    graphJson["activities"] = [];
-    graphActivities.forEach(function(actSet) {
-        graphJson["activities"].push({"id": actSet[0].dbid, "counter": actSet[0].counter});
-    });
-    graphJson["edges"] = [];
-    connections.forEach(function(connection) {
-        graphJson["edges"].push({
-            "a1": {
-                "id": connection.from.dbid,
-                "counter": connection.from.counter
-            }, 
-            "a2": {
-                "id": connection.to.dbid,
-                "counter": connection.to.counter
-            }
-        });
-    });
-    graphJson["start"] = getStartActivityId();
-    $('#scenarioForm #id_json').val(JSON.stringify(graphJson));
-    document.getElementById('scenarioForm').submit();
-}
 
 function getStartActivityId() {
     leftActId = 0; // init, is the id of an activitySet in graphActivities
