@@ -54,7 +54,7 @@ def path_from_edges(scenario):
     while True:
         next_act = []
         for e in edges:
-            if e['a1'] == path[-1]:
+            if e['a1']['id'] == path[-1]['id'] and e['a1']['count'] == path[-1]['count']:
                 next_act.append(e['a2'])
 
         if next_act:
@@ -62,7 +62,9 @@ def path_from_edges(scenario):
         else:
             break
 
-    return json.dumps(path)
+    id_path = [a['id'] for a in path]
+
+    return json.dumps(id_path)
 
 
 def student_registration(request, pk=0):
