@@ -1,4 +1,4 @@
-from django.views.generic.edit import CreateView, DeleteView
+from django.views.generic.edit import CreateView, DeleteView, UpdateView
 from django.views.generic.detail import DetailView
 from graphs.models import Scenario, Activity, Student, Result, Answer, TimeLog
 from django import forms
@@ -13,22 +13,96 @@ import random
 import json
 import csv
 
+class ScenarioUpdateView(LoginRequiredMixin, UpdateView):
+    """UpdateView subclass for the graph editor"""
+    model = Scenario
+    template_name = 'graph-editor.html'
+    fields = ['name', 'group', 'json', 'raphaelJson']
+    success_url = reverse_lazy("scenario-list")
+    def get_form(self, form_class):
+        form = super(ScenarioUpdateView, self).get_form(form_class)
+        form.fields['json'].widget = forms.HiddenInput()
+        form.fields['raphaelJson'].widget = forms.HiddenInput()
+        return form
+
+    def get_context_data(self, **kwargs):
+        context = super(ScenarioUpdateView, self).get_context_data(**kwargs)
+        context["activities"] = Activity.objects.all()
+        context["action"] = reverse_lazy('scenario-editor',
+                                    kwargs={'pk': self.get_object().id})
+
+        return context
 
 class ScenarioCreateView(LoginRequiredMixin, CreateView):
+    """CreateView subclass for the graph editor"""
     model = Scenario
-    fields = ['name', 'group', 'json']
     template_name = 'graph-editor.html'
-    success_url = reverse_lazy("scenario-list")
-
+    fields = ['name', 'group', 'json', 'raphaelJson']
+    success_url = reverse_lazy('scenario-list')
     def get_form(self, form_class):
         form = super(ScenarioCreateView, self).get_form(form_class)
         form.fields['json'].widget = forms.HiddenInput()
+        form.fields['raphaelJson'].widget = forms.HiddenInput()
         return form
 
+    def get_context_data(self, **kwargs):
+        context = super(ScenarioCreateView, self).get_context_data(**kwargs)
+        context["activities"] = Activity.objects.all()
+        context["action"] = reverse_lazy('scenario-creator')
+
+        return context
+
+class ActivityUpdateView(LoginRequiredMixin, UpdateView):
+    """UpdateView subclass for the activity editor"""
+    model = Activity
+    template_name = 'activity-editor.html'
+    fields = ['name', 'type', 'source']
+    success_url = reverse_lazy("activity-list")
+
+    def get_form(self, form_class):
+        form = super(ActivityUpdateView, self).get_form(form_class)
+        return form
+
+    def get_context_data(self, **kwargs):
+        context = super(ActivityUpdateView, self).get_context_data(**kwargs)
+        context["activities"] = Activity.objects.all()
+        context["action"] = reverse_lazy('activity-editor',
+                                    kwargs={'pk': self.get_object().id})
+
+        return context
+
+class ActivityCreateView(LoginRequiredMixin, CreateView):
+    """CreateView subclass for the activity editor"""
+    model = Activity
+    template_name = 'activity-editor.html'
+    fields = ['name', 'type', 'source']
+    success_url = reverse_lazy('activity-list')
+
+    def get_form(self, form_class):
+        form = super(ActivityCreateView, self).get_form(form_class)
+        return form
+
+    def get_context_data(self, **kwargs):
+        context = super(ActivityCreateView, self).get_context_data(**kwargs)
+        context["activities"] = Activity.objects.all()
+        context["action"] = reverse_lazy('activity-creator')
+
+        return context
 
 class ScenarioDeleteView(LoginRequiredMixin, DeleteView):
     model = Scenario
     success_url = reverse_lazy("scenario-list")
+
+class ActivityDeleteView(LoginRequiredMixin, DeleteView):
+    model = Activity
+    template_name = 'activity-delete.html'
+    success_url = reverse_lazy("activity-list")
+
+    def get_context_data(self, **kwargs):
+        context = super(ActivityDeleteView, self).get_context_data(**kwargs)
+        context["scenarios"] = Scenario.objects.all()
+
+        return context
 
 
 class ScenarioDetailView(LoginRequiredMixin, DetailView):

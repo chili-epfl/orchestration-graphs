@@ -41,6 +41,10 @@
 
 			<h2>Existing scenarios</h2>
 
+			<a type="button"
+					class="btn btn-default mode-btn glyphicon glyphicon-plus" 
+					href="{% url 'scenario-creator' %}">Add</a>
+
 			<div class="table-responsive">
 				<table class="table table-striped">
 				<tr>
@@ -55,8 +59,8 @@
 				  <td>{{ scenario.num_students }}</td>
 				  <td><a href="{% url 'scenario' scenario.id %}">Preview</a>
                       | <a href="{% url 'scenario-stats' scenario.id %}">Stats</a>
-                      | <!--a href="/">Edit</a> |-->
-                      <form style="display: inline;" action='{% url 'scenario-delete' scenario.id %}' method='post'>{% csrf_token %}
+                      | <a href="{% url 'scenario-editor' scenario.id %}">Edit</a>
+                      | <form style="display: inline;" action='{% url 'scenario-delete' scenario.id %}' method='post'>{% csrf_token %}
                           <a href="javascript:;" onclick="parentNode.submit();">Delete</a></form></td>
 				</tr>
 {% endfor %} 

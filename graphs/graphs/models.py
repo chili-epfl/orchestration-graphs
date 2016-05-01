@@ -11,6 +11,7 @@ class Scenario(models.Model):
     group = models.CharField(max_length=50)
     name = models.CharField(max_length=50)
     json = models.TextField()
+    raphaelJson = models.TextField()
     date = models.DateField(auto_now_add=True)
 
     def avg_time(self, path=ALL_PATHS):

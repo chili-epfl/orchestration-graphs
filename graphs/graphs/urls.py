@@ -3,18 +3,22 @@ from django.views.generic import TemplateView
 from django.conf.urls.static import static
 from django.conf import settings
 from activities.views import next_activity, activity_view, simple_activity
-from graphs.views import ScenarioCreateView, ScenarioDeleteView, ScenarioDetailView, student_registration,\
+from graphs.views import ScenarioCreateView, ScenarioUpdateView, ScenarioDeleteView, ActivityCreateView, ActivityUpdateView, ActivityDeleteView, ScenarioDetailView, student_registration,\
     student_learning, stats_view, get_csv, get_psycho_csv, get_time_csv
 from django.contrib.auth.decorators import login_required
 from django.views.generic.list import ListView
-from graphs.models import Scenario
+from graphs.models import Scenario, Activity
 
 from django.contrib import admin
 admin.autodiscover()
 
 urlpatterns = patterns('',
-    url(r'^teacher/scenario/editor/$', ScenarioCreateView.as_view(), name="scenario-editor"),
+    url(r'^teacher/scenario/editor/$', ScenarioCreateView.as_view(), name="scenario-creator"),
+    url(r'^teacher/scenario/editor/(?P<pk>\d+)/$', ScenarioUpdateView.as_view(), name='scenario-editor',),
     url(r'^teacher/scenario/delete/(?P<pk>\w+)/$', ScenarioDeleteView.as_view(), name="scenario-delete"),
+    url(r'^teacher/activity/editor/$', ActivityCreateView.as_view(), name="activity-creator"),
+    url(r'^teacher/activity/editor/(?P<pk>\d+)/$', ActivityUpdateView.as_view(), name='activity-editor',),
+    url(r'^teacher/activity/delete/(?P<pk>\w+)/$', ActivityDeleteView.as_view(), name="activity-delete"),
 
     url(r'^scenario/(?P<pk>\w+)/$', ScenarioDetailView.as_view(template_name='scenario.html'), name="scenario"),
     url(r'^scenario/(?P<pk>\w+)/stats/$', stats_view, name="scenario-stats"),
@@ -23,6 +27,7 @@ urlpatterns = patterns('',
     url(r'^scenario/csv/time/(?P<pk>\w+)/$', get_time_csv, name="scenario-time-csv"),
     url(r'^teacher/$', TemplateView.as_view(template_name='teacher-base.html'), name="teacher-dashboard"),
     url(r'^teacher/scenario/list/$', login_required(ListView.as_view(template_name='scenario-list.html', model=Scenario)), name="scenario-list"),
+    url(r'^teacher/activity/list/$', login_required(ListView.as_view(template_name='activity-list.html', model=Activity)), name="activity-list"),
 
     url(r'^student/register/scenario/(?P<pk>\w+)/$', student_registration, name="student-registration"),
     url(r'^student/register/$', student_registration, name="student-registration"),

@@ -1,0 +1,85 @@
+{% extends "teacher-base.html" %}
+{% load staticfiles %}
+    {% block css-files %}
+    <style>
+    </style>
+    <!--<link rel="stylesheet" type="text/css" href="http://medialize.github.io/jQuery-contextMenu/src/jquery.contextMenu.css" />-->
+    {% endblock %}
+    {% block content %}
+
+	{% if scenario.id %}
+	<h1>Edit Scenario {{ scenario.id }}</h1>
+	{% else %}
+	<h1>Add Scenario</h1>
+	{% endif %}
+
+	<form id="scenarioForm" action="{{ action }}" method="post">{% csrf_token %}
+	    {{ form.as_p }}
+	</form>
+
+	<div class="button-group">
+		<button type="button" class="btn btn-default mode-btn glyphicon glyphicon-plus" id="ADD">Add</button>
+		<button type="button" class="btn btn-default mode-btn glyphicon glyphicon-move" id="MOVE">Move</button>
+		<button type="button" class="btn btn-default mode-btn glyphicon glyphicon-log-in" id="CONNECT">Connect</button>
+		<button type="button" class="btn btn-default mode-btn glyphicon glyphicon-erase" id="ERASE">Eraser</button>
+		<button type="button" class="btn btn-default mode-btn glyphicon glyphicon-hand-up" id="EDIT">Edit activity</button>
+		<button type="button" class="btn btn-default glyphicon glyphicon-import" id="SAVE" onclick="saveScenario()">Save</button>
+	</div>
+
+	<div id="container" class="col-md-10">
+		<div id="graph"></div>
+	</div>
+
+	<!-- Modal -->
+	<div class="modal fade" id="activityChoice" tabindex="-1" role="dialog" data-backdrop="static">
+	  <div class="modal-dialog" role="document">
+	    <div class="modal-content">
+	      <div class="modal-body">
+	      	<label>Activity</label>
+	      	<select id="activitySelector" class="form-control">
+				<option value="choose" href="#">Choose an activity...</option>
+{% for act in activities %}
+				<option value="{{act.pk}}" href="#">{{ act.name }}</option>
+{% endfor %}
+			</select>
+	      </div>
+	      <div class="modal-footer">
+	        <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+	        <button type="button" class="btn btn-primary" onclick="submitActivityChoice()">Confirm</button>
+	      </div>
+	    </div>
+	  </div>
+	</div>
+
+    {% endblock %}
+    {% block extra-scripts %}
+    <!--<script src="/static/js/snap/dist/snap.svg-min.js"></script>-->
+	<!--<script src="http://medialize.github.io/jQuery-contextMenu/src/jquery.contextMenu.js" type="text/javascript"></script>-->
+	<!--<script src="{% static 'js/graph.js' %}"></script>-->
+
+	<script src="{% static 'js/raphael.js' %}"></script>
+	<script src="{% static 'js/raphael.json.js' %}"></script>
+	<script src="{% static 'grapheditor/init.js' %}"></script>
+	<script src="{% static 'grapheditor/modeSave.js' %}"></script>
+	<script src="{% static 'grapheditor/modeLoad.js' %}"></script>
+	<script src="{% static 'grapheditor/modeConnect.js' %}"></script>
+	<script src="{% static 'grapheditor/modeErase.js' %}"></script>
+	<script src="{% static 'grapheditor/modeMove.js' %}"></script>
+	<script src="{% static 'grapheditor/modeAdd.js' %}"></script>
+	<script src="{% static 'grapheditor/modeEdit.js' %}"></script>
+	<script>
+	var dbActivities = {};
+	var oldScenario = null;
+
+    //Building a dictionary of activities
+    {% for act in activities %}
+        dbActivities["{{ act.pk }}"] = ["{{ act.name|safe }}", "{{ act.type|safe }}", "{{ act.source|safe }}"];
+    {% endfor %}
+
+    {% if scenario.id %}
+		oldScenario = "{{ scenario.raphaelJson }}";
+	{% endif %}
+	</script>
+
+
+    {% endblock %}

@@ -1,0 +1,38 @@
+var inspectedActivity;
+
+/**
+ * Edit information about an activity
+ *
+ */
+function editActivityChoice(activitySet) {
+	inspectedActivity = activitySet;
+    console.log(inspectedActivity);
+    $('#activitySelector').val(activitySet[0].dbid);
+    $('#activityChoice').modal('show');
+}
+
+/**
+ * Processes information about a new activity from the activity form
+ *
+ */
+function submitEditedGraphActivity() {
+    activity = dbActivities[$('#activitySelector').val()]
+    
+    oldDbid = inspectedActivity[0].dbid;
+    oldCount = inspectedActivity[0].counter;
+
+    $('#activityChoice').modal('hide');
+    
+    inspectedActivity[1].attr('text', activity[0]);
+    inspectedActivity[0].attr('title', activity[1]);
+    inspectedActivity[0].attr('href', activity[2]);
+
+    newDbid = $('#activitySelector').val();
+
+    // Update id/counter in graph activity
+    inspectedActivity[0].dbid = parseInt($('#activitySelector').val());
+    counterMap[newDbid] = counterMap[newDbid] + 1 || 1;
+    inspectedActivity[0].counter = counterMap[newDbid];
+
+    $('#activitySelector').val('choose');
+}
