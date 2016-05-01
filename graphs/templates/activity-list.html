@@ -12,13 +12,12 @@
 			<div class="table-responsive">
 				<table class="table table-striped">
 				<tr>
-				<th>Activity name</th><th>Type</th><th>Source</th><th>Actions</th>
+				<th>Activity name</th><th>Type</th><th>Actions</th>
 				</tr>
 {% for activity in object_list %} 
 				<tr>
 				  <td>{{ activity.name }}</td>
 				  <td>{{ activity.type }}</td>
-				  <td>{{ activity.source }}</td>
 				  <td><a href="{% url 'activity' activity.id %}">Preview</a>
                       | <a href="{% url 'activity-editor' activity.id %}">Edit</a>
                       | <form style="display: inline;" action='{% url 'activity-delete' activity.id %}' method='get'>{% csrf_token %}

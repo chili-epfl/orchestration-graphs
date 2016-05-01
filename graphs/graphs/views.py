@@ -61,6 +61,7 @@ class ActivityUpdateView(LoginRequiredMixin, UpdateView):
 
     def get_form(self, form_class):
         form = super(ActivityUpdateView, self).get_form(form_class)
+        form.fields['source'].widget = forms.HiddenInput()
         return form
 
     def get_context_data(self, **kwargs):
@@ -80,6 +81,9 @@ class ActivityCreateView(LoginRequiredMixin, CreateView):
 
     def get_form(self, form_class):
         form = super(ActivityCreateView, self).get_form(form_class)
+        form.fields['type'].widget.choices.remove(('quiz', 'Quiz'))
+        form.fields['type'].widget.choices.remove(('psycho', 'Psycho'))
+        form.fields['source'].widget = forms.HiddenInput()
         return form
 
     def get_context_data(self, **kwargs):

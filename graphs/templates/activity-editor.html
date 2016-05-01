@@ -15,9 +15,70 @@
 
 	<form id="activityForm" action="{{ action }}" method="post">{% csrf_token %}
 	    {{ form.as_p }}
-	    <input type="submit" value="Save">
+		<p id="contentField">
+	    	<label for="content">Content:</label>
+	    	<textarea id="content" cols="40" rows="6" name="content"></textarea>
+	    </p>
+	    <p id="sourceField">
+	    	<label for="source">Source:</label>
+	    	<input id="source" maxlength="500" name="source" type="text">
+	    </p>
+
+	    <button type="button" onclick="saveScenario()">Save</button>
 	</form>
 
     {% endblock %}
     {% block extra-scripts %}
+
+    <script>
+    adaptFormToActivityType($('#activityForm #id_type').val())
+	$('#activityForm #id_type').change(function() {
+		adaptFormToActivityType($('#activityForm #id_type').val());
+	});
+
+	function adaptFormToActivityType(type) {
+		switch (type) {
+			case 'text':
+				$('option[value="quiz"]').attr('disabled', 'disabled');
+				$('option[value="psycho"]').attr('disabled', 'disabled');
+				$('#content').val($('#id_source').val());
+				$('#contentField').show();
+				$('#sourceField').hide();
+				break;
+			case 'link':
+				$('option[value="quiz"]').attr('disabled', 'disabled');
+				$('option[value="psycho"]').attr('disabled', 'disabled');
+				$('#source').val($('#id_source').val());
+				$('#contentField').hide();
+				$('#sourceField').show();
+				break;
+			case 'quiz' || 'psycho':
+				$('#id_type').attr('disabled', 'disabled');
+				$('#contentField').hide();
+				$('#sourceField').hide();
+			default:
+				$('#contentField').hide();
+				$('#sourceField').hide();
+				break;
+		}
+	}
+
+    // Create or edit activity
+	function saveScenario() {
+		switch ($('#id_type').val()) {
+			case 'text':
+				$('#activityForm #id_source').val($('#content').val());
+				break;
+			case 'link':
+				$('#activityForm #id_source').val($('#source').val());
+				break;
+			default:
+				$('#activityForm #id_source').val('');
+				break;
+		}
+
+	    // Submit form to save changes
+	    document.getElementById('activityForm').submit();
+	}
+    </script>
     {% endblock %}
