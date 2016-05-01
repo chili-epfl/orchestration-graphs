@@ -6,8 +6,13 @@ var counterMap;
 var form;
 
 // Global design variables
-var activityFill = "#428BCA";
-var activitySelectFill = "#23527B";
+var graphWidth = 2000;
+var actHeight = 40;
+var actWidth = 60;
+var interPlanes = 50;
+var nPlanes = 6;
+var activityFill = "#FFF";
+var activitySelectFill = "#AAA";
 
 /**
  * Executed on load:
@@ -16,16 +21,14 @@ var activitySelectFill = "#23527B";
  */
 window.onload = function () {
     // Creates a new graph
-    graph = Raphael("graph", 1000, 525); // creates graph with x=1000
+    graph = Raphael("graph", graphWidth, (nPlanes+1)*interPlanes);
 
     graphActivities = graph.set();
     selectedActRect = graph.set();
-    planes = [  graph.path("M0 425 L1000 425"),
-                graph.path("M0 350 L1000 350"),
-                graph.path("M0 275 L1000 275"),
-                graph.path("M0 200 L1000 200"),
-                graph.path("M0 125 L1000 125"),
-                graph.path("M0  50 L1000  50") ];
+    planes = [];
+    for (var i = 0; i < nPlanes; i++) {
+        planes.push(graph.path("M0 " + (i+1)*interPlanes + " L" + graphWidth + " " + (i+1)*interPlanes));
+    };
 
     // On click on the graph in ADD mode, display activity creation form
     $("#graph").on('click', function (e) {

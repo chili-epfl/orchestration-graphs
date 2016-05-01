@@ -7,16 +7,16 @@
 function activity(x, y, name, type, url, dbid) {
     // Creates a set containing a new Raphael rectangle and a new Raphael text
     var activitySet = graph.set();
-    var activityRect = graph.rect(x - 30, reposition(y - 20), 60, 40);
+    var activityRect = graph.rect(x - actWidth/2, reposition(y - actHeight/2), actWidth, actHeight);
     activityRect.attr({
         fill: activityFill,
-        "stroke-width": 0,
+        "stroke-width": 2,
         title: type,
         href: url
     });
 
-    var activityText = graph.text(x, reposition(y - 20) + 20, correctTextSize(name));
-    activityText.attr({fill: "#FFF"});
+    var activityText = graph.text(x, reposition(y - actHeight/2) + actHeight/2, correctTextSize(name));
+    activityText.attr({fill: "#000"});
     activitySet.push(activityRect, activityText);
 
     // Add custom attributes to Raphael elements
@@ -78,7 +78,7 @@ function submitNewGraphActivity() {
 function correctTextSize(text) {
     var midTextSize = (text.length - text.length%2)/2;
     var thirdTextSize = (text.length - text.length%3)/3
-    
+    return text;
     if (text.length <10) {
         return text;
     } else if (text.length < 20) {

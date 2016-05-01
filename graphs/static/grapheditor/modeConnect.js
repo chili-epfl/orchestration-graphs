@@ -131,7 +131,7 @@ Raphael.fn.connection = function (obj1, obj2, line, bg) {
         var color = typeof line == "string" ? line : "#000";
         return {
             bg: bg && bg.split && this.path(path).attr({stroke: bg.split("|")[0], fill: "none", "stroke-width": bg.split("|")[1] || 3}),
-            line: this.path(path).attr({stroke: color, "stroke-width": 3, fill: "none"}),
+            line: this.path(path).attr({stroke: color, "stroke-width": 2, fill: "none"}),
             from: obj1,
             to: obj2
         };
