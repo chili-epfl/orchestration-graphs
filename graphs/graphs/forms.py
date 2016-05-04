@@ -65,12 +65,7 @@ class PsychoForm(Form):
             field_name = "question_%d" % question.pk
             choices = tuple((c.pk, mark_safe(c.get_html())) for c in question.get_choices())
 
-            if question.image_source is not None:
-                label = "<img src='" + question.image_source + "' height='250' ><br>" + question.text
-            else:
-                label = question.text
-
-            self.fields[field_name] = ChoiceField(label=mark_safe(label), required=True, choices=choices, widget=RadioSelect)
+            self.fields[field_name] = ChoiceField(label=question.get_html(), required=True, choices=choices, widget=RadioSelect)
             if data:
                 self.fields[field_name].initial = data.get(field_name)
 
