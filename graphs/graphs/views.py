@@ -20,6 +20,7 @@ class ScenarioUpdateView(LoginRequiredMixin, UpdateView):
     template_name = 'graph-editor.html'
     fields = ['name', 'group', 'json', 'raphaelJson']
     success_url = reverse_lazy("scenario-list")
+
     def get_form(self, form_class):
         form = super(ScenarioUpdateView, self).get_form(form_class)
         form.fields['json'].widget = forms.HiddenInput()
