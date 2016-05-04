@@ -199,8 +199,8 @@ class Choice(models.Model):
 class Question(models.Model):
     """Models a question, which is part of one or more quiz/test activity"""
     text = models.CharField(max_length=1000)
-    image_source = models.CharField(max_length=100, blank = True, null=True)
-    correct_answer = models.ForeignKey(Choice,related_name='+', default= 1)
+    image_source = models.CharField(max_length=100, blank=True, null=True)
+    correct_answer = models.ForeignKey(Choice, blank=True, null=True, related_name='+')
     activity = models.ManyToManyField(Activity)
 
     def __str__(self):
