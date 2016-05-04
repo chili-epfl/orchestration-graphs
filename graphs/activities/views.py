@@ -12,6 +12,18 @@ def activity_view(request, pk, simple_layout=False):
     :param pk: The activity's primary key
     :param simple_layout: Whether the activity should be displayed in a basic way or with the header, buttons, etc.
     """
+
+    if not request.user.is_superuser:
+        if 'user_id' in request.session:
+            try:
+                student = Student.objects.get(pk=request.session['user_id'])
+                if not student.get_current_activity() == Activity.objects.get(pk=pk):
+                    return user_activity()
+            except ObjectDoesNotExist:
+                return HttpResponseRedirect('/student/register/')
+        else:
+            return HttpResponseRedirect('/student/register/')
+
     activity = Activity.objects.get(pk=pk)
     tpe = activity.type
     ctx = {'source': activity.source, 'title': activity.name}

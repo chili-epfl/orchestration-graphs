@@ -13,6 +13,7 @@ import random
 import json
 import csv
 
+
 class ScenarioUpdateView(LoginRequiredMixin, UpdateView):
     """UpdateView subclass for the graph editor"""
     model = Scenario
@@ -33,12 +34,14 @@ class ScenarioUpdateView(LoginRequiredMixin, UpdateView):
 
         return context
 
+
 class ScenarioCreateView(LoginRequiredMixin, CreateView):
     """CreateView subclass for the graph editor"""
     model = Scenario
     template_name = 'graph-editor.html'
     fields = ['name', 'group', 'json', 'raphaelJson']
     success_url = reverse_lazy('scenario-list')
+
     def get_form(self, form_class):
         form = super(ScenarioCreateView, self).get_form(form_class)
         form.fields['json'].widget = forms.HiddenInput()
@@ -51,6 +54,7 @@ class ScenarioCreateView(LoginRequiredMixin, CreateView):
         context["action"] = reverse_lazy('scenario-creator')
 
         return context
+
 
 class ActivityUpdateView(LoginRequiredMixin, UpdateView):
     """UpdateView subclass for the activity editor"""
@@ -71,6 +75,7 @@ class ActivityUpdateView(LoginRequiredMixin, UpdateView):
                                     kwargs={'pk': self.get_object().id})
 
         return context
+
 
 class ActivityCreateView(LoginRequiredMixin, CreateView):
     """CreateView subclass for the activity editor"""
@@ -93,9 +98,11 @@ class ActivityCreateView(LoginRequiredMixin, CreateView):
 
         return context
 
+
 class ScenarioDeleteView(LoginRequiredMixin, DeleteView):
     model = Scenario
     success_url = reverse_lazy("scenario-list")
+
 
 class ActivityDeleteView(LoginRequiredMixin, DeleteView):
     model = Activity
