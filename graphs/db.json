@@ -1,0 +1,4237 @@
+[
+{
+    "model": "contenttypes.contenttype",
+    "pk": 1,
+    "fields": {
+        "app_label": "admin",
+        "model": "logentry"
+    }
+},
+{
+    "model": "contenttypes.contenttype",
+    "pk": 2,
+    "fields": {
+        "app_label": "auth",
+        "model": "permission"
+    }
+},
+{
+    "model": "contenttypes.contenttype",
+    "pk": 3,
+    "fields": {
+        "app_label": "auth",
+        "model": "group"
+    }
+},
+{
+    "model": "contenttypes.contenttype",
+    "pk": 4,
+    "fields": {
+        "app_label": "auth",
+        "model": "user"
+    }
+},
+{
+    "model": "contenttypes.contenttype",
+    "pk": 5,
+    "fields": {
+        "app_label": "contenttypes",
+        "model": "contenttype"
+    }
+},
+{
+    "model": "contenttypes.contenttype",
+    "pk": 6,
+    "fields": {
+        "app_label": "sessions",
+        "model": "session"
+    }
+},
+{
+    "model": "contenttypes.contenttype",
+    "pk": 7,
+    "fields": {
+        "app_label": "graphs",
+        "model": "scenario"
+    }
+},
+{
+    "model": "contenttypes.contenttype",
+    "pk": 8,
+    "fields": {
+        "app_label": "graphs",
+        "model": "activity"
+    }
+},
+{
+    "model": "contenttypes.contenttype",
+    "pk": 9,
+    "fields": {
+        "app_label": "graphs",
+        "model": "student"
+    }
+},
+{
+    "model": "contenttypes.contenttype",
+    "pk": 10,
+    "fields": {
+        "app_label": "graphs",
+        "model": "question"
+    }
+},
+{
+    "model": "contenttypes.contenttype",
+    "pk": 11,
+    "fields": {
+        "app_label": "graphs",
+        "model": "result"
+    }
+},
+{
+    "model": "contenttypes.contenttype",
+    "pk": 12,
+    "fields": {
+        "app_label": "graphs",
+        "model": "answer"
+    }
+},
+{
+    "model": "contenttypes.contenttype",
+    "pk": 14,
+    "fields": {
+        "app_label": "graphs",
+        "model": "timelog"
+    }
+},
+{
+    "model": "contenttypes.contenttype",
+    "pk": 15,
+    "fields": {
+        "app_label": "graphs",
+        "model": "choice"
+    }
+},
+{
+    "model": "sessions.session",
+    "pk": "656hd9xzqtbq31lt75cx0bzmrpdd4fu6",
+    "fields": {
+        "session_data": "YTRiOTdjZjc0NTJlMGRmYzMzNjMwZjY3ODE0Y2Y3ZmJhNWQ1OTY1ZTp7Il9hdXRoX3VzZXJfaGFzaCI6ImEyNmM3MTBiMTFhNmJjMDdkNTA1MjMzYjEyZDk0NTVmM2MyMWMwOGEiLCJfYXV0aF91c2VyX2JhY2tlbmQiOiJkamFuZ28uY29udHJpYi5hdXRoLmJhY2tlbmRzLk1vZGVsQmFja2VuZCIsIl9hdXRoX3VzZXJfaWQiOiIxIn0=",
+        "expire_date": "2016-03-16T13:26:05.438Z"
+    }
+},
+{
+    "model": "sessions.session",
+    "pk": "6w1p4uo3xb0djhc4zzjvlb3a8dm5dvr9",
+    "fields": {
+        "session_data": "OGRiN2RlNTZmZTI2ZTgwZjE1YzBkYWEwNjYxZjJmNzdjM2FjNDgwYTp7Il9hdXRoX3VzZXJfYmFja2VuZCI6ImRqYW5nby5jb250cmliLmF1dGguYmFja2VuZHMuTW9kZWxCYWNrZW5kIiwiX2F1dGhfdXNlcl9oYXNoIjoiNTJlZDM5MGQ3NzBmY2Y1YTIyYzdlYmMwNGE0YmUxNjhjOTViOTJmMCIsIl9hdXRoX3VzZXJfaWQiOiI0In0=",
+        "expire_date": "2016-05-15T14:48:23.800Z"
+    }
+},
+{
+    "model": "sessions.session",
+    "pk": "cx2ked8a7jryzpv6euy4x0pmc029r6u1",
+    "fields": {
+        "session_data": "Mjg4NWUxZjZhNTk1ZTI2MDI0MGI3N2QwY2JjMGI0NjhiZjJlMWFlYTp7Il9hdXRoX3VzZXJfaWQiOiIzIiwiX2F1dGhfdXNlcl9oYXNoIjoiZjhlNzE4ZjQyZjI4ZWVlZGM4ZDBlZmNhNDQ2NDBmMzVjMTdiZjBmOSIsIl9hdXRoX3VzZXJfYmFja2VuZCI6ImRqYW5nby5jb250cmliLmF1dGguYmFja2VuZHMuTW9kZWxCYWNrZW5kIn0=",
+        "expire_date": "2016-05-18T12:59:27.544Z"
+    }
+},
+{
+    "model": "sessions.session",
+    "pk": "nllfg4yymywyghwqu9l9omfchwbldpwi",
+    "fields": {
+        "session_data": "NmUxOTQzYWU0YzQ3NmY5NWQzMGU3YWYyOGEwOGZmM2I0MjBiZGJiOTp7InVzZXJfaWQiOjQ5LCJfYXV0aF91c2VyX2JhY2tlbmQiOiJkamFuZ28uY29udHJpYi5hdXRoLmJhY2tlbmRzLk1vZGVsQmFja2VuZCIsIl9hdXRoX3VzZXJfaGFzaCI6ImY4ZTcxOGY0MmYyOGVlZWRjOGQwZWZjYTQ0NjQwZjM1YzE3YmYwZjkiLCJfYXV0aF91c2VyX2lkIjoiMyJ9",
+        "expire_date": "2016-05-11T07:48:04.791Z"
+    }
+},
+{
+    "model": "sessions.session",
+    "pk": "nqzuwtagajidzlbib1sbxm7wg8p8a8e3",
+    "fields": {
+        "session_data": "MmNjZDQ3MmMzMWRjZjRkYjM4MmI5NWI3ZDE5MjNhYmY2NGE3MzQ5MDp7Il9hdXRoX3VzZXJfaGFzaCI6ImY4ZTcxOGY0MmYyOGVlZWRjOGQwZWZjYTQ0NjQwZjM1YzE3YmYwZjkiLCJ1c2VyX2lkIjo0NywiX2F1dGhfdXNlcl9pZCI6IjMiLCJfYXV0aF91c2VyX2JhY2tlbmQiOiJkamFuZ28uY29udHJpYi5hdXRoLmJhY2tlbmRzLk1vZGVsQmFja2VuZCJ9",
+        "expire_date": "2016-05-10T09:52:16.823Z"
+    }
+},
+{
+    "model": "sessions.session",
+    "pk": "r8wv4g4opzls3rnvpbym4e22vatoz5zn",
+    "fields": {
+        "session_data": "ZTM3ODc1YWQ0NDE1ODBlNThiZDNlMzBiOTI3ZDk0NTc5MjM3NDYwYTp7InVzZXJfaWQiOjUwLCJfYXV0aF91c2VyX2JhY2tlbmQiOiJkamFuZ28uY29udHJpYi5hdXRoLmJhY2tlbmRzLk1vZGVsQmFja2VuZCIsIl9hdXRoX3VzZXJfaGFzaCI6ImY4ZTcxOGY0MmYyOGVlZWRjOGQwZWZjYTQ0NjQwZjM1YzE3YmYwZjkiLCJfYXV0aF91c2VyX2lkIjoiMyJ9",
+        "expire_date": "2016-05-14T12:52:20.541Z"
+    }
+},
+{
+    "model": "sessions.session",
+    "pk": "tkl4o0gozkrtouf3g2x4rs9qip85x1mj",
+    "fields": {
+        "session_data": "YjlkMDE5NGIxNTE5YmU4ZmY1NWMyOTcwYWQ2ZmFlZDYxZTc2OTRjZjp7Il9hdXRoX3VzZXJfaGFzaCI6IjFmYWM4N2NhNmEyODdiZmEwZTRhMzhhYjY2YTM1YmQzM2E4NmY4OTgiLCJ1c2VyX2lkIjo1OSwiX2F1dGhfdXNlcl9pZCI6IjUiLCJfYXV0aF91c2VyX2JhY2tlbmQiOiJkamFuZ28uY29udHJpYi5hdXRoLmJhY2tlbmRzLk1vZGVsQmFja2VuZCJ9",
+        "expire_date": "2016-05-18T12:45:50.578Z"
+    }
+},
+{
+    "model": "sessions.session",
+    "pk": "vl9t8a3p00c7wnb378l24txzax32kn6m",
+    "fields": {
+        "session_data": "M2M2NWE0M2Y4YTE5ZTQyMDc0YTVjZDE2MjU0NmY1ODM2MmI5YjFhNTp7InVzZXJfaWQiOjF9",
+        "expire_date": "2016-04-19T09:11:12.947Z"
+    }
+},
+{
+    "model": "graphs.scenario",
+    "pk": 17,
+    "fields": {
+        "group": "1",
+        "name": "Scenario",
+        "json": "{\"activities\":[{\"id\":12,\"counter\":1},{\"id\":13,\"counter\":1},{\"id\":14,\"counter\":1},{\"id\":15,\"counter\":1},{\"id\":16,\"counter\":1},{\"id\":17,\"counter\":1},{\"id\":18,\"counter\":1}],\"edges\":[{\"a1\":{\"id\":12,\"counter\":1},\"a2\":{\"id\":17,\"counter\":1}},{\"a1\":{\"id\":17,\"counter\":1},\"a2\":{\"id\":13,\"counter\":1}},{\"a1\":{\"id\":17,\"counter\":1},\"a2\":{\"id\":15,\"counter\":1}},{\"a1\":{\"id\":14,\"counter\":1},\"a2\":{\"id\":13,\"counter\":1}},{\"a1\":{\"id\":14,\"counter\":1},\"a2\":{\"id\":18,\"counter\":1}},{\"a1\":{\"id\":15,\"counter\":1},\"a2\":{\"id\":16,\"counter\":1}},{\"a1\":{\"id\":16,\"counter\":1},\"a2\":{\"id\":18,\"counter\":1}},{\"a1\":{\"id\":15,\"counter\":1},\"a2\":{\"id\":14,\"counter\":1}},{\"a1\":{\"id\":13,\"counter\":1},\"a2\":{\"id\":16,\"counter\":1}}],\"start\":{\"id\":12,\"counter\":1}}",
+        "raphaelJson": "\"[{\\\"data\\\":{},\\\"type\\\":\\\"path\\\",\\\"attrs\\\":{\\\"fill\\\":\\\"none\\\",\\\"stroke\\\":\\\"#000\\\",\\\"path\\\":[[\\\"M\\\",0,50],[\\\"L\\\",2000,50]]},\\\"transform\\\":\\\"\\\",\\\"id\\\":0},{\\\"data\\\":{},\\\"type\\\":\\\"path\\\",\\\"attrs\\\":{\\\"fill\\\":\\\"none\\\",\\\"stroke\\\":\\\"#000\\\",\\\"path\\\":[[\\\"M\\\",0,100],[\\\"L\\\",2000,100]]},\\\"transform\\\":\\\"\\\",\\\"id\\\":1},{\\\"data\\\":{},\\\"type\\\":\\\"path\\\",\\\"attrs\\\":{\\\"fill\\\":\\\"none\\\",\\\"stroke\\\":\\\"#000\\\",\\\"path\\\":[[\\\"M\\\",0,150],[\\\"L\\\",2000,150]]},\\\"transform\\\":\\\"\\\",\\\"id\\\":2},{\\\"data\\\":{},\\\"type\\\":\\\"path\\\",\\\"attrs\\\":{\\\"fill\\\":\\\"none\\\",\\\"stroke\\\":\\\"#000\\\",\\\"path\\\":[[\\\"M\\\",0,200],[\\\"L\\\",2000,200]]},\\\"transform\\\":\\\"\\\",\\\"id\\\":3},{\\\"data\\\":{},\\\"type\\\":\\\"path\\\",\\\"attrs\\\":{\\\"fill\\\":\\\"none\\\",\\\"stroke\\\":\\\"#000\\\",\\\"path\\\":[[\\\"M\\\",0,250],[\\\"L\\\",2000,250]]},\\\"transform\\\":\\\"\\\",\\\"id\\\":4},{\\\"data\\\":{},\\\"type\\\":\\\"path\\\",\\\"attrs\\\":{\\\"fill\\\":\\\"none\\\",\\\"stroke\\\":\\\"#000\\\",\\\"path\\\":[[\\\"M\\\",0,300],[\\\"L\\\",2000,300]]},\\\"transform\\\":\\\"\\\",\\\"id\\\":5},{\\\"data\\\":{\\\"dbid\\\":12,\\\"counter\\\":1},\\\"type\\\":\\\"rect\\\",\\\"attrs\\\":{\\\"x\\\":63,\\\"y\\\":130,\\\"width\\\":60,\\\"height\\\":40,\\\"r\\\":0,\\\"rx\\\":0,\\\"ry\\\":0,\\\"fill\\\":\\\"#FFF\\\",\\\"stroke\\\":\\\"#000\\\",\\\"stroke-width\\\":2,\\\"title\\\":\\\"psycho\\\",\\\"href\\\":\\\"\\\",\\\"cursor\\\":\\\"not-allowed\\\"},\\\"transform\\\":\\\"\\\",\\\"id\\\":6},{\\\"data\\\":{\\\"dbid\\\":12,\\\"counter\\\":1},\\\"type\\\":\\\"text\\\",\\\"attrs\\\":{\\\"x\\\":93,\\\"y\\\":150,\\\"text-anchor\\\":\\\"middle\\\",\\\"text\\\":\\\"Psychological Test\\\",\\\"font\\\":\\\"10px \\\\\\\"Arial\\\\\\\"\\\",\\\"stroke\\\":\\\"none\\\",\\\"fill\\\":\\\"#000\\\",\\\"cursor\\\":\\\"not-allowed\\\"},\\\"transform\\\":\\\"\\\",\\\"id\\\":7},{\\\"data\\\":{\\\"dbid\\\":13,\\\"counter\\\":1},\\\"type\\\":\\\"rect\\\",\\\"attrs\\\":{\\\"x\\\":355,\\\"y\\\":30,\\\"width\\\":60,\\\"height\\\":40,\\\"r\\\":0,\\\"rx\\\":0,\\\"ry\\\":0,\\\"fill\\\":\\\"#FFF\\\",\\\"stroke\\\":\\\"#000\\\",\\\"stroke-width\\\":2,\\\"title\\\":\\\"link\\\",\\\"href\\\":\\\"/static/video/Epidemic-def.mp4\\\",\\\"cursor\\\":\\\"not-allowed\\\"},\\\"transform\\\":\\\"\\\",\\\"id\\\":8},{\\\"data\\\":{\\\"dbid\\\":13,\\\"counter\\\":1},\\\"type\\\":\\\"text\\\",\\\"attrs\\\":{\\\"x\\\":385,\\\"y\\\":50,\\\"text-anchor\\\":\\\"middle\\\",\\\"text\\\":\\\"Epidemic definiton\\\",\\\"font\\\":\\\"10px \\\\\\\"Arial\\\\\\\"\\\",\\\"stroke\\\":\\\"none\\\",\\\"fill\\\":\\\"#000\\\",\\\"cursor\\\":\\\"not-allowed\\\"},\\\"transform\\\":\\\"\\\",\\\"id\\\":9},{\\\"data\\\":{\\\"dbid\\\":14,\\\"counter\\\":1},\\\"type\\\":\\\"rect\\\",\\\"attrs\\\":{\\\"x\\\":595,\\\"y\\\":30,\\\"width\\\":60,\\\"height\\\":40,\\\"r\\\":0,\\\"rx\\\":0,\\\"ry\\\":0,\\\"fill\\\":\\\"#FFF\\\",\\\"stroke\\\":\\\"#000\\\",\\\"stroke-width\\\":2,\\\"title\\\":\\\"link\\\",\\\"href\\\":\\\"/static/video/ReproductiveNumber.mp4\\\",\\\"cursor\\\":\\\"not-allowed\\\"},\\\"transform\\\":\\\"\\\",\\\"id\\\":10},{\\\"data\\\":{\\\"dbid\\\":14,\\\"counter\\\":1},\\\"type\\\":\\\"text\\\",\\\"attrs\\\":{\\\"x\\\":625,\\\"y\\\":50,\\\"text-anchor\\\":\\\"middle\\\",\\\"text\\\":\\\"Reproductive number\\\",\\\"font\\\":\\\"10px \\\\\\\"Arial\\\\\\\"\\\",\\\"stroke\\\":\\\"none\\\",\\\"fill\\\":\\\"#000\\\",\\\"cursor\\\":\\\"not-allowed\\\"},\\\"transform\\\":\\\"\\\",\\\"id\\\":11},{\\\"data\\\":{\\\"dbid\\\":15,\\\"counter\\\":1},\\\"type\\\":\\\"rect\\\",\\\"attrs\\\":{\\\"x\\\":357,\\\"y\\\":230,\\\"width\\\":60,\\\"height\\\":40,\\\"r\\\":0,\\\"rx\\\":0,\\\"ry\\\":0,\\\"fill\\\":\\\"#FFF\\\",\\\"stroke\\\":\\\"#000\\\",\\\"stroke-width\\\":2,\\\"title\\\":\\\"text\\\",\\\"href\\\":\\\"The term epidemic describes those diseases caused by infectious microorganisms that occasionally occur in large numbers. Once introduced into a population,infectious microorganisms such as viruses and bacteria can spread from person to person. And so long as each person transmits the infection to more than other person, the number of cases of disease will grow and grow exponentially.  It is not the disease that is spreading. But rather, the organisms that cause the disease. The term is here to stay, of course. And it's a good reminder that there are diseases whose underlying cause cannot spread from person to person. For example, diseases that have genetic causes, or diseases that are due to toxins in the environment. Disease when caused by microorganisms is always an outcome of an intricate interplay between the biology of the microorganism, the biology of the host, and the environment.   For example, Matt and I could be exposed to the exact same virus, yet one of us might develop a disease with all its symptoms while the other one will stay perfectly healthy.\\\",\\\"cursor\\\":\\\"not-allowed\\\"},\\\"transform\\\":\\\"\\\",\\\"id\\\":12},{\\\"data\\\":{\\\"dbid\\\":15,\\\"counter\\\":1},\\\"type\\\":\\\"text\\\",\\\"attrs\\\":{\\\"x\\\":387,\\\"y\\\":250,\\\"text-anchor\\\":\\\"middle\\\",\\\"text\\\":\\\"Epidemic definiton(text)\\\",\\\"font\\\":\\\"10px \\\\\\\"Arial\\\\\\\"\\\",\\\"stroke\\\":\\\"none\\\",\\\"fill\\\":\\\"#000\\\",\\\"cursor\\\":\\\"not-allowed\\\"},\\\"transform\\\":\\\"\\\",\\\"id\\\":13},{\\\"data\\\":{\\\"dbid\\\":16,\\\"counter\\\":1},\\\"type\\\":\\\"rect\\\",\\\"attrs\\\":{\\\"x\\\":601,\\\"y\\\":230,\\\"width\\\":60,\\\"height\\\":40,\\\"r\\\":0,\\\"rx\\\":0,\\\"ry\\\":0,\\\"fill\\\":\\\"#FFF\\\",\\\"stroke\\\":\\\"#000\\\",\\\"stroke-width\\\":2,\\\"title\\\":\\\"text\\\",\\\"href\\\":\\\"The question of how epidemics start is a complicated one. However, we can certainly propose a basic condition for an epidemic, which is that the first person who is infected with the pathogen must, on average, pass that infection on to at least one other person. If that fails to happen, the pathogen will fail to spread. If more than one person gets infected, and they subsequently infect more than one person, then the number of affected individuals will increase exponentially and we would have an epidemic.  This idea is described in epidemiology by the basic reproductive number R0. The formal definition for R0 is the average number of secondary infections, generated by the first infectious individual in a population of completely susceptible individuals. So, at the start of an epidemic, the first infected individual, infects R0 more individuals, who in turn infect R0 more and so on until something slows this process down.  Now let's consider the start of an epidemic and what properties might contribute to the rate of epidemic spread. Certainly, the longer an individual remains infectious, the longer they can transmit to others. So, we would expect R0 to increase with the length of infection. Let's call it L.  The more susceptible hosts there are to infect, let's call that number S, the greater the potential there is for the first individual to transmit their infection. These two terms together give us the potential number of contacts over the course of an infection.  Now, conditional on the number of potential contacts, R0 will also depend on how transmissible a pathogen is. So now, overall, we can characterize R0 as the product of the number of susceptible hosts S, the length of time an individual is infectious L, and the transmissibility beta. And from the basic conditions stated earlier, an outbreak is only likely to spread if R0 is greater than 1. It is also worth noting that R0 is a measure of the average or expected outcome of transmission.\\\",\\\"cursor\\\":\\\"not-allowed\\\"},\\\"transform\\\":\\\"\\\",\\\"id\\\":14},{\\\"data\\\":{\\\"dbid\\\":16,\\\"counter\\\":1},\\\"type\\\":\\\"text\\\",\\\"attrs\\\":{\\\"x\\\":631,\\\"y\\\":250,\\\"text-anchor\\\":\\\"middle\\\",\\\"text\\\":\\\"Reproductive number (text)\\\",\\\"font\\\":\\\"10px \\\\\\\"Arial\\\\\\\"\\\",\\\"stroke\\\":\\\"none\\\",\\\"fill\\\":\\\"#000\\\",\\\"cursor\\\":\\\"not-allowed\\\"},\\\"transform\\\":\\\"\\\",\\\"id\\\":15},{\\\"data\\\":{\\\"dbid\\\":17,\\\"counter\\\":1},\\\"type\\\":\\\"rect\\\",\\\"attrs\\\":{\\\"x\\\":211,\\\"y\\\":130,\\\"width\\\":60,\\\"height\\\":40,\\\"r\\\":0,\\\"rx\\\":0,\\\"ry\\\":0,\\\"fill\\\":\\\"#FFF\\\",\\\"stroke\\\":\\\"#000\\\",\\\"stroke-width\\\":2,\\\"title\\\":\\\"quiz\\\",\\\"href\\\":\\\"\\\",\\\"cursor\\\":\\\"not-allowed\\\"},\\\"transform\\\":\\\"\\\",\\\"id\\\":16},{\\\"data\\\":{\\\"dbid\\\":17,\\\"counter\\\":1},\\\"type\\\":\\\"text\\\",\\\"attrs\\\":{\\\"x\\\":241,\\\"y\\\":150,\\\"text-anchor\\\":\\\"middle\\\",\\\"text\\\":\\\"Pre-test\\\",\\\"font\\\":\\\"10px \\\\\\\"Arial\\\\\\\"\\\",\\\"stroke\\\":\\\"none\\\",\\\"fill\\\":\\\"#000\\\",\\\"cursor\\\":\\\"not-allowed\\\"},\\\"transform\\\":\\\"\\\",\\\"id\\\":17},{\\\"data\\\":{\\\"dbid\\\":18,\\\"counter\\\":1},\\\"type\\\":\\\"rect\\\",\\\"attrs\\\":{\\\"x\\\":765,\\\"y\\\":130,\\\"width\\\":60,\\\"height\\\":40,\\\"r\\\":0,\\\"rx\\\":0,\\\"ry\\\":0,\\\"fill\\\":\\\"#FFF\\\",\\\"stroke\\\":\\\"#000\\\",\\\"stroke-width\\\":2,\\\"title\\\":\\\"quiz\\\",\\\"href\\\":\\\"\\\",\\\"cursor\\\":\\\"not-allowed\\\"},\\\"transform\\\":\\\"\\\",\\\"id\\\":18},{\\\"data\\\":{\\\"dbid\\\":18,\\\"counter\\\":1},\\\"type\\\":\\\"text\\\",\\\"attrs\\\":{\\\"x\\\":795,\\\"y\\\":150,\\\"text-anchor\\\":\\\"middle\\\",\\\"text\\\":\\\"Post-test\\\",\\\"font\\\":\\\"10px \\\\\\\"Arial\\\\\\\"\\\",\\\"stroke\\\":\\\"none\\\",\\\"fill\\\":\\\"#000\\\",\\\"cursor\\\":\\\"not-allowed\\\"},\\\"transform\\\":\\\"\\\",\\\"id\\\":19},{\\\"data\\\":{\\\"startingRect\\\":6,\\\"endingRect\\\":16},\\\"type\\\":\\\"path\\\",\\\"attrs\\\":{\\\"fill\\\":\\\"none\\\",\\\"stroke\\\":\\\"#000\\\",\\\"path\\\":[[\\\"M\\\",124,150],[\\\"C\\\",167,150,167,150,210,150]],\\\"stroke-width\\\":2},\\\"transform\\\":\\\"\\\",\\\"id\\\":20},{\\\"data\\\":{\\\"startingRect\\\":16,\\\"endingRect\\\":8},\\\"type\\\":\\\"path\\\",\\\"attrs\\\":{\\\"fill\\\":\\\"none\\\",\\\"stroke\\\":\\\"#000\\\",\\\"path\\\":[[\\\"M\\\",272,150],[\\\"C\\\",313,150,313,50,354,50]],\\\"stroke-width\\\":2},\\\"transform\\\":\\\"\\\",\\\"id\\\":21},{\\\"data\\\":{\\\"startingRect\\\":16,\\\"endingRect\\\":12},\\\"type\\\":\\\"path\\\",\\\"attrs\\\":{\\\"fill\\\":\\\"none\\\",\\\"stroke\\\":\\\"#000\\\",\\\"path\\\":[[\\\"M\\\",272,150],[\\\"C\\\",314,150,314,250,356,250]],\\\"stroke-width\\\":2},\\\"transform\\\":\\\"\\\",\\\"id\\\":22},{\\\"data\\\":{\\\"startingRect\\\":10,\\\"endingRect\\\":8},\\\"type\\\":\\\"path\\\",\\\"attrs\\\":{\\\"fill\\\":\\\"none\\\",\\\"stroke\\\":\\\"#000\\\",\\\"path\\\":[[\\\"M\\\",594,50],[\\\"C\\\",505,50,505,50,416,50]],\\\"stroke-width\\\":2},\\\"transform\\\":\\\"\\\",\\\"id\\\":23},{\\\"data\\\":{\\\"startingRect\\\":10,\\\"endingRect\\\":18},\\\"type\\\":\\\"path\\\",\\\"attrs\\\":{\\\"fill\\\":\\\"none\\\",\\\"stroke\\\":\\\"#000\\\",\\\"path\\\":[[\\\"M\\\",656,50],[\\\"C\\\",710,50,710,150,764,150]],\\\"stroke-width\\\":2},\\\"transform\\\":\\\"\\\",\\\"id\\\":24},{\\\"data\\\":{\\\"startingRect\\\":12,\\\"endingRect\\\":14},\\\"type\\\":\\\"path\\\",\\\"attrs\\\":{\\\"fill\\\":\\\"none\\\",\\\"stroke\\\":\\\"#000\\\",\\\"path\\\":[[\\\"M\\\",418,250],[\\\"C\\\",509,250,509,250,600,250]],\\\"stroke-width\\\":2},\\\"transform\\\":\\\"\\\",\\\"id\\\":25},{\\\"data\\\":{\\\"startingRect\\\":14,\\\"endingRect\\\":18},\\\"type\\\":\\\"path\\\",\\\"attrs\\\":{\\\"fill\\\":\\\"none\\\",\\\"stroke\\\":\\\"#000\\\",\\\"path\\\":[[\\\"M\\\",662,250],[\\\"C\\\",713,250,713,150,764,150]],\\\"stroke-width\\\":2},\\\"transform\\\":\\\"\\\",\\\"id\\\":26},{\\\"data\\\":{\\\"startingRect\\\":12,\\\"endingRect\\\":10},\\\"type\\\":\\\"path\\\",\\\"attrs\\\":{\\\"fill\\\":\\\"none\\\",\\\"stroke\\\":\\\"#000\\\",\\\"path\\\":[[\\\"M\\\",418,250],[\\\"C\\\",506,250,506,50,594,50]],\\\"stroke-width\\\":2},\\\"transform\\\":\\\"\\\",\\\"id\\\":27},{\\\"data\\\":{\\\"startingRect\\\":8,\\\"endingRect\\\":14},\\\"type\\\":\\\"path\\\",\\\"attrs\\\":{\\\"fill\\\":\\\"none\\\",\\\"stroke\\\":\\\"#000\\\",\\\"path\\\":[[\\\"M\\\",416,50],[\\\"C\\\",508,50,508,250,600,250]],\\\"stroke-width\\\":2},\\\"transform\\\":\\\"\\\",\\\"id\\\":28}]\"",
+        "date": "2016-05-04"
+    }
+},
+{
+    "model": "graphs.activity",
+    "pk": 12,
+    "fields": {
+        "name": "Psychological Test",
+        "type": "psycho",
+        "source": ""
+    }
+},
+{
+    "model": "graphs.activity",
+    "pk": 13,
+    "fields": {
+        "name": "Epidemic definiton",
+        "type": "link",
+        "source": "/static/video/Epidemic-def.mp4"
+    }
+},
+{
+    "model": "graphs.activity",
+    "pk": 14,
+    "fields": {
+        "name": "Reproductive number",
+        "type": "link",
+        "source": "/static/video/ReproductiveNumber.mp4"
+    }
+},
+{
+    "model": "graphs.activity",
+    "pk": 15,
+    "fields": {
+        "name": "Epidemic definiton(text)",
+        "type": "text",
+        "source": "The term epidemic describes those diseases caused by infectious microorganisms that occasionally occur in large numbers. Once introduced into a population,infectious microorganisms such as viruses and bacteria can spread from person to person. And so long as each person transmits the infection to more than other person, the number of cases of disease will grow and grow exponentially.  It is not the disease that is spreading. But rather, the organisms that cause the disease. The term is here to stay, of course. And it's a good reminder that there are diseases whose underlying cause cannot spread from person to person. For example, diseases that have genetic causes, or diseases that are due to toxins in the environment. Disease when caused by microorganisms is always an outcome of an intricate interplay between the biology of the microorganism, the biology of the host, and the environment.   For example, Matt and I could be exposed to the exact same virus, yet one of us might develop a disease with all its symptoms while the other one will stay perfectly healthy."
+    }
+},
+{
+    "model": "graphs.activity",
+    "pk": 16,
+    "fields": {
+        "name": "Reproductive number (text)",
+        "type": "text",
+        "source": "The question of how epidemics start is a complicated one. However, we can certainly propose a basic condition for an epidemic, which is that the first person who is infected with the pathogen must, on average, pass that infection on to at least one other person. If that fails to happen, the pathogen will fail to spread. If more than one person gets infected, and they subsequently infect more than one person, then the number of affected individuals will increase exponentially and we would have an epidemic.  This idea is described in epidemiology by the basic reproductive number R0. The formal definition for R0 is the average number of secondary infections, generated by the first infectious individual in a population of completely susceptible individuals. So, at the start of an epidemic, the first infected individual, infects R0 more individuals, who in turn infect R0 more and so on until something slows this process down.  Now let's consider the start of an epidemic and what properties might contribute to the rate of epidemic spread. Certainly, the longer an individual remains infectious, the longer they can transmit to others. So, we would expect R0 to increase with the length of infection. Let's call it L.  The more susceptible hosts there are to infect, let's call that number S, the greater the potential there is for the first individual to transmit their infection. These two terms together give us the potential number of contacts over the course of an infection.  Now, conditional on the number of potential contacts, R0 will also depend on how transmissible a pathogen is. So now, overall, we can characterize R0 as the product of the number of susceptible hosts S, the length of time an individual is infectious L, and the transmissibility beta. And from the basic conditions stated earlier, an outbreak is only likely to spread if R0 is greater than 1. It is also worth noting that R0 is a measure of the average or expected outcome of transmission."
+    }
+},
+{
+    "model": "graphs.activity",
+    "pk": 17,
+    "fields": {
+        "name": "Pre-test",
+        "type": "quiz",
+        "source": ""
+    }
+},
+{
+    "model": "graphs.activity",
+    "pk": 18,
+    "fields": {
+        "name": "Post-test",
+        "type": "quiz",
+        "source": ""
+    }
+},
+{
+    "model": "graphs.choice",
+    "pk": 13,
+    "fields": {
+        "question": 5,
+        "text": "Very Inaccurate",
+        "image_source": ""
+    }
+},
+{
+    "model": "graphs.choice",
+    "pk": 14,
+    "fields": {
+        "question": 5,
+        "text": "Inaccurate",
+        "image_source": ""
+    }
+},
+{
+    "model": "graphs.choice",
+    "pk": 15,
+    "fields": {
+        "question": 5,
+        "text": "Neutral",
+        "image_source": ""
+    }
+},
+{
+    "model": "graphs.choice",
+    "pk": 16,
+    "fields": {
+        "question": 5,
+        "text": "Accurate",
+        "image_source": ""
+    }
+},
+{
+    "model": "graphs.choice",
+    "pk": 17,
+    "fields": {
+        "question": 5,
+        "text": "Very accurate",
+        "image_source": ""
+    }
+},
+{
+    "model": "graphs.choice",
+    "pk": 18,
+    "fields": {
+        "question": 7,
+        "text": "Very Inaccurate",
+        "image_source": ""
+    }
+},
+{
+    "model": "graphs.choice",
+    "pk": 19,
+    "fields": {
+        "question": 7,
+        "text": "Inaccurate",
+        "image_source": ""
+    }
+},
+{
+    "model": "graphs.choice",
+    "pk": 20,
+    "fields": {
+        "question": 7,
+        "text": "Neutral",
+        "image_source": ""
+    }
+},
+{
+    "model": "graphs.choice",
+    "pk": 21,
+    "fields": {
+        "question": 7,
+        "text": "Accurate",
+        "image_source": ""
+    }
+},
+{
+    "model": "graphs.choice",
+    "pk": 22,
+    "fields": {
+        "question": 7,
+        "text": "Very accurate",
+        "image_source": ""
+    }
+},
+{
+    "model": "graphs.choice",
+    "pk": 23,
+    "fields": {
+        "question": 8,
+        "text": "Very Inaccurate",
+        "image_source": ""
+    }
+},
+{
+    "model": "graphs.choice",
+    "pk": 24,
+    "fields": {
+        "question": 8,
+        "text": "Inaccurate",
+        "image_source": ""
+    }
+},
+{
+    "model": "graphs.choice",
+    "pk": 25,
+    "fields": {
+        "question": 8,
+        "text": "Neutral",
+        "image_source": ""
+    }
+},
+{
+    "model": "graphs.choice",
+    "pk": 28,
+    "fields": {
+        "question": 10,
+        "text": "Very Inaccurate",
+        "image_source": ""
+    }
+},
+{
+    "model": "graphs.choice",
+    "pk": 29,
+    "fields": {
+        "question": 10,
+        "text": "Inaccurate",
+        "image_source": ""
+    }
+},
+{
+    "model": "graphs.choice",
+    "pk": 30,
+    "fields": {
+        "question": 10,
+        "text": "Neutral",
+        "image_source": ""
+    }
+},
+{
+    "model": "graphs.choice",
+    "pk": 31,
+    "fields": {
+        "question": 10,
+        "text": "Accurate",
+        "image_source": ""
+    }
+},
+{
+    "model": "graphs.choice",
+    "pk": 32,
+    "fields": {
+        "question": 10,
+        "text": "Very accurate",
+        "image_source": ""
+    }
+},
+{
+    "model": "graphs.choice",
+    "pk": 33,
+    "fields": {
+        "question": 11,
+        "text": "Very Inaccurate",
+        "image_source": ""
+    }
+},
+{
+    "model": "graphs.choice",
+    "pk": 34,
+    "fields": {
+        "question": 11,
+        "text": "Inaccurate",
+        "image_source": ""
+    }
+},
+{
+    "model": "graphs.choice",
+    "pk": 35,
+    "fields": {
+        "question": 11,
+        "text": "Neutral",
+        "image_source": ""
+    }
+},
+{
+    "model": "graphs.choice",
+    "pk": 36,
+    "fields": {
+        "question": 11,
+        "text": "Accurate",
+        "image_source": ""
+    }
+},
+{
+    "model": "graphs.choice",
+    "pk": 37,
+    "fields": {
+        "question": 11,
+        "text": "Very accurate",
+        "image_source": ""
+    }
+},
+{
+    "model": "graphs.choice",
+    "pk": 38,
+    "fields": {
+        "question": 12,
+        "text": "Very Inaccurate",
+        "image_source": ""
+    }
+},
+{
+    "model": "graphs.choice",
+    "pk": 39,
+    "fields": {
+        "question": 12,
+        "text": "Inaccurate",
+        "image_source": ""
+    }
+},
+{
+    "model": "graphs.choice",
+    "pk": 40,
+    "fields": {
+        "question": 12,
+        "text": "Neutral",
+        "image_source": ""
+    }
+},
+{
+    "model": "graphs.choice",
+    "pk": 41,
+    "fields": {
+        "question": 12,
+        "text": "Accurate",
+        "image_source": ""
+    }
+},
+{
+    "model": "graphs.choice",
+    "pk": 42,
+    "fields": {
+        "question": 12,
+        "text": "Very accurate",
+        "image_source": ""
+    }
+},
+{
+    "model": "graphs.choice",
+    "pk": 43,
+    "fields": {
+        "question": 13,
+        "text": "Very Inaccurate",
+        "image_source": ""
+    }
+},
+{
+    "model": "graphs.choice",
+    "pk": 44,
+    "fields": {
+        "question": 13,
+        "text": "Inaccurate",
+        "image_source": ""
+    }
+},
+{
+    "model": "graphs.choice",
+    "pk": 45,
+    "fields": {
+        "question": 13,
+        "text": "Neutral",
+        "image_source": ""
+    }
+},
+{
+    "model": "graphs.choice",
+    "pk": 46,
+    "fields": {
+        "question": 13,
+        "text": "Accurate",
+        "image_source": ""
+    }
+},
+{
+    "model": "graphs.choice",
+    "pk": 47,
+    "fields": {
+        "question": 13,
+        "text": "Very accurate",
+        "image_source": ""
+    }
+},
+{
+    "model": "graphs.choice",
+    "pk": 48,
+    "fields": {
+        "question": 14,
+        "text": "Very Inaccurate",
+        "image_source": ""
+    }
+},
+{
+    "model": "graphs.choice",
+    "pk": 49,
+    "fields": {
+        "question": 14,
+        "text": "Inaccurate",
+        "image_source": ""
+    }
+},
+{
+    "model": "graphs.choice",
+    "pk": 51,
+    "fields": {
+        "question": 14,
+        "text": "Neutral",
+        "image_source": ""
+    }
+},
+{
+    "model": "graphs.choice",
+    "pk": 52,
+    "fields": {
+        "question": 14,
+        "text": "Accurate",
+        "image_source": ""
+    }
+},
+{
+    "model": "graphs.choice",
+    "pk": 53,
+    "fields": {
+        "question": 14,
+        "text": "Very accurate",
+        "image_source": ""
+    }
+},
+{
+    "model": "graphs.choice",
+    "pk": 54,
+    "fields": {
+        "question": 15,
+        "text": "Very Inaccurate",
+        "image_source": ""
+    }
+},
+{
+    "model": "graphs.choice",
+    "pk": 55,
+    "fields": {
+        "question": 15,
+        "text": "Inaccurate",
+        "image_source": ""
+    }
+},
+{
+    "model": "graphs.choice",
+    "pk": 56,
+    "fields": {
+        "question": 15,
+        "text": "Neutral",
+        "image_source": ""
+    }
+},
+{
+    "model": "graphs.choice",
+    "pk": 58,
+    "fields": {
+        "question": 15,
+        "text": "Accurate",
+        "image_source": ""
+    }
+},
+{
+    "model": "graphs.choice",
+    "pk": 59,
+    "fields": {
+        "question": 15,
+        "text": "Very accurate",
+        "image_source": ""
+    }
+},
+{
+    "model": "graphs.choice",
+    "pk": 60,
+    "fields": {
+        "question": 16,
+        "text": "True",
+        "image_source": ""
+    }
+},
+{
+    "model": "graphs.choice",
+    "pk": 61,
+    "fields": {
+        "question": 16,
+        "text": "False",
+        "image_source": ""
+    }
+},
+{
+    "model": "graphs.choice",
+    "pk": 62,
+    "fields": {
+        "question": 16,
+        "text": "I don't know",
+        "image_source": ""
+    }
+},
+{
+    "model": "graphs.choice",
+    "pk": 63,
+    "fields": {
+        "question": 17,
+        "text": "True",
+        "image_source": ""
+    }
+},
+{
+    "model": "graphs.choice",
+    "pk": 64,
+    "fields": {
+        "question": 17,
+        "text": "False",
+        "image_source": ""
+    }
+},
+{
+    "model": "graphs.choice",
+    "pk": 65,
+    "fields": {
+        "question": 17,
+        "text": "I don't know",
+        "image_source": ""
+    }
+},
+{
+    "model": "graphs.choice",
+    "pk": 66,
+    "fields": {
+        "question": 18,
+        "text": "the toxins in the environment infect only the healthy people.",
+        "image_source": ""
+    }
+},
+{
+    "model": "graphs.choice",
+    "pk": 67,
+    "fields": {
+        "question": 18,
+        "text": "of the biology of the host, the biology of microorganisms and the biology of the environment.",
+        "image_source": ""
+    }
+},
+{
+    "model": "graphs.choice",
+    "pk": 68,
+    "fields": {
+        "question": 18,
+        "text": "the infectious microorganisms spread exponentially from person to person .",
+        "image_source": ""
+    }
+},
+{
+    "model": "graphs.choice",
+    "pk": 69,
+    "fields": {
+        "question": 19,
+        "text": "True",
+        "image_source": ""
+    }
+},
+{
+    "model": "graphs.choice",
+    "pk": 70,
+    "fields": {
+        "question": 19,
+        "text": "False",
+        "image_source": ""
+    }
+},
+{
+    "model": "graphs.choice",
+    "pk": 71,
+    "fields": {
+        "question": 19,
+        "text": "I don't know",
+        "image_source": ""
+    }
+},
+{
+    "model": "graphs.choice",
+    "pk": 72,
+    "fields": {
+        "question": 21,
+        "text": "True",
+        "image_source": ""
+    }
+},
+{
+    "model": "graphs.choice",
+    "pk": 73,
+    "fields": {
+        "question": 21,
+        "text": "False",
+        "image_source": ""
+    }
+},
+{
+    "model": "graphs.choice",
+    "pk": 74,
+    "fields": {
+        "question": 21,
+        "text": "I don't know",
+        "image_source": ""
+    }
+},
+{
+    "model": "graphs.choice",
+    "pk": 75,
+    "fields": {
+        "question": 22,
+        "text": "The diet of an individual.",
+        "image_source": ""
+    }
+},
+{
+    "model": "graphs.choice",
+    "pk": 76,
+    "fields": {
+        "question": 22,
+        "text": "The duration of infectiousness of an individual.",
+        "image_source": ""
+    }
+},
+{
+    "model": "graphs.choice",
+    "pk": 77,
+    "fields": {
+        "question": 22,
+        "text": "The activity level of an individual.",
+        "image_source": ""
+    }
+},
+{
+    "model": "graphs.choice",
+    "pk": 78,
+    "fields": {
+        "question": 24,
+        "text": "True",
+        "image_source": ""
+    }
+},
+{
+    "model": "graphs.choice",
+    "pk": 79,
+    "fields": {
+        "question": 24,
+        "text": "False",
+        "image_source": ""
+    }
+},
+{
+    "model": "graphs.choice",
+    "pk": 80,
+    "fields": {
+        "question": 24,
+        "text": "I don't know",
+        "image_source": ""
+    }
+},
+{
+    "model": "graphs.choice",
+    "pk": 81,
+    "fields": {
+        "question": 25,
+        "text": "140",
+        "image_source": ""
+    }
+},
+{
+    "model": "graphs.choice",
+    "pk": 82,
+    "fields": {
+        "question": 23,
+        "text": "R0",
+        "image_source": ""
+    }
+},
+{
+    "model": "graphs.choice",
+    "pk": 83,
+    "fields": {
+        "question": 20,
+        "text": "2",
+        "image_source": ""
+    }
+},
+{
+    "model": "graphs.choice",
+    "pk": 84,
+    "fields": {
+        "question": 8,
+        "text": "Accurate",
+        "image_source": ""
+    }
+},
+{
+    "model": "graphs.choice",
+    "pk": 85,
+    "fields": {
+        "question": 8,
+        "text": "Very accurate",
+        "image_source": ""
+    }
+},
+{
+    "model": "graphs.choice",
+    "pk": 89,
+    "fields": {
+        "question": 9,
+        "text": "Very Inaccurate",
+        "image_source": ""
+    }
+},
+{
+    "model": "graphs.choice",
+    "pk": 90,
+    "fields": {
+        "question": 9,
+        "text": "Inaccurate",
+        "image_source": ""
+    }
+},
+{
+    "model": "graphs.choice",
+    "pk": 91,
+    "fields": {
+        "question": 9,
+        "text": "Neutral",
+        "image_source": ""
+    }
+},
+{
+    "model": "graphs.choice",
+    "pk": 92,
+    "fields": {
+        "question": 9,
+        "text": "Accurate",
+        "image_source": ""
+    }
+},
+{
+    "model": "graphs.choice",
+    "pk": 93,
+    "fields": {
+        "question": 9,
+        "text": "Very accurate",
+        "image_source": ""
+    }
+},
+{
+    "model": "graphs.choice",
+    "pk": 94,
+    "fields": {
+        "question": 23,
+        "text": "R0/2",
+        "image_source": ""
+    }
+},
+{
+    "model": "graphs.choice",
+    "pk": 95,
+    "fields": {
+        "question": 23,
+        "text": "exp(R0)",
+        "image_source": ""
+    }
+},
+{
+    "model": "graphs.choice",
+    "pk": 96,
+    "fields": {
+        "question": 25,
+        "text": "2.86",
+        "image_source": ""
+    }
+},
+{
+    "model": "graphs.choice",
+    "pk": 97,
+    "fields": {
+        "question": 25,
+        "text": "280",
+        "image_source": ""
+    }
+},
+{
+    "model": "graphs.choice",
+    "pk": 98,
+    "fields": {
+        "question": 20,
+        "text": "10",
+        "image_source": ""
+    }
+},
+{
+    "model": "graphs.choice",
+    "pk": 99,
+    "fields": {
+        "question": 20,
+        "text": "R0",
+        "image_source": ""
+    }
+},
+{
+    "model": "graphs.question",
+    "pk": 5,
+    "fields": {
+        "text": "I have a vivid imagination",
+        "image_source": "",
+        "correct_answer": null,
+        "activity": [
+            12
+        ]
+    }
+},
+{
+    "model": "graphs.question",
+    "pk": 7,
+    "fields": {
+        "text": "I Prefer variety to routine",
+        "image_source": "",
+        "correct_answer": null,
+        "activity": [
+            12
+        ]
+    }
+},
+{
+    "model": "graphs.question",
+    "pk": 8,
+    "fields": {
+        "text": "I am open to change",
+        "image_source": "",
+        "correct_answer": null,
+        "activity": [
+            12
+        ]
+    }
+},
+{
+    "model": "graphs.question",
+    "pk": 9,
+    "fields": {
+        "text": "I carry the conversation to a higher level",
+        "image_source": "",
+        "correct_answer": null,
+        "activity": [
+            12
+        ]
+    }
+},
+{
+    "model": "graphs.question",
+    "pk": 10,
+    "fields": {
+        "text": "I enjoy hearing new ideas",
+        "image_source": "",
+        "correct_answer": null,
+        "activity": [
+            12
+        ]
+    }
+},
+{
+    "model": "graphs.question",
+    "pk": 11,
+    "fields": {
+        "text": "I accomplish my work on time",
+        "image_source": "",
+        "correct_answer": null,
+        "activity": [
+            12
+        ]
+    }
+},
+{
+    "model": "graphs.question",
+    "pk": 12,
+    "fields": {
+        "text": "I do things according to a plan",
+        "image_source": "",
+        "correct_answer": null,
+        "activity": [
+            12
+        ]
+    }
+},
+{
+    "model": "graphs.question",
+    "pk": 13,
+    "fields": {
+        "text": "I am careful to avoid making mistakes",
+        "image_source": "",
+        "correct_answer": null,
+        "activity": [
+            12
+        ]
+    }
+},
+{
+    "model": "graphs.question",
+    "pk": 14,
+    "fields": {
+        "text": "I keep my checkbook balanced",
+        "image_source": "",
+        "correct_answer": null,
+        "activity": [
+            12
+        ]
+    }
+},
+{
+    "model": "graphs.question",
+    "pk": 15,
+    "fields": {
+        "text": "I like to plan ahead",
+        "image_source": "",
+        "correct_answer": null,
+        "activity": [
+            12
+        ]
+    }
+},
+{
+    "model": "graphs.question",
+    "pk": 16,
+    "fields": {
+        "text": "Bacteria are a microorganisms and viruses are macroorganisms",
+        "image_source": "",
+        "correct_answer": 61,
+        "activity": [
+            17,
+            18
+        ]
+    }
+},
+{
+    "model": "graphs.question",
+    "pk": 17,
+    "fields": {
+        "text": "Diseases that have genetic causes, or diseases that are due to toxins in the environment spread quicker than other type of diseases",
+        "image_source": "",
+        "correct_answer": 61,
+        "activity": [
+            17,
+            18
+        ]
+    }
+},
+{
+    "model": "graphs.question",
+    "pk": 18,
+    "fields": {
+        "text": "People react differently to diseases because:",
+        "image_source": "",
+        "correct_answer": 67,
+        "activity": [
+            17,
+            18
+        ]
+    }
+},
+{
+    "model": "graphs.question",
+    "pk": 19,
+    "fields": {
+        "text": "It is not the organisms that are spreading but rather, the disease itself",
+        "image_source": "",
+        "correct_answer": 61,
+        "activity": [
+            17,
+            18
+        ]
+    }
+},
+{
+    "model": "graphs.question",
+    "pk": 20,
+    "fields": {
+        "text": "How many cases of illness start an epidemic?",
+        "image_source": "",
+        "correct_answer": 83,
+        "activity": [
+            17,
+            18
+        ]
+    }
+},
+{
+    "model": "graphs.question",
+    "pk": 21,
+    "fields": {
+        "text": "The number of infected individuals increase exponentially",
+        "image_source": "",
+        "correct_answer": 72,
+        "activity": [
+            17,
+            18
+        ]
+    }
+},
+{
+    "model": "graphs.question",
+    "pk": 22,
+    "fields": {
+        "text": "Which of the following properties might contribute to the rate of epidemic spread?",
+        "image_source": "",
+        "correct_answer": 76,
+        "activity": [
+            17,
+            18
+        ]
+    }
+},
+{
+    "model": "graphs.question",
+    "pk": 23,
+    "fields": {
+        "text": "Thinking about the reproductive number, how many individuals are infected by the first one infected ?",
+        "image_source": "",
+        "correct_answer": 82,
+        "activity": [
+            17,
+            18
+        ]
+    }
+},
+{
+    "model": "graphs.question",
+    "pk": 24,
+    "fields": {
+        "text": "The reproductive number R0 must be greater or equal to 2.",
+        "image_source": "",
+        "correct_answer": 61,
+        "activity": [
+            17,
+            18
+        ]
+    }
+},
+{
+    "model": "graphs.question",
+    "pk": 25,
+    "fields": {
+        "text": "What is the reproductive number knowing that : an individual has been infected for about 7days, the number of susceptible hosts there are to get infected is 100 and the probability of the infection being transmitted during contact is 0.2.",
+        "image_source": "",
+        "correct_answer": 81,
+        "activity": [
+            17,
+            18
+        ]
+    }
+},
+{
+    "model": "graphs.timelog",
+    "pk": 33,
+    "fields": {
+        "student": 40,
+        "activity": 12,
+        "start_time": "2016-04-20T09:24:09.888Z",
+        "end_time": null
+    }
+},
+{
+    "model": "graphs.timelog",
+    "pk": 34,
+    "fields": {
+        "student": 41,
+        "activity": 12,
+        "start_time": "2016-04-20T09:24:23.572Z",
+        "end_time": null
+    }
+},
+{
+    "model": "graphs.timelog",
+    "pk": 35,
+    "fields": {
+        "student": 42,
+        "activity": 12,
+        "start_time": "2016-04-20T09:27:19.247Z",
+        "end_time": null
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 1,
+    "fields": {
+        "name": "Can add log entry",
+        "content_type": 1,
+        "codename": "add_logentry"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 2,
+    "fields": {
+        "name": "Can change log entry",
+        "content_type": 1,
+        "codename": "change_logentry"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 3,
+    "fields": {
+        "name": "Can delete log entry",
+        "content_type": 1,
+        "codename": "delete_logentry"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 4,
+    "fields": {
+        "name": "Can add permission",
+        "content_type": 2,
+        "codename": "add_permission"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 5,
+    "fields": {
+        "name": "Can change permission",
+        "content_type": 2,
+        "codename": "change_permission"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 6,
+    "fields": {
+        "name": "Can delete permission",
+        "content_type": 2,
+        "codename": "delete_permission"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 7,
+    "fields": {
+        "name": "Can add group",
+        "content_type": 3,
+        "codename": "add_group"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 8,
+    "fields": {
+        "name": "Can change group",
+        "content_type": 3,
+        "codename": "change_group"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 9,
+    "fields": {
+        "name": "Can delete group",
+        "content_type": 3,
+        "codename": "delete_group"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 10,
+    "fields": {
+        "name": "Can add user",
+        "content_type": 4,
+        "codename": "add_user"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 11,
+    "fields": {
+        "name": "Can change user",
+        "content_type": 4,
+        "codename": "change_user"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 12,
+    "fields": {
+        "name": "Can delete user",
+        "content_type": 4,
+        "codename": "delete_user"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 13,
+    "fields": {
+        "name": "Can add content type",
+        "content_type": 5,
+        "codename": "add_contenttype"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 14,
+    "fields": {
+        "name": "Can change content type",
+        "content_type": 5,
+        "codename": "change_contenttype"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 15,
+    "fields": {
+        "name": "Can delete content type",
+        "content_type": 5,
+        "codename": "delete_contenttype"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 16,
+    "fields": {
+        "name": "Can add session",
+        "content_type": 6,
+        "codename": "add_session"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 17,
+    "fields": {
+        "name": "Can change session",
+        "content_type": 6,
+        "codename": "change_session"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 18,
+    "fields": {
+        "name": "Can delete session",
+        "content_type": 6,
+        "codename": "delete_session"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 19,
+    "fields": {
+        "name": "Can add scenario",
+        "content_type": 7,
+        "codename": "add_scenario"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 20,
+    "fields": {
+        "name": "Can change scenario",
+        "content_type": 7,
+        "codename": "change_scenario"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 21,
+    "fields": {
+        "name": "Can delete scenario",
+        "content_type": 7,
+        "codename": "delete_scenario"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 22,
+    "fields": {
+        "name": "Can add activity",
+        "content_type": 8,
+        "codename": "add_activity"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 23,
+    "fields": {
+        "name": "Can change activity",
+        "content_type": 8,
+        "codename": "change_activity"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 24,
+    "fields": {
+        "name": "Can delete activity",
+        "content_type": 8,
+        "codename": "delete_activity"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 25,
+    "fields": {
+        "name": "Can add student",
+        "content_type": 9,
+        "codename": "add_student"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 26,
+    "fields": {
+        "name": "Can change student",
+        "content_type": 9,
+        "codename": "change_student"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 27,
+    "fields": {
+        "name": "Can delete student",
+        "content_type": 9,
+        "codename": "delete_student"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 28,
+    "fields": {
+        "name": "Can add question",
+        "content_type": 10,
+        "codename": "add_question"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 29,
+    "fields": {
+        "name": "Can change question",
+        "content_type": 10,
+        "codename": "change_question"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 30,
+    "fields": {
+        "name": "Can delete question",
+        "content_type": 10,
+        "codename": "delete_question"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 31,
+    "fields": {
+        "name": "Can add result",
+        "content_type": 11,
+        "codename": "add_result"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 32,
+    "fields": {
+        "name": "Can change result",
+        "content_type": 11,
+        "codename": "change_result"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 33,
+    "fields": {
+        "name": "Can delete result",
+        "content_type": 11,
+        "codename": "delete_result"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 34,
+    "fields": {
+        "name": "Can add answer",
+        "content_type": 12,
+        "codename": "add_answer"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 35,
+    "fields": {
+        "name": "Can change answer",
+        "content_type": 12,
+        "codename": "change_answer"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 36,
+    "fields": {
+        "name": "Can delete answer",
+        "content_type": 12,
+        "codename": "delete_answer"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 40,
+    "fields": {
+        "name": "Can add time log",
+        "content_type": 14,
+        "codename": "add_timelog"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 41,
+    "fields": {
+        "name": "Can change time log",
+        "content_type": 14,
+        "codename": "change_timelog"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 42,
+    "fields": {
+        "name": "Can delete time log",
+        "content_type": 14,
+        "codename": "delete_timelog"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 43,
+    "fields": {
+        "name": "Can add choice",
+        "content_type": 15,
+        "codename": "add_choice"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 44,
+    "fields": {
+        "name": "Can change choice",
+        "content_type": 15,
+        "codename": "change_choice"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 45,
+    "fields": {
+        "name": "Can delete choice",
+        "content_type": 15,
+        "codename": "delete_choice"
+    }
+},
+{
+    "model": "auth.user",
+    "pk": 1,
+    "fields": {
+        "password": "pbkdf2_sha256$20000$gV3bjVF0dj87$MRCWDJEjWIypwpoV6S3tPj2hQZgZm1aGaiGvbRE8cR4=",
+        "last_login": "2016-03-02T13:26:05.430Z",
+        "is_superuser": true,
+        "username": "kidzik",
+        "first_name": "",
+        "last_name": "",
+        "email": "lukasz.kidzinski@gmail.com",
+        "is_staff": true,
+        "is_active": true,
+        "date_joined": "2016-03-02T13:25:46.273Z",
+        "groups": [],
+        "user_permissions": []
+    }
+},
+{
+    "model": "auth.user",
+    "pk": 3,
+    "fields": {
+        "password": "pbkdf2_sha256$24000$EgHnD62y7sOs$3Wde09KoRccLvVUeby3UgaPBL+MKSO6EmgdYRkpSTUE=",
+        "last_login": "2016-05-04T12:59:27.534Z",
+        "is_superuser": true,
+        "username": "ritterni",
+        "first_name": "",
+        "last_name": "",
+        "email": "ritterni@gmail.com",
+        "is_staff": true,
+        "is_active": true,
+        "date_joined": "2016-04-13T12:11:10.936Z",
+        "groups": [],
+        "user_permissions": []
+    }
+},
+{
+    "model": "auth.user",
+    "pk": 4,
+    "fields": {
+        "password": "pbkdf2_sha256$24000$ZHIWEx7XKSQr$s8xe4zTz1wus19l5J4OnLTvCzFwtQCDGcBqkpkAkjnI=",
+        "last_login": "2016-05-01T14:48:23.798Z",
+        "is_superuser": true,
+        "username": "thibaultcalvayrac",
+        "first_name": "",
+        "last_name": "",
+        "email": "thibault.calvayrac@epfl.ch",
+        "is_staff": true,
+        "is_active": true,
+        "date_joined": "2016-05-01T14:47:59.151Z",
+        "groups": [],
+        "user_permissions": []
+    }
+},
+{
+    "model": "auth.user",
+    "pk": 5,
+    "fields": {
+        "password": "pbkdf2_sha256$24000$N8t8BD5zsydV$ikxzC/GPS54KnZfBQbNB9bQKHl3IuoA3y2mtIXmquuk=",
+        "last_login": "2016-05-04T08:33:08.707Z",
+        "is_superuser": true,
+        "username": "besma",
+        "first_name": "",
+        "last_name": "",
+        "email": "besma.elektroussi@epfl.ch",
+        "is_staff": true,
+        "is_active": true,
+        "date_joined": "2016-05-04T08:32:48.415Z",
+        "groups": [],
+        "user_permissions": []
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 1,
+    "fields": {
+        "action_time": "2016-05-04T08:37:59.344Z",
+        "user": 5,
+        "content_type": 8,
+        "object_id": "13",
+        "object_repr": "13: Video",
+        "action_flag": 1,
+        "change_message": "Added."
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 2,
+    "fields": {
+        "action_time": "2016-05-04T08:43:53.352Z",
+        "user": 5,
+        "content_type": 8,
+        "object_id": "13",
+        "object_repr": "13: Epidemic definiton",
+        "action_flag": 2,
+        "change_message": "Changed name."
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 3,
+    "fields": {
+        "action_time": "2016-05-04T08:44:31.373Z",
+        "user": 5,
+        "content_type": 8,
+        "object_id": "14",
+        "object_repr": "14: Reproductive number",
+        "action_flag": 1,
+        "change_message": "Added."
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 4,
+    "fields": {
+        "action_time": "2016-05-04T08:44:40.202Z",
+        "user": 5,
+        "content_type": 8,
+        "object_id": "13",
+        "object_repr": "13: Epidemic definiton",
+        "action_flag": 2,
+        "change_message": "Changed source."
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 5,
+    "fields": {
+        "action_time": "2016-05-04T08:45:00.443Z",
+        "user": 5,
+        "content_type": 8,
+        "object_id": "14",
+        "object_repr": "14: Reproductive number",
+        "action_flag": 2,
+        "change_message": "No fields changed."
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 6,
+    "fields": {
+        "action_time": "2016-05-04T08:45:43.852Z",
+        "user": 5,
+        "content_type": 8,
+        "object_id": "15",
+        "object_repr": "15: Epidemic definiton",
+        "action_flag": 1,
+        "change_message": "Added."
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 7,
+    "fields": {
+        "action_time": "2016-05-04T08:45:58.721Z",
+        "user": 5,
+        "content_type": 8,
+        "object_id": "15",
+        "object_repr": "15: Epidemic definiton",
+        "action_flag": 2,
+        "change_message": "Changed source."
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 8,
+    "fields": {
+        "action_time": "2016-05-04T08:47:21.603Z",
+        "user": 5,
+        "content_type": 8,
+        "object_id": "15",
+        "object_repr": "15: Epidemic definiton",
+        "action_flag": 2,
+        "change_message": "Changed source."
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 9,
+    "fields": {
+        "action_time": "2016-05-04T08:47:31.774Z",
+        "user": 5,
+        "content_type": 8,
+        "object_id": "15",
+        "object_repr": "15: Epidemic definiton",
+        "action_flag": 2,
+        "change_message": "Changed source."
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 10,
+    "fields": {
+        "action_time": "2016-05-04T08:48:06.299Z",
+        "user": 5,
+        "content_type": 8,
+        "object_id": "16",
+        "object_repr": "16: Reproductive number",
+        "action_flag": 1,
+        "change_message": "Added."
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 11,
+    "fields": {
+        "action_time": "2016-05-04T08:50:42.575Z",
+        "user": 5,
+        "content_type": 10,
+        "object_id": "5",
+        "object_repr": "5: I have a vivid imagination",
+        "action_flag": 1,
+        "change_message": "Added."
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 12,
+    "fields": {
+        "action_time": "2016-05-04T09:20:30.081Z",
+        "user": 3,
+        "content_type": 10,
+        "object_id": "5",
+        "object_repr": "5: I have a vivid imagination",
+        "action_flag": 2,
+        "change_message": "No fields changed."
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 13,
+    "fields": {
+        "action_time": "2016-05-04T09:33:21.591Z",
+        "user": 5,
+        "content_type": 10,
+        "object_id": "6",
+        "object_repr": "6: test",
+        "action_flag": 1,
+        "change_message": "Added."
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 14,
+    "fields": {
+        "action_time": "2016-05-04T09:33:31.092Z",
+        "user": 5,
+        "content_type": 10,
+        "object_id": "6",
+        "object_repr": "6: test",
+        "action_flag": 3,
+        "change_message": ""
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 15,
+    "fields": {
+        "action_time": "2016-05-04T09:33:52.972Z",
+        "user": 5,
+        "content_type": 10,
+        "object_id": "7",
+        "object_repr": "7: I Prefer variety to routine",
+        "action_flag": 1,
+        "change_message": "Added."
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 16,
+    "fields": {
+        "action_time": "2016-05-04T09:34:02.128Z",
+        "user": 5,
+        "content_type": 10,
+        "object_id": "4",
+        "object_repr": "4: test question",
+        "action_flag": 3,
+        "change_message": ""
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 17,
+    "fields": {
+        "action_time": "2016-05-04T09:34:20.988Z",
+        "user": 5,
+        "content_type": 10,
+        "object_id": "8",
+        "object_repr": "8: I am open to change",
+        "action_flag": 1,
+        "change_message": "Added."
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 18,
+    "fields": {
+        "action_time": "2016-05-04T09:34:36.319Z",
+        "user": 5,
+        "content_type": 10,
+        "object_id": "9",
+        "object_repr": "9: I carry the conversation to a higher level",
+        "action_flag": 1,
+        "change_message": "Added."
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 19,
+    "fields": {
+        "action_time": "2016-05-04T09:34:51.118Z",
+        "user": 5,
+        "content_type": 10,
+        "object_id": "10",
+        "object_repr": "10: I enjoy hearing new ideas",
+        "action_flag": 1,
+        "change_message": "Added."
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 20,
+    "fields": {
+        "action_time": "2016-05-04T09:35:20.768Z",
+        "user": 5,
+        "content_type": 10,
+        "object_id": "11",
+        "object_repr": "11: I accomplish my work on time",
+        "action_flag": 1,
+        "change_message": "Added."
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 21,
+    "fields": {
+        "action_time": "2016-05-04T09:35:49.271Z",
+        "user": 5,
+        "content_type": 10,
+        "object_id": "12",
+        "object_repr": "12: I do things according to a plan",
+        "action_flag": 1,
+        "change_message": "Added."
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 22,
+    "fields": {
+        "action_time": "2016-05-04T09:36:06.844Z",
+        "user": 5,
+        "content_type": 10,
+        "object_id": "13",
+        "object_repr": "13: I am careful to avoid making mistakes",
+        "action_flag": 1,
+        "change_message": "Added."
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 23,
+    "fields": {
+        "action_time": "2016-05-04T09:36:21.802Z",
+        "user": 5,
+        "content_type": 10,
+        "object_id": "14",
+        "object_repr": "14: I keep my checkbook balanced",
+        "action_flag": 1,
+        "change_message": "Added."
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 24,
+    "fields": {
+        "action_time": "2016-05-04T09:36:33.979Z",
+        "user": 5,
+        "content_type": 10,
+        "object_id": "15",
+        "object_repr": "15: I like to plan ahead",
+        "action_flag": 1,
+        "change_message": "Added."
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 25,
+    "fields": {
+        "action_time": "2016-05-04T09:39:22.020Z",
+        "user": 5,
+        "content_type": 15,
+        "object_id": "13",
+        "object_repr": "Very Inaccurate",
+        "action_flag": 1,
+        "change_message": "Added."
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 26,
+    "fields": {
+        "action_time": "2016-05-04T09:39:43.698Z",
+        "user": 5,
+        "content_type": 15,
+        "object_id": "14",
+        "object_repr": "Inaccurate",
+        "action_flag": 1,
+        "change_message": "Added."
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 27,
+    "fields": {
+        "action_time": "2016-05-04T09:39:54.251Z",
+        "user": 5,
+        "content_type": 15,
+        "object_id": "15",
+        "object_repr": "Neutral",
+        "action_flag": 1,
+        "change_message": "Added."
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 28,
+    "fields": {
+        "action_time": "2016-05-04T09:40:11.134Z",
+        "user": 5,
+        "content_type": 15,
+        "object_id": "16",
+        "object_repr": "Accurate",
+        "action_flag": 1,
+        "change_message": "Added."
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 29,
+    "fields": {
+        "action_time": "2016-05-04T09:40:23.436Z",
+        "user": 5,
+        "content_type": 15,
+        "object_id": "17",
+        "object_repr": "Very accurate",
+        "action_flag": 1,
+        "change_message": "Added."
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 30,
+    "fields": {
+        "action_time": "2016-05-04T09:40:36.733Z",
+        "user": 5,
+        "content_type": 15,
+        "object_id": "18",
+        "object_repr": "Very Inaccurate",
+        "action_flag": 1,
+        "change_message": "Added."
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 31,
+    "fields": {
+        "action_time": "2016-05-04T09:40:44.460Z",
+        "user": 5,
+        "content_type": 15,
+        "object_id": "19",
+        "object_repr": "Inaccurate",
+        "action_flag": 1,
+        "change_message": "Added."
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 32,
+    "fields": {
+        "action_time": "2016-05-04T09:40:50.750Z",
+        "user": 5,
+        "content_type": 15,
+        "object_id": "20",
+        "object_repr": "Neutral",
+        "action_flag": 1,
+        "change_message": "Added."
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 33,
+    "fields": {
+        "action_time": "2016-05-04T09:40:58.375Z",
+        "user": 5,
+        "content_type": 15,
+        "object_id": "21",
+        "object_repr": "Accurate",
+        "action_flag": 1,
+        "change_message": "Added."
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 34,
+    "fields": {
+        "action_time": "2016-05-04T09:41:05.605Z",
+        "user": 5,
+        "content_type": 15,
+        "object_id": "22",
+        "object_repr": "Very accurate",
+        "action_flag": 1,
+        "change_message": "Added."
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 35,
+    "fields": {
+        "action_time": "2016-05-04T09:41:17.979Z",
+        "user": 5,
+        "content_type": 15,
+        "object_id": "23",
+        "object_repr": "Very Inaccurate",
+        "action_flag": 1,
+        "change_message": "Added."
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 36,
+    "fields": {
+        "action_time": "2016-05-04T09:41:28.626Z",
+        "user": 5,
+        "content_type": 15,
+        "object_id": "24",
+        "object_repr": "Inaccurate",
+        "action_flag": 1,
+        "change_message": "Added."
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 37,
+    "fields": {
+        "action_time": "2016-05-04T09:41:35.307Z",
+        "user": 5,
+        "content_type": 15,
+        "object_id": "25",
+        "object_repr": "Neutral",
+        "action_flag": 1,
+        "change_message": "Added."
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 38,
+    "fields": {
+        "action_time": "2016-05-04T09:41:41.179Z",
+        "user": 5,
+        "content_type": 15,
+        "object_id": "26",
+        "object_repr": "Accurate",
+        "action_flag": 1,
+        "change_message": "Added."
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 39,
+    "fields": {
+        "action_time": "2016-05-04T09:41:47.892Z",
+        "user": 5,
+        "content_type": 15,
+        "object_id": "27",
+        "object_repr": "Very accurate",
+        "action_flag": 1,
+        "change_message": "Added."
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 40,
+    "fields": {
+        "action_time": "2016-05-04T09:41:55.268Z",
+        "user": 5,
+        "content_type": 15,
+        "object_id": "28",
+        "object_repr": "Very Inaccurate",
+        "action_flag": 1,
+        "change_message": "Added."
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 41,
+    "fields": {
+        "action_time": "2016-05-04T09:42:02.115Z",
+        "user": 5,
+        "content_type": 15,
+        "object_id": "29",
+        "object_repr": "Inaccurate",
+        "action_flag": 1,
+        "change_message": "Added."
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 42,
+    "fields": {
+        "action_time": "2016-05-04T09:42:12.916Z",
+        "user": 5,
+        "content_type": 15,
+        "object_id": "30",
+        "object_repr": "Neutral",
+        "action_flag": 1,
+        "change_message": "Added."
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 43,
+    "fields": {
+        "action_time": "2016-05-04T09:42:18.746Z",
+        "user": 5,
+        "content_type": 15,
+        "object_id": "31",
+        "object_repr": "Accurate",
+        "action_flag": 1,
+        "change_message": "Added."
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 44,
+    "fields": {
+        "action_time": "2016-05-04T09:42:24.936Z",
+        "user": 5,
+        "content_type": 15,
+        "object_id": "32",
+        "object_repr": "Very accurate",
+        "action_flag": 1,
+        "change_message": "Added."
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 45,
+    "fields": {
+        "action_time": "2016-05-04T09:42:33.970Z",
+        "user": 5,
+        "content_type": 15,
+        "object_id": "33",
+        "object_repr": "Very Inaccurate",
+        "action_flag": 1,
+        "change_message": "Added."
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 46,
+    "fields": {
+        "action_time": "2016-05-04T09:42:40.536Z",
+        "user": 5,
+        "content_type": 15,
+        "object_id": "34",
+        "object_repr": "Inaccurate",
+        "action_flag": 1,
+        "change_message": "Added."
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 47,
+    "fields": {
+        "action_time": "2016-05-04T09:42:46.011Z",
+        "user": 5,
+        "content_type": 15,
+        "object_id": "35",
+        "object_repr": "Neutral",
+        "action_flag": 1,
+        "change_message": "Added."
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 48,
+    "fields": {
+        "action_time": "2016-05-04T09:42:58.454Z",
+        "user": 5,
+        "content_type": 15,
+        "object_id": "36",
+        "object_repr": "Accurate",
+        "action_flag": 1,
+        "change_message": "Added."
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 49,
+    "fields": {
+        "action_time": "2016-05-04T09:43:17.526Z",
+        "user": 5,
+        "content_type": 15,
+        "object_id": "37",
+        "object_repr": "Very accurate",
+        "action_flag": 1,
+        "change_message": "Added."
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 50,
+    "fields": {
+        "action_time": "2016-05-04T09:43:25.093Z",
+        "user": 5,
+        "content_type": 15,
+        "object_id": "38",
+        "object_repr": "Very Inaccurate",
+        "action_flag": 1,
+        "change_message": "Added."
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 51,
+    "fields": {
+        "action_time": "2016-05-04T09:43:31.466Z",
+        "user": 5,
+        "content_type": 15,
+        "object_id": "39",
+        "object_repr": "Inaccurate",
+        "action_flag": 1,
+        "change_message": "Added."
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 52,
+    "fields": {
+        "action_time": "2016-05-04T09:43:43.936Z",
+        "user": 5,
+        "content_type": 15,
+        "object_id": "40",
+        "object_repr": "Neutral",
+        "action_flag": 1,
+        "change_message": "Added."
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 53,
+    "fields": {
+        "action_time": "2016-05-04T09:43:50.518Z",
+        "user": 5,
+        "content_type": 15,
+        "object_id": "41",
+        "object_repr": "Accurate",
+        "action_flag": 1,
+        "change_message": "Added."
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 54,
+    "fields": {
+        "action_time": "2016-05-04T09:43:58.755Z",
+        "user": 5,
+        "content_type": 15,
+        "object_id": "42",
+        "object_repr": "Very accurate",
+        "action_flag": 1,
+        "change_message": "Added."
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 55,
+    "fields": {
+        "action_time": "2016-05-04T09:44:11.017Z",
+        "user": 5,
+        "content_type": 15,
+        "object_id": "43",
+        "object_repr": "Very Inaccurate",
+        "action_flag": 1,
+        "change_message": "Added."
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 56,
+    "fields": {
+        "action_time": "2016-05-04T09:44:16.047Z",
+        "user": 5,
+        "content_type": 15,
+        "object_id": "44",
+        "object_repr": "Inaccurate",
+        "action_flag": 1,
+        "change_message": "Added."
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 57,
+    "fields": {
+        "action_time": "2016-05-04T09:44:21.498Z",
+        "user": 5,
+        "content_type": 15,
+        "object_id": "45",
+        "object_repr": "Neutral",
+        "action_flag": 1,
+        "change_message": "Added."
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 58,
+    "fields": {
+        "action_time": "2016-05-04T09:44:27.428Z",
+        "user": 5,
+        "content_type": 15,
+        "object_id": "46",
+        "object_repr": "Accurate",
+        "action_flag": 1,
+        "change_message": "Added."
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 59,
+    "fields": {
+        "action_time": "2016-05-04T09:44:37.921Z",
+        "user": 5,
+        "content_type": 15,
+        "object_id": "47",
+        "object_repr": "Very accurate",
+        "action_flag": 1,
+        "change_message": "Added."
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 60,
+    "fields": {
+        "action_time": "2016-05-04T09:44:45.184Z",
+        "user": 5,
+        "content_type": 15,
+        "object_id": "48",
+        "object_repr": "Very Inaccurate",
+        "action_flag": 1,
+        "change_message": "Added."
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 61,
+    "fields": {
+        "action_time": "2016-05-04T09:45:06.375Z",
+        "user": 5,
+        "content_type": 15,
+        "object_id": "49",
+        "object_repr": "Inaccurate",
+        "action_flag": 1,
+        "change_message": "Added."
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 62,
+    "fields": {
+        "action_time": "2016-05-04T09:45:15.621Z",
+        "user": 5,
+        "content_type": 15,
+        "object_id": "50",
+        "object_repr": "Neutral",
+        "action_flag": 1,
+        "change_message": "Added."
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 63,
+    "fields": {
+        "action_time": "2016-05-04T09:45:22.837Z",
+        "user": 5,
+        "content_type": 15,
+        "object_id": "51",
+        "object_repr": "Neutral",
+        "action_flag": 1,
+        "change_message": "Added."
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 64,
+    "fields": {
+        "action_time": "2016-05-04T09:45:28.770Z",
+        "user": 5,
+        "content_type": 15,
+        "object_id": "52",
+        "object_repr": "Accurate",
+        "action_flag": 1,
+        "change_message": "Added."
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 65,
+    "fields": {
+        "action_time": "2016-05-04T09:45:36.572Z",
+        "user": 5,
+        "content_type": 15,
+        "object_id": "53",
+        "object_repr": "Very accurate",
+        "action_flag": 1,
+        "change_message": "Added."
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 66,
+    "fields": {
+        "action_time": "2016-05-04T09:45:50.004Z",
+        "user": 5,
+        "content_type": 15,
+        "object_id": "50",
+        "object_repr": "Neutral",
+        "action_flag": 3,
+        "change_message": ""
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 67,
+    "fields": {
+        "action_time": "2016-05-04T09:46:05.754Z",
+        "user": 5,
+        "content_type": 15,
+        "object_id": "54",
+        "object_repr": "Very Inaccurate",
+        "action_flag": 1,
+        "change_message": "Added."
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 68,
+    "fields": {
+        "action_time": "2016-05-04T09:46:14.410Z",
+        "user": 5,
+        "content_type": 15,
+        "object_id": "55",
+        "object_repr": "Inaccurate",
+        "action_flag": 1,
+        "change_message": "Added."
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 69,
+    "fields": {
+        "action_time": "2016-05-04T09:46:21.917Z",
+        "user": 5,
+        "content_type": 15,
+        "object_id": "56",
+        "object_repr": "Neutral",
+        "action_flag": 1,
+        "change_message": "Added."
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 70,
+    "fields": {
+        "action_time": "2016-05-04T09:46:34.835Z",
+        "user": 5,
+        "content_type": 15,
+        "object_id": "57",
+        "object_repr": "Neutral",
+        "action_flag": 1,
+        "change_message": "Added."
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 71,
+    "fields": {
+        "action_time": "2016-05-04T09:46:40.640Z",
+        "user": 5,
+        "content_type": 15,
+        "object_id": "58",
+        "object_repr": "Accurate",
+        "action_flag": 1,
+        "change_message": "Added."
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 72,
+    "fields": {
+        "action_time": "2016-05-04T09:46:45.804Z",
+        "user": 5,
+        "content_type": 15,
+        "object_id": "59",
+        "object_repr": "Very accurate",
+        "action_flag": 1,
+        "change_message": "Added."
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 73,
+    "fields": {
+        "action_time": "2016-05-04T09:46:57.914Z",
+        "user": 5,
+        "content_type": 15,
+        "object_id": "57",
+        "object_repr": "Neutral",
+        "action_flag": 3,
+        "change_message": ""
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 74,
+    "fields": {
+        "action_time": "2016-05-04T11:35:20.778Z",
+        "user": 5,
+        "content_type": 10,
+        "object_id": "16",
+        "object_repr": "16: bacteria are a microorganisms and viruses are macr...",
+        "action_flag": 1,
+        "change_message": "Added."
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 75,
+    "fields": {
+        "action_time": "2016-05-04T11:35:38.614Z",
+        "user": 5,
+        "content_type": 10,
+        "object_id": "17",
+        "object_repr": "17: diseases that have genetic causes, or diseases tha...",
+        "action_flag": 1,
+        "change_message": "Added."
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 76,
+    "fields": {
+        "action_time": "2016-05-04T11:36:00.123Z",
+        "user": 5,
+        "content_type": 10,
+        "object_id": "18",
+        "object_repr": "18: People react differently to diseases because:",
+        "action_flag": 1,
+        "change_message": "Added."
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 77,
+    "fields": {
+        "action_time": "2016-05-04T11:36:19.063Z",
+        "user": 5,
+        "content_type": 10,
+        "object_id": "19",
+        "object_repr": "19: It is not the organisms that are spreading but rat...",
+        "action_flag": 1,
+        "change_message": "Added."
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 78,
+    "fields": {
+        "action_time": "2016-05-04T11:36:58.642Z",
+        "user": 5,
+        "content_type": 10,
+        "object_id": "20",
+        "object_repr": "20: How many cases of illness start an epidemic?",
+        "action_flag": 1,
+        "change_message": "Added."
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 79,
+    "fields": {
+        "action_time": "2016-05-04T11:37:13.682Z",
+        "user": 5,
+        "content_type": 10,
+        "object_id": "21",
+        "object_repr": "21: The number of infected individuals increase expone...",
+        "action_flag": 1,
+        "change_message": "Added."
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 80,
+    "fields": {
+        "action_time": "2016-05-04T11:37:31.252Z",
+        "user": 5,
+        "content_type": 10,
+        "object_id": "22",
+        "object_repr": "22: Which of the following properties might contribute...",
+        "action_flag": 1,
+        "change_message": "Added."
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 81,
+    "fields": {
+        "action_time": "2016-05-04T11:37:49.105Z",
+        "user": 5,
+        "content_type": 10,
+        "object_id": "23",
+        "object_repr": "23: Thinking about the reproductive number, how many i...",
+        "action_flag": 1,
+        "change_message": "Added."
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 82,
+    "fields": {
+        "action_time": "2016-05-04T11:38:07.792Z",
+        "user": 5,
+        "content_type": 10,
+        "object_id": "24",
+        "object_repr": "24: The reproductive number R0 must be greater or equa...",
+        "action_flag": 1,
+        "change_message": "Added."
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 83,
+    "fields": {
+        "action_time": "2016-05-04T11:39:01.792Z",
+        "user": 5,
+        "content_type": 10,
+        "object_id": "25",
+        "object_repr": "25: Compute the reproductive number knowing that : an ...",
+        "action_flag": 1,
+        "change_message": "Added."
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 84,
+    "fields": {
+        "action_time": "2016-05-04T11:39:56.090Z",
+        "user": 5,
+        "content_type": 10,
+        "object_id": "25",
+        "object_repr": "25: Compute the reproductive number knowing that : an ...",
+        "action_flag": 2,
+        "change_message": "Changed text."
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 85,
+    "fields": {
+        "action_time": "2016-05-04T11:40:55.099Z",
+        "user": 5,
+        "content_type": 15,
+        "object_id": "60",
+        "object_repr": "True",
+        "action_flag": 1,
+        "change_message": "Added."
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 86,
+    "fields": {
+        "action_time": "2016-05-04T11:41:03.387Z",
+        "user": 5,
+        "content_type": 15,
+        "object_id": "61",
+        "object_repr": "False",
+        "action_flag": 1,
+        "change_message": "Added."
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 87,
+    "fields": {
+        "action_time": "2016-05-04T11:41:19.481Z",
+        "user": 5,
+        "content_type": 15,
+        "object_id": "62",
+        "object_repr": "I don't know",
+        "action_flag": 1,
+        "change_message": "Added."
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 88,
+    "fields": {
+        "action_time": "2016-05-04T11:41:30.283Z",
+        "user": 5,
+        "content_type": 15,
+        "object_id": "63",
+        "object_repr": "True",
+        "action_flag": 1,
+        "change_message": "Added."
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 89,
+    "fields": {
+        "action_time": "2016-05-04T11:41:37.445Z",
+        "user": 5,
+        "content_type": 15,
+        "object_id": "64",
+        "object_repr": "False",
+        "action_flag": 1,
+        "change_message": "Added."
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 90,
+    "fields": {
+        "action_time": "2016-05-04T11:41:45.419Z",
+        "user": 5,
+        "content_type": 15,
+        "object_id": "65",
+        "object_repr": "I don't know",
+        "action_flag": 1,
+        "change_message": "Added."
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 91,
+    "fields": {
+        "action_time": "2016-05-04T11:42:02.111Z",
+        "user": 5,
+        "content_type": 15,
+        "object_id": "66",
+        "object_repr": "the toxins in the environment infect only the healthy people.",
+        "action_flag": 1,
+        "change_message": "Added."
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 92,
+    "fields": {
+        "action_time": "2016-05-04T11:42:13.838Z",
+        "user": 5,
+        "content_type": 15,
+        "object_id": "67",
+        "object_repr": "of the biology of the host, the biology of microorganisms and the biology of the environment.",
+        "action_flag": 1,
+        "change_message": "Added."
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 93,
+    "fields": {
+        "action_time": "2016-05-04T11:42:26.209Z",
+        "user": 5,
+        "content_type": 15,
+        "object_id": "68",
+        "object_repr": "the infectious microorganisms spread exponentially from person to person .",
+        "action_flag": 1,
+        "change_message": "Added."
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 94,
+    "fields": {
+        "action_time": "2016-05-04T11:42:37.502Z",
+        "user": 5,
+        "content_type": 15,
+        "object_id": "69",
+        "object_repr": "True",
+        "action_flag": 1,
+        "change_message": "Added."
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 95,
+    "fields": {
+        "action_time": "2016-05-04T11:42:45.905Z",
+        "user": 5,
+        "content_type": 15,
+        "object_id": "70",
+        "object_repr": "False",
+        "action_flag": 1,
+        "change_message": "Added."
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 96,
+    "fields": {
+        "action_time": "2016-05-04T11:42:53.364Z",
+        "user": 5,
+        "content_type": 15,
+        "object_id": "71",
+        "object_repr": "I don't know",
+        "action_flag": 1,
+        "change_message": "Added."
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 97,
+    "fields": {
+        "action_time": "2016-05-04T11:43:15.017Z",
+        "user": 5,
+        "content_type": 15,
+        "object_id": "72",
+        "object_repr": "True",
+        "action_flag": 1,
+        "change_message": "Added."
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 98,
+    "fields": {
+        "action_time": "2016-05-04T11:43:22.288Z",
+        "user": 5,
+        "content_type": 15,
+        "object_id": "73",
+        "object_repr": "False",
+        "action_flag": 1,
+        "change_message": "Added."
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 99,
+    "fields": {
+        "action_time": "2016-05-04T11:43:34.073Z",
+        "user": 5,
+        "content_type": 15,
+        "object_id": "74",
+        "object_repr": "I don't know",
+        "action_flag": 1,
+        "change_message": "Added."
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 100,
+    "fields": {
+        "action_time": "2016-05-04T11:43:53.494Z",
+        "user": 5,
+        "content_type": 15,
+        "object_id": "75",
+        "object_repr": "The diet of an individual.",
+        "action_flag": 1,
+        "change_message": "Added."
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 101,
+    "fields": {
+        "action_time": "2016-05-04T11:44:05.390Z",
+        "user": 5,
+        "content_type": 15,
+        "object_id": "76",
+        "object_repr": "The duration of infectiousness of an individual.",
+        "action_flag": 1,
+        "change_message": "Added."
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 102,
+    "fields": {
+        "action_time": "2016-05-04T11:44:22.158Z",
+        "user": 5,
+        "content_type": 15,
+        "object_id": "77",
+        "object_repr": "The activity level of an individual.",
+        "action_flag": 1,
+        "change_message": "Added."
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 103,
+    "fields": {
+        "action_time": "2016-05-04T11:44:41.469Z",
+        "user": 5,
+        "content_type": 15,
+        "object_id": "78",
+        "object_repr": "True",
+        "action_flag": 1,
+        "change_message": "Added."
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 104,
+    "fields": {
+        "action_time": "2016-05-04T11:44:48.103Z",
+        "user": 5,
+        "content_type": 15,
+        "object_id": "79",
+        "object_repr": "False",
+        "action_flag": 1,
+        "change_message": "Added."
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 105,
+    "fields": {
+        "action_time": "2016-05-04T11:44:54.598Z",
+        "user": 5,
+        "content_type": 15,
+        "object_id": "80",
+        "object_repr": "I don't know",
+        "action_flag": 1,
+        "change_message": "Added."
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 106,
+    "fields": {
+        "action_time": "2016-05-04T11:45:20.711Z",
+        "user": 5,
+        "content_type": 10,
+        "object_id": "16",
+        "object_repr": "16: bacteria are a microorganisms and viruses are macr...",
+        "action_flag": 2,
+        "change_message": "Changed activity."
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 107,
+    "fields": {
+        "action_time": "2016-05-04T11:45:28.350Z",
+        "user": 5,
+        "content_type": 10,
+        "object_id": "17",
+        "object_repr": "17: diseases that have genetic causes, or diseases tha...",
+        "action_flag": 2,
+        "change_message": "Changed activity."
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 108,
+    "fields": {
+        "action_time": "2016-05-04T11:53:44.637Z",
+        "user": 5,
+        "content_type": 15,
+        "object_id": "81",
+        "object_repr": "140",
+        "action_flag": 1,
+        "change_message": "Added."
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 109,
+    "fields": {
+        "action_time": "2016-05-04T11:53:47.154Z",
+        "user": 5,
+        "content_type": 10,
+        "object_id": "25",
+        "object_repr": "25: Compute the reproductive number knowing that : an ...",
+        "action_flag": 2,
+        "change_message": "Changed correct_answer."
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 110,
+    "fields": {
+        "action_time": "2016-05-04T11:54:20.636Z",
+        "user": 5,
+        "content_type": 15,
+        "object_id": "82",
+        "object_repr": "R0",
+        "action_flag": 1,
+        "change_message": "Added."
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 111,
+    "fields": {
+        "action_time": "2016-05-04T11:54:25.396Z",
+        "user": 5,
+        "content_type": 10,
+        "object_id": "23",
+        "object_repr": "23: Thinking about the reproductive number, how many i...",
+        "action_flag": 2,
+        "change_message": "Changed correct_answer."
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 112,
+    "fields": {
+        "action_time": "2016-05-04T11:54:53.467Z",
+        "user": 5,
+        "content_type": 15,
+        "object_id": "83",
+        "object_repr": "2",
+        "action_flag": 1,
+        "change_message": "Added."
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 113,
+    "fields": {
+        "action_time": "2016-05-04T11:55:07.339Z",
+        "user": 5,
+        "content_type": 10,
+        "object_id": "20",
+        "object_repr": "20: How many cases of illness start an epidemic?",
+        "action_flag": 2,
+        "change_message": "Changed correct_answer."
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 114,
+    "fields": {
+        "action_time": "2016-05-04T12:09:05.233Z",
+        "user": 5,
+        "content_type": 15,
+        "object_id": "84",
+        "object_repr": "Accurate",
+        "action_flag": 1,
+        "change_message": "Added."
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 115,
+    "fields": {
+        "action_time": "2016-05-04T12:09:12.746Z",
+        "user": 5,
+        "content_type": 15,
+        "object_id": "85",
+        "object_repr": "Very accurate",
+        "action_flag": 1,
+        "change_message": "Added."
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 116,
+    "fields": {
+        "action_time": "2016-05-04T12:09:23.658Z",
+        "user": 5,
+        "content_type": 15,
+        "object_id": "86",
+        "object_repr": "Very Inaccurate",
+        "action_flag": 1,
+        "change_message": "Added."
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 117,
+    "fields": {
+        "action_time": "2016-05-04T12:09:33.143Z",
+        "user": 5,
+        "content_type": 15,
+        "object_id": "87",
+        "object_repr": "Inaccurate",
+        "action_flag": 1,
+        "change_message": "Added."
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 118,
+    "fields": {
+        "action_time": "2016-05-04T12:09:40.686Z",
+        "user": 5,
+        "content_type": 15,
+        "object_id": "88",
+        "object_repr": "Neutral",
+        "action_flag": 1,
+        "change_message": "Added."
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 119,
+    "fields": {
+        "action_time": "2016-05-04T12:11:00.652Z",
+        "user": 5,
+        "content_type": 15,
+        "object_id": "88",
+        "object_repr": "Neutral",
+        "action_flag": 3,
+        "change_message": ""
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 120,
+    "fields": {
+        "action_time": "2016-05-04T12:11:00.655Z",
+        "user": 5,
+        "content_type": 15,
+        "object_id": "87",
+        "object_repr": "Inaccurate",
+        "action_flag": 3,
+        "change_message": ""
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 121,
+    "fields": {
+        "action_time": "2016-05-04T12:11:00.658Z",
+        "user": 5,
+        "content_type": 15,
+        "object_id": "86",
+        "object_repr": "Very Inaccurate",
+        "action_flag": 3,
+        "change_message": ""
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 122,
+    "fields": {
+        "action_time": "2016-05-04T12:11:00.661Z",
+        "user": 5,
+        "content_type": 15,
+        "object_id": "27",
+        "object_repr": "Very accurate",
+        "action_flag": 3,
+        "change_message": ""
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 123,
+    "fields": {
+        "action_time": "2016-05-04T12:11:00.664Z",
+        "user": 5,
+        "content_type": 15,
+        "object_id": "26",
+        "object_repr": "Accurate",
+        "action_flag": 3,
+        "change_message": ""
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 124,
+    "fields": {
+        "action_time": "2016-05-04T12:11:09.418Z",
+        "user": 5,
+        "content_type": 15,
+        "object_id": "89",
+        "object_repr": "Very Inaccurate",
+        "action_flag": 1,
+        "change_message": "Added."
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 125,
+    "fields": {
+        "action_time": "2016-05-04T12:11:16.863Z",
+        "user": 5,
+        "content_type": 15,
+        "object_id": "90",
+        "object_repr": "Inaccurate",
+        "action_flag": 1,
+        "change_message": "Added."
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 126,
+    "fields": {
+        "action_time": "2016-05-04T12:11:23.514Z",
+        "user": 5,
+        "content_type": 15,
+        "object_id": "91",
+        "object_repr": "Neutral",
+        "action_flag": 1,
+        "change_message": "Added."
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 127,
+    "fields": {
+        "action_time": "2016-05-04T12:11:32.720Z",
+        "user": 5,
+        "content_type": 15,
+        "object_id": "92",
+        "object_repr": "Accurate",
+        "action_flag": 1,
+        "change_message": "Added."
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 128,
+    "fields": {
+        "action_time": "2016-05-04T12:11:39.550Z",
+        "user": 5,
+        "content_type": 15,
+        "object_id": "93",
+        "object_repr": "Very accurate",
+        "action_flag": 1,
+        "change_message": "Added."
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 129,
+    "fields": {
+        "action_time": "2016-05-04T12:14:44.850Z",
+        "user": 5,
+        "content_type": 10,
+        "object_id": "17",
+        "object_repr": "17: Diseases that have genetic causes, or diseases tha...",
+        "action_flag": 2,
+        "change_message": "Changed text."
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 130,
+    "fields": {
+        "action_time": "2016-05-04T12:14:46.974Z",
+        "user": 5,
+        "content_type": 10,
+        "object_id": "17",
+        "object_repr": "17: Diseases that have genetic causes, or diseases tha...",
+        "action_flag": 2,
+        "change_message": "No fields changed."
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 131,
+    "fields": {
+        "action_time": "2016-05-04T12:15:03.310Z",
+        "user": 5,
+        "content_type": 10,
+        "object_id": "16",
+        "object_repr": "16: Bacteria are a microorganisms and viruses are macr...",
+        "action_flag": 2,
+        "change_message": "Changed text."
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 132,
+    "fields": {
+        "action_time": "2016-05-04T12:15:30.238Z",
+        "user": 5,
+        "content_type": 10,
+        "object_id": "3",
+        "object_repr": "3: An Ohio class nuclear submarine has a length of ab...",
+        "action_flag": 3,
+        "change_message": ""
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 133,
+    "fields": {
+        "action_time": "2016-05-04T12:15:30.241Z",
+        "user": 5,
+        "content_type": 10,
+        "object_id": "2",
+        "object_repr": "2: A hot air balloon works based on Archimedes Princi...",
+        "action_flag": 3,
+        "change_message": ""
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 134,
+    "fields": {
+        "action_time": "2016-05-04T12:15:30.245Z",
+        "user": 5,
+        "content_type": 10,
+        "object_id": "1",
+        "object_repr": "1: Archimedes Principle States that the buoyant force...",
+        "action_flag": 3,
+        "change_message": ""
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 135,
+    "fields": {
+        "action_time": "2016-05-04T12:18:57.578Z",
+        "user": 5,
+        "content_type": 10,
+        "object_id": "24",
+        "object_repr": "24: The reproductive number R0 must be greater or equa...",
+        "action_flag": 2,
+        "change_message": "Changed correct_answer."
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 136,
+    "fields": {
+        "action_time": "2016-05-04T12:19:45.349Z",
+        "user": 5,
+        "content_type": 10,
+        "object_id": "22",
+        "object_repr": "22: Which of the following properties might contribute...",
+        "action_flag": 2,
+        "change_message": "Changed correct_answer."
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 137,
+    "fields": {
+        "action_time": "2016-05-04T12:19:56.936Z",
+        "user": 5,
+        "content_type": 10,
+        "object_id": "21",
+        "object_repr": "21: The number of infected individuals increase expone...",
+        "action_flag": 2,
+        "change_message": "Changed correct_answer."
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 138,
+    "fields": {
+        "action_time": "2016-05-04T12:20:05.534Z",
+        "user": 5,
+        "content_type": 10,
+        "object_id": "19",
+        "object_repr": "19: It is not the organisms that are spreading but rat...",
+        "action_flag": 2,
+        "change_message": "Changed correct_answer."
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 139,
+    "fields": {
+        "action_time": "2016-05-04T12:20:19.985Z",
+        "user": 5,
+        "content_type": 10,
+        "object_id": "18",
+        "object_repr": "18: People react differently to diseases because:",
+        "action_flag": 2,
+        "change_message": "Changed correct_answer."
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 140,
+    "fields": {
+        "action_time": "2016-05-04T12:20:31.588Z",
+        "user": 5,
+        "content_type": 10,
+        "object_id": "17",
+        "object_repr": "17: Diseases that have genetic causes, or diseases tha...",
+        "action_flag": 2,
+        "change_message": "Changed correct_answer."
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 141,
+    "fields": {
+        "action_time": "2016-05-04T12:20:40.856Z",
+        "user": 5,
+        "content_type": 10,
+        "object_id": "16",
+        "object_repr": "16: Bacteria are a microorganisms and viruses are macr...",
+        "action_flag": 2,
+        "change_message": "Changed correct_answer."
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 142,
+    "fields": {
+        "action_time": "2016-05-04T12:21:19.928Z",
+        "user": 5,
+        "content_type": 15,
+        "object_id": "94",
+        "object_repr": "R0/2",
+        "action_flag": 1,
+        "change_message": "Added."
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 143,
+    "fields": {
+        "action_time": "2016-05-04T12:21:29.116Z",
+        "user": 5,
+        "content_type": 15,
+        "object_id": "95",
+        "object_repr": "exp(R0)",
+        "action_flag": 1,
+        "change_message": "Added."
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 144,
+    "fields": {
+        "action_time": "2016-05-04T12:21:58.433Z",
+        "user": 5,
+        "content_type": 10,
+        "object_id": "25",
+        "object_repr": "25: What is the reproductive number knowing that : an ...",
+        "action_flag": 2,
+        "change_message": "Changed text."
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 145,
+    "fields": {
+        "action_time": "2016-05-04T12:22:02.893Z",
+        "user": 5,
+        "content_type": 15,
+        "object_id": "81",
+        "object_repr": "140",
+        "action_flag": 2,
+        "change_message": "No fields changed."
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 146,
+    "fields": {
+        "action_time": "2016-05-04T12:22:38.013Z",
+        "user": 5,
+        "content_type": 15,
+        "object_id": "96",
+        "object_repr": "2.86",
+        "action_flag": 1,
+        "change_message": "Added."
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 147,
+    "fields": {
+        "action_time": "2016-05-04T12:23:49.685Z",
+        "user": 5,
+        "content_type": 15,
+        "object_id": "97",
+        "object_repr": "280",
+        "action_flag": 1,
+        "change_message": "Added."
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 148,
+    "fields": {
+        "action_time": "2016-05-04T12:24:11.294Z",
+        "user": 5,
+        "content_type": 15,
+        "object_id": "98",
+        "object_repr": "10",
+        "action_flag": 1,
+        "change_message": "Added."
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 149,
+    "fields": {
+        "action_time": "2016-05-04T12:24:37.131Z",
+        "user": 5,
+        "content_type": 15,
+        "object_id": "99",
+        "object_repr": "R0",
+        "action_flag": 1,
+        "change_message": "Added."
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 150,
+    "fields": {
+        "action_time": "2016-05-04T12:27:53.074Z",
+        "user": 5,
+        "content_type": 8,
+        "object_id": "11",
+        "object_repr": "11: Post-test",
+        "action_flag": 3,
+        "change_message": ""
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 151,
+    "fields": {
+        "action_time": "2016-05-04T12:27:53.087Z",
+        "user": 5,
+        "content_type": 8,
+        "object_id": "10",
+        "object_repr": "10: Exercises",
+        "action_flag": 3,
+        "change_message": ""
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 152,
+    "fields": {
+        "action_time": "2016-05-04T12:27:53.091Z",
+        "user": 5,
+        "content_type": 8,
+        "object_id": "9",
+        "object_repr": "9: Story",
+        "action_flag": 3,
+        "change_message": ""
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 153,
+    "fields": {
+        "action_time": "2016-05-04T12:27:53.095Z",
+        "user": 5,
+        "content_type": 8,
+        "object_id": "8",
+        "object_repr": "8: Definitions",
+        "action_flag": 3,
+        "change_message": ""
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 154,
+    "fields": {
+        "action_time": "2016-05-04T12:27:53.098Z",
+        "user": 5,
+        "content_type": 8,
+        "object_id": "7",
+        "object_repr": "7: Simulator",
+        "action_flag": 3,
+        "change_message": ""
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 155,
+    "fields": {
+        "action_time": "2016-05-04T12:27:53.102Z",
+        "user": 5,
+        "content_type": 8,
+        "object_id": "6",
+        "object_repr": "6: Feedback",
+        "action_flag": 3,
+        "change_message": ""
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 156,
+    "fields": {
+        "action_time": "2016-05-04T12:27:53.105Z",
+        "user": 5,
+        "content_type": 8,
+        "object_id": "5",
+        "object_repr": "5: Summary",
+        "action_flag": 3,
+        "change_message": ""
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 157,
+    "fields": {
+        "action_time": "2016-05-04T12:27:53.108Z",
+        "user": 5,
+        "content_type": 8,
+        "object_id": "4",
+        "object_repr": "4: Group exercise",
+        "action_flag": 3,
+        "change_message": ""
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 158,
+    "fields": {
+        "action_time": "2016-05-04T12:27:53.111Z",
+        "user": 5,
+        "content_type": 8,
+        "object_id": "3",
+        "object_repr": "3: Exercise",
+        "action_flag": 3,
+        "change_message": ""
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 159,
+    "fields": {
+        "action_time": "2016-05-04T12:27:53.114Z",
+        "user": 5,
+        "content_type": 8,
+        "object_id": "2",
+        "object_repr": "2: Pre-test",
+        "action_flag": 3,
+        "change_message": ""
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 160,
+    "fields": {
+        "action_time": "2016-05-04T12:27:53.117Z",
+        "user": 5,
+        "content_type": 8,
+        "object_id": "1",
+        "object_repr": "1: Overview",
+        "action_flag": 3,
+        "change_message": ""
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 161,
+    "fields": {
+        "action_time": "2016-05-04T12:28:40.330Z",
+        "user": 5,
+        "content_type": 7,
+        "object_id": "8",
+        "object_repr": "8: Scenario 2",
+        "action_flag": 3,
+        "change_message": ""
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 162,
+    "fields": {
+        "action_time": "2016-05-04T12:28:40.334Z",
+        "user": 5,
+        "content_type": 7,
+        "object_id": "7",
+        "object_repr": "7: Scenario 1",
+        "action_flag": 3,
+        "change_message": ""
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 163,
+    "fields": {
+        "action_time": "2016-05-04T12:28:40.337Z",
+        "user": 5,
+        "content_type": 7,
+        "object_id": "6",
+        "object_repr": "6: Inductive",
+        "action_flag": 3,
+        "change_message": ""
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 164,
+    "fields": {
+        "action_time": "2016-05-04T12:28:40.341Z",
+        "user": 5,
+        "content_type": 7,
+        "object_id": "5",
+        "object_repr": "5: Inductive",
+        "action_flag": 3,
+        "change_message": ""
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 165,
+    "fields": {
+        "action_time": "2016-05-04T12:28:57.696Z",
+        "user": 5,
+        "content_type": 9,
+        "object_id": "52",
+        "object_repr": "Student object",
+        "action_flag": 3,
+        "change_message": ""
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 166,
+    "fields": {
+        "action_time": "2016-05-04T12:28:57.699Z",
+        "user": 5,
+        "content_type": 9,
+        "object_id": "51",
+        "object_repr": "Student object",
+        "action_flag": 3,
+        "change_message": ""
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 167,
+    "fields": {
+        "action_time": "2016-05-04T12:28:57.703Z",
+        "user": 5,
+        "content_type": 9,
+        "object_id": "50",
+        "object_repr": "Student object",
+        "action_flag": 3,
+        "change_message": ""
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 168,
+    "fields": {
+        "action_time": "2016-05-04T12:28:57.706Z",
+        "user": 5,
+        "content_type": 9,
+        "object_id": "49",
+        "object_repr": "Student object",
+        "action_flag": 3,
+        "change_message": ""
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 169,
+    "fields": {
+        "action_time": "2016-05-04T12:28:57.708Z",
+        "user": 5,
+        "content_type": 9,
+        "object_id": "48",
+        "object_repr": "Student object",
+        "action_flag": 3,
+        "change_message": ""
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 170,
+    "fields": {
+        "action_time": "2016-05-04T12:28:57.712Z",
+        "user": 5,
+        "content_type": 9,
+        "object_id": "47",
+        "object_repr": "Student object",
+        "action_flag": 3,
+        "change_message": ""
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 171,
+    "fields": {
+        "action_time": "2016-05-04T12:28:57.715Z",
+        "user": 5,
+        "content_type": 9,
+        "object_id": "46",
+        "object_repr": "Student object",
+        "action_flag": 3,
+        "change_message": ""
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 172,
+    "fields": {
+        "action_time": "2016-05-04T12:28:57.718Z",
+        "user": 5,
+        "content_type": 9,
+        "object_id": "45",
+        "object_repr": "Student object",
+        "action_flag": 3,
+        "change_message": ""
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 173,
+    "fields": {
+        "action_time": "2016-05-04T12:28:57.721Z",
+        "user": 5,
+        "content_type": 9,
+        "object_id": "44",
+        "object_repr": "Student object",
+        "action_flag": 3,
+        "change_message": ""
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 174,
+    "fields": {
+        "action_time": "2016-05-04T12:28:57.724Z",
+        "user": 5,
+        "content_type": 9,
+        "object_id": "43",
+        "object_repr": "Student object",
+        "action_flag": 3,
+        "change_message": ""
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 175,
+    "fields": {
+        "action_time": "2016-05-04T12:35:07.010Z",
+        "user": 5,
+        "content_type": 8,
+        "object_id": "17",
+        "object_repr": "17: Pre-test",
+        "action_flag": 1,
+        "change_message": "Added."
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 176,
+    "fields": {
+        "action_time": "2016-05-04T12:35:22.872Z",
+        "user": 5,
+        "content_type": 8,
+        "object_id": "18",
+        "object_repr": "18: Post-test",
+        "action_flag": 1,
+        "change_message": "Added."
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 177,
+    "fields": {
+        "action_time": "2016-05-04T12:35:35.667Z",
+        "user": 5,
+        "content_type": 10,
+        "object_id": "24",
+        "object_repr": "24: The reproductive number R0 must be greater or equa...",
+        "action_flag": 2,
+        "change_message": "Changed activity."
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 178,
+    "fields": {
+        "action_time": "2016-05-04T12:35:44.683Z",
+        "user": 5,
+        "content_type": 10,
+        "object_id": "25",
+        "object_repr": "25: What is the reproductive number knowing that : an ...",
+        "action_flag": 2,
+        "change_message": "Changed activity."
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 179,
+    "fields": {
+        "action_time": "2016-05-04T12:37:08.427Z",
+        "user": 5,
+        "content_type": 10,
+        "object_id": "23",
+        "object_repr": "23: Thinking about the reproductive number, how many i...",
+        "action_flag": 2,
+        "change_message": "Changed activity."
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 180,
+    "fields": {
+        "action_time": "2016-05-04T12:37:24.139Z",
+        "user": 5,
+        "content_type": 10,
+        "object_id": "22",
+        "object_repr": "22: Which of the following properties might contribute...",
+        "action_flag": 2,
+        "change_message": "Changed activity."
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 181,
+    "fields": {
+        "action_time": "2016-05-04T12:37:31.812Z",
+        "user": 5,
+        "content_type": 10,
+        "object_id": "21",
+        "object_repr": "21: The number of infected individuals increase expone...",
+        "action_flag": 2,
+        "change_message": "Changed activity."
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 182,
+    "fields": {
+        "action_time": "2016-05-04T12:37:42.315Z",
+        "user": 5,
+        "content_type": 10,
+        "object_id": "20",
+        "object_repr": "20: How many cases of illness start an epidemic?",
+        "action_flag": 2,
+        "change_message": "Changed activity."
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 183,
+    "fields": {
+        "action_time": "2016-05-04T12:37:54.579Z",
+        "user": 5,
+        "content_type": 10,
+        "object_id": "19",
+        "object_repr": "19: It is not the organisms that are spreading but rat...",
+        "action_flag": 2,
+        "change_message": "Changed activity."
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 184,
+    "fields": {
+        "action_time": "2016-05-04T12:38:03.372Z",
+        "user": 5,
+        "content_type": 10,
+        "object_id": "18",
+        "object_repr": "18: People react differently to diseases because:",
+        "action_flag": 2,
+        "change_message": "Changed activity."
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 185,
+    "fields": {
+        "action_time": "2016-05-04T12:38:14.891Z",
+        "user": 5,
+        "content_type": 10,
+        "object_id": "17",
+        "object_repr": "17: Diseases that have genetic causes, or diseases tha...",
+        "action_flag": 2,
+        "change_message": "Changed activity."
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 186,
+    "fields": {
+        "action_time": "2016-05-04T12:38:33.018Z",
+        "user": 5,
+        "content_type": 10,
+        "object_id": "16",
+        "object_repr": "16: Bacteria are a microorganisms and viruses are macr...",
+        "action_flag": 2,
+        "change_message": "Changed activity."
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 187,
+    "fields": {
+        "action_time": "2016-05-04T12:39:43.228Z",
+        "user": 5,
+        "content_type": 9,
+        "object_id": "56",
+        "object_repr": "Student object",
+        "action_flag": 3,
+        "change_message": ""
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 188,
+    "fields": {
+        "action_time": "2016-05-04T12:39:43.232Z",
+        "user": 5,
+        "content_type": 9,
+        "object_id": "55",
+        "object_repr": "Student object",
+        "action_flag": 3,
+        "change_message": ""
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 189,
+    "fields": {
+        "action_time": "2016-05-04T12:39:43.235Z",
+        "user": 5,
+        "content_type": 9,
+        "object_id": "54",
+        "object_repr": "Student object",
+        "action_flag": 3,
+        "change_message": ""
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 190,
+    "fields": {
+        "action_time": "2016-05-04T12:39:43.238Z",
+        "user": 5,
+        "content_type": 9,
+        "object_id": "53",
+        "object_repr": "Student object",
+        "action_flag": 3,
+        "change_message": ""
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 191,
+    "fields": {
+        "action_time": "2016-05-04T12:49:13.136Z",
+        "user": 5,
+        "content_type": 8,
+        "object_id": "16",
+        "object_repr": "16: Reproductive number (text)",
+        "action_flag": 2,
+        "change_message": "Changed name."
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 192,
+    "fields": {
+        "action_time": "2016-05-04T12:49:24.468Z",
+        "user": 5,
+        "content_type": 8,
+        "object_id": "15",
+        "object_repr": "15: Epidemic definiton(text)",
+        "action_flag": 2,
+        "change_message": "Changed name."
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 193,
+    "fields": {
+        "action_time": "2016-05-04T13:01:05.251Z",
+        "user": 3,
+        "content_type": 9,
+        "object_id": "59",
+        "object_repr": "Student object",
+        "action_flag": 3,
+        "change_message": ""
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 194,
+    "fields": {
+        "action_time": "2016-05-04T13:01:05.265Z",
+        "user": 3,
+        "content_type": 9,
+        "object_id": "58",
+        "object_repr": "Student object",
+        "action_flag": 3,
+        "change_message": ""
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 195,
+    "fields": {
+        "action_time": "2016-05-04T13:01:05.274Z",
+        "user": 3,
+        "content_type": 9,
+        "object_id": "57",
+        "object_repr": "Student object",
+        "action_flag": 3,
+        "change_message": ""
+    }
+}
+]
