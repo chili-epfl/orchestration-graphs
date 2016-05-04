@@ -144,7 +144,7 @@ class Activity(models.Model):
 
     name = models.CharField(max_length=50)
     type = models.CharField(max_length=8, choices=TYPE_CHOICES)
-    source = models.CharField(max_length=10000, null=True)
+    source = models.CharField(max_length=10000,blank = True, null=True)
 
     def __str__(self):
         return str(self.pk) + ": " + self.name
