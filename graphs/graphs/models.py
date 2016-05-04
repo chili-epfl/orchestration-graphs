@@ -183,7 +183,7 @@ class Choice(models.Model):
     """Models a possible answer"""
     question = models.ForeignKey('Question', on_delete=models.CASCADE)
     text = models.CharField(max_length=100)
-    image_source = models.CharField(max_length=100)
+    image_source = models.CharField(max_length=100,blank = True, null = True)
 
     def __str__(self):
         return self.text
@@ -201,7 +201,7 @@ class Question(models.Model):
     text = models.CharField(max_length=1000)
     image_source = models.CharField(max_length=100, blank=True, null=True)
     correct_answer = models.ForeignKey(Choice, blank=True, null=True, related_name='+')
-    activity = models.ManyToManyField(Activity)
+    activity = models.ManyToManyField(Activity, blank = True)
 
     def __str__(self):
         limit = 50
