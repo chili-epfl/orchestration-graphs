@@ -139,7 +139,7 @@ def path_from_edges(scenario):
     while True:
         next_act = []
         for e in edges:
-            if e['a1']['id'] == path[-1]['id'] and e['a1']['count'] == path[-1]['count']:
+            if e['a1']['id'] == path[-1]['id'] and e['a1']['counter'] == path[-1]['counter']:
                 next_act.append(e['a2'])
 
         if next_act:
