@@ -43,7 +43,10 @@ def activity_view(request, pk, simple_layout=False):
         else:
             return quiz_activity(request, activity, simple_layout)
     elif tpe == 'link':
-        return render(request, 'link-activity.html', context=ctx)
+        if activity.source[-4:] == ".mp4":
+            return render(request, 'video-activity.html', context=ctx)
+        else:
+            return render(request, 'link-activity.html', context=ctx)
     elif tpe == 'psycho':
         if simple_layout:
             return quiz_preview(request, activity)
