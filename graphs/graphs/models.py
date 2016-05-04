@@ -141,7 +141,7 @@ class Activity(models.Model):
 
     name = models.CharField(max_length=50)
     type = models.CharField(max_length=8, choices=TYPE_CHOICES)
-    source = models.CharField(max_length=1000, null=True)
+    source = models.CharField(max_length=10000, null=True)
 
     def __str__(self):
         return str(self.pk) + ": " + self.name
@@ -199,8 +199,8 @@ class Choice(models.Model):
 class Question(models.Model):
     """Models a question, which is part of one or more quiz/test activity"""
     text = models.CharField(max_length=1000)
-    image_source = models.CharField(max_length=100, null=True)
-    correct_answer = models.ForeignKey(Choice, related_name='+')
+    image_source = models.CharField(max_length=100, blank = True, null=True)
+    correct_answer = models.ForeignKey(Choice,related_name='+', default= 1)
     activity = models.ManyToManyField(Activity)
 
     def __str__(self):
