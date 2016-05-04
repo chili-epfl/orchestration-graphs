@@ -25,7 +25,7 @@ urlpatterns = patterns('',
     url(r'^scenario/csv/(?P<pk>\w+)/$', get_csv, name="scenario-csv"),
     url(r'^scenario/csv/psycho/(?P<pk>\w+)/$', get_psycho_csv, name="scenario-psycho-csv"),
     url(r'^scenario/csv/time/(?P<pk>\w+)/$', get_time_csv, name="scenario-time-csv"),
-    url(r'^teacher/$', TemplateView.as_view(template_name='teacher-base.html'), name="teacher-dashboard"),
+    url(r'^teacher/$', login_required(TemplateView.as_view(template_name='teacher-base.html')), name="teacher-dashboard"),
     url(r'^teacher/scenario/list/$', login_required(ListView.as_view(template_name='scenario-list.html', model=Scenario)), name="scenario-list"),
     url(r'^teacher/activity/list/$', login_required(ListView.as_view(template_name='activity-list.html', model=Activity)), name="activity-list"),
 
