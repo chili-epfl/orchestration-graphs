@@ -132,6 +132,9 @@ class Scenario(models.Model):
 
 
 class Activity(models.Model):
+    class Meta:
+        verbose_name_plural = "activities"
+
     TYPE_CHOICES = (
         ('text', 'Text'),
         ('quiz', 'Quiz'),
