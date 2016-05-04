@@ -14,6 +14,9 @@ class Scenario(models.Model):
     raphaelJson = models.TextField()
     date = models.DateField(auto_now_add=True)
 
+    def __str__(self):
+        return str(self.pk) + ": " + self.name
+
     def avg_time(self, path=ALL_PATHS):
         """Computes the average time spent by students to complete the scenario.
 
@@ -140,6 +143,9 @@ class Activity(models.Model):
     type = models.CharField(max_length=8, choices=TYPE_CHOICES)
     source = models.CharField(max_length=1000, null=True)
 
+    def __str__(self):
+        return str(self.pk) + ": " + self.name
+
     @classmethod
     def create(cls, name, tpe):
         activity = cls(name=name, type=tpe)
@@ -179,6 +185,9 @@ class Choice(models.Model):
     text = models.CharField(max_length=100)
     image_source = models.CharField(max_length=100)
 
+    def __str__(self):
+        return self.text
+
     def get_html(self):
         """Returns a string containing the image (if there is one) in an HTML tag, followed by the text"""
         if self.image_source is not None and self.image_source != "":
@@ -193,6 +202,11 @@ class Question(models.Model):
     image_source = models.CharField(max_length=100, null=True)
     correct_answer = models.ForeignKey(Choice, related_name='+')
     activity = models.ManyToManyField(Activity)
+
+    def __str__(self):
+        limit = 50
+        text = self.text[0:limit] + "..." if len(self.text) > limit + 1 else self.text
+        return str(self.pk) + ": " + text
 
     def get_choices(self):
         return Choice.objects.filter(question=self)
