@@ -263,3 +263,8 @@ def get_time_csv(request, pk):
     for log in time_logs:
         writer.writerow([log.student.email, log.activity_id, log.activity.name, log.start_time, log.end_time])
     return response
+
+
+def home_view(request):
+    """The website's home page"""
+    return render(request, 'home.html')
