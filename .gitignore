@@ -6,3 +6,4 @@ uwsgi.ini
 reload
 localsettings.py
 *.sqlite3
+.DS_Store
