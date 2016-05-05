@@ -3,8 +3,8 @@ from django.views.generic import TemplateView
 from django.conf.urls.static import static
 from django.conf import settings
 from activities.views import next_activity, activity_view, simple_activity
-from graphs.views import ScenarioCreateView, ScenarioUpdateView, ScenarioDeleteView, ActivityCreateView, ActivityUpdateView, ActivityDeleteView, ScenarioDetailView, student_registration,\
-    student_learning, stats_view, get_csv, get_psycho_csv, get_time_csv
+from graphs.views import ScenarioCreateView, ScenarioUpdateView, ScenarioDeleteView, ActivityCreateView,ActivityUpdateView, ActivityDeleteView, ScenarioDetailView, student_registration,\
+    student_learning, stats_view, get_csv, get_psycho_csv, get_time_csv, home_view
 from django.contrib.auth.decorators import login_required
 from django.views.generic.list import ListView
 from graphs.models import Scenario, Activity
@@ -25,7 +25,7 @@ urlpatterns = patterns('',
     url(r'^scenario/csv/(?P<pk>\w+)/$', get_csv, name="scenario-csv"),
     url(r'^scenario/csv/psycho/(?P<pk>\w+)/$', get_psycho_csv, name="scenario-psycho-csv"),
     url(r'^scenario/csv/time/(?P<pk>\w+)/$', get_time_csv, name="scenario-time-csv"),
-    url(r'^teacher/$', TemplateView.as_view(template_name='teacher-base.html'), name="teacher-dashboard"),
+    url(r'^teacher/$', login_required(TemplateView.as_view(template_name='teacher-base.html')), name="teacher-dashboard"),
     url(r'^teacher/scenario/list/$', login_required(ListView.as_view(template_name='scenario-list.html', model=Scenario)), name="scenario-list"),
     url(r'^teacher/activity/list/$', login_required(ListView.as_view(template_name='activity-list.html', model=Activity)), name="activity-list"),
 
@@ -42,4 +42,6 @@ urlpatterns = patterns('',
     url(r'^accounts/logout/$', 'django.contrib.auth.views.logout', {'next_page': '/teacher/scenario/list/'}, name='logout'),
 
     url(r'^admin/', include(admin.site.urls)),
+
+    url(r'^$', home_view),
 ) + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

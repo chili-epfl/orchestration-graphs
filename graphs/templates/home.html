@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+
+
+{% block content %}
+<div class="container">
+    <br>
+    <a href="http://epfl.ch">
+    <img src="static/img/EPFL_logo-transp.png" alt="EPFL logo" width="100">
+    </a>
+    <h1>Welcome to the CHILI learning experiment!</h1>
+    <div>
+        <i>Can a machine suggest better activities than a teacher?</i> This is the question this experiment (conducted by the <a href="http://chili.epfl.ch">CHILI</a> lab at EPFL) is attempting to answer.
+        The idea is to find out if certain types of people are more receptive to certain teaching methods, then use this knowledge to build a system that can provide each student with a learning scenario adapted to their personality.
+    </div>
+    <br>
+    <div>
+        <a href="/student/register/"><p class="btn btn-lg btn-primary">Join the experiment</p></a>
+        <a href="/teacher/scenario/list/"><p class="btn btn-lg btn-primary">Teacher login</p></a>
+    </div>
+</div>
+{% endblock %}

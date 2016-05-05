@@ -129,10 +129,10 @@
 },
 {
     "model": "sessions.session",
-    "pk": "cx2ked8a7jryzpv6euy4x0pmc029r6u1",
+    "pk": "avpb3gqrcmed4oa1vxrjrfje1dscj2fl",
     "fields": {
-        "session_data": "Mjg4NWUxZjZhNTk1ZTI2MDI0MGI3N2QwY2JjMGI0NjhiZjJlMWFlYTp7Il9hdXRoX3VzZXJfaWQiOiIzIiwiX2F1dGhfdXNlcl9oYXNoIjoiZjhlNzE4ZjQyZjI4ZWVlZGM4ZDBlZmNhNDQ2NDBmMzVjMTdiZjBmOSIsIl9hdXRoX3VzZXJfYmFja2VuZCI6ImRqYW5nby5jb250cmliLmF1dGguYmFja2VuZHMuTW9kZWxCYWNrZW5kIn0=",
-        "expire_date": "2016-05-18T12:59:27.544Z"
+        "session_data": "YjljOWFiMmMxMTk5Zjk3MmMwODhkNTYyZmFhZDEyYWVjZmI1NjlmNDp7Il9hdXRoX3VzZXJfYmFja2VuZCI6ImRqYW5nby5jb250cmliLmF1dGguYmFja2VuZHMuTW9kZWxCYWNrZW5kIiwiX2F1dGhfdXNlcl9pZCI6IjMiLCJfYXV0aF91c2VyX2hhc2giOiJmOGU3MThmNDJmMjhlZWVkYzhkMGVmY2E0NDY0MGYzNWMxN2JmMGY5In0=",
+        "expire_date": "2016-05-18T14:30:55.731Z"
     }
 },
 {
@@ -157,6 +157,14 @@
     "fields": {
         "session_data": "ZTM3ODc1YWQ0NDE1ODBlNThiZDNlMzBiOTI3ZDk0NTc5MjM3NDYwYTp7InVzZXJfaWQiOjUwLCJfYXV0aF91c2VyX2JhY2tlbmQiOiJkamFuZ28uY29udHJpYi5hdXRoLmJhY2tlbmRzLk1vZGVsQmFja2VuZCIsIl9hdXRoX3VzZXJfaGFzaCI6ImY4ZTcxOGY0MmYyOGVlZWRjOGQwZWZjYTQ0NjQwZjM1YzE3YmYwZjkiLCJfYXV0aF91c2VyX2lkIjoiMyJ9",
         "expire_date": "2016-05-14T12:52:20.541Z"
+    }
+},
+{
+    "model": "sessions.session",
+    "pk": "rbtiz6h5flyrzz5xqk24g8zcd8a9xwaz",
+    "fields": {
+        "session_data": "YmVlZDE2ZGUyNzUzZGVkNWQ5ODg4ZDcwNWI4ZDA3ZjZjOTIzYTRkMjp7Il9hdXRoX3VzZXJfaWQiOiIzIiwiX2F1dGhfdXNlcl9iYWNrZW5kIjoiZGphbmdvLmNvbnRyaWIuYXV0aC5iYWNrZW5kcy5Nb2RlbEJhY2tlbmQiLCJfYXV0aF91c2VyX2hhc2giOiIxODkxZDA5NzIwOTIxNDZmMzY3OWQ4MGQ4N2M1Zjc2NDg0ZjQ5NDI1In0=",
+        "expire_date": "2016-05-18T15:01:42.912Z"
     }
 },
 {
@@ -1220,36 +1228,6 @@
     }
 },
 {
-    "model": "graphs.timelog",
-    "pk": 33,
-    "fields": {
-        "student": 40,
-        "activity": 12,
-        "start_time": "2016-04-20T09:24:09.888Z",
-        "end_time": null
-    }
-},
-{
-    "model": "graphs.timelog",
-    "pk": 34,
-    "fields": {
-        "student": 41,
-        "activity": 12,
-        "start_time": "2016-04-20T09:24:23.572Z",
-        "end_time": null
-    }
-},
-{
-    "model": "graphs.timelog",
-    "pk": 35,
-    "fields": {
-        "student": 42,
-        "activity": 12,
-        "start_time": "2016-04-20T09:27:19.247Z",
-        "end_time": null
-    }
-},
-{
     "model": "auth.permission",
     "pk": 1,
     "fields": {
@@ -1649,8 +1627,8 @@
     "model": "auth.user",
     "pk": 3,
     "fields": {
-        "password": "pbkdf2_sha256$24000$EgHnD62y7sOs$3Wde09KoRccLvVUeby3UgaPBL+MKSO6EmgdYRkpSTUE=",
-        "last_login": "2016-05-04T12:59:27.534Z",
+        "password": "pbkdf2_sha256$24000$ICswjkoBG248$jKmtXDVQUKkPAHvDU45vTbMdVS7WoD49QMn7RnwLgN0=",
+        "last_login": "2016-05-04T14:58:11.255Z",
         "is_superuser": true,
         "username": "ritterni",
         "first_name": "",
@@ -4230,6 +4208,84 @@
         "content_type": 9,
         "object_id": "57",
         "object_repr": "Student object",
+        "action_flag": 3,
+        "change_message": ""
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 196,
+    "fields": {
+        "action_time": "2016-05-04T13:47:28.587Z",
+        "user": 3,
+        "content_type": 9,
+        "object_id": "60",
+        "object_repr": "Student object",
+        "action_flag": 3,
+        "change_message": ""
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 197,
+    "fields": {
+        "action_time": "2016-05-04T14:22:06.593Z",
+        "user": 3,
+        "content_type": 9,
+        "object_id": "61",
+        "object_repr": "Student object",
+        "action_flag": 3,
+        "change_message": ""
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 198,
+    "fields": {
+        "action_time": "2016-05-04T15:01:55.551Z",
+        "user": 3,
+        "content_type": 9,
+        "object_id": "62",
+        "object_repr": "Student object",
+        "action_flag": 3,
+        "change_message": ""
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 199,
+    "fields": {
+        "action_time": "2016-05-04T15:02:19.337Z",
+        "user": 3,
+        "content_type": 14,
+        "object_id": "35",
+        "object_repr": "TimeLog object",
+        "action_flag": 3,
+        "change_message": ""
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 200,
+    "fields": {
+        "action_time": "2016-05-04T15:02:19.361Z",
+        "user": 3,
+        "content_type": 14,
+        "object_id": "34",
+        "object_repr": "TimeLog object",
+        "action_flag": 3,
+        "change_message": ""
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 201,
+    "fields": {
+        "action_time": "2016-05-04T15:02:19.370Z",
+        "user": 3,
+        "content_type": 14,
+        "object_id": "33",
+        "object_repr": "TimeLog object",
         "action_flag": 3,
         "change_message": ""
     }

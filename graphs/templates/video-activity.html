@@ -4,7 +4,9 @@
     <div class="container">
     <h1>{{ title }}</h1>
     <br>
-<object id="workspace" data={{ source }} style="width: 100%; height: 870px; border: 0px;"></object>
+    <video height="480" controls>
+        <source src="{{ source }}" type="video/mp4">
+    </video>
     {% if not simple %}
 <br><br>
 <button type="button" onclick="window.location.href='/student/activity/next/' " class="btn btn-lg btn-primary">Next activity</button>
