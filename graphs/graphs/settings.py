@@ -26,11 +26,6 @@ TEMPLATE_DEBUG = True
 
 ALLOWED_HOSTS = []
 
-try:
-    from graphs.localsettings import *
-except ImportError as e:
-    pass
-
 # Application definition
 
 INSTALLED_APPS = (
@@ -105,3 +100,9 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 STATIC_ROOT = '/static/'
+
+try:
+    from graphs.localsettings import *
+except ImportError as e:
+    pass
+
