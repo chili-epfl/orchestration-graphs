@@ -26,6 +26,10 @@ TEMPLATE_DEBUG = True
 
 ALLOWED_HOSTS = []
 
+try:
+    from graphs.localsettings import *
+except ImportError as e:
+    pass
 
 # Application definition
 
