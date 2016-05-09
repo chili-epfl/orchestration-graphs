@@ -4,7 +4,7 @@ Workflow engine for orchestration graphs
 How to run the server:
 * Make sure you're running Python 3
 * Install Django 1.9 (easiest way using pip: `pip install django`)
-* Install required packages `pip install -r requirements`
+* Install required packages `pip install -r requirements.txt`
 * Run `manage.py runserver` (in the graphs directory)
 * Now you can connect to e.g. `http://localhost:8000`.
 
