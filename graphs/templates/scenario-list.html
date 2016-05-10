@@ -37,14 +37,22 @@
 {% endblock meta-head %}
 {% block content %}
 
-    	<div class="row">
+            <div class="row">
+                <div class="col-lg-12">
+                    <h1 class="page-header">Existing scenarios</h1>
+                </div>
+                <!-- /.col-lg-12 -->
+            </div>
 
-			<h2>Existing scenarios</h2>
+    	<div class="row" style="padding-bottom: 15px;">
+
 
 			<a type="button"
 					class="btn btn-default mode-btn glyphicon glyphicon-plus" 
 					href="{% url 'scenario-creator' %}">Add</a>
+	</div>
 
+    	<div class="row">
 			<div class="table-responsive">
 				<table class="table table-striped">
 				<tr>
@@ -57,11 +65,11 @@
 				  <td title="Standard deviation: {{ scenario.learning_stdev }} | Variance: {{ scenario.learning_variance }}">{{ scenario.avg_learning }}</td>
 				  <td>{{ scenario.avg_time }}</td>
 				  <td>{{ scenario.num_students }}</td>
-				  <td><a href="{% url 'scenario' scenario.id %}">Preview</a>
-                      | <a href="{% url 'scenario-stats' scenario.id %}">Stats</a>
-                      | <a href="{% url 'scenario-editor' scenario.id %}">Edit</a>
-                      | <form style="display: inline;" action='{% url 'scenario-delete' scenario.id %}' method='post'>{% csrf_token %}
-                          <a href="javascript:;" onclick="parentNode.submit();">Delete</a></form></td>
+				  <td><a class="btn btn-default" href="{% url 'scenario' scenario.id %}">Preview</a>
+                      <a class="btn btn-default" href="{% url 'scenario-stats' scenario.id %}">Stats</a>
+                      <a class="btn btn-default" href="{% url 'scenario-editor' scenario.id %}">Edit</a>
+                      <form style="display: inline;" action='{% url 'scenario-delete' scenario.id %}' method='post'>{% csrf_token %}
+                          <a class="btn btn-danger" href="javascript:;" onclick="parentNode.submit();">Delete</a></form></td>
 				</tr>
 {% endfor %} 
 				</table>

@@ -1,34 +1,78 @@
 {% extends "meta-base.html" %}
 {% load staticfiles %}
+{% block css-files %}
+    <link href="{% static 'bower_components/bootstrap/dist/css/bootstrap.min.css' %}" rel="stylesheet">
+
+    <!-- MetisMenu CSS -->
+    <link href="{% static 'bower_components/metisMenu/dist/metisMenu.min.css' %}" rel="stylesheet">
+
+    <!-- Timeline CSS -->
+    <link href="{% static 'dist/css/timeline.css' %}" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <link href="{% static 'dist/css/sb-admin-2.css' %}" rel="stylesheet">
+
+    <!-- Morris Charts CSS -->
+    <link href="{% static 'bower_components/morrisjs/morris.css' %}" rel="stylesheet">
+
+    <!-- Custom Fonts -->
+    <link href="{% static 'bower_components/font-awesome/css/font-awesome.min.css' %}" rel="stylesheet" type="text/css">
+{% endblock %}
 {% block meta-head %}
 {% endblock %}
-{% block meta-body %}
 
-    <div class="container-fluid" style="padding-top: 50px;">
-      <div class="row">
-        <div class="col-sm-3 col-md-2 sidebar">
-          <ul class="nav nav-sidebar" id="scenario-menu">
-          </ul>
-          <ul class="nav nav-sidebar">
-            <!--li><a href="{% url 'teacher-dashboard' %}">Activities</a></li-->
-            <li><a href="{% url 'activity-list' %}">Activities</a></li>
-            <li><a href="{% url 'scenario-list' %}">Scenarios</a></li>
-            <!--li><a href="{% url 'scenario-creator' %}">Graph editor</a></li>-->
-          </ul>
-          <!--ul class="nav nav-sidebar">
-            <li><a href="">Nav item again</a></li>
-            <li><a href="">One more nav</a></li>
-            <li><a href="">Another nav item</a></li>
-          </ul-->
-        </div>
-        <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main" style="" >
-          <!--h1 class="page-header">Dashboard</h1-->
-                <div class="container">
-{% block content %}
-Dashboard
+
+{% block extra-navbar %}
+
+    <div class="navbar-default sidebar" role="navigation">
+                <div class="sidebar-nav navbar-collapse">
+                    <ul class="nav" id="side-menu">
+                        <!--li class="sidebar-search">
+                            <div class="input-group custom-search-form">
+                                <input type="text" class="form-control" placeholder="Search...">
+                                <span class="input-group-btn">
+                                <button class="btn btn-default" type="button">
+                                    <i class="fa fa-search"></i>
+                                </button>
+                            </span>
+                            </div>
+                        </li-->
+                        <li>
+                            <a href="{% url 'teacher-dashboard' %}"><i class="fa fa-dashboard fa-fw"></i> Dashboard</a>
+                        </li>
+                        <li>
+                            <a href="{% url 'activity-list' %}"><i class="fa fa-table fa-fw"></i> Activities</a>
+                        </li>
+                        <li>
+                            <a href="{% url 'scenario-list' %}"><i class="fa fa-edit fa-fw"></i> Scenarios</a>
+                        </li>
+                    </ul>
+                </div>
+                <!-- /.sidebar-collapse -->
+            </div>
+            <!-- /.navbar-static-side -->
 {% endblock %}
-	</div>
-        </div>
-      </div>
-    </div>
+{% block meta-body %}
+	    <div id="page-wrapper">
+{% block content %}
+            <div class="row">
+                <div class="col-lg-12">
+                    <h1 class="page-header">Dashboard</h1>
+                </div>
+                <!-- /.col-lg-12 -->
+            </div>
+{% endblock %}
+	    </div>
+{% endblock %}
+{% block extra-scripts %}
+    <!-- Metis Menu Plugin JavaScript -->
+    <script src="{% static 'bower_components/metisMenu/dist/metisMenu.min.js' %}"></script>
+
+    <!-- Morris Charts JavaScript -->
+    <script src="{% static 'bower_components/raphael/raphael-min.js' %}"></script>
+    <script src="{% static 'bower_components/morrisjs/morris.min.js' %}"></script>
+    <script src="{% static 'js/morris-data.js' %}"></script>
+
+    <!-- Custom Theme JavaScript -->
+    <script src="{% static 'dist/js/sb-admin-2.js' %}"></script>
 {% endblock %}
