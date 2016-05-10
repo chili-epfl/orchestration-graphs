@@ -57,9 +57,12 @@
     </script>
 {% endblock meta-head %}
 {% block content %}
-<div class="container">
-    <h1>{{ scenario.name }}</h1>
-    <h3>Global stats</h3>
+            <div class="row">
+                <div class="col-lg-12">
+                    <h1 class="page-header">{{ scenario.name }} - statistics</h1>
+                </div>
+                <!-- /.col-lg-12 -->
+            </div>
     <p>Number of students: {{ scenario.num_students }}</p>
     <p>Average time: {{ scenario.avg_time }}</p>
     <p>Average learning gain: {{ scenario.avg_learning }}</p>
@@ -79,9 +82,8 @@
         {% endfor %}
     {% endfor %}
     <br>
-    <button type="button" onclick="window.location.href='/scenario/csv/' + {{ scenario.pk }}">Download results CSV</button>
-    <button type="button" onclick="window.location.href='/scenario/csv/psycho/' + {{ scenario.pk }}">Download psychological results CSV</button>
-    <button type="button" onclick="window.location.href='/scenario/csv/time/' + {{ scenario.pk }}">Download time logs CSV</button>
-    <button type="button" onclick="window.location.href='/teacher/scenario/list/'">Back</button>
-</div>
+    <a class="btn btn-default" type="button" href="/scenario/csv/{{ scenario.pk }}">Download results CSV</a>
+    <a class="btn btn-default" type="button" href="/scenario/csv/psycho/{{ scenario.pk }}">Download psychological results CSV</a>
+    <a class="btn btn-default" type="button" href="/scenario/csv/time/{{ scenario.pk }}">Download time logs CSV</a>
+    <a class="btn btn-default" type="button" href="/teacher/scenario/list/">Back</a>
 {% endblock content %}

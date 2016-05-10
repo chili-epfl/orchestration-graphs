@@ -1,14 +1,18 @@
 {% extends "meta-base.html"%}
 {% load staticfiles %}
 {% block meta-body %}
-    <div class="container-fluid">
-
+    <div class="page-wrapper" style="background: #ffffff; padding-bottom: 20px;">
+      <div class="container-fluid">
 {% block content %}
-                <div class="container">
-
-
-                </div>
 
 {% endblock %}
+      </div>
     </div>
+{% endblock %}
+
+{% block extra-scripts %}
+    <script type="text/javascript">
+      $("nav").hide()
+      $("body").css("background","#ffffff");
+    </script>
 {% endblock %}
