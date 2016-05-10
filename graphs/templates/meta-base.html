@@ -10,7 +10,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Landing Page - Start Bootstrap Theme</title>
+    <title>classroom.ai - learn and improve learning</title>
 
     <!-- Bootstrap Core CSS -->
     <link rel="shortcut icon" type="image/png" href="{% static 'img/mortarboard-16.png' %}"/>
@@ -23,6 +23,8 @@
         <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
 
+  {% block meta-head %}
+  {% endblock %}
     <style>
       .main {
       padding: 20px;
@@ -32,9 +34,6 @@
 
     {% block css-files %}
     {% endblock %}
-    {% block meta-head %}
-    {% endblock %}
-    
   </head>
 
   <body>
