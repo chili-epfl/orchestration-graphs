@@ -8,7 +8,7 @@ var form;
 // Global design variables
 var graphWidth = 2000;
 var actHeight = 40;
-var actWidth = 60;
+var actWidth = 140;
 var interPlanes = 50;
 var nPlanes = 6;
 var activityFill = "#FFF";
@@ -27,7 +27,7 @@ window.onload = function () {
     selectedActRect = graph.set();
     planes = [];
     for (var i = 0; i < nPlanes; i++) {
-        planes.push(graph.path("M0 " + (i+1)*interPlanes + " L" + graphWidth + " " + (i+1)*interPlanes));
+        planes.push(graph.path("M0 " + (i+1)*interPlanes + " L" + graphWidth + " " + (i+1)*interPlanes).attr({stroke:'#BBB'}));
     };
 
     // On click on the graph in ADD mode, display activity creation form
