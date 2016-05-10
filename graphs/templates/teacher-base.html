@@ -1,29 +1,28 @@
 {% extends "meta-base.html" %}
 {% load staticfiles %}
 {% block css-files %}
-    <link href="{% static 'bower_components/bootstrap/dist/css/bootstrap.min.css' %}" rel="stylesheet">
+    <!--link href="{% static 'bower_components/bootstrap/dist/css/bootstrap.min.css' %}" rel="stylesheet"-->
 
     <!-- MetisMenu CSS -->
-    <link href="{% static 'bower_components/metisMenu/dist/metisMenu.min.css' %}" rel="stylesheet">
+    <!--link href="{% static 'bower_components/metisMenu/dist/metisMenu.min.css' %}" rel="stylesheet"-->
 
     <!-- Timeline CSS -->
-    <link href="{% static 'dist/css/timeline.css' %}" rel="stylesheet">
+    <!--link href="{% static 'dist/css/timeline.css' %}" rel="stylesheet"-->
 
     <!-- Custom CSS -->
     <link href="{% static 'dist/css/sb-admin-2.css' %}" rel="stylesheet">
 
     <!-- Morris Charts CSS -->
-    <link href="{% static 'bower_components/morrisjs/morris.css' %}" rel="stylesheet">
+    <!--link href="{% static 'bower_components/morrisjs/morris.css' %}" rel="stylesheet"-->
 
     <!-- Custom Fonts -->
-    <link href="{% static 'bower_components/font-awesome/css/font-awesome.min.css' %}" rel="stylesheet" type="text/css">
+    <!--link href="{% static 'bower_components/font-awesome/css/font-awesome.min.css' %}" rel="stylesheet" type="text/css"-->
 {% endblock %}
 {% block meta-head %}
 {% endblock %}
 
 
 {% block extra-navbar %}
-
     <div class="navbar-default sidebar" role="navigation">
                 <div class="sidebar-nav navbar-collapse">
                     <ul class="nav" id="side-menu">
@@ -64,16 +63,15 @@
 {% endblock %}
 	    </div>
 {% endblock %}
-{% block extra-scripts %}
+{% block base-scripts %}
     <!-- Metis Menu Plugin JavaScript -->
-    <script src="{% static 'bower_components/metisMenu/dist/metisMenu.min.js' %}"></script>
+    <!--script src="{% static 'bower_components/metisMenu/dist/metisMenu.min.js' %}"></script-->
 
     <!-- Custom Theme JavaScript -->
-    <script src="{% static 'dist/js/sb-admin-2.js' %}"></script>
+    <!--script src="{% static 'dist/js/sb-admin-2.js' %}"></script-->
 
     <!-- Morris Charts JavaScript -->
-    <script src="{% static 'bower_components/raphael/raphael-min.js' %}"></script>
+    <!--script src="{% static 'bower_components/raphael/raphael-min.js' %}"></script>
     <script src="{% static 'bower_components/morrisjs/morris.min.js' %}"></script>
-    <script src="{% static 'js/morris-data.js' %}"></script>
-
+    <script src="{% static 'js/morris-data.js' %}"></script-->
 {% endblock %}
