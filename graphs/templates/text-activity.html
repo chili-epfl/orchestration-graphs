@@ -1,4 +1,4 @@
-{% extends "simple-base.html" %}
+{% extends "activity-base.html" %}
 
 {% block content %}
     <div class="container">
@@ -7,9 +7,8 @@
     <div>
     {{ source }}
     </div>
-    {% if not simple %}
-        <br><br>
-<button type="button" onclick="window.location.href='/student/activity/next/'" class="btn btn-lg btn-primary">Next activity</button>
-    {% endif %}
+    {% block button %}
+        {{ block.super }}
+    {% endblock button %}
     </div>
 {% endblock content %}

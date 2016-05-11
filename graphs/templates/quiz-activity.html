@@ -1,4 +1,4 @@
-{% extends "simple-base.html" %}
+{% extends "activity-base.html" %}
 
 {% block content %}
 <div class="container">
@@ -9,9 +9,9 @@
             {{ field.label }}
             {{ field }}
         {% endfor %}
-    {% if not simple %}
-        <input type="submit" value="Submit" class="btn btn-lg btn-primary"/>
-    {% endif %}
     </form>
+{% block button %}
+    {{ block.super }}
+{% endblock button %}
 </div>
 {% endblock content %}
