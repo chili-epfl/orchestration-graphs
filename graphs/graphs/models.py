@@ -54,7 +54,11 @@ class Scenario(models.Model):
         return progress_list
 
     def num_by_gain(self, path=ALL_PATHS):
-        """Computes the number of students in each gain bracket
+        """Computes the number of students in each gain bracket. Results start from 0%, or the lowest non-empty sub-zero
+         bracket if there is one.
+
+        :param path: if specified, restricts the computation to student that have followed this specific json path
+        :return: a list of tuples containing the number of students in each bracket
         """
         progress_list = [round(p, 1)*100 for p in self.progress_data(path)]
         gain_data = []
@@ -132,6 +136,13 @@ class Scenario(models.Model):
 
 
 class Activity(models.Model):
+    """Models an activity. Activities can be of several types:
+
+        Text: simple text
+        Quiz: A test containing multiple choice questions
+        Link: An embedded web page or video
+        Psycho: A psychological test, similar to quizzes
+    """
     class Meta:
         verbose_name_plural = "activities"
 
@@ -144,7 +155,8 @@ class Activity(models.Model):
 
     name = models.CharField(max_length=50)
     type = models.CharField(max_length=8, choices=TYPE_CHOICES)
-    source = models.CharField(max_length=10000,blank = True, null=True)
+    # The 'source' field contains raw text for text activities, and a URL for link activities.
+    source = models.CharField(max_length=10000, blank=True, null=True)
 
     def __str__(self):
         return str(self.pk) + ": " + self.name
@@ -160,6 +172,7 @@ class Activity(models.Model):
 
 
 class Student(models.Model):
+    """Models a student, i.e. a participant to the experiment"""
     email = models.EmailField(max_length=50, unique=True)
     scenario = models.ForeignKey(Scenario, null=True, on_delete=models.SET_NULL)
     current_activity = models.IntegerField(default=0)  # index of current activity in the path
@@ -186,7 +199,7 @@ class Choice(models.Model):
     """Models a possible answer"""
     question = models.ForeignKey('Question', on_delete=models.CASCADE)
     text = models.CharField(max_length=100)
-    image_source = models.CharField(max_length=100,blank = True, null = True)
+    image_source = models.CharField(max_length=100, blank=True, null=True)
 
     def __str__(self):
         return self.text
@@ -204,7 +217,7 @@ class Question(models.Model):
     text = models.CharField(max_length=1000)
     image_source = models.CharField(max_length=100, blank=True, null=True)
     correct_answer = models.ForeignKey(Choice, blank=True, null=True, related_name='+')
-    activity = models.ManyToManyField(Activity, blank = True)
+    activity = models.ManyToManyField(Activity, blank=True)
 
     def __str__(self):
         limit = 50
