@@ -268,4 +268,5 @@ def get_time_csv(request, pk):
 
 def home_view(request):
     """The website's home page"""
-    return render(request, 'home.html')
+    ctx = {'scenarios': Scenario.objects.all()}
+    return render(request, 'home.html', ctx)

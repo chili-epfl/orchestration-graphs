@@ -15,9 +15,10 @@
                         <h3>Learn and improve learning</h3>
                         <hr class="intro-divider">
 			<p>What would you like to learn today?</p>
-			<form action="/student/register/"><select class="selectpicker">
-			  <option>Epidemiology</option>
-			  <!--option>Archimedes' principle</option-->
+			<form action="/student/register/" id="registration-form"><select class="selectpicker" id="scenario-select" onchange="updateButton()">
+                {% for scenario in scenarios %}
+                    <option value="{{ scenario.pk }}">{{ scenario.name }}</option>
+                {% endfor %}
 			</select>
 			<div style="margin-top: 10px;"><input type="submit" class="btn btn-danger btn-default" value="Learn now in 10 minutes!"/></div></form>
                         <!--ul class="list-inline intro-social-buttons">
@@ -52,7 +53,7 @@
                     <hr class="section-heading-spacer">
                     <div class="clearfix"></div>
                     <h2 class="section-heading">How does it work?</h2>
-                    <p class="lead">We offer short <strong>crash courses</strong> on selected topics embeded in an <strong>experimental setup</strong>. It is a great opportunity to <strong>learn new things quickly</strong> but also to contribute to personalized education.</p>
+                    <p class="lead">We offer short <strong>crash courses</strong> on selected topics embedded in an <strong>experimental setup</strong>. It is a great opportunity to <strong>learn new things quickly</strong> but also to contribute to personalized education.</p>
 		    <p class="lead">Data gathered from these quick learning sessions allows us to improve learning experience in on-line education.</p>
                 </div>
                 <div class="col-lg-5 col-lg-offset-2 col-sm-6">
@@ -171,4 +172,10 @@
     <!-- Bootstrap Core JavaScript -->
     <script src="{% static 'js/bootstrap.min.js' %}"></script>
 
+    <script type="text/javascript">
+        function updateButton(){
+            document.getElementById('registration-form').action = '/student/register/scenario/' + document.getElementById('scenario-select').value;
+        }
+        updateButton();
+    </script>
 {% endblock  %}
