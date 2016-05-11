@@ -135,6 +135,13 @@ class Scenario(models.Model):
             return "N/A"
 
 
+class ActivityGroup(models.Model):
+    name = models.CharField(max_length=50)
+
+    def __str__(self):
+        return self.name
+
+
 class Activity(models.Model):
     """Models an activity. Activities can be of several types:
 
@@ -157,6 +164,8 @@ class Activity(models.Model):
     type = models.CharField(max_length=8, choices=TYPE_CHOICES)
     # The 'source' field contains raw text for text activities, and a URL for link activities.
     source = models.CharField(max_length=10000, blank=True, null=True)
+    description = models.CharField(max_length=1000, blank=True, null=True)
+    group = models.ManyToManyField(ActivityGroup, blank=True)
 
     def __str__(self):
         return str(self.pk) + ": " + self.name

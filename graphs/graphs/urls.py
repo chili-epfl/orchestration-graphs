@@ -3,8 +3,7 @@ from django.views.generic import TemplateView
 from django.conf.urls.static import static
 from django.conf import settings
 from activities.views import next_activity, activity_view, simple_activity
-from graphs.views import ScenarioCreateView, ScenarioUpdateView, ScenarioDeleteView, ActivityCreateView,ActivityUpdateView, ActivityDeleteView, ScenarioDetailView, student_registration,\
-    student_learning, stats_view, get_csv, get_psycho_csv, get_time_csv, home_view
+from graphs.views import *
 from django.contrib.auth.decorators import login_required
 from django.views.generic.list import ListView
 from graphs.models import Scenario, Activity

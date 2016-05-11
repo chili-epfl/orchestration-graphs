@@ -1,16 +1,18 @@
 # -*- coding: utf-8 -*-
 from django.contrib import admin
 from graphs.models import *
-from django.utils.translation import ugettext_lazy as _
 
 admin.site.register(Scenario)
 
 
 class ActivityAdmin(admin.ModelAdmin):
-    list_display = ('name','type', 'source')
+    list_display = ('name', 'type', 'source')
+    list_filter = ('group',)
+    filter_horizontal = ('group',)
 
 admin.site.register(Activity, ActivityAdmin)
 
+admin.site.register(ActivityGroup)
 
 admin.site.register(Answer)
 
@@ -50,6 +52,7 @@ admin.site.register(Choice, ChoiceAdmin)
 
 class TimeLogAdmin(admin.ModelAdmin):
     list_display = ('get_email', 'get_activity', 'start_time', 'end_time')
+
     def get_email(self, obj):
         return obj.student.email
     get_email.short_description = 'Student'
