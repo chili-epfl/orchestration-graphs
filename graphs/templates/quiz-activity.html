@@ -1,7 +1,7 @@
 {% extends "activity-base.html" %}
 
-{% block content %}
-<div class="container">
+{% block inner-content %}
+
     <h1>{{ title }}</h1>
     <form method="POST" class="post-form">
         {% csrf_token %}
@@ -10,8 +10,5 @@
             {{ field }}
         {% endfor %}
     </form>
-{% block button %}
-    {{ block.super }}
-{% endblock button %}
-</div>
-{% endblock content %}
+
+{% endblock inner-content %}

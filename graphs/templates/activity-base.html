@@ -1,10 +1,14 @@
 {% extends "simple-base.html" %}
 
 {% block content %}
-{% block button %}
-{% if not simple %}
-        <br><br>
-<button type="button" onclick="window.location.href='/student/activity/next/'" class="btn btn-lg btn-primary">Next activity</button>
-{% endif %}
-{% endblock button %}
+    <div class="container">
+    {% block inner-content %}
+    {% endblock inner-content %}
+    {% block button %}
+        {% if not simple %}
+            <br><br>
+            <button type="button" onclick="window.location.href='/student/activity/next/'" class="btn btn-lg btn-primary">Next activity</button>
+        {% endif %}
+    {% endblock button %}
+    </div>
 {% endblock content %}

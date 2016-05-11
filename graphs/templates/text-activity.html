@@ -1,14 +1,11 @@
 {% extends "activity-base.html" %}
 
-{% block content %}
-    <div class="container">
+{% block inner-content %}
+
     <h1>{{ title }}</h1>
     <br>
     <div>
     {{ source }}
     </div>
-    {% block button %}
-        {{ block.super }}
-    {% endblock button %}
-    </div>
-{% endblock content %}
+
+{% endblock inner-content %}
