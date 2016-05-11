@@ -36,7 +36,6 @@ urlpatterns = patterns('',
 
     url(r'^activity/(?P<pk>\w+)/$', activity_view, name="activity"),
     url(r'^activity/simple/(?P<pk>\w+)/$', simple_activity, name="activity"),
-    # url(r'^blog/', include('blog.urls')),
 
     url(r'^accounts/login/$', 'django.contrib.auth.views.login', name='login'),
     url(r'^accounts/logout/$', 'django.contrib.auth.views.logout', {'next_page': '/teacher/scenario/list/'}, name='logout'),
