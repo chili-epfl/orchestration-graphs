@@ -4,6 +4,7 @@ from django.utils.safestring import mark_safe
 
 
 class StudentRegistrationForm(ModelForm):
+    """Form for registering to the experiment"""
     class Meta:
         model = Student
         fields = ['email']
@@ -51,7 +52,7 @@ class QuizForm(ModelForm):
 
 
 class PsychoForm(Form):
-    """Form for psychological test. Saves the answers as is instead of computing a score since there are no right or
+    """Form for psychological test. Saves each answer as is instead of computing a score since there are no right or
     wrong answers.
     """
     def __init__(self, *args, **kwargs):
