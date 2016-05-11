@@ -25,6 +25,7 @@ def activity_view(request, pk, simple_layout=False):
             return HttpResponseRedirect('/student/register/')
 
     activity = Activity.objects.get(pk=pk)
+    student = Student.objects.get(pk=request.session['user_id'])
     tpe = activity.type
     ctx = {'source': activity.source, 'title': activity.name}
     base_template = 'base.html'
@@ -34,6 +35,7 @@ def activity_view(request, pk, simple_layout=False):
         ctx['simple'] = True
 
     ctx['base_template'] = base_template
+    ctx['percentage'] = (student.current_activity/len(student.path_list()))*100
 
     if tpe == 'text':
         return render(request, 'text-activity.html', context=ctx)
@@ -117,6 +119,7 @@ def quiz_activity(request, activity, simple_layout=False):
         ctx['simple'] = True
 
     ctx['base_template'] = base_template
+    ctx['percentage'] = (student.current_activity/len(student.path_list()))*100
 
     if request.method == 'POST':
         form = QuizForm(request.POST, quiz=activity, student=student)
@@ -145,6 +148,7 @@ def psycho_activity(request, activity, simple_layout=False):
         ctx['simple'] = True
 
     ctx['base_template'] = base_template
+    ctx['percentage'] = (student.current_activity/len(student.path_list()))*100
 
     if request.method == 'POST':
         form = PsychoForm(request.POST, test=activity, student=student)
