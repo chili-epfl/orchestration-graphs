@@ -2,16 +2,15 @@
 {% load staticfiles %}
     {% block content %}
 
-            <div class="row">
-                <div class="col-lg-12">
-	{% if activity.id %}
-	<h1>Editing {{ activity.type | title }} Activity {{ activity.id }}</h1>
-	{% else %}
-	<h1>Create Activity</h1>
-	{% endif %}
-                </div>
-                <!-- /.col-lg-12 -->
-            </div>
+    <div class="row">
+        <div class="col-lg-12">
+			{% if activity.id %}
+			<h1 class="page-header">Editing {{ activity.type | title }} Activity {{ activity.id }}</h1>
+			{% else %}
+			<h1 class="page-header">Creating New Activity</h1>
+			{% endif %}
+        </div>
+    </div>
 
 	<form id="activityForm" action="{{ action }}" method="post">{% csrf_token %}
 	    {{ form.as_p }}
