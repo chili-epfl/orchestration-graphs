@@ -13,21 +13,31 @@ def activity_view(request, pk, simple_layout=False):
     :param simple_layout: Whether the activity should be displayed in a basic way or with the header, buttons, etc.
     """
 
-    if not request.user.is_superuser:
-        if 'user_id' in request.session:
-            try:
-                student = Student.objects.get(pk=request.session['user_id'])
-                if not student.get_current_activity() == Activity.objects.get(pk=pk):
-                    return user_activity()
-            except ObjectDoesNotExist:
+    ctx = {}
+
+    # Checking that the current user is allowed to view this activity
+    if 'user_id' in request.session:
+        try:
+            student = Student.objects.get(pk=request.session['user_id'])
+            ctx['percentage'] = (student.current_activity/len(student.path_list()))*100
+            if not student.get_current_activity() == Activity.objects.get(pk=pk) and not request.user.is_staff:
+                return user_activity()
+            elif request.user.is_staff:
+                simple_layout = True
+        except ObjectDoesNotExist:
+            if request.user.is_staff:
+                simple_layout = True
+            else:
                 return HttpResponseRedirect('/student/register/')
-        else:
-            return HttpResponseRedirect('/student/register/')
+    elif request.user.is_staff:
+        simple_layout = True
+    else:
+        return HttpResponseRedirect('/student/register/')
 
     activity = Activity.objects.get(pk=pk)
-    student = Student.objects.get(pk=request.session['user_id'])
     tpe = activity.type
-    ctx = {'source': activity.source, 'title': activity.name}
+    ctx['source'] = activity.source
+    ctx['title'] = activity.name
     base_template = 'base.html'
 
     if simple_layout:
@@ -35,7 +45,6 @@ def activity_view(request, pk, simple_layout=False):
         ctx['simple'] = True
 
     ctx['base_template'] = base_template
-    ctx['percentage'] = (student.current_activity/len(student.path_list()))*100
 
     if tpe == 'text':
         return render(request, 'text-activity.html', context=ctx)
