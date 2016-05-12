@@ -5,7 +5,7 @@
             <div class="row">
                 <div class="col-lg-12">
 	{% if activity.id %}
-	<h1>Edit Activity {{ activity.id }}</h1>
+	<h1>Editing {{ activity.type | title }} Activity {{ activity.id }}</h1>
 	{% else %}
 	<h1>Create Activity</h1>
 	{% endif %}
@@ -16,12 +16,12 @@
 	<form id="activityForm" action="{{ action }}" method="post">{% csrf_token %}
 	    {{ form.as_p }}
 		<p id="contentField">
-	    	<label for="content">Content:</label>
-	    	<textarea id="content" cols="40" rows="6" name="content"></textarea>
+	    	<label>Content:</label>
+	    	<textarea id="content" cols="40" rows="6"></textarea>
 	    </p>
 	    <p id="sourceField">
-	    	<label for="source">URL:</label>
-	    	<input id="source" maxlength="500" name="source" type="text">
+	    	<label>URL:</label>
+	    	<input id="source" maxlength="500" type="url">
 	    </p>
 
 	    <button class="btn btn-primary" type="button" onclick="saveScenario()">Save</button>
@@ -48,9 +48,6 @@
 				$('#contentField').hide();
 				$('#sourceField').show();
 				break;
-			case 'quiz' || 'psycho':
-				$('#contentField').hide();
-				$('#sourceField').hide();
 			default:
 				$('#contentField').hide();
 				$('#sourceField').hide();
@@ -73,6 +70,7 @@
 		}
 
 	    // Submit form to save changes
+		console.log($('#id_source').val());
 	    document.getElementById('activityForm').submit();
 	}
     </script>

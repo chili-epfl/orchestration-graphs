@@ -67,7 +67,7 @@ class ActivityUpdateView(LoginRequiredMixin, UpdateView):
     def get_form(self, form_class):
         form = super(ActivityUpdateView, self).get_form(form_class)
         # Impossible to change type when editing an activity
-        form.fields['type'].widget.attrs['disabled'] = True
+        form.fields['type'].widget = forms.HiddenInput()
         form.fields['source'].widget = forms.HiddenInput()
         return form
 
