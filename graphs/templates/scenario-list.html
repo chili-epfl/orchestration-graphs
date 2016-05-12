@@ -56,11 +56,10 @@
 			<div class="table-responsive">
 				<table class="table table-striped">
 				<tr>
-				<th>Scenario group</th><th>Scenario</th><th>Avg. learning gain</th><th>Avg time</th><th># students</th><th>Actions</th>
+				<th>Scenario</th><th>Avg. learning gain</th><th>Avg time</th><th># students</th><th>Actions</th>
 				</tr>
 {% for scenario in object_list %} 
 				<tr>
-				  <td>{{ scenario.group }}</td>
 				  <td>{{ scenario.name }}</td>
 				  <td title="Standard deviation: {{ scenario.learning_stdev }} | Variance: {{ scenario.learning_variance }}">{{ scenario.avg_learning }}</td>
 				  <td>{{ scenario.avg_time }}</td>
