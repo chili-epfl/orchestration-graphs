@@ -20,7 +20,7 @@
 	    	<textarea id="content" cols="40" rows="6" name="content"></textarea>
 	    </p>
 	    <p id="sourceField">
-	    	<label for="source">Source:</label>
+	    	<label for="source">URL:</label>
 	    	<input id="source" maxlength="500" name="source" type="text">
 	    </p>
 
@@ -31,29 +31,24 @@
     {% block extra-scripts %}
 
     <script>
-    adaptFormToActivityType($('#activityForm #id_type').val())
+    adaptFormToActivity($('#activityForm #id_type').val())
 	$('#activityForm #id_type').change(function() {
-		adaptFormToActivityType($('#activityForm #id_type').val());
+		adaptFormToActivity($('#activityForm #id_type').val());
 	});
 
-	function adaptFormToActivityType(type) {
+	function adaptFormToActivity(type) {
 		switch (type) {
 			case 'text':
-				$('option[value="quiz"]').attr('disabled', 'disabled');
-				$('option[value="psycho"]').attr('disabled', 'disabled');
 				$('#content').val($('#id_source').val());
 				$('#contentField').show();
 				$('#sourceField').hide();
 				break;
 			case 'link':
-				$('option[value="quiz"]').attr('disabled', 'disabled');
-				$('option[value="psycho"]').attr('disabled', 'disabled');
 				$('#source').val($('#id_source').val());
 				$('#contentField').hide();
 				$('#sourceField').show();
 				break;
 			case 'quiz' || 'psycho':
-				$('#id_type').attr('disabled', 'disabled');
 				$('#contentField').hide();
 				$('#sourceField').hide();
 			default:

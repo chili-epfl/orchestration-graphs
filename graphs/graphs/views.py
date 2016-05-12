@@ -61,11 +61,13 @@ class ActivityUpdateView(LoginRequiredMixin, UpdateView):
     """UpdateView subclass for the activity editor"""
     model = Activity
     template_name = 'activity-editor.html'
-    fields = ['name', 'type', 'source']
+    fields = ['name', 'type', 'source', 'description']
     success_url = reverse_lazy("activity-list")
 
     def get_form(self, form_class):
         form = super(ActivityUpdateView, self).get_form(form_class)
+        # Impossible to change type when editing an activity
+        form.fields['type'].widget.attrs['disabled'] = True
         form.fields['source'].widget = forms.HiddenInput()
         return form
 
@@ -82,11 +84,12 @@ class ActivityCreateView(LoginRequiredMixin, CreateView):
     """CreateView subclass for the activity editor"""
     model = Activity
     template_name = 'activity-editor.html'
-    fields = ['name', 'type', 'source']
+    fields = ['name', 'type', 'source', 'description']
     success_url = reverse_lazy('activity-list')
 
     def get_form(self, form_class):
         form = super(ActivityCreateView, self).get_form(form_class)
+        # Impossible to create Quiz or Psycho via the form
         form.fields['type'].widget.choices.remove(('quiz', 'Quiz'))
         form.fields['type'].widget.choices.remove(('psycho', 'Psycho'))
         form.fields['source'].widget = forms.HiddenInput()
