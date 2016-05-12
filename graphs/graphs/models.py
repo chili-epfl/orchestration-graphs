@@ -8,7 +8,6 @@ from django.utils.safestring import mark_safe
 class Scenario(models.Model):
     """Models a scenario and its graph of activities"""
     ALL_PATHS = 'all'
-    group = models.CharField(max_length=50)
     name = models.CharField(max_length=50)
     json = models.TextField()
     raphaelJson = models.TextField()
