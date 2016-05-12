@@ -3,12 +3,12 @@
  *
  */
 function selectActivity(activitySet) {
+
     // Select/Deselect the activity
     if (activitySet[0].selected == false) {
         activitySet.forEach(function(elem) {
             elem.selected = true;
             if (elem.type === 'rect') {
-                elem.attr({fill: activitySelectFill});
                 selectedActRect.push(elem);
             }
         });
@@ -27,10 +27,10 @@ function selectActivity(activitySet) {
  *
  */
 function deselectActivity(activitySet) {
+    unfocusActivity(activitySet);
     activitySet.forEach(function(elem) {
         elem.selected = false;
         if (elem.type === 'rect') {
-            elem.attr({fill: activityFill});
             selectedActRect.exclude(elem);
         }
     });
@@ -128,10 +128,10 @@ Raphael.fn.connection = function (obj1, obj2, line, bg) {
         line.bg && line.bg.attr({path: path});
         line.line.attr({path: path});
     } else {
-        var color = typeof line == "string" ? line : "#000";
+        var color = typeof line == "string" ? line : "#888";
         return {
             bg: bg && bg.split && this.path(path).attr({stroke: bg.split("|")[0], fill: "none", "stroke-width": bg.split("|")[1] || 3}),
-            line: this.path(path).attr({stroke: color, "stroke-width": 2, fill: "none"}),
+            line: this.path(path).attr({stroke: color, "stroke-width": 3, "arrow-end": "classic-wide-long", fill: "none"}),
             from: obj1,
             to: obj2
         };

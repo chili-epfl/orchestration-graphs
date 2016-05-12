@@ -7,16 +7,20 @@
 function activity(x, y, name, type, url, dbid) {
     // Creates a set containing a new Raphael rectangle and a new Raphael text
     var activitySet = graph.set();
-    var activityRect = graph.rect(x - actWidth/2, reposition(y - actHeight/2), actWidth, actHeight);
+    var activityRect = graph.rect(x - actWidth/2, reposition(y - actHeight/2), actWidth, actHeight, actRadius);
     activityRect.attr({
         fill: activityFill,
+        stroke: "#BBB",
         "stroke-width": 2,
         title: type,
         href: url
     });
 
-    var activityText = graph.text(x, reposition(y - actHeight/2) + actHeight/2, correctTextSize(name));
-    activityText.attr({fill: "#000"});
+    var activityText = graph.text(x, reposition(y - actHeight/2) + actHeight/2)
+    activityText.attr({
+        fill: activityTextColor,
+    });
+    correctTextSize(activityText, name);
     activitySet.push(activityRect, activityText);
 
     // Add custom attributes to Raphael elements
@@ -33,6 +37,10 @@ function activity(x, y, name, type, url, dbid) {
     activitySet.click(function(event) {
         handleClickOnActivity(event, activitySet);  // SELECT/ERASE mode
     });
+    activitySet.hover(
+        function(e) { focusActivity(activitySet) },
+        function(e) { unfocusActivity(activitySet)},
+        activityRect, activityRect);
 
     // Adds the new set to the global set of activities
     graphActivities.push(activitySet);
@@ -75,16 +83,16 @@ function submitNewGraphActivity() {
  * Format activity title size
  *
  */
-function correctTextSize(text) {
-    var midTextSize = (text.length - text.length%2)/2;
-    var thirdTextSize = (text.length - text.length%3)/3
-    return text;
-    if (text.length <10) {
-        return text;
-    } else if (text.length < 20) {
-        return text.substring(0,midTextSize).concat("\n").concat(text.substring(midTextSize,text.length));
-    } else {
-        return text.substring(0,thirdTextSize).concat("\n").concat(text.substring(thirdTextSize,thirdTextSize*2)).concat("\n").concat(text.substring(thirdTextSize*2,text.length));
+function correctTextSize(t, text) {
+    var words = text.split(" ");
+    var tempText = "";
+    for (var i=0; i<words.length; i++) {
+        t.attr("text", tempText + " " + words[i]);
+        if (t.getBBox().width > actWidth) {
+            tempText += "\n" + words[i];
+        } else {
+            tempText += " " + words[i];
+        }
     }
-    
+    t.attr("text", tempText.substring(1));
 }

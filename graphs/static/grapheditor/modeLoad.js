@@ -8,7 +8,6 @@ function loadScenario(raphaelJson) {
     // Parse input as JSON
     var json = JSON.parse(decodeHtml(raphaelJson)).slice(6);
 
-    console.log(json);
     counterMap = {};
 
     // Generate graph from JSON
@@ -32,6 +31,10 @@ function loadScenario(raphaelJson) {
             activitySet.click(function(event) {
                 handleClickOnActivity(event, activitySet);
             });
+            activitySet.hover(
+                function(e) { focusActivity(activitySet) },
+                function(e) { unfocusActivity(activitySet)},
+                activityRect, activityRect);
             graphActivities.push(activitySet);
         }
 

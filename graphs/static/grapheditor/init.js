@@ -8,11 +8,14 @@ var form;
 // Global design variables
 var graphWidth = 2000;
 var actHeight = 40;
-var actWidth = 140;
+var actWidth = 100;
+var actRadius = 10;
 var interPlanes = 50;
 var nPlanes = 6;
-var activityFill = "#FFF";
-var activitySelectFill = "#AAA";
+var activityFill = "#FFFFFF";
+var activitySelectFill = "#D4D4D4";
+var activityTextColor = "#0080CF";
+var activitySelectTextColor = "#26537A";
 
 /**
  * Executed on load:
@@ -117,7 +120,7 @@ function handleClickOnActivity(event, actSet) {
 function handleClickOnConnection(event, line) {
     if (MODE == "ERASE") {
         for (var i = 0; i < connections.length; i++) {
-            if (connections[i].line.id == this.id) {
+            if (connections[i].line.id == line.id) {
                 eraseConnection(connections[i], i);
             }
         }
@@ -142,4 +145,24 @@ function getPosition(element) {
         element = element.offsetParent;
     }
     return { x: xPosition, y: yPosition };
+}
+
+function focusActivity(activitySet) {
+    activitySet.forEach(function(elem) {
+        if (elem.type === 'rect') {
+            elem.attr({fill: activitySelectFill});
+        } else if (elem.type === 'text') {
+            elem.attr({fill: activitySelectTextColor});
+        }
+    });
+}
+
+function unfocusActivity(activitySet) {
+    activitySet.forEach(function(elem) {
+        if (elem.type === 'rect' && elem.selected === false) {
+            elem.attr({fill: activityFill});
+        } else if (elem.type === 'text' && elem.selected === false) {
+            elem.attr({fill: activityTextColor});
+        }
+    });
 }
