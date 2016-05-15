@@ -3,7 +3,6 @@
  *
  */
 function eraseActivity(activitySet) {
-    console.log("erase activity")
     activitySet.forEach(function(elem) {
         if (elem.type === 'rect') {
             // Delete all connections related to the activity

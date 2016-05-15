@@ -15,7 +15,7 @@ function activity(x, y, name, type, url, dbid) {
 
     // Create text containing activity name
     var activityText = graph.text(x, reposition(y - actHeight/2) + actHeight/2)
-                            .attr({ fill: activityTextColor });
+                            .attr({ "font-size": "13px", fill: activityTextColor, cursor: "pointer" });
     activityText.description = "actText";
     correctTextSize(activityText, name);
 
@@ -24,7 +24,7 @@ function activity(x, y, name, type, url, dbid) {
                                  .attr({fill: "#FF4E53", "stroke-width": 0, cursor: "pointer"});
     activityDelCircle.description = "actDelCircle";
     var activityDelText = graph.text(x + actWidth/2, reposition(y - actHeight/2), "X")
-                                 .attr({fill: "#FFFFFF", cursor: "pointer"});
+                                 .attr({fill: "#FFFFFF"});
     activityDelText.description = "actDelText";
     graph.set().push(activityDelCircle, activityDelText).hide();
     graph.set().push(activityDelCircle, activityDelText).click(function(event) {
@@ -32,15 +32,22 @@ function activity(x, y, name, type, url, dbid) {
     });
     
     activitySet.push(activityRect, activityText, activityDelCircle, activityDelText);
+    activitySet.attr("cursor", "pointer");
 
     activitySet.hover(
         function() { activityDelCircle.show(); activityDelText.show(); },
         function() { activityDelCircle.hide(); activityDelText.hide(); }
     );
 
+    $([activityRect.node, activityText.node]).contextMenu({
+            menu:     'menuContext',
+            onSelect: onContextMenuItemSelect
+    });
+
     // Add custom attributes to Raphael elements
     counterMap[dbid] = counterMap[dbid] + 1 || 1;
     activitySet.forEach(function(elem) {
+        elem.node.setAttribute("raphael", elem.id);
         elem.dbid = dbid;
         elem.counter = counterMap[dbid];
         elem.activitySet = activitySet; // allows the drag method to apply on the whole set

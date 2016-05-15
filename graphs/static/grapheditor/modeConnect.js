@@ -3,22 +3,30 @@
  *
  */
 function selectActivity(activitySet) {
-
-    // Select/Deselect the activity
-    if (activitySet[0].selected == false) {
+    if (!selectedActRect[0] || activitySet[0].id != selectedActRect[0].id) {
+        // Select/Deselect the activity
         activitySet.forEach(function(elem) {
             elem.selected = true;
             if (elem.type === 'rect') {
                 selectedActRect.push(elem);
             }
         });
+
+        if (selectedActRect.length == 1 && !possibleConnection) {
+            possibleConnection = graph.connection(selectedActRect[0], cursor);
+            possibleConnection.line.attr("opacity", 0.5);
+        }
+        // When two activities are selected and not already connected, connect them
+        if (selectedActRect.length == 2 && checkConnection) {
+            connectActivities();
+            deselectAllActivities();
+            possibleConnection.line.remove();
+            possibleConnection = null;
+        }
     } else {
-        deselectActivity(activitySet);
-    }
-    // When two activities are selected and not already connected, connect them
-    if (selectedActRect.length == 2 && checkConnection) {
-        connectActivities();
         deselectAllActivities();
+        possibleConnection.line.remove();
+        possibleConnection = null;
     }
 }
 
@@ -43,19 +51,18 @@ function checkConnection() {
     var existingConnections = 0;
     for (var i = 0; i < connections.length; i++) {
         if (connections[i].from.id == selectedActRect[0].id && connections[i].to.id == selectedActRect[1].id) {
-            existingConnections ++;
+            return false;
         }
     }
-    return existingConnections == 0;
+    return true;
 }
 
 /**
  * Creates a new connection between the two selected activities
  *
  */
-function connectActivities(description) {
+function connectActivities() {
     newConnection = graph.connection(selectedActRect[0], selectedActRect[1]);
-    newConnection.line.attr({title: description});
     newConnection.line.startingRect = selectedActRect[0].id;
     newConnection.line.endingRect = selectedActRect[1].id;
     connections.push(newConnection);

@@ -6,7 +6,7 @@ function decodeHtml(html) {
 
 function loadScenario(raphaelJson) {
     // Parse input as JSON
-    var json = JSON.parse(decodeHtml(raphaelJson)).slice(6);
+    var json = JSON.parse(decodeHtml(raphaelJson)).slice(7);
 
     counterMap = {};
 
@@ -26,20 +26,28 @@ function loadScenario(raphaelJson) {
             var activityDelCircle = graph.getById(el.id - 1);
             activityDelCircle.description = "actDelCircle";
             var activityDelText = el;
+            activityDelText.description = "actDelText";
             graph.set().push(activityDelCircle, activityDelText).hide();
             graph.set().push(activityDelCircle, activityDelText).click(function(event) {
                 eraseActivity(activitySet);
             });
 
             activitySet.push(activityRect, activityText, activityDelCircle, activityDelText);
+            activitySet.attr("cursor", "pointer");
+            
+            activitySet.hover(
+                function() { activityDelCircle.show(); activityDelText.show(); },
+                function() { activityDelCircle.hide(); activityDelText.hide(); }
+            );
 
-        activitySet.hover(
-            function() { activityDelCircle.show(); activityDelText.show(); },
-            function() { activityDelCircle.hide(); activityDelText.hide(); }
-        );
+            $([activityRect.node, activityText.node]).contextMenu({
+                    menu:     'menuContext',
+                    onSelect: onContextMenuItemSelect
+            });
 
             counterMap[data.dbid] = counterMap[data.dbid] + 1 || 1;
             activitySet.forEach(function(elem) {
+                elem.node.setAttribute("raphael", elem.id);
                 elem.dbid = data.dbid;
                 elem.counter = counterMap[data.dbid];
                 elem.activitySet = activitySet;

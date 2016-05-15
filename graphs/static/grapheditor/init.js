@@ -16,6 +16,8 @@ var activityFill = "#FFFFFF";
 var activitySelectFill = "#D4D4D4";
 var activityTextColor = "#0080CF";
 var activitySelectTextColor = "#26537A";
+var possibleConnection = null;
+
 
 /**
  * Executed on load:
@@ -36,13 +38,41 @@ window.onload = function () {
         planes.push(graph.path("M0 " + (i+1)*interPlanes + " L" + graphWidth + " " + (i+1)*interPlanes).attr({stroke:'#BBB'}));
     };
 
-    // On click on the graph, display activity creation form
+    cursor = graph.rect(0, 0, actWidth, actHeight).hide();
+    $("#graph").mousemove(function(e) {
+        // If move on graph
+        if (graph.getElementByPoint(e.clientX, e.clientY) == null ||
+            graph.getElementByPoint(e.clientX, e.clientY) == undefined ||
+            graph.getElementByPoint(e.clientX, e.clientY).id < 7) {
+            cursor.attr({x: e.offsetX-actWidth/2, y: e.offsetY-actHeight/2});
+        // If move on activity
+        } else {
+            hoverActRect = graph.getElementByPoint(e.clientX, e.clientY);
+            if (hoverActRect.activitySet && hoverActRect.activitySet[0]) {
+                cursor.attr({x: hoverActRect.activitySet[0].attr("x"),
+                             y: hoverActRect.activitySet[0].attr("y")});
+            }
+        }
+        if (possibleConnection) {
+            graph.connection(possibleConnection);
+        }
+    });
+
+    // On click on the graph
     $("#graph").on('click', function (e) {
         if (preventActivityCreation == false &&
             (graph.getElementByPoint(e.clientX, e.clientY) == null ||
-            graph.getElementByPoint(e.clientX, e.clientY).id < 6)) {
-            var parentPos = getPosition(e.currentTarget);
-            newActivityChoice(e.clientX - parentPos.x, e.clientY - parentPos.y);
+            graph.getElementByPoint(e.clientX, e.clientY).id < 7)) {
+            // If connecting, delete possible connection
+            if (possibleConnection) {
+                deselectAllActivities();
+                possibleConnection.line.remove();
+                possibleConnection = null;
+            // Else, create new activity
+            } else {
+                var parentPos = getPosition(e.currentTarget);
+                newActivityChoice(e.clientX - parentPos.x, e.clientY - parentPos.y);
+            }
         }
     });
 
@@ -83,6 +113,9 @@ function getStartActivityId() {
  */
 function handleClickOnActivity(event, actSet) {
     event.preventDefault();
+    if (possibleConnection) {
+        selectActivity(actSet);
+    }
 }
 
 function handleClickOnConnection(event, line) {
@@ -115,3 +148,17 @@ function getPosition(element) {
     return { x: xPosition, y: yPosition };
 }
 
+function onContextMenuItemSelect (menuitem, target, href, pos) {
+    var activitySet = graph.getById(target.get(0).getAttribute("raphael")).activitySet;
+    var action = menuitem.attr("name");
+
+    switch (action) {
+        case 'edit': editActivityChoice(activitySet); break;
+        case 'connect': 
+            console.log(possibleConnection);
+            if (possibleConnection == null) {
+                selectActivity(activitySet);
+            }
+            break;
+    }
+}

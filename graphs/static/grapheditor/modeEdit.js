@@ -4,7 +4,6 @@
  */
 function editActivityChoice(activitySet) {
 	inspectedActivity = activitySet;
-    console.log(inspectedActivity);
     $('#activitySelector').val(activitySet[0].dbid);
     $('#activityChoice').modal('show');
 }
@@ -17,7 +16,7 @@ function submitEditedGraphActivity() {
     activity = dbActivities[$('#activitySelector').val()]
     $('#activityChoice').modal('hide');
     
-    inspectedActivity[1].attr('text', activity[0]);
+    correctTextSize(inspectedActivity[1], activity[0]);
     inspectedActivity[0].attr('title', activity[1]);
     inspectedActivity[0].attr('href', activity[2]);
 
