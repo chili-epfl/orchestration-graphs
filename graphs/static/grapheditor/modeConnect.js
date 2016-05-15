@@ -27,7 +27,6 @@ function selectActivity(activitySet) {
  *
  */
 function deselectActivity(activitySet) {
-    unfocusActivity(activitySet);
     activitySet.forEach(function(elem) {
         elem.selected = false;
         if (elem.type === 'rect') {

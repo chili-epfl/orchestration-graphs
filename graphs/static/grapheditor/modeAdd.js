@@ -1,27 +1,42 @@
 /**
- * Constructs a new activity set and adds it to the current graph
+ * Construct a new activity set and add it to the current graph
  * x, y                     position of the new activity on the graph
  * name, type, url, dbid    of the activity defined in the activity form
  * 
  */
 function activity(x, y, name, type, url, dbid) {
-    // Creates a set containing a new Raphael rectangle and a new Raphael text
+    // Create a set containing the elements for the activity
     var activitySet = graph.set();
-    var activityRect = graph.rect(x - actWidth/2, reposition(y - actHeight/2), actWidth, actHeight, actRadius);
-    activityRect.attr({
-        fill: activityFill,
-        stroke: "#BBB",
-        "stroke-width": 2,
-        title: type,
-        href: url
-    });
+    
+    // Create activity rectangle
+    var activityRect = graph.rect(x - actWidth/2, reposition(y - actHeight/2), actWidth, actHeight, actRadius)
+                            .attr({ fill: activityFill, stroke: "#BBB", "stroke-width": 2, title: type, href: url });
+    activityRect.description = "actRect";
 
+    // Create text containing activity name
     var activityText = graph.text(x, reposition(y - actHeight/2) + actHeight/2)
-    activityText.attr({
-        fill: activityTextColor,
-    });
+                            .attr({ fill: activityTextColor });
+    activityText.description = "actText";
     correctTextSize(activityText, name);
-    activitySet.push(activityRect, activityText);
+
+    // Create the delete button
+    var activityDelCircle = graph.circle(x + actWidth/2, reposition(y - actHeight/2), 7)
+                                 .attr({fill: "#FF4E53", "stroke-width": 0, cursor: "pointer"});
+    activityDelCircle.description = "actDelCircle";
+    var activityDelText = graph.text(x + actWidth/2, reposition(y - actHeight/2), "X")
+                                 .attr({fill: "#FFFFFF", cursor: "pointer"});
+    activityDelText.description = "actDelText";
+    graph.set().push(activityDelCircle, activityDelText).hide();
+    graph.set().push(activityDelCircle, activityDelText).click(function(event) {
+        eraseActivity(activitySet);
+    });
+    
+    activitySet.push(activityRect, activityText, activityDelCircle, activityDelText);
+
+    activitySet.hover(
+        function() { activityDelCircle.show(); activityDelText.show(); },
+        function() { activityDelCircle.hide(); activityDelText.hide(); }
+    );
 
     // Add custom attributes to Raphael elements
     counterMap[dbid] = counterMap[dbid] + 1 || 1;
@@ -37,16 +52,24 @@ function activity(x, y, name, type, url, dbid) {
     activitySet.click(function(event) {
         handleClickOnActivity(event, activitySet);  // SELECT/ERASE mode
     });
-    activitySet.hover(
-        function(e) { focusActivity(activitySet) },
-        function(e) { unfocusActivity(activitySet)},
-        activityRect, activityRect);
 
     // Adds the new set to the global set of activities
     graphActivities.push(activitySet);
+}
 
-    // Default return to MOVE mode
-    changeMode("MOVE");
+function createDeleteButton(activitySet, x, y) {
+    var activityDelCircle = graph.circle(x + actWidth/2, reposition(y - actHeight/2), 7).attr({fill: "#FF4E53", "stroke-width": 0});
+    activityDelCircle.description = "actDelButton";
+    activitySet.push(activityDelCircle);
+    
+    var activityDelText = graph.text(x + actWidth/2, reposition(y - actHeight/2), "X").attr("fill", "#FFFFFF");
+    activityDelText.description = "actDelText";
+    activitySet.push(activityDelText);
+    
+    res = graph.set().push(activityDelCircle, activityDelText);
+    res.attr("cursor", "pointer").hide();
+
+    return res;
 }
 
 

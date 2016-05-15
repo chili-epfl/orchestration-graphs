@@ -1,4 +1,4 @@
-var graph, MODE, graphActivities;
+var graph, graphActivities;
 var connections = [];
 var selectedActRect;
 var newActivityX, newActivityY;
@@ -27,18 +27,22 @@ window.onload = function () {
     graph = Raphael("graph", graphWidth, (nPlanes+1)*interPlanes);
 
     graphActivities = graph.set();
+
+    preventActivityCreation = false;
+    inspectedActivity = null;
     selectedActRect = graph.set();
     planes = [];
     for (var i = 0; i < nPlanes; i++) {
         planes.push(graph.path("M0 " + (i+1)*interPlanes + " L" + graphWidth + " " + (i+1)*interPlanes).attr({stroke:'#BBB'}));
     };
 
-    // On click on the graph in ADD mode, display activity creation form
+    // On click on the graph, display activity creation form
     $("#graph").on('click', function (e) {
-        switch(MODE) {
-            case 'ADD':
-                var parentPos = getPosition(e.currentTarget);
-                newActivityChoice(e.clientX - parentPos.x, e.clientY - parentPos.y);
+        if (preventActivityCreation == false &&
+            (graph.getElementByPoint(e.clientX, e.clientY) == null ||
+            graph.getElementByPoint(e.clientX, e.clientY).id < 6)) {
+            var parentPos = getPosition(e.currentTarget);
+            newActivityChoice(e.clientX - parentPos.x, e.clientY - parentPos.y);
         }
     });
 
@@ -56,37 +60,7 @@ window.onload = function () {
 };
 
 function changeMode(newMode) {
-    $(".btn-default").removeClass('active');
-    if (newMode !== MODE) {
-        $("#" + newMode).addClass('active');
-        MODE = newMode;
-    } else if (MODE !== 'MOVE') {
-        changeMode('MOVE');
-    }
     deselectAllActivities();
-
-    switch(MODE) {
-        case 'ADD':
-            $('#graph').css({cursor: 'cell'});
-            graphActivities.forEach(function(activity) { activity.attr({cursor: 'not-allowed'}); });
-            break;
-        case 'MOVE':
-            $('#graph').css({cursor: 'default'});
-            graphActivities.forEach(function(activity) { activity.attr({cursor: 'move'}); });
-            break;
-        case 'CONNECT':
-            $('#graph').css({cursor: 'default'});
-            graphActivities.forEach(function(activity) { activity.attr({cursor: 'e-resize'}); });
-            break;
-        case 'ERASE':
-            $('#graph').css({cursor: 'default'});
-            graphActivities.forEach(function(activity) { activity.attr({cursor: 'pointer'}); });
-            break;
-        case 'EDIT':
-            $('#graph').css({cursor: 'default'});
-            graphActivities.forEach(function(activity) { activity.attr({cursor: 'pointer'}); });
-            break;
-    }
 };
 
 function getStartActivityId() {
@@ -109,12 +83,6 @@ function getStartActivityId() {
  */
 function handleClickOnActivity(event, actSet) {
     event.preventDefault();
-    switch(MODE) {
-        case 'CONNECT': selectActivity(actSet); break;
-        case 'ERASE':   eraseActivity(actSet); break;
-        case 'EDIT': editActivityChoice(actSet); break;
-        default:        break;
-    }
 }
 
 function handleClickOnConnection(event, line) {
@@ -128,10 +96,10 @@ function handleClickOnConnection(event, line) {
 }
 
 function submitActivityChoice() {
-    switch(MODE) {
-        case 'ADD': submitNewGraphActivity(); break;
-        case 'EDIT': submitEditedGraphActivity(); break;
-        default:        break;
+    if (inspectedActivity == null) {
+        submitNewGraphActivity();
+    } else {
+        submitEditedGraphActivity();
     }
 }
 
@@ -147,22 +115,3 @@ function getPosition(element) {
     return { x: xPosition, y: yPosition };
 }
 
-function focusActivity(activitySet) {
-    activitySet.forEach(function(elem) {
-        if (elem.type === 'rect') {
-            elem.attr({fill: activitySelectFill});
-        } else if (elem.type === 'text') {
-            elem.attr({fill: activitySelectTextColor});
-        }
-    });
-}
-
-function unfocusActivity(activitySet) {
-    activitySet.forEach(function(elem) {
-        if (elem.type === 'rect' && elem.selected === false) {
-            elem.attr({fill: activityFill});
-        } else if (elem.type === 'text' && elem.selected === false) {
-            elem.attr({fill: activityTextColor});
-        }
-    });
-}

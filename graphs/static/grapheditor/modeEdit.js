@@ -1,5 +1,3 @@
-var inspectedActivity;
-
 /**
  * Edit information about an activity
  *
@@ -17,10 +15,6 @@ function editActivityChoice(activitySet) {
  */
 function submitEditedGraphActivity() {
     activity = dbActivities[$('#activitySelector').val()]
-    
-    oldDbid = inspectedActivity[0].dbid;
-    oldCount = inspectedActivity[0].counter;
-
     $('#activityChoice').modal('hide');
     
     inspectedActivity[1].attr('text', activity[0]);
@@ -35,4 +29,6 @@ function submitEditedGraphActivity() {
     inspectedActivity[0].counter = counterMap[newDbid];
 
     $('#activitySelector').val('choose');
+    
+    inspectedActivity = null;
 }

@@ -12,13 +12,31 @@ function loadScenario(raphaelJson) {
 
     // Generate graph from JSON
     graph.fromJSON(json, function(el, data) {
-        if (el.type == 'text') {
-            // If text, then create new activity
-            // (adapted from addActivity method)
-            var activitySet = graph.set();
-            var activityRect = graph.getById(el.id - 1);
 
-            activitySet.push(activityRect, el);
+        // If delete button text, then create new activity
+        // (adapted from addActivity method)
+        if (data.description == 'actDelText') {
+            var activitySet = graph.set();
+            var activityRect = graph.getById(el.id - 3);
+            activityRect.description = "actRect";
+
+            var activityText = graph.getById(el.id - 2);
+            activityText.description = "actText";
+
+            var activityDelCircle = graph.getById(el.id - 1);
+            activityDelCircle.description = "actDelCircle";
+            var activityDelText = el;
+            graph.set().push(activityDelCircle, activityDelText).hide();
+            graph.set().push(activityDelCircle, activityDelText).click(function(event) {
+                eraseActivity(activitySet);
+            });
+
+            activitySet.push(activityRect, activityText, activityDelCircle, activityDelText);
+
+        activitySet.hover(
+            function() { activityDelCircle.show(); activityDelText.show(); },
+            function() { activityDelCircle.hide(); activityDelText.hide(); }
+        );
 
             counterMap[data.dbid] = counterMap[data.dbid] + 1 || 1;
             activitySet.forEach(function(elem) {
@@ -31,10 +49,6 @@ function loadScenario(raphaelJson) {
             activitySet.click(function(event) {
                 handleClickOnActivity(event, activitySet);
             });
-            activitySet.hover(
-                function(e) { focusActivity(activitySet) },
-                function(e) { unfocusActivity(activitySet)},
-                activityRect, activityRect);
             graphActivities.push(activitySet);
         }
 

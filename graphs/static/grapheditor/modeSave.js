@@ -13,8 +13,9 @@ function createRaphaelJson() {
     raphaelJson = graph.toJSON(function(el, data) {
         data.startingRect = el.startingRect; // attribute of line elements to reconstruct connection
         data.endingRect = el.endingRect; // attribute of line elements to reconstruct connection
-        data.dbid = el.dbid; // attribute of rectangle elements to find corresponding activity
-        data.counter = el.counter;  // attribute of rectangle elements to find corresponding activity
+        data.dbid = el.dbid; // attribute to find corresponding activity
+        data.counter = el.counter;  // attribute to find corresponding activity
+        data.description = el.description;
         return data;
     });
 
