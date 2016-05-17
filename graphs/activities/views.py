@@ -20,10 +20,11 @@ def activity_view(request, pk, simple_layout=False):
         try:
             student = Student.objects.get(pk=request.session['user_id'])
             ctx['percentage'] = (student.current_activity/len(student.path_list()))*100
-            if not student.get_current_activity() == Activity.objects.get(pk=pk) and not request.user.is_staff:
-                return user_activity()
-            elif request.user.is_staff:
-                simple_layout = True
+            if not student.get_current_activity() == Activity.objects.get(pk=pk):
+                if request.user.is_staff:
+                    simple_layout = True
+                else:
+                    return user_activity()
         except ObjectDoesNotExist:
             if request.user.is_staff:
                 simple_layout = True
