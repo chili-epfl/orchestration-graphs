@@ -14,7 +14,7 @@ class Scenario(models.Model):
     date = models.DateField(auto_now_add=True)
 
     def __str__(self):
-        return str(self.pk) + ": " + self.name
+        return self.name
 
     def avg_time(self, path=ALL_PATHS):
         """Computes the average time spent by students to complete the scenario.
