@@ -1,4 +1,5 @@
 from django.http import HttpResponseRedirect
+from django.utils import timezone
 from graphs.models import Student, Activity, TimeLog
 from graphs.forms import QuizForm, PsychoForm
 from django.core.exceptions import ObjectDoesNotExist
@@ -96,12 +97,12 @@ def next_activity(request):
     try:
         student = Student.objects.get(pk=request.session['user_id'])
         log = TimeLog.objects.get(student=student, activity=student.get_current_activity(), end_time__isnull=True)
-        log.end_time = datetime.now()
+        log.end_time = timezone.now()
         log.save()
 
         if student.current_activity + 1 >= len(student.path_list()):
             if student.completion_date is None:
-                student.completion_date = datetime.now()
+                student.completion_date = timezone.now()
                 student.save()
             return render(request, 'completion.html')
 
