@@ -62,4 +62,3 @@ class TimeLogAdmin(admin.ModelAdmin):
     get_activity.short_description = 'Activity'
 
 admin.site.register(TimeLog, TimeLogAdmin)
-

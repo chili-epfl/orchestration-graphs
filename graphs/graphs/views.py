@@ -1,5 +1,6 @@
 from django.views.generic.edit import CreateView, DeleteView, UpdateView
 from django.views.generic.detail import DetailView
+from django.views.generic.list import ListView
 from graphs.models import Scenario, Activity, Student, Result, Answer, TimeLog
 from django import forms
 from django.shortcuts import render
@@ -118,6 +119,14 @@ class ActivityDeleteView(LoginRequiredMixin, DeleteView):
         context["scenarios"] = Scenario.objects.all()
 
         return context
+
+
+class StudentDeleteView(LoginRequiredMixin, DeleteView):
+    model = Student
+
+    def get_success_url(self):
+        student = Student.objects.get(pk=self.kwargs['pk'])
+        return reverse_lazy("student-list", kwargs={'pk': student.scenario_id})
 
 
 class ScenarioDetailView(LoginRequiredMixin, DetailView):
@@ -273,3 +282,17 @@ def home_view(request):
     """The website's home page"""
     ctx = {'scenarios': Scenario.objects.all()}
     return render(request, 'home.html', ctx)
+
+
+class StudentListView(ListView):
+    model = Student
+    template_name = 'student-list.html'
+
+    def get_queryset(self):
+        qs = super(StudentListView, self).get_queryset()
+        return qs.filter(scenario_id=self.kwargs['pk'])
+
+    def get_context_data(self, **kwargs):
+        context = super(StudentListView, self).get_context_data(**kwargs)
+        context['scenario'] = Scenario.objects.get(pk=self.kwargs['pk'])
+        return context

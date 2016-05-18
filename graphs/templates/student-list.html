@@ -1,0 +1,35 @@
+{% extends "teacher-base.html" %}
+{% block content %}
+
+            <div class="row">
+                <div class="col-lg-12">
+                    <h1 class="page-header">Students in {{ scenario.name }}</h1>
+                </div>
+                <!-- /.col-lg-12 -->
+            </div>
+
+    	<div class="row" style="padding-bottom: 15px;">
+	</div>
+
+    	<div class="row">
+			<div class="table-responsive">
+				<table class="table table-striped">
+				<tr>
+				<th>Student</th><th>Current Activity</th><th>Completion time</th><th>Actions</th>
+				</tr>
+{% for student in object_list %}
+				<tr>
+				  <td>{{ student.email }}</td>
+				  <td>{{ student.get_current_activity }}</td>
+				  <td>{{ student.completion_time }}</td>
+				  <td><form style="display: inline;" action='{% url 'student-delete' student.id %}' method='post'>{% csrf_token %}
+                          <a class="btn btn-danger" href="javascript:;" onclick="parentNode.submit();">Delete</a></form></td>
+				</tr>
+{% endfor %} 
+				</table>
+
+			</div>
+		</div>
+<!--Div that will hold the chart-->
+    <div id="chart_div"></div>
+{% endblock %}

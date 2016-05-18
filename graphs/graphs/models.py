@@ -202,6 +202,12 @@ class Student(models.Model):
         tests = Activity.objects.filter(type='psycho')
         return Answer.objects.filter(student=self, activity__in=tests)
 
+    def completion_time(self):
+        if self.completion_date is not None:
+            return self.completion_date - self.start_date
+        else:
+            return "N/A"
+
 
 class Choice(models.Model):
     """Models a possible answer"""
