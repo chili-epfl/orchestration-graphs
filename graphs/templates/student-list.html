@@ -20,7 +20,13 @@
 {% for student in object_list %}
 				<tr>
 				  <td>{{ student.email }}</td>
-				  <td>{{ student.get_current_activity }}</td>
+				  <td>
+                      {% if not student.completion_date %}
+                        {{ student.get_current_activity }}
+                      {% else %}
+                        <i>Completed</i>
+                      {% endif %}
+                  </td>
 				  <td>{{ student.completion_time }}</td>
 				  <td><form style="display: inline;" action='{% url 'student-delete' student.id %}' method='post'>{% csrf_token %}
                           <a class="btn btn-danger" href="javascript:;" onclick="parentNode.submit();">Delete</a></form></td>
