@@ -9,6 +9,10 @@
             </div>
 
     	<div class="row" style="padding-bottom: 15px;">
+        <a type="button"
+					class="btn btn-danger mode-btn" href="{% url 'purge-students' scenario.pk %}">
+            Delete all students that haven't completed the scenario
+        </a>
 	</div>
 
     	<div class="row">

@@ -139,6 +139,17 @@ class ScenarioDetailView(LoginRequiredMixin, DetailView):
         return context
 
 
+@login_required
+def purge_students(request, pk):
+    """Delete students that haven't completed the scenario
+
+    :param pk: Scenario primary key
+    """
+    students = Student.objects.filter(scenario_id=pk, completion_date=None)
+    students.delete()
+    return HttpResponseRedirect('/teacher/student/list/' + str(pk))
+
+
 def path_from_edges(scenario):
     """Picks a random learning path based on the scenario graph
 
