@@ -10,6 +10,7 @@
       // Set a callback to run when the Google Visualization API is loaded.
       google.charts.setOnLoadCallback(drawGainChart);
       google.charts.setOnLoadCallback(drawNumChart);
+      google.charts.setOnLoadCallback(drawActChart);
 
       // Callback that creates and populates a data table,
       // instantiates the pie chart, passes in the data and
@@ -54,6 +55,28 @@
             var chart = new google.visualization.PieChart(document.getElementById('num_chart_div'));
             chart.draw(data, options);
           }
+        function drawActChart() {
+
+            // Create the data table.
+            var data = new google.visualization.DataTable();
+            data.addColumn('string', 'Activity');
+            data.addColumn('timeofday', 'Time');
+
+            {% for activity in activities %}
+                {% if activity.avg_time > 0 %}
+                    data.addRows([['{{ activity.name }}', [0, 0, {{ activity.avg_time }}]]]);
+                {% endif %}
+            {% endfor %}
+
+            // Set chart options
+            var options = {'title':'Average time spent',
+                           'width':1200,
+                           'height':300};
+
+            // Instantiate and draw our chart, passing in some options.
+            var chart = new google.visualization.ColumnChart(document.getElementById('act_chart_div'));
+            chart.draw(data, options);
+          }
     </script>
 {% endblock meta-head %}
 {% block content %}
@@ -62,10 +85,13 @@
             <h1 class="page-header">Dashboard</h1>
         </div>
     </div>
-    <table>
+    <table style="margin:0 auto;">
         <tr>
             <td><div id="gain_chart_div"></div></td>
             <td><div id="num_chart_div"></div></td>
+        </tr>
+        <tr>
+            <td colspan="2"><div id="act_chart_div"></div></td>
         </tr>
     </table>
 {% endblock content %}

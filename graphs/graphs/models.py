@@ -178,6 +178,15 @@ class Activity(models.Model):
         """Returns the questions that are part of this activity"""
         return Question.objects.filter(activity=self)
 
+    def avg_time(self):
+        """"Computes the average time spent on this activity"""
+        timelogs = TimeLog.objects.filter(activity=self, end_time__isnull=False)
+        times = [t.end_time - t.start_time for t in timelogs]
+        if times:
+            return (sum(times, timedelta())/len(times)).seconds
+        else:
+            return 0
+
 
 class Student(models.Model):
     """Models a student, i.e. a participant to the experiment"""
@@ -189,20 +198,25 @@ class Student(models.Model):
     completion_date = models.DateTimeField(null=True)
 
     def get_results(self):
+        """Returns all results from this student"""
         return Result.objects.filter(student=self)
 
     def get_current_activity(self):
+        """Returns this student's current activity (as an Activity object)"""
         act_id = json.loads(self.path)[self.current_activity]
         return Activity.objects.get(pk=act_id)
 
     def path_list(self):
+        """Returns this student's path in list form"""
         return json.loads(self.path)
 
     def get_psycho_answers(self):
+        """Returns all answers to psychological questions from this student"""
         tests = Activity.objects.filter(type='psycho')
         return Answer.objects.filter(student=self, activity__in=tests)
 
     def completion_time(self):
+        """Returns the time it took for this student to complete their scenario"""
         if self.completion_date is not None:
             return str(self.completion_date - self.start_date).split('.')[0]
         else:

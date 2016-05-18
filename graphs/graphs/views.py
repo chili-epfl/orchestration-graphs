@@ -231,7 +231,9 @@ def stats_view(request, pk):
                      ('Variance', scenario.learning_variance(path))])
         path_learning.append((path, scenario.avg_learning_num(path)))
 
-    return render(request, 'scenario-stats.html', context={'scenario': scenario, 'data': data, 'path_learning': path_learning})
+    return render(request, 'scenario-stats.html', context={'scenario': scenario,
+                                                           'data': data,
+                                                           'path_learning': path_learning})
 
 
 @login_required
@@ -311,5 +313,5 @@ class StudentListView(ListView, LoginRequiredMixin):
 
 @login_required
 def dashboard_view(request):
-    ctx = {'scenarios': Scenario.objects.all()}
+    ctx = {'scenarios': Scenario.objects.all(), 'activities': Activity.objects.all()}
     return render(request, 'teacher-dashboard.html', ctx)
