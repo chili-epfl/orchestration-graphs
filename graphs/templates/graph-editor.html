@@ -92,7 +92,7 @@
 
     //Building a dictionary of activities
     {% for act in activities %}
-        dbActivities["{{ act.pk }}"] = ["{{ act.name|safe }}", "{{ act.type|safe }}", "{{ act.source|safe }}"];
+        dbActivities["{{ act.pk }}"] = ["{{ act.name|escapejs }}", "{{ act.type|escapejs }}", "{{ act.source|escapejs }}"];
     {% endfor %}
 
     {% if scenario.id %}
