@@ -6,6 +6,9 @@
     <form method="POST" class="post-form">
         {% csrf_token %}
         {% for field in form %}
+            {% for error in field.errors %}
+                <p style="color:red;"> <b>{{ error }}</b> </p>
+            {% endfor %}
             {{ field.label }}
             {{ field }}
         {% endfor %}
