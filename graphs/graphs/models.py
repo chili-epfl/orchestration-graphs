@@ -204,7 +204,7 @@ class Student(models.Model):
 
     def completion_time(self):
         if self.completion_date is not None:
-            return self.completion_date - self.start_date
+            return str(self.completion_date - self.start_date).split('.')[0]
         else:
             return "N/A"
 
