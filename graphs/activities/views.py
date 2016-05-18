@@ -73,6 +73,21 @@ def simple_activity(request, pk):
     return activity_view(request, pk, simple_layout=True)
 
 
+def completion(request):
+    """Displays the completion page"""
+    try:
+        student = Student.objects.get(pk=request.session['user_id'])
+
+        results = student.get_results().order_by('timestamp')
+        pre_test = round(results.first().score * 100)
+        post_test = round(results.last().score * 100)
+        ctx = {'pretest': pre_test, 'posttest': post_test, 'diff': post_test - pre_test}
+        return render(request, 'completion.html', context=ctx)
+
+    except ObjectDoesNotExist:
+        return HttpResponseRedirect('/student/register/')
+
+
 def user_activity(request):
     """Displays the current user's current activity"""
     try:
@@ -80,11 +95,7 @@ def user_activity(request):
         activity = student.get_current_activity()
 
         if student.completion_date is not None:
-            results = student.get_results().order_by('timestamp')
-            pre_test = round(results.first().score * 100)
-            post_test = round(results.last().score * 100)
-            ctx = {'pretest': pre_test, 'posttest': post_test, 'diff': post_test - pre_test}
-            return render(request, 'completion.html', context=ctx)
+            return completion(request)
         else:
             return activity_view(request, activity.pk)
 
@@ -104,7 +115,7 @@ def next_activity(request):
             if student.completion_date is None:
                 student.completion_date = timezone.now()
                 student.save()
-            return render(request, 'completion.html')
+            return completion(request)
 
         else:
             # We make sure we're not creating duplicate logs
