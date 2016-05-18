@@ -79,7 +79,11 @@ def user_activity(request):
         activity = student.get_current_activity()
 
         if student.completion_date is not None:
-            return render(request, 'completion.html')
+            results = student.get_results().order_by('timestamp')
+            pre_test = round(results.first().score * 100)
+            post_test = round(results.last().score * 100)
+            ctx = {'pretest': pre_test, 'posttest': post_test, 'diff': post_test - pre_test}
+            return render(request, 'completion.html', context=ctx)
         else:
             return activity_view(request, activity.pk)
 
