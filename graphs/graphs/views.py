@@ -295,7 +295,7 @@ def home_view(request):
     return render(request, 'home.html', ctx)
 
 
-class StudentListView(ListView):
+class StudentListView(ListView, LoginRequiredMixin):
     model = Student
     template_name = 'student-list.html'
 
@@ -307,3 +307,9 @@ class StudentListView(ListView):
         context = super(StudentListView, self).get_context_data(**kwargs)
         context['scenario'] = Scenario.objects.get(pk=self.kwargs['pk'])
         return context
+
+
+@login_required
+def dashboard_view(request):
+    ctx = {'scenarios': Scenario.objects.all()}
+    return render(request, 'teacher-dashboard.html', ctx)
