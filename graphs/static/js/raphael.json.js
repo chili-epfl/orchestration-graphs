@@ -5,22 +5,20 @@
  */
 
 (function() {
-	Raphael.fn.toJSON = function(callback) {
+	Raphael.fn.toJSON = function(nFixedElements, callback) {
 		var
 			data,
 			elements = new Array,
-			paper    = this
-			;
-
+			paper    = this;
 		for ( var el = paper.bottom; el != null; el = el.next ) {
 			data = callback ? callback(el, new Object) : new Object;
 			
-			if ( data ) elements.push({
+			if ( data && el.id > nFixedElements) elements.push({
 				data:      data,
 				type:      el.type,
 				attrs:     el.attrs,
 				transform: el.matrix.toTransformString(),
-				id:        el.id,
+				//id:        el.id,
 				});
 		}
 
@@ -41,7 +39,7 @@
 		return o;
 	}
 
-	Raphael.fn.fromJSON = function(json, callback) {
+	Raphael.fn.fromJSON = function(nFixedElements, json, callback) {
 		var
 			el,
 			paper = this
@@ -51,10 +49,10 @@
 		for ( var i in json ) {
 			if ( json.hasOwnProperty(i) ) {
 				el = paper[json[i].type]()
-					.attr(json[i].attrs)
-					.transform(json[i].transform);
+					.attr(json[i].attrs);
+					//.transform(json[i].transform);
 
-				el.id = json[i].id;
+				el.id = nFixedElements+1+parseInt(i);
 
 				if ( callback ) el = callback(el, json[i].data);
 

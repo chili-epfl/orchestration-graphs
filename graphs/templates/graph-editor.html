@@ -5,8 +5,10 @@
 	<div class="modal fade" id="activityChoice" tabindex="-1" role="dialog" data-backdrop="static">
 	  <div class="modal-dialog" role="document">
 	    <div class="modal-content">
+	      <div class="modal-header">
+        	<h4 class="modal-title">Activity</h4>
+          </div>
 	      <div class="modal-body">
-	      	<label>Activity</label>
 	      	<select id="activitySelector" class="form-control">
 				<option value="choose" href="#">Choose an activity...</option>
 {% for act in activities %}
@@ -16,7 +18,22 @@
 	      </div>
 	      <div class="modal-footer">
 	        <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
-	        <button type="button" class="btn btn-primary" onclick="submitActivityChoice()">Confirm</button>
+	        <button id="confirmActivityModal" type="button" class="btn btn-primary">Confirm</button>
+	      </div>
+	    </div>
+	  </div>
+	</div>
+	<div class="modal fade" id="saveError" tabindex="-1" role="dialog" data-backdrop="static">
+	  <div class="modal-dialog" role="document">
+	    <div class="modal-content">
+	      <div class="modal-header">
+        	<h4 class="modal-title">Error: Cannot save scenario</h4>
+          </div>
+	      <div class="modal-body">
+	      	<p id="saveErrorMessage"></p>
+	      </div>
+	      <div class="modal-footer">
+	        <button type="button" class="btn btn-primary" data-dismiss="modal">Ok</button>
 	      </div>
 	    </div>
 	  </div>
@@ -53,7 +70,7 @@
 		</div>
 	</div>
 
-	<button type="button" class="btn btn-primary pull-right" id="SAVE" onclick="saveScenario()">Save</button>
+	<button type="button" class="btn btn-primary pull-right" id="SAVE">Save</button>
             <div class="row">
 	<form id="scenarioForm" action="{{ action }}" method="post">{% csrf_token %}
 	    {{ form.as_p }}
@@ -78,14 +95,16 @@
 
 	<script src="{% static 'js/raphael.js' %}"></script>
 	<script src="{% static 'js/raphael.json.js' %}"></script>
-	<script src="{% static 'grapheditor/init.js' %}"></script>
-	<script src="{% static 'grapheditor/modeSave.js' %}"></script>
-	<script src="{% static 'grapheditor/modeLoad.js' %}"></script>
-	<script src="{% static 'grapheditor/modeConnect.js' %}"></script>
-	<script src="{% static 'grapheditor/modeErase.js' %}"></script>
-	<script src="{% static 'grapheditor/modeMove.js' %}"></script>
-	<script src="{% static 'grapheditor/modeAdd.js' %}"></script>
-	<script src="{% static 'grapheditor/modeEdit.js' %}"></script>
+	<script src="{% static 'grapheditor/singletons.js' %}"></script>
+	<script src="{% static 'grapheditor/graphEditor.js' %}"></script>
+	<script src="{% static 'grapheditor/activity.js' %}"></script>
+	<script src="{% static 'grapheditor/connection.js' %}"></script>
+	<script src="{% static 'grapheditor/deleteButton.js' %}"></script>
+	<script src="{% static 'grapheditor/graph.js' %}"></script>
+	<script src="{% static 'grapheditor/handlers.js' %}"></script>
+	<script src="{% static 'grapheditor/builders.js' %}"></script>
+	<script src="{% static 'grapheditor/possibleConnection.js' %}"></script>
+
 	<script>
 	var dbActivities = {};
 	var oldScenario = null;
@@ -96,7 +115,7 @@
     {% endfor %}
 
     {% if scenario.id %}
-		oldScenario = "{{ scenario.raphaelJson }}";
+		oldScenario = JSON.parse("{{ scenario.raphaelJson|escapejs }}");
 	{% endif %}
 	</script>
 
