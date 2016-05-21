@@ -98,7 +98,7 @@ var Connection = function() {
 	connection.from = null;
 	connection.to = null;
 
-	connection.path = paper.path();
+	connection.path = null;
 	connection.deleteButton = null;
 
 	/**
@@ -108,15 +108,14 @@ var Connection = function() {
 	 *		  {startRaphId, endRaphId, raphael elements} if loading connection
 	 */
 	connection.initRaphaelElements = function(params) {
-		console.log(params);
 		if (params.sId && params.sCount && params.eId && params.eCount) {
-			console.log(graph.getActivityFromDbid(params.sId, params.sCount));
-			console.log(graph.getActivityFromDbid(params.eId, params.eCount));
 			connection.from = graph.getActivityFromDbid(params.sId, params.sCount).rectangle;
 			connection.to = graph.getActivityFromDbid(params.eId, params.eCount).rectangle;
 			
 			if (params.path) {
 				connection.path = params.path;
+			} else {
+				connection.path = paper.path();
 			}
 		} else {
 			throw new Error('Impossible to create connection.');

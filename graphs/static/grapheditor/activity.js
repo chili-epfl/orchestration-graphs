@@ -124,11 +124,9 @@ var Activity = function() {
 	 *
 	 */
 	activity.setAttributes = function(newDbid, newCounter) {
-		console.log('setAttr dbid = ' + newDbid);
 		activity.dbid = newDbid;
 		activity.counter = newCounter;
 
-		console.log('setText to = ' + dbActivities[activity.dbid][0]);
 		setText(dbActivities[activity.dbid][0]);
 	    activity.set.forEach(function(elem) {
 	    	elem.dbid = activity.dbid;
@@ -154,7 +152,7 @@ var Activity = function() {
 	    	element.remove();
 	    });
 	    graph.deleteActivity(activity);
-	    graph.updateCounter(null, activity.dbid, activity.counter);
+	    activity.updateCounter(null, activity.dbid, activity.counter);
 	    activity = null;   
 	};
 
@@ -201,8 +199,36 @@ var Activity = function() {
 	 */
 	activity.edit = function(newDbid) {
 		var oldDbid = activity.dbid;
-	    var newCounter = graph.updateCounter(newDbid, oldDbid, activity.counter);
-	    activity.setAttributes(newDbid, newCounter);
+	    var newCounter = activity.updateCounter(newDbid, oldDbid, activity.counter);
+	};
+
+	/**
+	 * Update counterMap 
+	 * @param {int} dbid (Optional) - Current Dbid of Activity object
+	 * @param {int} oldDbid (Optional) - Previous Dbid of Activity object 
+	 * @param {int} oldCounter (Optional) - Previous counter of Activity object
+	 */
+	activity.updateCounter = function(newDbid, oldDbid, oldCounter) {
+		if (newDbid) {
+			// Add and edit
+			graph.counterMap[newDbid] = graph.counterMap[newDbid] + 1 || 1;
+			activity.setAttributes(newDbid, graph.counterMap[newDbid]);
+		}
+		if (oldDbid && oldCounter) {
+			// Edit and delete
+			graph.activities.forEach(function(act) {
+				if (act.dbid == oldDbid && act.counter > oldCounter) {
+					decrementedCounter = act.counter-1;
+					act.setAttributes(oldDbid, decrementedCounter);
+				}
+			});
+			graph.connections.forEach(function(connection) {
+				
+				connection.setAttributes();
+			});
+			// Decrement counter for oldDbid
+			graph.counterMap[oldDbid] = graph.counterMap[oldDbid] - 1;
+		}
 	};
 
 	return activity;

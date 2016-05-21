@@ -14,7 +14,7 @@ function generateBuilders(graph) {
 		// Create new Activity Object
 		activity = new Activity();
 		activity.initRaphaelElements(data);
-		
+
 		// Adds to list of activities
     	graph.activities.push(activity);
     	
@@ -23,13 +23,19 @@ function generateBuilders(graph) {
 		button.initRaphaelElements("activity", data);
 		activity.bindButton(button);
 
-		var dbid = data.dbid;
-	    var counter = graph.updateCounter(dbid);
-	    activity.setAttributes(dbid, counter);
+		// If dbid and counter not retrieved from data, update counter
+		if (!(data.counter)) {
+			var dbid = data.dbid;
+		    activity.updateCounter(dbid);
+		} else {
+			activity.setAttributes(dbid, data.counter);
+		}
 		
 		// Assign Handlers
 		activity.setCustomHandlers();
 		button.setCustomHandlers();
+
+		return activity;
 	}
 
 	/**
@@ -54,6 +60,8 @@ function generateBuilders(graph) {
 
 	    connection.setCustomHandlers();
 		button.setCustomHandlers();
+
+		return connection;
 	};
 
 	return builders;

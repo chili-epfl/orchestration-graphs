@@ -77,7 +77,6 @@ var activityHandlers = {
 	// event.data contains the Activity object
 	onClick: function(event) {
 		event.preventDefault();
-		console.log(event.data.activity);
 		if (graph.selectedActivities.length == 1) {
 			event.data.activity.select();
 		}

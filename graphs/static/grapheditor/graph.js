@@ -9,7 +9,6 @@ var Graph = function(divId) {
 	var graph = {};
 
 	var raphaelJson, graphJson;
-	var counterMap = {};
 	var nPlanes = 6;
 	var interPlanes = 50; // space between two planes in px
 	var nFixedElements = 0;
@@ -40,13 +39,14 @@ var Graph = function(divId) {
 	    graph.paper.fromJSON(nFixedElements, json, function(el, data) {
 	      	if (data.description == 'activityDeleteText') {
 	    		// Creates new Activity
-	          	graph.buildActivity({
+	    		var activity = graph.buildActivity({
 	          		dbid : data.dbid,
 	            	rectangle : graph.paper.getById(el.id - 3),
 	            	text : graph.paper.getById(el.id - 2),
 	            	deleteCircle : graph.paper.getById(el.id - 1),
 	            	deleteText : el
 	            });
+	          	activity.setAttributes(data.dbid, data.counter);
 			} else if (data.description == 'connectionDeleteText') {
 	        	// Creates new Connection
 	            graph.buildConnection({
@@ -101,7 +101,7 @@ var Graph = function(divId) {
 	        data.description = el.description;
 	        return data;
 	    });
-		return JSON.stringify(raphaelJson);
+	    return JSON.stringify(raphaelJson);
 	}
 
 	/**
@@ -156,6 +156,7 @@ var Graph = function(divId) {
 	graph.id = divId;
 	graph.blockActivityCreation = false;
 	graph.selectedActivities = [];
+	graph.counterMap = {};
 
 	/**
 	 * Called on instantiation of the Singleton
@@ -199,7 +200,7 @@ var Graph = function(divId) {
 		if (index > -1) {
 			graph.activities.splice(index, 1);
 		} else {
-			console.log("activity not found");
+			throw new Error("Activity not found");
 		}
    	};
 
@@ -247,7 +248,7 @@ var Graph = function(divId) {
 		if (index > -1) {
 			graph.connections.splice(index, 1);
 		} else {
-			console.log("connection not found");
+			throw new Error("Connection not found");
 		}
 	};
 	
@@ -265,34 +266,6 @@ var Graph = function(divId) {
 			}
 		}
     	return true;
-	};
-
-	/**
-	 * Update counterMap 
-	 * @param {int} dbid (Optional) - Current Dbid of Activity object
-	 * @param {int} oldDbid (Optional) - Previous Dbid of Activity object 
-	 * @param {int} oldCounter (Optional) - Previous counter of Activity object
-	 */
-	graph.updateCounter = function(newDbid, oldDbid, oldCounter) {
-		if (newDbid) {
-			// Add and edit
-			counterMap[newDbid] = counterMap[newDbid] + 1 || 1;
-		}
-		if (oldDbid && oldCounter) {
-			// Edit and delete
-			graph.activities.forEach(function(activity) {
-				if (activity.dbid == oldDbid && activity.counter > oldCounter) {
-					decrementedCounter = activity.counter-1;
-					activity.setAttributes(oldDbid, decrementedCounter);
-					graph.connections.forEach(function(connection) {
-						connection.setAttributes();
-					});
-				}
-			});
-			// Decrement counter for oldDbid
-			counterMap[oldDbid] = counterMap[oldDbid] - 1;
-		}
-		return counterMap[newDbid];
 	};
 
 
