@@ -3,7 +3,7 @@
 {% block inner-content %}
 
     <h1>{{ title }}</h1>
-    <form method="POST" class="post-form">
+    <form method="POST" class="post-form" onsubmit="nextbutton.disabled = true">
         {% csrf_token %}
         {% for field in form %}
             {% for error in field.errors %}
@@ -12,7 +12,7 @@
             {{ field.label }}
             {{ field }}
         {% endfor %}
-        <input type="submit" value="Submit" class="btn btn-lg btn-primary"/>
+        <input name="nextbutton" type="submit" value="Submit" class="btn btn-lg btn-primary"/>
     </form>
 
 {% endblock inner-content %}
