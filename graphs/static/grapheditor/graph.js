@@ -222,7 +222,7 @@ var Graph = function(divId) {
 	 * @return {int} - new y position of the activity
 	 */
 	graph.getNewY = function(oldy) {
-		var newy;
+		var newy = nPlanes*interPlanes;
 	    for (var i = nPlanes; i > 0; i--) {
 	    	if (oldy < i*interPlanes + interPlanes/2) {
 	            newy = i*interPlanes;

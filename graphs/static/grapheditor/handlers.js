@@ -109,7 +109,7 @@ var activityHandlers = {
 	},
 	// Reposition the activity on origin + dx/dy
 	move: function(dx, dy) {
-		var x = this.activity.Ox + dx;
+		var x = Math.max(this.activity.Ox + dx, this.width/2);
 		var y = this.activity.Oy + dy;
 	    this.activity.x = x;
 	    this.activity.y = y;
