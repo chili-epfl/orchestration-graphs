@@ -65,10 +65,12 @@ var activityHandlers = {
 	// Hover handlers
 	// this contains the Activity object
 	hoverIn: function(event) {
+		this.activity.inspectButton.show();
 		this.activity.deleteButton.show();
 		SingletonPossibleConnection.getInstance().setTo(this.activity.rectangle);
 	},
 	hoverOut: function(event) {
+		this.activity.inspectButton.hide();
 		this.activity.deleteButton.hide();
 		SingletonPossibleConnection.getInstance().setTo(graph.getCursor());
 	},
@@ -113,6 +115,7 @@ var activityHandlers = {
 	    this.activity.y = y;
 	    this.activity.rectangle.attr({x: x - this.width/2, y: y - this.height/2});
 	    this.activity.text.attr({x: x, y: y});
+	    this.activity.inspectButton.setPosition({x: x-this.width/2, y: y-this.height/2});
 	    this.activity.deleteButton.setPosition({x: x+this.width/2, y: y-this.height/2});
 	    graph.updateConnections();
 	    //r.safari();
@@ -123,6 +126,7 @@ var activityHandlers = {
 		this.activity.y = y;
 	    this.activity.rectangle.attr({y: y - this.height/2});
 	    this.activity.text.attr({y: y});
+	    this.activity.inspectButton.setPosition({y: y-this.height/2});
 	    this.activity.deleteButton.setPosition({y: y-this.height/2});
 	    graph.updateConnections();
 	    
@@ -159,3 +163,16 @@ var deleteButtonHandlers = {
 }
 
 
+var inspectButtonHandlers = {
+	onClick: function(event) {
+		event.data.target.inspect();
+		$('#inspectContainer').show();
+	}
+}
+
+
+var inspectPanelHandlers = {
+	onClear: function(event) {
+		$('#inspectContainer').hide();
+	}
+}

@@ -47,6 +47,7 @@
 	    -moz-user-select: none; -ms-user-select: none; user-select: none;
 	}
 	#graph.hover { cursor: pointer!important; }
+	#inspectContainer { display: inline-block; margin-top: 10px; width: 100%; }
 	.contextMenu {
 	    position: absolute; width: 70px; z-index: 99999;
 	    border: solid 1px #BBB; border-radius: 5px; background: #FFF;
@@ -81,6 +82,14 @@
 		<div id="graph"></div>
 	</div>
 
+	<div id="inspectContainer" class="panel panel-info">
+		<div class="panel-heading">
+			<span id="inspectTitle"> </span>
+			<button type="button" class="close"><span>&times;</span></button>
+		</div>
+		<div class="panel-body"></div>
+	</div>
+
 	<ul id="menuContext" class="contextMenu">
 	    <li><a name="edit">Edit</a></li>
 	    <li><a name="connect">Connect</a></li>
@@ -99,6 +108,8 @@
 	<script src="{% static 'grapheditor/graphEditor.js' %}"></script>
 	<script src="{% static 'grapheditor/activity.js' %}"></script>
 	<script src="{% static 'grapheditor/connection.js' %}"></script>
+	<script src="{% static 'grapheditor/button.js' %}"></script>
+	<script src="{% static 'grapheditor/inspectButton.js' %}"></script>
 	<script src="{% static 'grapheditor/deleteButton.js' %}"></script>
 	<script src="{% static 'grapheditor/graph.js' %}"></script>
 	<script src="{% static 'grapheditor/handlers.js' %}"></script>
@@ -108,10 +119,17 @@
 	<script>
 	var dbActivities = {};
 	var oldScenario = null;
+    $('#inspectContainer').hide();
 
     //Building a dictionary of activities
     {% for act in activities %}
-        dbActivities["{{ act.pk }}"] = ["{{ act.name|escapejs }}", "{{ act.type|escapejs }}", "{{ act.source|escapejs }}"];
+        dbActivities["{{ act.pk }}"] = {
+        	name: "{{ act.name|escapejs }}",
+        	type: "{{ act.type|escapejs }}",
+        	description: "{{ act.description|escapejs }}",
+        	source: "{{ act.source|escapejs }}",
+        	avg_time: "{{ act.avg_time|escapejs }}"
+        };
     {% endfor %}
 
     {% if scenario.id %}

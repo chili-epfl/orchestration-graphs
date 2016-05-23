@@ -104,8 +104,8 @@ var Connection = function() {
 	/**
 	 * Initialize the connection by setting from, to and path
 	 * @param {Object} params - containing :
-	 *		  {startRaphId, endRaphId} if creating new connection
-	 *		  {startRaphId, endRaphId, raphael elements} if loading connection
+	 *		  {sId, sCount, eId, eCount} if creating new connection
+	 *		  {sId, sCount, eId, eCount, raphael elements} if loading connection
 	 */
 	connection.initRaphaelElements = function(params) {
 		if (params.sId && params.sCount && params.eId && params.eCount) {

@@ -4,35 +4,29 @@
  */
 var DeleteButton = function() {
 
-	// Instance to return
-	var deleteButton = {};
+	// Instance to return (inheritance from Button)
+	var deleteButton = Button.apply(deleteButton);
 
 	// Private variables
 	var x, y;
 	var graph = SingletonGraph.getInstance();
 	var paper = graph.paper;
-	var target;
-	var circleColor = "#FF4E53";
-	var textColor = "#FFFFFF";
 
 	// Private functions
 
 	function drawCircle() {
 		deleteButton.circle = paper
 		.circle(x, y, 7)
-		.attr({fill: circleColor, "stroke-width": 0});
+		.attr({fill: "#FF4E53", "stroke-width": 0});
     }
 
 	function drawText() {
 	    deleteButton.text = paper
 	    .text(x, y, 'X')
-	    .attr({ fill: textColor });
+	    .attr({ fill: "#FFFFFF" });
 	}
 
 	// Public variables and functions
-
-	deleteButton.circle = null;
-	deleteButton.text = null;
 
 	/**
 	 * Initialize the delete button by setting circle and text
@@ -52,46 +46,14 @@ var DeleteButton = function() {
 	};
 
 	/**
-	 * Bind a target to this delete button,
-	 * @param {Object} instance - to bind (Activity or Connection)
-	 * @param {Object} position - containing x and y
-	 *
-	 */
-	deleteButton.bindTarget = function(instance, position) {
-		target = instance;
-		deleteButton.setPosition(position);
-	};
-
-	/**
 	 * Custom handlers related to this delete button
 	 * - Click on circle/text => delete the target
 	 *
 	 */
 	deleteButton.setCustomHandlers = function() {
 		var nodes = [deleteButton.circle.node, deleteButton.text.node];
-		$(nodes).on('click', {target: target}, deleteButtonHandlers.onClick);
+		$(nodes).on('click', {target: deleteButton.getTarget()}, deleteButtonHandlers.onClick);
 	};
 
-	/**
-	 * Update the position of the button
-	 * @params {Object} position - containing x and y
-	 *
-	 */
-	deleteButton.setPosition = function(position) {
-		deleteButton.circle.attr("cx", position.x);
-		deleteButton.circle.attr("cy", position.y);
-		deleteButton.text.attr("x", position.x);
-		deleteButton.text.attr("y", position.y);
-	};
-
-	deleteButton.show = function() {
-		deleteButton.circle.show();
-		deleteButton.text.show();
-	};
-	deleteButton.hide = function() {
-		deleteButton.circle.hide();
-		deleteButton.text.hide();
-	};
-	
 	return deleteButton;
 };

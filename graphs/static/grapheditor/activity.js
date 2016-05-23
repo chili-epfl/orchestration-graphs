@@ -16,7 +16,6 @@ var Activity = function() {
 	var radius = 5;
 	var fill = "#FFFFFF";
 	var textColor = "#0080CF";
-	var name, type, url;
 	
 	function drawRectangle() {
 	    activity.rectangle = paper
@@ -50,6 +49,7 @@ var Activity = function() {
 
 	activity.rectangle = null;
 	activity.text = null;
+	activity.inspectButton = null;
 	activity.deleteButton = null;
 	activity.set = paper.set();
 	activity.dbid = null;
@@ -87,13 +87,17 @@ var Activity = function() {
 	};
 
 	/**
-	 * Bind a delete button to this activity,
-	 * @param {DeleteButton} button
+	 * Binds buttons to this activity,
+	 * @param {InspectButton} inspectButton
+	 * @param {DeleteButton} deleteButton
 	 *
 	 */
-	activity.bindButton = function(button) {
-		activity.deleteButton = button;
-		activity.set.push(activity.deleteButton.circle, activity.deleteButton.text);
+	activity.bindButtons = function(inspectButton, deleteButton) {
+		activity.inspectButton = inspectButton;
+		activity.deleteButton = deleteButton;
+		activity.set.push(activity.inspectButton.circle, activity.inspectButton.text,
+						  activity.deleteButton.circle, activity.deleteButton.text);
+		activity.inspectButton.bindTarget(this, {x : activity.x-width/2, y : activity.y-height/2});
 		activity.deleteButton.bindTarget(this, {x : activity.x+width/2, y : activity.y-height/2});
 	};
 
@@ -103,6 +107,7 @@ var Activity = function() {
 	 */
 	activity.setCustomHandlers = function() {
 		var nodes = [activity.rectangle.node, activity.text.node,
+			activity.inspectButton.circle.node, activity.inspectButton.text.node,
 			activity.deleteButton.circle.node, activity.deleteButton.text.node];
 		var possibleConnection = SingletonPossibleConnection.getInstance();
 		
@@ -113,6 +118,7 @@ var Activity = function() {
 			{activity}, {activity});
 		
 		$(nodes).on('click', {activity: activity}, activityHandlers.onClick);
+		
 		$(nodes).contextMenu({menu: 'menuContext', activity: activity, onSelect: activityHandlers.onContextMenuItemSelect});
 	};
 
@@ -127,7 +133,7 @@ var Activity = function() {
 		activity.dbid = newDbid;
 		activity.counter = newCounter;
 
-		setText(dbActivities[activity.dbid][0]);
+		setText(dbActivities[activity.dbid].name);
 	    activity.set.forEach(function(elem) {
 	    	elem.dbid = activity.dbid;
 	    	elem.counter = activity.counter;
@@ -200,6 +206,15 @@ var Activity = function() {
 	activity.edit = function(newDbid) {
 		var oldDbid = activity.dbid;
 	    var newCounter = activity.updateCounter(newDbid, oldDbid, activity.counter);
+	};
+
+	activity.inspect = function() {
+		$('#inspectContainer .panel-heading #inspectTitle')
+		.html('Activity : ' + dbActivities[activity.dbid].name);
+		$('#inspectContainer .panel-body')
+		.html('Type : ' + dbActivities[activity.dbid].type + '<br>' +
+			  'Description : ' + dbActivities[activity.dbid].description + '<br>' +
+			  'Average time : ' + dbActivities[activity.dbid].avg_time);
 	};
 
 	/**

@@ -5,11 +5,11 @@ function generateBuilders(graph) {
 	 * Creates, edit or load Activity Object
 	 * @param {Object} data - containing
 	 *		  {dbid, x, y} if creating new activity
-	 *		  {dbid, raphael elements} if loading activity
+	 *		  {dbid, counter, raphael elements} if loading activity
 	 *
 	 */
 	builders.newActivity = function(data) {
-		var activity, button, dbid;
+		var activity, deleteButton, inspectButton, dbid;
 
 		// Create new Activity Object
 		activity = new Activity();
@@ -18,22 +18,20 @@ function generateBuilders(graph) {
 		// Adds to list of activities
     	graph.activities.push(activity);
     	
-    	// Create and binds new button object
-		button = new DeleteButton();
-		button.initRaphaelElements("activity", data);
-		activity.bindButton(button);
+    	// Create and binds new buttons object
+		inspectButton = new InspectButton();
+		inspectButton.initRaphaelElements("activity", data);
+		deleteButton = new DeleteButton();
+		deleteButton.initRaphaelElements("activity", data);
+		
+		activity.bindButtons(inspectButton, deleteButton);
 
-		// If dbid and counter not retrieved from data, update counter
-		if (!(data.counter)) {
-			var dbid = data.dbid;
-		    activity.updateCounter(dbid);
-		} else {
-			activity.setAttributes(dbid, data.counter);
-		}
+		activity.updateCounter(data.dbid);
 		
 		// Assign Handlers
 		activity.setCustomHandlers();
-		button.setCustomHandlers();
+		inspectButton.setCustomHandlers();
+		deleteButton.setCustomHandlers();
 
 		return activity;
 	}

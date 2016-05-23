@@ -27,6 +27,7 @@ var Graph = function(divId) {
     	$("#"+divId).on('click', {nFixedElements: nFixedElements}, graphHandlers.onClick);
     	$("#SAVE").on('click', save);
     	$("#confirmActivityModal").on('click', graphHandlers.onActivityModalSubmit);
+    	$('#inspectContainer .close').on('click', inspectPanelHandlers.onClear);
     }
 
 
@@ -41,12 +42,13 @@ var Graph = function(divId) {
 	    		// Creates new Activity
 	    		var activity = graph.buildActivity({
 	          		dbid : data.dbid,
-	            	rectangle : graph.paper.getById(el.id - 3),
-	            	text : graph.paper.getById(el.id - 2),
+	          		rectangle : graph.paper.getById(el.id - 5),
+	            	text : graph.paper.getById(el.id - 4),
+	            	inspectCircle : graph.paper.getById(el.id - 3),
+	            	inspectText : graph.paper.getById(el.id - 2),
 	            	deleteCircle : graph.paper.getById(el.id - 1),
 	            	deleteText : el
 	            });
-	          	activity.setAttributes(data.dbid, data.counter);
 			} else if (data.description == 'connectionDeleteText') {
 	        	// Creates new Connection
 	            graph.buildConnection({
