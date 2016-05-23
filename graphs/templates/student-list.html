@@ -13,6 +13,11 @@
 					class="btn btn-danger mode-btn" href="{% url 'purge-students' scenario.pk %}">
             Delete all students that haven't completed the scenario
         </a>
+        <a type="button" id="purge-time-btn"
+					class="btn btn-danger mode-btn" href="{% url 'purge-by-time' scenario.pk 1 %}">
+            Delete all students that completed the scenario in less than:
+        </a>
+        <input id="minutes-input" type="number" name="minutes" min="0" value="1" onchange="updateButton()"> minutes.
 	</div>
 
     	<div class="row">
@@ -40,6 +45,13 @@
 
 			</div>
 		</div>
-<!--Div that will hold the chart-->
-    <div id="chart_div"></div>
 {% endblock %}
+{% block extra-scripts %}
+    <script type="text/javascript">
+        function updateButton(){
+            document.getElementById('purge-time-btn').href = '/teacher/student/purgetime/' + {{ scenario.pk }} + "/"
+                    + document.getElementById('minutes-input').value;
+        }
+        updateButton();
+    </script>
+{% endblock extra-scripts %}

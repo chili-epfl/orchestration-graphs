@@ -10,6 +10,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from graphs.forms import StudentRegistrationForm
 from django.http import HttpResponseRedirect, HttpResponse
 from activities.views import user_activity
+from datetime import timedelta
 import random
 import json
 import csv
@@ -147,6 +148,23 @@ def purge_students(request, pk):
     """
     students = Student.objects.filter(scenario_id=pk, completion_date=None)
     students.delete()
+    return HttpResponseRedirect('/teacher/student/list/' + str(pk))
+
+
+@login_required
+def purge_by_time(request, pk, minutes):
+    """Delete students that spent less than the specified amount of time to complete the scenario
+
+    :param pk: Scenario primary key
+    :param minutes: The time below which students will be deleted
+    """
+    students = Student.objects.filter(completion_date__isnull=False, scenario_id=pk)
+    delta = timedelta(minutes=int(minutes))
+
+    for student in students:
+        if student.completion_date - student.start_date < delta:
+            student.delete()
+
     return HttpResponseRedirect('/teacher/student/list/' + str(pk))
 
 

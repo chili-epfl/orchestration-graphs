@@ -20,6 +20,7 @@ urlpatterns = patterns('',
     url(r'^teacher/activity/delete/(?P<pk>\w+)/$', ActivityDeleteView.as_view(), name="activity-delete"),
     url(r'^teacher/student/delete/(?P<pk>\w+)/$', StudentDeleteView.as_view(), name="student-delete"),
     url(r'^teacher/student/purge/(?P<pk>\w+)/$', purge_students, name="purge-students"),
+    url(r'^teacher/student/purgetime/(?P<pk>\w+)/(?P<minutes>\w+)/$', purge_by_time, name="purge-by-time"),
 
     url(r'^scenario/(?P<pk>\w+)/$', ScenarioDetailView.as_view(template_name='scenario.html'), name="scenario"),
     url(r'^scenario/(?P<pk>\w+)/stats/$', stats_view, name="scenario-stats"),
