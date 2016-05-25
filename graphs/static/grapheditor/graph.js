@@ -26,6 +26,7 @@ var Graph = function(divId) {
     	$("#"+divId).on('mousemove', {nFixedElements: nFixedElements}, graphHandlers.onMouseMove);
     	$("#"+divId).on('click', {nFixedElements: nFixedElements}, graphHandlers.onClick);
     	$("#SAVE").on('click', save);
+    	$("#"+divId).contextMenu({menu: 'graphMenuContext', onSelect: graphHandlers.onContextMenuItemSelect});
     	
     	$("#confirmActivityModal").on('click', graphHandlers.onActivityModalSubmit);
 
@@ -261,6 +262,12 @@ var Graph = function(divId) {
 		} else {
 			throw new Error("Activity not found");
 		}
+   	};
+
+   	graph.clear = function() {
+   		for (var i = graph.activities.length-1; i >= 0; i--) {
+   			graph.activities[i].delete();
+   		}
    	};
 
 	/**

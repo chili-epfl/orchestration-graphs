@@ -122,7 +122,7 @@ var Activity = function() {
 		
 		$(nodes).on('click', {activity: activity}, activityHandlers.onClick);
 		
-		$(nodes).contextMenu({menu: 'menuContext', activity: activity, onSelect: activityHandlers.onContextMenuItemSelect});
+		$(nodes).contextMenu({menu: 'activityMenuContext', activity: activity, onSelect: activityHandlers.onContextMenuItemSelect});
 	};
 
 	/**

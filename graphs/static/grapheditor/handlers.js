@@ -25,6 +25,14 @@ var graphHandlers = {
 		}
 	},
 
+	onContextMenuItemSelect: function(menuitem, target, href, pos) {
+		switch (menuitem.attr("name")) {
+			case 'clear':
+	        	graph.clear();
+				break;
+	    }
+	},
+
    	/**
 	 * Handles Submit on Activity Modal
 	 */

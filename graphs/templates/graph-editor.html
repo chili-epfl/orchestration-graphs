@@ -92,7 +92,8 @@
 	.contextMenu {
 	    position: absolute; width: 150px; z-index: 99999;
 	    border: solid 1px #BBB; border-radius: 5px; background: #FFF;
-	    padding: 0px; margin: 0px; display: none; }
+	    padding: 0px; margin: 0px; display: none;
+		box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);}
 	.contextMenu LI { list-style: none; padding: 0px; margin: 0px; color: #333; }
 	.contextMenu A {
 	    color: inherit; text-decoration: none; font-size: 12px;
@@ -130,10 +131,14 @@
 		<div class="panel-body"></div>
 	</div>
 
-	<ul id="menuContext" class="contextMenu">
+	<ul id="activityMenuContext" class="contextMenu">
 	    <li><a name="edit">Edit activity</a></li>
 	    <li><a name="connectSimple">Add simple operator</a></li>
 	    <li><a name="connectComplex">Add complex operator</a></li>
+	</ul>
+
+	<ul id="graphMenuContext" class="contextMenu">
+	    <li><a name="clear">Clear graph</a></li>
 	</ul>
 
 
