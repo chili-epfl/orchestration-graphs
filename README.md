@@ -10,5 +10,5 @@ How to run the server:
 
 
 You can create accounts to access the teacher area using the following manage.py command:
-`python manage.py createsuperuser --usernname=your_name --email=your_email`
+`python manage.py createsuperuser --username=your_name --email=your_email`
 (or use an existing account).
