@@ -1,39 +1,56 @@
 {% extends "teacher-base.html" %}
+
+{% load staticfiles %}
+
 {% block content %}
+    <div class="row">
+        <object id="workspace" data="" style="width: 100%; height: 0px; border: 0px;"></object>
+    </div>
+    <div id="act-list">
+    <div class="row">
+        <div class="col-lg-12">
+            <h1 class="page-header">Existing activities</h1>
+        </div>
+        <!-- /.col-lg-12 -->
+    </div>
 
-            <div class="row">
-                <div class="col-lg-12">
-                    <h1 class="page-header">Existing activities</h1>
-                </div>
-                <!-- /.col-lg-12 -->
-            </div>
-
-    	<div class="row" style="padding-bottom: 15px;">
+    <div class="row" style="padding-bottom: 15px;">
 		<a type="button"
 					class="btn btn-success mode-btn" 
 					href="{% url 'activity-creator' %}">Create new activity</a>
 	</div>
 
-    	<div class="row">
-			<div class="table-responsive">
-				<table class="table table-striped">
-				<tr>
-				<th>Activity name</th><th>Type</th><th>Description</th><th>Actions</th>
-				</tr>
-{% for activity in object_list %} 
-				<tr>
-				  <td>{{ activity.name }}</td>
-				  <td>{{ activity.type }}</td>
-				  <td>{{ activity.description }}</td>
-				  <td><a class="btn btn-default" href="{% url 'activity' activity.id %}">Preview</a>
-                      <a class="btn btn-default" href="{% url 'activity-editor' activity.id %}">Edit</a>
-                      <form style="display: inline;" action='{% url 'activity-delete' activity.id %}' method='get'>{% csrf_token %}
-                          <a class="btn btn-danger" href="javascript:;" onclick="parentNode.submit();">Delete</a></form></td>
-				</tr>
-{% endfor %} 
-				</table>
-
-			</div>
-		</div>
-
+    <div class="row">
+        <div class="table-responsive">
+            <table class="table table-striped">
+            <tr>
+            <th>Activity name</th><th>Type</th><th>Description</th><th>Actions</th>
+            </tr>
+            {% for activity in object_list %}
+            <tr>
+              <td>{{ activity.name }}</td>
+              <td>{{ activity.type }}</td>
+              <td>{{ activity.description }}</td>
+              <td><a class="btn btn-default workspace-link" href="{% url 'activity' activity.id %}">Preview</a>
+                  <a class="btn btn-default" href="{% url 'activity-editor' activity.id %}">Edit</a>
+                  <form style="display: inline;" action='{% url 'activity-delete' activity.id %}' method='get'>{% csrf_token %}
+                      <a class="btn btn-danger" href="javascript:;" onclick="parentNode.submit();">Delete</a></form></td>
+            </tr>
+            {% endfor %}
+            </table>
+        </div>
+    </div>
+</div>
+    <a id="back-button" class="btn btn-default" style="visibility: hidden;" href="{% url 'activity-list' %}">Back</a>
 {% endblock %}
+{% block extra-scripts %}
+    <script type="text/javascript">
+$(".workspace-link").click(function(event){
+	            event.preventDefault();
+	            $("#workspace").attr("data", $(this).attr("href"));
+                document.getElementById('workspace').style.height = "600px";
+                document.getElementById('act-list').innerHTML = "";
+                document.getElementById('back-button').style.visibility = "visible";
+               });
+    </script>
+{% endblock extra-scripts %}
