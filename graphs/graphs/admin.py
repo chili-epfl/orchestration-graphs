@@ -23,8 +23,13 @@ admin.site.register(Student, StudentAdmin)
 
 
 class QuestionAdmin(admin.ModelAdmin):
-    list_display = ('text', 'correct_answer')
+    list_display = ('get_text', 'image_source', 'correct_answer')
     filter_horizontal = ('activity',)
+
+    def get_text(self, obj):
+        text = obj.text
+        return text if text is not None and text != "" else "Question #" + str(obj.id)
+    get_text.short_description = 'Question'
 admin.site.register(Question, QuestionAdmin)
 
 
@@ -43,9 +48,10 @@ admin.site.register(Result, ResultAdmin)
 
 class ChoiceAdmin(admin.ModelAdmin):
     def get_question(self, obj):
-        return obj.question.text
+        text = obj.question.text
+        return text if text is not None and text != "" else "Question #" + str(obj.question.id)
     get_question.short_description = 'Question'
-    list_display = ('get_question', 'text')
+    list_display = ('get_question', 'image_source', 'text')
 
 admin.site.register(Choice, ChoiceAdmin)
 

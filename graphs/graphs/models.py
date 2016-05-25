@@ -226,7 +226,7 @@ class Student(models.Model):
 class Choice(models.Model):
     """Models a possible answer"""
     question = models.ForeignKey('Question', on_delete=models.CASCADE)
-    text = models.CharField(max_length=100)
+    text = models.CharField(max_length=100, blank=True, null=True)
     image_source = models.CharField(max_length=100, blank=True, null=True)
 
     def __str__(self):
@@ -242,7 +242,7 @@ class Choice(models.Model):
 
 class Question(models.Model):
     """Models a question, which is part of one or more quiz/test activity"""
-    text = models.CharField(max_length=1000)
+    text = models.CharField(max_length=1000, blank=True, null=True)
     image_source = models.CharField(max_length=100, blank=True, null=True)
     correct_answer = models.ForeignKey(Choice, blank=True, null=True, related_name='+')
     activity = models.ManyToManyField(Activity, blank=True)
