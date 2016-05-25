@@ -4,7 +4,6 @@ from graphs.models import Student, Activity, TimeLog
 from graphs.forms import QuizForm, PsychoForm
 from django.core.exceptions import ObjectDoesNotExist
 from django.shortcuts import render
-from datetime import datetime
 
 
 def activity_view(request, pk, simple_layout=False):
@@ -40,6 +39,7 @@ def activity_view(request, pk, simple_layout=False):
     tpe = activity.type
     ctx['source'] = activity.source
     ctx['title'] = activity.name
+    ctx['description'] = activity.description
     base_template = 'base.html'
 
     if simple_layout:
@@ -137,7 +137,7 @@ def quiz_activity(request, activity, simple_layout=False):
     :param simple_layout: If true, displays the quiz as plain text instead of a form (default false)
     """
     student = Student.objects.get(pk=request.session['user_id'])
-    ctx = {'title': activity.name}
+    ctx = {'title': activity.name, 'description': activity.description}
     base_template = 'base.html'
 
     if simple_layout:
@@ -166,7 +166,7 @@ def psycho_activity(request, activity, simple_layout=False):
     :param simple_layout: If true, displays the test as plain text instead of a form (default false)
     """
     student = Student.objects.get(pk=request.session['user_id'])
-    ctx = {'title': activity.name}
+    ctx = {'title': activity.name, 'description': activity.description}
     base_template = 'base.html'
 
     if simple_layout:
@@ -192,5 +192,5 @@ def quiz_preview(request, activity):
     """Displays a quiz activity as text rather than as a radio button form
 
     :param activity: The quiz to display"""
-    ctx = {'title': activity.name, 'questions': activity.get_questions()}
+    ctx = {'title': activity.name, 'description': activity.description, 'questions': activity.get_questions()}
     return render(request, 'quiz-preview.html', ctx)

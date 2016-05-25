@@ -1,8 +1,6 @@
 {% extends "activity-base.html" %}
 
 {% block inner-content %}
-
-    <h1>{{ title }}</h1>
     <form method="POST" class="post-form" onsubmit="nextbutton.disabled = true">
         {% csrf_token %}
         {% for field in form %}
