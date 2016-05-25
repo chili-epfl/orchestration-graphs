@@ -3,7 +3,7 @@ from datetime import timedelta
 import json
 from statistics import mean, pstdev, pvariance
 from django.utils.safestring import mark_safe
-from datetime import timedelta
+from django.utils.html import escape
 
 
 class Scenario(models.Model):
@@ -192,7 +192,7 @@ class Activity(models.Model):
         """Returns the average time spent on this activity in a more human-readable format"""
         time = timedelta(seconds=self.avg_time())
         return str(time) if time > timedelta() else "N/A"
-    
+
 
 class Student(models.Model):
     """Models a student, i.e. a participant to the experiment"""
@@ -239,9 +239,9 @@ class Choice(models.Model):
         return self.text
 
     def get_html(self):
-        """Returns a string containing the image (if there is one) in an HTML tag, followed by the text"""
+        """Returns a string containing the image (if there is one) in an img tag, followed by the text"""
         if self.image_source is not None and self.image_source != "":
-            return mark_safe("<img src='" + self.image_source + "' height='128' > " + self.text)
+            return mark_safe("<img src='" + self.image_source + "' height='128' > " + escape(self.text))
         else:
             return self.text
 
@@ -259,11 +259,16 @@ class Question(models.Model):
         return str(self.pk) + ": " + text
 
     def get_choices(self):
+        """Returns all the possible choices for this question"""
         return Choice.objects.filter(question=self)
 
     def get_html(self, img_height=250):
+        """Returns a string containing the image (if there is one) in an img tag, followed by the text
+
+        :param img_height: Desired height of the image (default 250)
+        """
         if self.image_source is not None and self.image_source != "":
-            return mark_safe("<img src='" + self.image_source + "' height='" + str(img_height) + "' > <p>" + self.text + "</p>")
+            return mark_safe("<img src='" + self.image_source + "' height='" + str(img_height) + "' > <p>" + escape(self.text) + "</p>")
         else:
             return self.text
 
