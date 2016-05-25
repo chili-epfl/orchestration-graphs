@@ -128,7 +128,7 @@
         	type: "{{ act.type|escapejs }}",
         	description: "{{ act.description|escapejs }}",
         	source: "{{ act.source|escapejs }}",
-        	avg_time: "{{ act.avg_time|escapejs }}"
+        	avg_time: "{{ act.avg_time_str|escapejs }}"
         };
     {% endfor %}
 

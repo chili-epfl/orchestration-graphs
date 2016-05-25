@@ -3,6 +3,7 @@ from datetime import timedelta
 import json
 from statistics import mean, pstdev, pvariance
 from django.utils.safestring import mark_safe
+from datetime import timedelta
 
 
 class Scenario(models.Model):
@@ -179,7 +180,7 @@ class Activity(models.Model):
         return Question.objects.filter(activity=self)
 
     def avg_time(self):
-        """"Computes the average time spent on this activity"""
+        """"Computes the average time spent on this activity, in seconds"""
         timelogs = TimeLog.objects.filter(activity=self, end_time__isnull=False)
         times = [t.end_time - t.start_time for t in timelogs]
         if times:
@@ -187,6 +188,11 @@ class Activity(models.Model):
         else:
             return 0
 
+    def avg_time_str(self):
+        """Returns the average time spent on this activity in a more human-readable format"""
+        time = timedelta(seconds=self.avg_time())
+        return str(time) if time > timedelta() else "N/A"
+    
 
 class Student(models.Model):
     """Models a student, i.e. a participant to the experiment"""
