@@ -13,8 +13,7 @@ var graphHandlers = {
 			// If on graph (not on existing activity)
 			if (graph.selectedActivities.length == 1) {
 				// If connecting, delete possible connection
-	    		graph.deselectActivities();
-	    		SingletonPossibleConnection.getInstance().hide();
+				graph.deselectActivities();
 			} else {
 				// If on graph, create activity
 	    		position = {};
@@ -30,19 +29,69 @@ var graphHandlers = {
 	 * Handles Submit on Activity Modal
 	 */
 	onActivityModalSubmit: function(e) {
-		$('#activityChoice').modal('hide');
-		var data = graph.retrieveData();
-		var dbid = parseInt($('#activitySelector').val());
-		$('#activitySelector').val('choose');
-		
-		if (data.rectangle) {
-			// Data is the Activity object to edit
-			data.edit(dbid);
-		} else {
-			// Data contains {dbid, x, y}
-			data.dbid = dbid;
-			graph.buildActivity(data);
+		var value = $('#activitySelector').val();
+		if (value != "choose") {
+			$('#activityChoice').modal('hide');
+			var data = graph.retrieveData();
+			var dbid = parseInt($('#activitySelector').val());
+			$('#activitySelector').val('choose');
+			
+			if (data.rectangle) {
+				// Data is the Activity object to edit
+				data.edit(dbid);
+			} else {
+				// Data contains {dbid, x, y}
+				data.dbid = dbid;
+				graph.buildActivity(data);
+			}
 		}
+	},
+
+	onOperatorTypeSelect: function(e) {
+		var value = $("#operatorTypeSelector").val();
+		if (value == 'choose') {
+			$("#operatorSubtype").hide();
+		} else {
+			var htmlContent = '<option value="choose" href="#">Choose a subtype...</option>';
+			operatorTypes[value].forEach(function(key) {
+				htmlContent += '<option value="' + key + '" href="#">' + key + '</option>';
+			});
+			$('#operatorSubtypeSelector').html(htmlContent);
+			$("#operatorSubtype").show();
+		}
+	},
+
+	onOperatorLabelSelect: function(e) {
+		var value = $("#operatorLabelSelector").val();
+		if (value == 'choose') {
+			$("#operatorSublabel").hide();
+		} else {
+			var htmlContent = '<option value="choose" href="#">Choose a sublabel...</option>';
+			operatorLabels[value].forEach(function(key) {
+				htmlContent += '<option value="' + key + '" href="#">' + key + '</option>';
+			});
+			$('#operatorSublabelSelector').html(htmlContent);
+			$("#operatorSublabel").show();
+		}
+	},
+
+   	/**
+	 * Handles Submit on Complex Operator Modal
+	 */
+	onOperatorModalSubmit: function(e) {
+		var subtypeValue = $("#operatorSubtypeSelector").val();
+		var sublabelValue = $("#operatorSublabelSelector").val();
+		if (sublabelValue != 'choose' && subtypeValue != 'choose') {
+			$('#operatorChoice').modal('hide');
+		}
+	},
+
+   	/**
+	 * Handles Cancel on Complex Operator Modal
+	 */
+	onOperatorModalCancel: function(e) {
+		$('#operatorChoice').modal('hide');
+		graph.deselectActivities();
 	},
 
 	/**
@@ -94,7 +143,13 @@ var activityHandlers = {
 	        	graph.storeData(this.activity.get());
 				$('#activityChoice').modal('show');
 				break;
-			case 'connect':
+			case 'connectSimple':
+				if (graph.selectedActivities.length == 0) {
+	            	this.activity.select();
+	            }
+	            break;
+			case 'connectComplex':
+				$('#operatorChoice').modal('show');
 				if (graph.selectedActivities.length == 0) {
 	            	this.activity.select();
 	            }
@@ -143,8 +198,10 @@ var connectionHandlers = {
 		var box = event.data.connection.getBBox();
 		if (event.offsetX > box.x && event.offsetX < box.x+box.width &&
 			event.offsetY > box.y && event.offsetY < box.y+box.height) {
+			event.data.connection.inspectButton.show();
 			event.data.connection.deleteButton.show();
 		} else {
+			event.data.connection.inspectButton.hide();
 			event.data.connection.deleteButton.hide();
 		}
 	}
@@ -165,6 +222,7 @@ var deleteButtonHandlers = {
 
 var inspectButtonHandlers = {
 	onClick: function(event) {
+		graph.inspectedElement = event.data.target;
 		event.data.target.inspect();
 		$('#inspectContainer').show();
 	}

@@ -16,11 +16,13 @@ var Activity = function() {
 	var radius = 5;
 	var fill = "#FFFFFF";
 	var textColor = "#0080CF";
+	var stroke = "#BBBBBB";
+	var inspectedStroke = "#0080CF";
 	
 	function drawRectangle() {
 	    activity.rectangle = paper
 	    .rect(activity.x - width/2, activity.y - height/2, width, height, radius)
-	    .attr({ fill: fill, stroke: "#BBB", "stroke-width": 2 });
+	    .attr({ fill: fill, stroke: stroke, "stroke-width": 2 });
 	}
 	function drawText() {
 	    activity.text = paper
@@ -60,6 +62,7 @@ var Activity = function() {
 	activity.Oy = 0;
 
 	activity.get = function() { return activity; };
+	activity.getStroke = function() { return stroke; };
 
 	/**
 	 * Bind Raphael elements to the activity
@@ -180,21 +183,23 @@ var Activity = function() {
 	    } else {
 	    	//Prevents connection to self
 	    	graph.deselectActivities();
-	    	possibleConnection.hide();
 	    }
 	    // When two activities are selected and not already connected,
 	    if (graph.selectedActivities.length == 2) {
 	    	// Builds connection if valid
 	    	if (graph.isConnectionValid()) {
-	    	 	graph.buildConnection({
+	    		graph.buildConnection({
 	    	 		sId: graph.selectedActivities[0].dbid,
 	    	 		sCount: graph.selectedActivities[0].counter,
 	    	 		eId: graph.selectedActivities[1].dbid,
-	    	 		eCount: graph.selectedActivities[1].counter
+	    	 		eCount: graph.selectedActivities[1].counter,
+	    	 		type: $('#operatorTypeSelector').val() != 'choose' ? $('#operatorTypeSelector').val() : undefined,
+	    	 		subtype: $('#operatorSubtypeSelector').val() != 'choose' ? $('#operatorSubtypeSelector').val() : undefined,
+	    	 		label: $('#operatorLabelSelector').val() != 'choose' ? $('#operatorLabelSelector').val() : undefined,
+	    	 		sublabel: $('#operatorSublabelSelector').val() != 'choose' ? $('#operatorSublabelSelector').val() : undefined,
 	    	 	});
 	    	}
 	    	graph.deselectActivities();
-	    	possibleConnection.hide();
 	    } 
 	};
 
@@ -206,15 +211,27 @@ var Activity = function() {
 	activity.edit = function(newDbid) {
 		var oldDbid = activity.dbid;
 	    var newCounter = activity.updateCounter(newDbid, oldDbid, activity.counter);
+	    // Update inspector (inspected activity/operator may habe changed)
+	    if (graph.inspectedElement) {
+	    	graph.inspectedElement.inspect();
+	    }
 	};
 
 	activity.inspect = function() {
-		$('#inspectContainer .panel-heading #inspectTitle')
-		.html('Activity : ' + dbActivities[activity.dbid].name);
+		$('#inspectContainer .panel-heading #inspectTitle').html('Activity');
+		
+		var htmlContent =
+			'<div class="form-group"><label class="col-md-2 text-right">Name</label>' + dbActivities[activity.dbid].name + '</div>' +
+			'<div class="form-group"><label class="col-md-2 text-right">Type</label>' + dbActivities[activity.dbid].type + '</div>' +
+			'<div class="form-group"><label class="col-md-2 text-right">Average time</label>' + dbActivities[activity.dbid].avg_time + '</div>';
+		if (dbActivities[activity.dbid].description) {
+			htmlContent += '<div class="form-group"><label class="col-md-2 text-right">Description</label>' + dbActivities[activity.dbid].description + '</div>';
+		}
 		$('#inspectContainer .panel-body')
-		.html('Type : ' + dbActivities[activity.dbid].type + '<br>' +
-			  'Description : ' + dbActivities[activity.dbid].description + '<br>' +
-			  'Average time : ' + dbActivities[activity.dbid].avg_time);
+		.html(htmlContent);
+
+		graph.clearInspector();
+		activity.rectangle.attr('stroke', inspectedStroke);
 	};
 
 	/**
@@ -237,14 +254,19 @@ var Activity = function() {
 					act.setAttributes(oldDbid, decrementedCounter);
 				}
 			});
+			// Update informations in connections (from and to dbid and counter)
 			graph.connections.forEach(function(connection) {
-				
 				connection.setAttributes();
 			});
 			// Decrement counter for oldDbid
 			graph.counterMap[oldDbid] = graph.counterMap[oldDbid] - 1;
 		}
 	};
+
+	activity.loadCounter = function(dbid, counter) {
+		activity.setAttributes(dbid, counter);
+		graph.counterMap[dbid] = Math.max(graph.counterMap[dbid], counter);
+	}
 
 	return activity;
 };

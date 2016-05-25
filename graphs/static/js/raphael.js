@@ -3948,7 +3948,7 @@ window.Raphael.svg && function (R) {
             }
             if (type != "none") {
                 var pathId = "raphael-marker-" + type,
-                    markerId = "raphael-marker-" + se + type + w + h;
+                    markerId = "raphael-marker-" + se + type + w + h + "-obj" + o.id;
                 if (!R._g.doc.getElementById(pathId)) {
                     p.defs.appendChild($($("path"), {
                         "stroke-linecap": "round",

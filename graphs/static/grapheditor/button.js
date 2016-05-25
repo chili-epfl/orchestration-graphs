@@ -27,7 +27,6 @@ var Button = function() {
 	 *
 	 */
 	button.bindTarget = function(instance, position) {
-		console.log(instance);
 		target = instance;
 		button.setPosition(position);
 	};

@@ -17,7 +17,7 @@ var InspectButton = function() {
 	function drawCircle() {
 		inspectButton.circle = paper
 		.circle(x, y, 7)
-		.attr({fill: "#009F46", "stroke-width": 0});
+		.attr({fill: "#0080CF", "stroke-width": 0});
     }
 
 	function drawText() {

@@ -26,7 +26,14 @@ var Graph = function(divId) {
     	$("#"+divId).on('mousemove', {nFixedElements: nFixedElements}, graphHandlers.onMouseMove);
     	$("#"+divId).on('click', {nFixedElements: nFixedElements}, graphHandlers.onClick);
     	$("#SAVE").on('click', save);
+    	
     	$("#confirmActivityModal").on('click', graphHandlers.onActivityModalSubmit);
+
+    	$("#operatorTypeSelector").on('change', graphHandlers.onOperatorTypeSelect);
+    	$("#operatorLabelSelector").on('change', graphHandlers.onOperatorLabelSelect);
+    	$("#confirmOperatorModal").on('click', graphHandlers.onOperatorModalSubmit);
+    	$("#cancelOperatorModal").on('click', graphHandlers.onOperatorModalCancel);
+
     	$('#inspectContainer .close').on('click', inspectPanelHandlers.onClear);
     }
 
@@ -42,6 +49,7 @@ var Graph = function(divId) {
 	    		// Creates new Activity
 	    		var activity = graph.buildActivity({
 	          		dbid : data.dbid,
+	          		counter : data.counter,
 	          		rectangle : graph.paper.getById(el.id - 5),
 	            	text : graph.paper.getById(el.id - 4),
 	            	inspectCircle : graph.paper.getById(el.id - 3),
@@ -56,7 +64,13 @@ var Graph = function(divId) {
 	            	sCount: data.startCount,
 	            	eId: data.endId,
 	            	eCount: data.endCount,
-	                path: graph.paper.getById(el.id - 2),
+	            	type: data.type,
+	            	subtype: data.subtype,
+	            	label: data.label,
+	            	sublabel: data.sublabel,
+	                path: graph.paper.getById(el.id - 4),
+	                inspectCircle: graph.paper.getById(el.id - 3),
+	                inspectText: graph.paper.getById(el.id - 2),
 	                deleteCircle: graph.paper.getById(el.id - 1),
 	                deleteText: el
 	            });
@@ -98,6 +112,10 @@ var Graph = function(divId) {
 	        data.startCount = el.startCount;
 	        data.endId = el.endId;
 	        data.endCount = el.endCount;
+	        data.type = el.optype;
+	        data.subtype = el.subtype;
+	        data.label = el.label;
+	        data.sublabel = el.sublabel;
 	        data.dbid = el.dbid; // attribute to find corresponding activity
 	        data.counter = el.counter; // attribute to find corresponding activity
 	        data.description = el.description;
@@ -159,6 +177,8 @@ var Graph = function(divId) {
 	graph.blockActivityCreation = false;
 	graph.selectedActivities = [];
 	graph.counterMap = {};
+	// Element for the inspected panel
+	graph.inspectedElement = null;
 
 	/**
 	 * Called on instantiation of the Singleton
@@ -191,20 +211,6 @@ var Graph = function(divId) {
 			loadScenario(oldScenario);
 		}
 	};
-
-   	/**
-   	 * Removes Activity from array of activities
-	 * @param {Activity} activity - to delete
-	 *
-	 */
-	graph.deleteActivity = function(activity) {
-		var index = graph.activities.indexOf(activity);
-		if (index > -1) {
-			graph.activities.splice(index, 1);
-		} else {
-			throw new Error("Activity not found");
-		}
-   	};
 
 	graph.getActivityFromDbid = function(dbid, counter) {
 		var res = null;
@@ -240,12 +246,32 @@ var Graph = function(divId) {
 	    }
 	};
 
+   	/**
+   	 * Removes Activity from array of activities
+	 * @param {Activity} activity - to delete
+	 *
+	 */
+	graph.deleteActivity = function(activity) {
+		if (graph.inspectedElement == activity) {
+			$('#inspectContainer').hide();
+		}
+		var index = graph.activities.indexOf(activity);
+		if (index > -1) {
+			graph.activities.splice(index, 1);
+		} else {
+			throw new Error("Activity not found");
+		}
+   	};
+
 	/**
    	 * Removes Connection from array of connections
 	 * @param {Connection} connection - to delete
 	 *
 	 */
 	graph.deleteConnection = function(connection) {
+		if (graph.inspectedElement == connection) {
+			$('#inspectContainer').hide();
+		}
 		var index = graph.connections.indexOf(connection);
 		if (index > -1) {
 			graph.connections.splice(index, 1);
@@ -270,6 +296,15 @@ var Graph = function(divId) {
     	return true;
 	};
 
+	graph.clearInspector = function() {
+		graph.inspectedElement = null;
+		graph.activities.forEach(function(activity) {
+			activity.rectangle.attr('stroke', activity.getStroke());
+		});
+		graph.connections.forEach(function(connection) {
+			connection.path.attr('stroke', connection.getStroke());
+		});
+	}
 
     /**
      * Allows to store data to distinguish activity creation and edition
@@ -281,7 +316,15 @@ var Graph = function(divId) {
 	graph.storeData = function (data) { storedData = data; }
 	graph.retrieveData = function () { return storedData; }
 	graph.selectActivity = function(activity) { graph.selectedActivities.push(activity); };
-	graph.deselectActivities = function() { graph.selectedActivities = []; }
+	graph.deselectActivities = function() {
+		graph.selectedActivities = [];
+		// Connection finished, reset modal values
+		$('#operatorTypeSelector').val('choose');
+		$('#operatorSubtypeSelector').val('choose');
+		$('#operatorLabelSelector').val('choose');
+		$('#operatorSublabelSelector').val('choose');
+		possibleConnection.hide();
+	}
 	graph.getCursor = function() { return cursor; };
 	graph.getInterPlanes = function() { return interPlanes; };
 

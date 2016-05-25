@@ -12,6 +12,8 @@ var Connection = function() {
 	var paper = graph.paper;
 	var set = paper.set();
 	var BBox;
+	var stroke = '#BBBBBB';
+	var inspectedStroke = "#0080CF";
 
 	// Private functions
 
@@ -68,10 +70,13 @@ var Connection = function() {
 	    // Update path and delete button
 	    connection.path.attr({path: ["M", x1.toFixed(3), y1.toFixed(3), "C", x2, y2, x3, y3, x4.toFixed(3), y4.toFixed(3)].join(",")});
 		
-		if (connection.deleteButton) {
+		if (connection.deleteButton && connection.inspectButton) {
+			connection.inspectButton.setPosition(
+				connection.path.getPointAtLength(
+					1/3 * connection.path.getTotalLength()));
 			connection.deleteButton.setPosition(
 				connection.path.getPointAtLength(
-					connection.path.getTotalLength()/2));
+					2/3 * connection.path.getTotalLength()));
 		}
 	}
 
@@ -97,8 +102,13 @@ var Connection = function() {
 	// Raphael rectangles
 	connection.from = null;
 	connection.to = null;
+	connection.type = null;
+	connection.subtype = null;
+	connection.label = null;
+	connection.sublabel = null;
 
 	connection.path = null;
+	connection.inspectButton = null;
 	connection.deleteButton = null;
 
 	/**
@@ -106,6 +116,7 @@ var Connection = function() {
 	 * @param {Object} params - containing :
 	 *		  {sId, sCount, eId, eCount} if creating new connection
 	 *		  {sId, sCount, eId, eCount, raphael elements} if loading connection
+	 * data also contains type, subtype, label and sublabel if operator is complex
 	 */
 	connection.initRaphaelElements = function(params) {
 		if (params.sId && params.sCount && params.eId && params.eCount) {
@@ -135,17 +146,28 @@ var Connection = function() {
 
 	/**
 	 * Set Raphael elements custom attributes
+	 * Called when creating connection or after editing activity
 	 *
 	 */
-	connection.setAttributes = function() {
+	connection.setAttributes = function(data) {
+		if (data) {
+			connection.type = data.type;
+			connection.subtype = data.subtype;
+			connection.label = data.label;
+			connection.sublabel = data.sublabel;
+		}
 		set.forEach(function(elem) {
 			elem.startId = connection.from.dbid;
 			elem.startCount = connection.from.counter;
 			elem.endId = connection.to.dbid;
 			elem.endCount = connection.to.counter;
+    		elem.optype = connection.type;
+    		elem.subtype = connection.subtype;
+    		elem.label = connection.label;
+    		elem.sublabel = connection.sublabel;
     	});
     	connection.path.attr({
-			stroke: "#BBB",
+			stroke: stroke,
 			"stroke-width": 3,
 			"arrow-end": "classic-wide-long",
 			fill: "none"
@@ -164,17 +186,47 @@ var Connection = function() {
 		connection = null;
 	};
 
+	connection.inspect = function() {
+		$('#inspectContainer .panel-heading #inspectTitle')
+		.html('Operator');
+		var htmlContent =
+			'<div class="form-group"><label class="col-md-2 text-right">From</label>' + dbActivities[connection.from.dbid].name + '</div>' +
+			'<div class="form-group"><label class="col-md-2 text-right">To</label>' + dbActivities[connection.to.dbid].name + '</div>';
+		if (connection.type && connection.label) {
+			htmlContent +=
+			'<div class="form-group">' +
+				'<label class="col-md-2 text-right">Type</label>' + 
+				connection.subtype + ' (' + connection.type + ')' +
+			'</div>' +
+			'<div class="form-group">' +
+				'<label class="col-md-2 text-right">Label</label>' +
+				connection.sublabel + ' (' + connection.label + ')' +
+			'</div>';
+		} 
+		$('#inspectContainer .panel-body').html(htmlContent);
+	
+		graph.clearInspector();
+		connection.path.attr('stroke', inspectedStroke);
+	};
+
 	/**
-	 * Bind a delete button to this connection,
-	 * @param {DeleteButton} button
+	 * Binds buttons to this connection,
+	 * @param {InspectButton} inspectButton
+	 * @param {DeleteButton} deleteButton
 	 *
 	 */
-	connection.bindButton = function(button) {
-		connection.deleteButton = button;
-		set.push(connection.deleteButton.circle, connection.deleteButton.text);
+	connection.bindButtons = function(inspectButton, deleteButton) {
+		connection.inspectButton = inspectButton;
+		connection.deleteButton = deleteButton;
+		set.push(connection.inspectButton.circle, connection.inspectButton.text,
+				 connection.deleteButton.circle, connection.deleteButton.text);
+		connection.inspectButton.bindTarget(
+			connection,
+			connection.path.getPointAtLength(1/3 * connection.path.getTotalLength())
+		);
 		connection.deleteButton.bindTarget(
 			connection,
-			connection.path.getPointAtLength(connection.path.getTotalLength()/2)
+			connection.path.getPointAtLength(2/3 * connection.path.getTotalLength())
 		);
 	};
 
@@ -191,6 +243,7 @@ var Connection = function() {
 	 * Getter and setters for private variables
 	 *
 	 */
+	connection.getStroke = function() { return stroke; };
 	connection.setFrom = function(rectangle) { connection.from = rectangle; };
 	connection.setTo = function(rectangle) { connection.to = rectangle; };
 	connection.setPath = function(path) { connection.path = path; };

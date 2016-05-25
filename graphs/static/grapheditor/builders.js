@@ -26,7 +26,13 @@ function generateBuilders(graph) {
 		
 		activity.bindButtons(inspectButton, deleteButton);
 
-		activity.updateCounter(data.dbid);
+		if (data.counter) {
+			// Loading
+			activity.loadCounter(data.dbid, data.counter);
+		} else {
+			// Creating
+			activity.updateCounter(data.dbid);
+		}
 		
 		// Assign Handlers
 		activity.setCustomHandlers();
@@ -38,10 +44,10 @@ function generateBuilders(graph) {
 
 	/**
 	 * Creates or load Connection Object
-	 * @param {Object} data - containing:
-	 *		  {startRaphId, endRaphId} if creating new connection
-	 *		  {startRaphId, endRaphId, raphael elements} if loading connection
-	 *
+	 * @param {Object} params - containing :
+	 *		  {sId, sCount, eId, eCount} if creating new connection
+	 *		  {sId, sCount, eId, eCount, raphael elements} if loading connection
+	 * data also contains type, subtype, label and sublabel if operator is complex
 	 */
 	builders.newConnection = function(data) {
     	var connection, button;
@@ -50,14 +56,17 @@ function generateBuilders(graph) {
     	connection.initRaphaelElements(data);
 	    graph.connections.push(connection);
 
-	    button = new DeleteButton(connection);
-	    button.initRaphaelElements("connection", data);
-	    connection.bindButton(button);
+		inspectButton = new InspectButton();
+		inspectButton.initRaphaelElements("connection", data);
+	    deleteButton = new DeleteButton(connection);
+	    deleteButton.initRaphaelElements("connection", data);
+	    connection.bindButtons(inspectButton, deleteButton);
 
-	    connection.setAttributes();
+	    connection.setAttributes(data);
 
 	    connection.setCustomHandlers();
-		button.setCustomHandlers();
+		inspectButton.setCustomHandlers();
+		deleteButton.setCustomHandlers();
 
 		return connection;
 	};
