@@ -20,7 +20,7 @@
 
     //Building a dictionary of activities
     {% for act in activities %}
-        all_activities["{{ act.pk }}"] = ["{{ act.name|safe }}", "{{ act.source|safe }}"];
+        all_activities["{{ act.pk }}"] = ["{{ act.name }}", "{{ act.source }}"];
     {% endfor %}
 
 	$(document).ready(function(){
