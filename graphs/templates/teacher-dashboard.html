@@ -29,7 +29,11 @@
         // Set chart options
         var options = {'title':'Learning gain',
                        'width':600,
-                       'height':300};
+                       'height':300,
+                        'animation': {
+                            'startup': true,
+                            'duration': 300
+                        }};
 
         // Instantiate and draw our chart, passing in some options.
         var chart = new google.visualization.ColumnChart(document.getElementById('gain_chart_div'));
@@ -49,7 +53,11 @@
             // Set chart options
             var options = {'title':'Students',
                            'width':600,
-                           'height':300};
+                           'height':300,
+                            'animation': {
+                                'startup': true,
+                                'duration': 300
+                            }};
 
             // Instantiate and draw our chart, passing in some options.
             var chart = new google.visualization.PieChart(document.getElementById('num_chart_div'));
@@ -71,7 +79,11 @@
             // Set chart options
             var options = {'title':'Average time spent',
                            'width':1200,
-                           'height':300};
+                           'height':300,
+                            'animation': {
+                                'startup': true,
+                                'duration': 300
+                            }};
 
             // Instantiate and draw our chart, passing in some options.
             var chart = new google.visualization.ColumnChart(document.getElementById('act_chart_div'));

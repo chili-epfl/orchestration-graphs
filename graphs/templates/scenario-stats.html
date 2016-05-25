@@ -28,7 +28,11 @@
         // Set chart options
         var options = {'title':'Learning gain by path',
                        'width':500,
-                       'height':300};
+                       'height':300,
+                            'animation': {
+                                'startup': true,
+                                'duration': 300
+                            }};
 
         // Instantiate and draw our chart, passing in some options.
         var chart = new google.visualization.ColumnChart(document.getElementById('chart_div'));
@@ -48,7 +52,11 @@
         // Set chart options
         var options = {'title':'Progress distribution',
                        'width':700,
-                       'height':300};
+                       'height':300,
+                            'animation': {
+                                'startup': true,
+                                'duration': 300
+                            }};
 
         // Instantiate and draw our chart, passing in some options.
         var chart = new google.visualization.ColumnChart(document.getElementById('gain_chart_div'));
