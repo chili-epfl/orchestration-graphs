@@ -165,6 +165,7 @@ class Activity(models.Model):
     # The 'source' field contains raw text for text activities, and a URL for link activities.
     source = models.CharField(max_length=10000, blank=True, null=True)
     description = models.CharField(max_length=1000, blank=True, null=True)
+    instruction = models.CharField(max_length=1000, blank=True, null=True)
     group = models.ManyToManyField(ActivityGroup, blank=True)
 
     def __str__(self):
