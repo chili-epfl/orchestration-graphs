@@ -1,0 +1,37 @@
+{% extends 'teacher-base.html' %}
+{% block title %}{{object_name}} Confirm delete?{% endblock %}
+
+{% block content %}
+    <div id="content-container" class="p-none">
+        <div class="side-p">
+            <h3>Are you sure?</h3>
+            <p>You're about to delete the following scenario:</p>
+            <ul>
+            	<li>Name: {{ object.name }}</li>
+            </ul>
+
+            <div id="confirmationText"></div>
+
+            <form action="" method="post">
+                {% csrf_token %}
+                <input class="btn btn-link" 
+                       type="button" value="Cancel" 
+                       onclick="window.history.go(-1);"/>
+                <input id="confirm" class="btn btn-danger" type="submit" value="Confirm"/>
+            </form>
+        </div>
+    </div>
+
+	<script>
+		var confirmationText = '';
+
+        {% if object.num_students == 0 %}
+            confirmationText = '<p>Are you sure?</p>';
+        {% else %}
+        	confirmationText = '<p>Impossible to delete this scenario. Currently, '+ {{ object.num_students }} +' students are involved in this scenario.</p>';
+            document.getElementById('confirm').disabled = true;
+        {% endif %}
+
+    	document.getElementById('confirmationText').innerHTML = confirmationText;
+	</script>
+{% endblock %}

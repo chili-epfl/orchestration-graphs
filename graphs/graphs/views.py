@@ -107,6 +107,7 @@ class ActivityCreateView(LoginRequiredMixin, CreateView):
 
 class ScenarioDeleteView(LoginRequiredMixin, DeleteView):
     model = Scenario
+    template_name = 'scenario-delete.html'
     success_url = reverse_lazy("scenario-list")
 
 

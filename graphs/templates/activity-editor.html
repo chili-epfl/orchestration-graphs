@@ -23,7 +23,7 @@
 	    	<input id="source" maxlength="500" type="url">
 	    </p>
 
-	    <button class="btn btn-primary" type="button" onclick="saveScenario()">Save</button>
+	    <button class="btn btn-primary" type="button" onclick="saveActivity()">Save</button>
 	</form>
 
     {% endblock %}
@@ -55,7 +55,7 @@
 	}
 
     // Create or edit activity
-	function saveScenario() {
+	function saveActivity() {
 		switch ($('#id_type').val()) {
 			case 'text':
 				$('#activityForm #id_source').val($('#content').val());
