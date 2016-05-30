@@ -115,7 +115,21 @@ var graphHandlers = {
 		if (graph.selectedActivities.length == 1) {
 			SingletonPossibleConnection.getInstance().update();
 		}
-	}	   
+	},
+
+	onSaveButtonClick: function() {
+		if (!$('#scenarioForm #id_name').val()) {
+			document.getElementById('saveMessage').innerHTML = 'Impposible to save: please set a name to your scenario.';
+			document.getElementById('confirmSaveModal').disabled = true;
+		} else if (graph.activities.length == 0) {
+			document.getElementById('saveMessage').innerHTML = 'Impposible to save: please add at least one activity to your scenario.';
+			document.getElementById('confirmSaveModal').disabled = true;
+		} else {
+			document.getElementById('saveMessage').innerHTML = 'Are you sure that you want to save this scenario? Changes cannot be reverted.';
+			document.getElementById('confirmSaveModal').disabled = false;
+		}
+		$('#saveError').modal('show');
+	},
 }
 
 var activityHandlers = {

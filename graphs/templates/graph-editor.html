@@ -3,81 +3,66 @@
     {% block modals %}
 	<!-- Modal -->
 	<div class="modal fade" id="activityChoice" tabindex="-1" role="dialog" data-backdrop="static">
-	  <div class="modal-dialog" role="document">
-	    <div class="modal-content">
-	      <div class="modal-header">
-        	<h4 class="modal-title">Activity</h4>
-          </div>
-	      <div class="modal-body">
-	      	<select id="activitySelector" class="form-control">
-				<option value="choose" href="#">Choose an activity...</option>
-{% for act in activities %}
-				<option value="{{act.pk}}" href="#">{{ act.name }}</option>
-{% endfor %}
-			</select>
-	      </div>
-	      <div class="modal-footer">
-	        <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
-	        <button id="confirmActivityModal" type="button" class="btn btn-primary">Confirm</button>
-	      </div>
-	    </div>
-	  </div>
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header"><h4 class="modal-title">Activity</h4></div>
+				<div class="modal-body">
+					<select id="activitySelector" class="form-control">
+						<option value="choose" href="#">Choose an activity...</option>
+						{% for act in activities %}
+						<option value="{{act.pk}}" href="#">{{ act.name }}</option>
+						{% endfor %}
+					</select>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+					<button id="confirmActivityModal" type="button" class="btn btn-primary">Confirm</button>
+				</div>
+			</div>
+		</div>
 	</div>
 
 	<div class="modal fade" id="operatorChoice" tabindex="-1" role="dialog" data-backdrop="static">
-	  <div class="modal-dialog" role="document">
-	    <div class="modal-content">
-	      <div class="modal-header">
-        	<h4 class="modal-title">Operator</h4>
-          </div>
-	      <div class="modal-body form-horizontal">
-	      	<div class="form-group">
-	      		<label class="col-md-2 control-label">Type</label>
-	      		<div class="col-md-10">
-		      		<select id="operatorTypeSelector" class="form-control"><option value="choose" href="#">Choose a type...</option></select>
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header"><h4 class="modal-title">Operator</h4></div>
+				<div class="modal-body form-horizontal">
+					<div class="form-group">
+						<label class="col-md-2 control-label">Type</label>
+						<div class="col-md-10"><select id="operatorTypeSelector" class="form-control"><option value="choose" href="#">Choose a type...</option></select></div>
+					</div>
+					<div id="operatorSubtype" class="form-group">
+						<label class="col-md-2 control-label">Subtype</label>
+						<div class="col-md-10"><select id="operatorSubtypeSelector" class="form-control"><option value="choose" href="#">Choose a subtype...</option></select></div>
+					</div>
+					<div class="form-group">
+						<label class="col-md-2 control-label">Label</label>
+						<div class="col-md-10"><select id="operatorLabelSelector" class="form-control"><option value="choose" href="#">Choose a label...</option></select></div>
+					</div>
+					<div id="operatorSublabel" class="form-group">
+						<label class="col-md-2 control-label">Sublabel</label>
+						<div class="col-md-10"><select id="operatorSublabelSelector" class="form-control"><option value="choose" href="#">Choose a sublabel...</option></select></div>
+					</div>
+				</div>
+				<div class="modal-footer">
+					<button id="cancelOperatorModal" type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+					<button id="confirmOperatorModal" type="button" class="btn btn-primary">Confirm</button>
 				</div>
 			</div>
-	      	<div id="operatorSubtype" class="form-group">
-	      		<label class="col-md-2 control-label">Subtype</label>
-	      		<div class="col-md-10">
-	      			<select id="operatorSubtypeSelector" class="form-control"><option value="choose" href="#">Choose a subtype...</option></select>
-	      		</div>
-			</div>
-	      	<div class="form-group">
-	      		<label class="col-md-2 control-label">Label</label>
-	      		<div class="col-md-10">
-	      			<select id="operatorLabelSelector" class="form-control"><option value="choose" href="#">Choose a label...</option></select>
-	      		</div>
-			</div>
-	      	<div id="operatorSublabel" class="form-group">
-	      		<label class="col-md-2 control-label">Sublabel</label>
-	      		<div class="col-md-10">
-	      			<select id="operatorSublabelSelector" class="form-control"><option value="choose" href="#">Choose a sublabel...</option></select>
-				</div>
-			</div>
-	      </div>
-	      <div class="modal-footer">
-	        <button id="cancelOperatorModal" type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
-	        <button id="confirmOperatorModal" type="button" class="btn btn-primary">Confirm</button>
-	      </div>
-	    </div>
-	  </div>
+		</div>
 	</div>
 
 	<div class="modal fade" id="saveError" tabindex="-1" role="dialog" data-backdrop="static">
-	  <div class="modal-dialog" role="document">
-	    <div class="modal-content">
-	      <div class="modal-header">
-        	<h4 class="modal-title">Error: Cannot save scenario</h4>
-          </div>
-	      <div class="modal-body">
-	      	<p id="saveErrorMessage"></p>
-	      </div>
-	      <div class="modal-footer">
-	        <button type="button" class="btn btn-primary" data-dismiss="modal">Ok</button>
-	      </div>
-	    </div>
-	  </div>
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header"><h4 class="modal-title">Saving scenario {{ scenario.name }}</h4></div>
+				<div class="modal-body"><p id="saveMessage"></p></div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+					<button id="confirmSaveModal" type="button" class="btn btn-primary">Confirm</button>
+				</div>
+			</div>
+		</div>
 	</div>
     {% endblock %}
     {% block content %}
@@ -113,7 +98,7 @@
 		</div>
 	</div>
 
-	<button type="button" class="btn btn-primary pull-right" id="SAVE">Save</button>
+	<button type="button" class="btn btn-primary pull-right" id="saveButton">Save</button>
             <div class="row">
 	<form id="scenarioForm" action="{{ action }}" method="post">{% csrf_token %}
 	    {{ form.as_p }}

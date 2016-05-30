@@ -25,9 +25,11 @@ var Graph = function(divId) {
 	function setCustomHandlers() {
     	$("#"+divId).on('mousemove', {nFixedElements: nFixedElements}, graphHandlers.onMouseMove);
     	$("#"+divId).on('click', {nFixedElements: nFixedElements}, graphHandlers.onClick);
-    	$("#SAVE").on('click', save);
     	$("#"+divId).contextMenu({menu: 'graphMenuContext', onSelect: graphHandlers.onContextMenuItemSelect});
     	
+    	$("#saveButton").on('click', graphHandlers.onSaveButtonClick);
+    	$("#confirmSaveModal").on('click', saveToDatabase);
+
     	$("#confirmActivityModal").on('click', graphHandlers.onActivityModalSubmit);
 
     	$("#operatorTypeSelector").on('change', graphHandlers.onOperatorTypeSelect);
@@ -85,20 +87,12 @@ var Graph = function(divId) {
 	 * Submits Django form
 	 *
 	 */
-	function save() {
-		if (!$('#scenarioForm #id_name').val()) {
-			document.getElementById('saveErrorMessage').innerHTML = 'Please set a name to your scenario.';
-			$('#saveError').modal('show');
-		} else if (graph.activities.length == 0) {
-			document.getElementById('saveErrorMessage').innerHTML = 'Please add at least one activity to your scenario.';
-			$('#saveError').modal('show');
-		} else {
-			$('#scenarioForm #id_raphaelJson').val(makeRaphaelJson());
-		    $('#scenarioForm #id_json').val(makeGraphJson());
+   	function saveToDatabase() {
+   		$('#scenarioForm #id_raphaelJson').val(makeRaphaelJson());
+   		$('#scenarioForm #id_json').val(makeGraphJson());
 
-		    // Submit form to save changes
-		    document.getElementById('scenarioForm').submit();
-		}
+   		// Submit form to save changes
+   		document.getElementById('scenarioForm').submit();
    	};
  
 	/**
