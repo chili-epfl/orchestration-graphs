@@ -25,8 +25,11 @@ var Graph = function(divId) {
 	function setCustomHandlers() {
     	$("#"+divId).on('mousemove', {nFixedElements: nFixedElements}, graphHandlers.onMouseMove);
     	$("#"+divId).on('click', {nFixedElements: nFixedElements}, graphHandlers.onClick);
-    	$("#"+divId).contextMenu({menu: 'graphMenuContext', onSelect: graphHandlers.onContextMenuItemSelect});
-    	
+    	$("#"+divId).contextMenu({
+    		selector: "*",
+    		nFixedElements: nFixedElements,
+    		build: graphHandlers.onContextMenu,
+    	});
     	$("#saveButton").on('click', graphHandlers.onSaveButtonClick);
     	$("#confirmSaveModal").on('click', saveToDatabase);
 

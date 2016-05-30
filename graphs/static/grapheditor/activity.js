@@ -121,8 +121,6 @@ var Activity = function() {
 			{activity}, {activity});
 		
 		$(nodes).on('click', {activity: activity}, activityHandlers.onClick);
-		
-		$(nodes).contextMenu({menu: 'activityMenuContext', activity: activity, onSelect: activityHandlers.onContextMenuItemSelect});
 	};
 
 	/**

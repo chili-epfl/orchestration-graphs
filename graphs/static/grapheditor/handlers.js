@@ -25,12 +25,29 @@ var graphHandlers = {
 		}
 	},
 
-	onContextMenuItemSelect: function(menuitem, target, href, pos) {
-		switch (menuitem.attr("name")) {
-			case 'clear':
-	        	graph.clear();
-				break;
-	    }
+	onContextMenu: function($trigger, event) {
+    	var raphElement = graph.paper.getElementByPoint(event.clientX, event.clientY);
+    	if (!raphElement || raphElement.id <= event.data.nFixedElements) {
+    		return graphHandlers.getContextMenu();
+    	} else {
+    		var activity = graph.getActivityFromDbid(raphElement.dbid, raphElement.counter);
+    		if (activity) {
+    			return activityHandlers.getContextMenu(activity);
+    		} else {
+    			return false;
+    		}
+    	}
+    },
+
+	getContextMenu: function() {
+		return {
+			callback: function(key, options) {
+				switch (key) {
+				case "clear": graph.clear(); break;
+				}
+			},
+			items: { "clear": { name: "Clear graph" } }
+		}
 	},
 
    	/**
@@ -161,25 +178,34 @@ var activityHandlers = {
 	// If edit: stores the edited activity and shows modal
 	// If connect: selects activity
 	// this contains the Activity object
-	onContextMenuItemSelect: function(menuitem, target, href, pos) {
-		switch (menuitem.attr("name")) {
-			case 'edit':
-	        	$('#activitySelector').val(this.activity.get().dbid);
-	        	graph.storeData(this.activity.get());
-				$('#activityChoice').modal('show');
-				break;
-			case 'connectSimple':
-				if (graph.selectedActivities.length == 0) {
-	            	this.activity.select();
-	            }
-	            break;
-			case 'connectComplex':
-				$('#operatorChoice').modal('show');
-				if (graph.selectedActivities.length == 0) {
-	            	this.activity.select();
-	            }
-	            break;
-	    }
+	getContextMenu: function(activity) {
+		return {
+		    callback: function(key, options) {
+		    	switch (key) {
+		    		case "edit":
+			        	$('#activitySelector').val(activity.get().dbid);
+			        	graph.storeData(activity.get());
+						$('#activityChoice').modal('show');
+						break;
+		    		case "connect":
+						if (graph.selectedActivities.length == 0) {
+			            	activity.select();
+			            }
+			            break;
+		    		case "complexConnect":
+						$('#operatorChoice').modal('show');
+						if (graph.selectedActivities.length == 0) {
+			            	activity.select();
+			            }
+			            break;
+		    	}
+		    },
+			items: {
+				"edit": {name: "Edit"},
+				"connect": {name: "Add simple operator"},
+				"complexConnect": {name: "Add complex operator"},
+			}
+		}
 	},
 
 	// Stores origin position
