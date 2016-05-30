@@ -125,7 +125,10 @@ var graphHandlers = {
 			document.getElementById('saveMessage').innerHTML = 'Impposible to save: please add at least one activity to your scenario.';
 			document.getElementById('confirmSaveModal').disabled = true;
 		} else {
-			document.getElementById('saveMessage').innerHTML = 'Are you sure that you want to save this scenario? Changes cannot be reverted.';
+			document.getElementById('saveMessage').innerHTML = 'Are you sure that you want to save this scenario?';
+			if (window.location.href.indexOf('editor') > -1) {
+				document.getElementById('saveMessage').innerHTML += ' Previous version will be lost.';
+			}
 			document.getElementById('confirmSaveModal').disabled = false;
 		}
 		$('#saveError').modal('show');

@@ -12,8 +12,9 @@ from django.contrib import admin
 admin.autodiscover()
 
 urlpatterns = patterns('',
-    url(r'^teacher/scenario/editor/$', ScenarioCreateView.as_view(), name="scenario-creator"),
-    url(r'^teacher/scenario/editor/(?P<pk>\d+)/$', ScenarioUpdateView.as_view(), name='scenario-editor',),
+    url(r'^teacher/scenario/creator/$', ScenarioCreateView.as_view(), name="scenario-creator"),
+    url(r'^teacher/scenario/duplicator/(?P<pk>\d+)/$', ScenarioDuplicateView.as_view(), name="scenario-duplicator"),
+    url(r'^teacher/scenario/editor/(?P<pk>\d+)/$', ScenarioUpdateView.as_view(), name='scenario-editor'),
     url(r'^teacher/scenario/delete/(?P<pk>\w+)/$', ScenarioDeleteView.as_view(), name="scenario-delete"),
     url(r'^teacher/activity/editor/$', ActivityCreateView.as_view(), name="activity-creator"),
     url(r'^teacher/activity/editor/(?P<pk>\d+)/$', ActivityUpdateView.as_view(), name='activity-editor',),

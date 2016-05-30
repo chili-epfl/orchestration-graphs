@@ -31,6 +31,7 @@
 				  <td><a class="btn btn-default" href="{% url 'scenario' scenario.id %}">Preview</a>
                       <a class="btn btn-default" href="{% url 'scenario-stats' scenario.id %}">Stats</a>
                       <a class="btn btn-default" href="{% url 'student-list' scenario.id %}">Students</a>
+                      <a class="btn btn-default" href="{% url 'scenario-duplicator' scenario.id %}">Duplicate</a>
                       <a class="btn btn-default" href="{% url 'scenario-editor' scenario.id %}">Edit</a>
                       <form style="display: inline;" action='{% url 'scenario-delete' scenario.id %}' method='get'>{% csrf_token %}
                       	<a class="btn btn-danger" href="javascript:;" onclick="parentNode.submit();">Delete</a></form></td>

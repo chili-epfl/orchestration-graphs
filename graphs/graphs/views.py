@@ -54,7 +54,31 @@ class ScenarioCreateView(LoginRequiredMixin, CreateView):
     def get_context_data(self, **kwargs):
         context = super(ScenarioCreateView, self).get_context_data(**kwargs)
         context["activities"] = Activity.objects.all()
+        
         context["action"] = reverse_lazy('scenario-creator')
+
+        return context
+
+
+class ScenarioDuplicateView(LoginRequiredMixin, CreateView):
+    """CreateView subclass for the graph editor"""
+    model = Scenario
+    template_name = 'graph-editor.html'
+    fields = ['name', 'json', 'raphaelJson']
+    success_url = reverse_lazy('scenario-list')
+
+    def get_form(self, form_class):
+        form = super(ScenarioDuplicateView, self).get_form(form_class)
+        form.fields['json'].widget = forms.HiddenInput()
+        form.fields['raphaelJson'].widget = forms.HiddenInput()
+        return form
+
+    def get_context_data(self, **kwargs):
+        context = super(ScenarioDuplicateView, self).get_context_data(**kwargs)
+        context["activities"] = Activity.objects.all()
+        context["duplicatedScenario"] = self.get_object()
+        context["action"] = reverse_lazy('scenario-duplicator',
+                                    kwargs={'pk': self.get_object().id})
 
         return context
 

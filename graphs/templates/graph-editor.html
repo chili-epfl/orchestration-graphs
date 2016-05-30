@@ -166,6 +166,10 @@
     {% if scenario.id %}
 		oldScenario = JSON.parse("{{ scenario.raphaelJson|escapejs }}");
 	{% endif %}
+	{% if duplicatedScenario.id %}
+		$('#scenarioForm #id_name').val("{{ duplicatedScenario.name|escapejs }} - copy");
+		oldScenario = JSON.parse("{{ duplicatedScenario.raphaelJson|escapejs }}");
+	{% endif %}
 	</script>
 
 
