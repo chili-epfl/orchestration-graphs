@@ -1,4 +1,4 @@
-from django.forms import ModelForm, ChoiceField, RadioSelect, Form
+from django.forms import ModelForm, ChoiceField, RadioSelect, Form, ValidationError, BooleanField
 from graphs.models import Student, Question, Result, Answer
 from django.utils.safestring import mark_safe
 
@@ -8,6 +8,33 @@ class StudentRegistrationForm(ModelForm):
     class Meta:
         model = Student
         fields = ['email']
+
+    def clean(self):
+        cleaned_data = super(ModelForm, self).clean()
+        email = cleaned_data.get('email')
+        if email is None or email == "":
+            raise ValidationError("Email required")
+        return cleaned_data
+
+
+class NoEmailRegistrationForm(ModelForm):
+    """Form for registering to the experiment without email"""
+    no_email = BooleanField(label="Register without email", required=False)
+
+    class Meta:
+        model = Student
+        fields = ['email']
+
+    def clean(self):
+        cleaned_data = super(ModelForm, self).clean()
+        if cleaned_data['email'] == "":
+            if not cleaned_data.get('no_email'):
+                raise ValidationError("Please provide an email address")
+            cleaned_data['email'] = None
+        elif cleaned_data.get('no_email'):
+            # In case the user checks the box but also inputs an email address
+            cleaned_data['email'] = None
+        return cleaned_data
 
 
 class QuizForm(ModelForm):

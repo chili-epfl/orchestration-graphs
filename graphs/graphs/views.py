@@ -7,7 +7,7 @@ from django.shortcuts import render
 from django.core.urlresolvers import reverse_lazy
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
-from graphs.forms import StudentRegistrationForm
+from graphs.forms import StudentRegistrationForm, NoEmailRegistrationForm
 from django.http import HttpResponseRedirect, HttpResponse
 from activities.views import user_activity
 from datetime import timedelta
@@ -20,7 +20,7 @@ class ScenarioUpdateView(LoginRequiredMixin, UpdateView):
     """UpdateView subclass for the graph editor"""
     model = Scenario
     template_name = 'graph-editor.html'
-    fields = ['name', 'json', 'raphaelJson']
+    fields = ['name', 'email_required', 'json', 'raphaelJson']
     success_url = reverse_lazy("scenario-list")
 
     def get_form(self, form_class):
@@ -42,7 +42,7 @@ class ScenarioCreateView(LoginRequiredMixin, CreateView):
     """CreateView subclass for the graph editor"""
     model = Scenario
     template_name = 'graph-editor.html'
-    fields = ['name', 'json', 'raphaelJson']
+    fields = ['name', 'email_required', 'json', 'raphaelJson']
     success_url = reverse_lazy('scenario-list')
 
     def get_form(self, form_class):
@@ -64,7 +64,7 @@ class ScenarioDuplicateView(LoginRequiredMixin, CreateView):
     """CreateView subclass for the graph editor"""
     model = Scenario
     template_name = 'graph-editor.html'
-    fields = ['name', 'json', 'raphaelJson']
+    fields = ['name', 'email_required' 'json', 'raphaelJson']
     success_url = reverse_lazy('scenario-list')
 
     def get_form(self, form_class):
@@ -224,17 +224,21 @@ def student_registration(request, pk=0):
 
     :param pk: Primary key of the scenario to register in. Random if not provided.
     """
-    form = StudentRegistrationForm(request.POST)
+    if str(pk) == '0':
+        scenario_id = random.randint(0, Scenario.objects.count() - 1)
+        scenario = Scenario.objects.all()[scenario_id]
+    else:
+        scenario = Scenario.objects.get(pk=pk)
+
+    if scenario.email_required:
+        form = StudentRegistrationForm(request.POST)
+    else:
+        form = NoEmailRegistrationForm(request.POST)
 
     if form.is_valid():
-        form.save()
-        student = Student.objects.get(email=form.cleaned_data['email'])
+        student = form.save()
 
-        if str(pk) == '0':
-            scenario_id = random.randint(0, Scenario.objects.count() - 1)
-            student.scenario = Scenario.objects.all()[scenario_id]
-        else:
-            student.scenario = Scenario.objects.get(pk=pk)
+        student.scenario = scenario
 
         student.path = path_from_edges(student.scenario)
         student.save()
@@ -244,7 +248,7 @@ def student_registration(request, pk=0):
 
         return HttpResponseRedirect('/student/')
     else:
-        return render(request, 'registration/student-registration.html', {'form': form, 'scenario_id': pk})
+        return render(request, 'registration/student-registration.html', {'form': form, 'scenario': scenario})
 
 
 def student_learning(request):
@@ -293,7 +297,7 @@ def get_csv(request, pk):
     response['Content-Disposition'] = 'attachment; filename=' + filename
     writer = csv.writer(response)
     for result in results:
-        writer.writerow([result.student.email, result.timestamp, result.quiz_id, result.quiz.name, result.score])
+        writer.writerow([result.student_id, result.student.email, result.timestamp, result.quiz_id, result.quiz.name, result.score])
     return response
 
 
@@ -312,7 +316,7 @@ def get_psycho_csv(request, pk):
     response['Content-Disposition'] = 'attachment; filename=' + filename
     writer = csv.writer(response)
     for answer in answers:
-        writer.writerow([answer.student.email, answer.question_id, answer.question.text, answer.given_answer_id, answer.given_answer.text])
+        writer.writerow([answer.student_id, answer.student.email, answer.question_id, answer.question.text, answer.given_answer_id, answer.given_answer.text])
     return response
 
 
@@ -330,7 +334,7 @@ def get_time_csv(request, pk):
     response['Content-Disposition'] = 'attachment; filename=' + filename
     writer = csv.writer(response)
     for log in time_logs:
-        writer.writerow([log.student.email, log.activity_id, log.activity.name, log.start_time, log.end_time])
+        writer.writerow([log.student_id, log.student.email, log.activity_id, log.activity.name, log.start_time, log.end_time])
     return response
 
 

@@ -18,7 +18,7 @@ admin.site.register(Answer)
 
 
 class StudentAdmin(admin.ModelAdmin):
-    list_display = ('email', 'scenario', 'current_activity')
+    list_display = ('pk', 'email', 'scenario', 'current_activity')
 admin.site.register(Student, StudentAdmin)
 
 

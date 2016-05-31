@@ -13,6 +13,7 @@ class Scenario(models.Model):
     json = models.TextField()
     raphaelJson = models.TextField()
     date = models.DateField(auto_now_add=True)
+    email_required = models.BooleanField(default=True)
 
     def __str__(self):
         return self.name
@@ -197,7 +198,7 @@ class Activity(models.Model):
 
 class Student(models.Model):
     """Models a student, i.e. a participant to the experiment"""
-    email = models.EmailField(max_length=50, unique=True)
+    email = models.EmailField(max_length=50, unique=True, null=True, blank=True)
     scenario = models.ForeignKey(Scenario, null=True, on_delete=models.SET_NULL)
     current_activity = models.IntegerField(default=0)  # index of current activity in the path
     path = models.CharField(max_length=1000, null=True)  # sequence of activities in JSON format
