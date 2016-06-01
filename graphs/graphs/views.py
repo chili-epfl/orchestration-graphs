@@ -64,7 +64,7 @@ class ScenarioDuplicateView(LoginRequiredMixin, CreateView):
     """CreateView subclass for the graph editor"""
     model = Scenario
     template_name = 'graph-editor.html'
-    fields = ['name', 'email_required' 'json', 'raphaelJson']
+    fields = ['name', 'email_required', 'json', 'raphaelJson']
     success_url = reverse_lazy('scenario-list')
 
     def get_form(self, form_class):
