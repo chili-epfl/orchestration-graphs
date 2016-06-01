@@ -20,6 +20,7 @@ var graphHandlers = {
 				position.x = event.offsetX;
 				position.y = event.offsetY;
 				graph.storeData(position);
+				$('#activitySelector').val('choose');
 				$('#activityChoice').modal('show');
 			}
 		}
