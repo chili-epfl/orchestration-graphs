@@ -238,7 +238,7 @@ class Choice(models.Model):
     image_source = models.CharField(max_length=100, blank=True, null=True)
 
     def __str__(self):
-        return self.text
+        return self.text + " (question " + str(self.question_id) + ")"
 
     def get_html(self):
         """Returns a string containing the image (if there is one) in an img tag, followed by the text"""
