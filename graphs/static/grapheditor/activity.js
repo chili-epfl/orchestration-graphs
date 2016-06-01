@@ -229,6 +229,7 @@ var Activity = function() {
 		.html(htmlContent);
 
 		graph.clearInspector();
+		graph.inspectedElement = activity;
 		activity.rectangle.attr('stroke', inspectedStroke);
 	};
 

@@ -251,7 +251,7 @@ var Graph = function(divId) {
 	 */
 	graph.deleteActivity = function(activity) {
 		if (graph.inspectedElement == activity) {
-			$('#inspectContainer').hide();
+			$('#inspectClose').click();
 		}
 		var index = graph.activities.indexOf(activity);
 		if (index > -1) {
@@ -274,7 +274,7 @@ var Graph = function(divId) {
 	 */
 	graph.deleteConnection = function(connection) {
 		if (graph.inspectedElement == connection) {
-			$('#inspectContainer').hide();
+			$('#inspectClose').click();
 		}
 		var index = graph.connections.indexOf(connection);
 		if (index > -1) {

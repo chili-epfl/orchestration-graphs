@@ -273,7 +273,6 @@ var deleteButtonHandlers = {
 
 var inspectButtonHandlers = {
 	onClick: function(event) {
-		graph.inspectedElement = event.data.target;
 		event.data.target.inspect();
 		$('#inspectContainer').show();
 	}

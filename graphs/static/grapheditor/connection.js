@@ -206,6 +206,7 @@ var Connection = function() {
 		$('#inspectContainer .panel-body').html(htmlContent);
 	
 		graph.clearInspector();
+		graph.inspectedElement = connection;
 		connection.path.attr('stroke', inspectedStroke);
 	};
 
