@@ -17,13 +17,13 @@ var InspectButton = function() {
 	function drawCircle() {
 		inspectButton.circle = paper
 		.circle(x, y, 7)
-		.attr({fill: "#0080CF", "stroke-width": 0});
+		.style('base', 'inspectButton');
     }
 
 	function drawText() {
 	    inspectButton.text = paper
 	    .text(x, y, '?')
-	    .attr({ fill: "#FFFFFF" });
+	    .style('base', 'button');
 	}
 
 	// Public variables and functions

@@ -17,13 +17,13 @@ var DeleteButton = function() {
 	function drawCircle() {
 		deleteButton.circle = paper
 		.circle(x, y, 7)
-		.attr({fill: "#FF4E53", "stroke-width": 0});
+	 	.style('base', 'deleteButton');
     }
 
 	function drawText() {
 	    deleteButton.text = paper
 	    .text(x, y, 'X')
-	    .attr({ fill: "#FFFFFF" });
+	 	.style('base', 'button');
 	}
 
 	// Public variables and functions

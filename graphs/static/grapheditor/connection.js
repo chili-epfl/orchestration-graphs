@@ -12,8 +12,6 @@ var Connection = function() {
 	var paper = graph.paper;
 	var set = paper.set();
 	var BBox;
-	var stroke = '#BBBBBB';
-	var inspectedStroke = "#0080CF";
 
 	// Private functions
 
@@ -110,6 +108,7 @@ var Connection = function() {
 	connection.path = null;
 	connection.inspectButton = null;
 	connection.deleteButton = null;
+	connection.inspectSet = paper.set(); // set of elements that will change style when inspected
 
 	/**
 	 * Initialize the connection by setting from, to and path
@@ -128,6 +127,7 @@ var Connection = function() {
 			} else {
 				connection.path = paper.path();
 			}
+			connection.inspectSet.push(connection.path);
 		} else {
 			throw new Error('Impossible to create connection.');
 		}
@@ -166,12 +166,6 @@ var Connection = function() {
     		elem.label = connection.label;
     		elem.sublabel = connection.sublabel;
     	});
-    	connection.path.attr({
-			stroke: stroke,
-			"stroke-width": 3,
-			"arrow-end": "classic-wide-long",
-			fill: "none"
-		});
 	};
 
 	/**
@@ -205,9 +199,7 @@ var Connection = function() {
 		} 
 		$('#inspectContainer .panel-body').html(htmlContent);
 	
-		graph.clearInspector();
-		graph.inspectedElement = connection;
-		connection.path.attr('stroke', inspectedStroke);
+		graph.setInspectedObject(connection);
 	};
 
 	/**
@@ -244,7 +236,6 @@ var Connection = function() {
 	 * Getter and setters for private variables
 	 *
 	 */
-	connection.getStroke = function() { return stroke; };
 	connection.setFrom = function(rectangle) { connection.from = rectangle; };
 	connection.setTo = function(rectangle) { connection.to = rectangle; };
 	connection.setPath = function(path) { connection.path = path; };

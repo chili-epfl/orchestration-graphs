@@ -18,7 +18,6 @@ var PossibleConnection = function() {
 	possibleConnection.initRaphaelElements = function() {
 		possibleConnection.path = paper.path();
 		set.push(possibleConnection.path);
-
 	};
 	// Hide path
 	possibleConnection.hide = function() {
@@ -27,13 +26,7 @@ var PossibleConnection = function() {
 	// Show path and set style
 	possibleConnection.show = function() {
 		possibleConnection.path.show();
-		possibleConnection.path.attr({
-			"stroke": "#BBB",
-			"stroke-width": 3,
-			"arrow-end": "classic-wide-long",
-			"fill": "none",
-			"opacity": 0.5
-		});
+		possibleConnection.path.style('base', 'possibleConnection');
 	};
 	
 	return possibleConnection;

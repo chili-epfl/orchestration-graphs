@@ -14,20 +14,16 @@ var Activity = function() {
 	var height = 40;
 	var width = 100;
 	var radius = 5;
-	var fill = "#FFFFFF";
-	var textColor = "#0080CF";
-	var stroke = "#BBBBBB";
-	var inspectedStroke = "#0080CF";
 	
 	function drawRectangle() {
 	    activity.rectangle = paper
 	    .rect(activity.x - width/2, activity.y - height/2, width, height, radius)
-	    .attr({ fill: fill, stroke: stroke, "stroke-width": 2 });
+	    .style('base', 'default');
 	}
 	function drawText() {
 	    activity.text = paper
 	    .text(activity.x, activity.y)
-	    .attr({ "font-size": "13px", fill: textColor });
+	    .style('base', 'activity');
 	}
 
 	/**
@@ -37,22 +33,36 @@ var Activity = function() {
 	function setText(str) {
 	    var words = str.split(" ");
 	    var temp = "";
+	    var numLines=1;
 	    for (var i=0; i<words.length; i++) {
 	        activity.text.attr("text", temp + " " + words[i]);
 	        if (activity.text.getBBox().width > width) {
 	            temp += "\n" + words[i];
+	            numLines++;
 	        } else {
 	            temp += " " + words[i];
 	        }
 	    }
-	    activity.text.attr("text", temp.substring(1));
-	}
 
+	    activity.text.attr("text", temp.substring(1));
+	    if (numLines >2){
+	    	width = width + 20;
+	    	activity.rectangle.attr("width", width);
+	    	activity.x = activity.x+10;
+	    	activity.text.attr("x", activity.x);
+	    	setText(str);
+	    	activity.inspectButton.setPosition({x : activity.x-width/2, y : activity.y-height/2});
+			activity.deleteButton.setPosition({x : activity.x+width/2, y : activity.y-height/2});
+	    }
+	    	
+	}
 
 	activity.rectangle = null;
 	activity.text = null;
 	activity.inspectButton = null;
 	activity.deleteButton = null;
+	activity.inspectSet = paper.set(); // set of elements that will change style when inspected
+
 	activity.set = paper.set();
 	activity.dbid = null;
 	activity.counter = null;
@@ -61,9 +71,9 @@ var Activity = function() {
 	activity.Ox = 0;
 	activity.Oy = 0;
 
-	activity.get = function() { return activity; };
-	activity.getStroke = function() { return stroke; };
 
+	activity.get = function() { return activity; };
+	activity.getWidth = function() { return width; };
 	/**
 	 * Bind Raphael elements to the activity
 	 * @param {Object} data - containing:
@@ -87,6 +97,7 @@ var Activity = function() {
     	activity.rectangle.description = "activityRectangle";
     	activity.text.description = "activityText";
 		activity.set.push(activity.rectangle, activity.text);
+		activity.inspectSet.push(activity.rectangle);
 	};
 
 	/**
@@ -140,7 +151,6 @@ var Activity = function() {
 	    	elem.counter = activity.counter;
 	        elem.set = activity.set; // allows the drag method to apply on the whole set
 	    });
-		activity.set.attr("cursor", "pointer");
 	};
 
 	/**
@@ -209,9 +219,9 @@ var Activity = function() {
 	activity.edit = function(newDbid) {
 		var oldDbid = activity.dbid;
 	    var newCounter = activity.updateCounter(newDbid, oldDbid, activity.counter);
-	    // Update inspector (inspected activity/operator may habe changed)
-	    if (graph.inspectedElement) {
-	    	graph.inspectedElement.inspect();
+	    // Update inspector (inspected activity/operator may have changed)
+	    if (graph.getInspectedObject()) {
+	    	graph.getInspectedObject().inspect();
 	    }
 	};
 
@@ -228,9 +238,7 @@ var Activity = function() {
 		$('#inspectContainer .panel-body')
 		.html(htmlContent);
 
-		graph.clearInspector();
-		graph.inspectedElement = activity;
-		activity.rectangle.attr('stroke', inspectedStroke);
+		graph.setInspectedObject(activity);
 	};
 
 	/**

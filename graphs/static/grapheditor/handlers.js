@@ -215,14 +215,14 @@ var activityHandlers = {
 	},
 	// Reposition the activity on origin + dx/dy
 	move: function(dx, dy) {
-		var x = Math.max(this.activity.Ox + dx, this.width/2);
+		var x = Math.max(this.activity.Ox + dx, this.activity.getWidth()/2);
 		var y = this.activity.Oy + dy;
 	    this.activity.x = x;
 	    this.activity.y = y;
-	    this.activity.rectangle.attr({x: x - this.width/2, y: y - this.height/2});
+	    this.activity.rectangle.attr({x: x - this.activity.getWidth()/2, y: y - this.height/2});
 	    this.activity.text.attr({x: x, y: y});
-	    this.activity.inspectButton.setPosition({x: x-this.width/2, y: y-this.height/2});
-	    this.activity.deleteButton.setPosition({x: x+this.width/2, y: y-this.height/2});
+	    this.activity.inspectButton.setPosition({x: x-this.activity.getWidth()/2, y: y-this.height/2});
+	    this.activity.deleteButton.setPosition({x: x+this.activity.getWidth()/2, y: y-this.height/2});
 	    graph.updateConnections();
 	    //r.safari();
 	},

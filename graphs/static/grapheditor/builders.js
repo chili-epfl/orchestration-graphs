@@ -63,6 +63,7 @@ function generateBuilders(graph) {
 	    connection.bindButtons(inspectButton, deleteButton);
 
 	    connection.setAttributes(data);
+    	connection.path.style('base', 'default');
 
 	    connection.setCustomHandlers();
 		inspectButton.setCustomHandlers();

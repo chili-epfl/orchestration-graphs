@@ -111,7 +111,7 @@
 	<div id="inspectContainer" class="panel panel-info">
 		<div class="panel-heading">
 			<span id="inspectTitle"> </span>
-			<button id="inspectClose" type="button" class="close" onclick="graph.clearInspector()"><span>&times;</span></button>
+			<button id="inspectClose" type="button" class="close" onclick="graph.setInspectedObject()"><span>&times;</span></button>
 		</div>
 		<div class="panel-body"></div>
 	</div>
@@ -126,6 +126,7 @@
 	<script src="{% static 'js/raphael.js' %}"></script>
 	<script src="{% static 'js/raphael.json.js' %}"></script>
 	<script src="{% static 'grapheditor/singletons.js' %}"></script>
+	<script src="{% static 'grapheditor/style.js' %}"></script>
 	<script src="{% static 'grapheditor/graphEditor.js' %}"></script>
 	<script src="{% static 'grapheditor/activity.js' %}"></script>
 	<script src="{% static 'grapheditor/connection.js' %}"></script>

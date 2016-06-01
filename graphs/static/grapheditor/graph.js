@@ -18,6 +18,7 @@ var Graph = function(divId) {
 	// When creating new activity, stores x and y before showing the modal
 	// When editing an activity, stores the Activity object before showing the modal
 	var storedData = null;
+	var inspectedObject = null;
 
 	/**
 	 * Custom handlers related to the graph
@@ -175,8 +176,6 @@ var Graph = function(divId) {
 	graph.blockActivityCreation = false;
 	graph.selectedActivities = [];
 	graph.counterMap = {};
-	// Element for the inspected panel
-	graph.inspectedElement = null;
 
 	/**
 	 * Called on instantiation of the Singleton
@@ -250,7 +249,7 @@ var Graph = function(divId) {
 	 *
 	 */
 	graph.deleteActivity = function(activity) {
-		if (graph.inspectedElement == activity) {
+		if (graph.getInspectedObject() == activity) {
 			$('#inspectClose').click();
 		}
 		var index = graph.activities.indexOf(activity);
@@ -273,7 +272,7 @@ var Graph = function(divId) {
 	 *
 	 */
 	graph.deleteConnection = function(connection) {
-		if (graph.inspectedElement == connection) {
+		if (graph.getInspectedObject() == connection) {
 			$('#inspectClose').click();
 		}
 		var index = graph.connections.indexOf(connection);
@@ -300,16 +299,6 @@ var Graph = function(divId) {
     	return true;
 	};
 
-	graph.clearInspector = function() {
-		graph.inspectedElement = null;
-		graph.activities.forEach(function(activity) {
-			activity.rectangle.attr('stroke', activity.getStroke());
-		});
-		graph.connections.forEach(function(connection) {
-			connection.path.attr('stroke', connection.getStroke());
-		});
-	}
-
     /**
      * Allows to store data to distinguish activity creation and edition
      * Retrieved by onActivityModalSubmit handler
@@ -319,6 +308,18 @@ var Graph = function(divId) {
      */
 	graph.storeData = function (data) { storedData = data; }
 	graph.retrieveData = function () { return storedData; }
+	graph.setInspectedObject = function (object) {
+		if (inspectedObject) {
+			inspectedObject.inspectSet.style('base', 'default', {duration: 300, easing: 'linear'});
+		}
+		if (object) {
+			inspectedObject = object;
+			object.inspectSet.style('base', 'inspected', {duration: 300, easing: 'linear'});
+		} else {
+			inspectedObject = null;
+		}
+	}
+	graph.getInspectedObject = function () { return inspectedObject; }
 	graph.selectActivity = function(activity) { graph.selectedActivities.push(activity); };
 	graph.deselectActivities = function() {
 		graph.selectedActivities = [];
