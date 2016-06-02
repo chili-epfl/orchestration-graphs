@@ -23,8 +23,9 @@
     <div class="row">
       <div class="table-responsive">
       <table id="activityList" class="table table-striped">
+          <thead>
             <tr class="listHeader">
-              <th>Activity name</th><th>Type</th><th data-priority="1">Tags</th><th>Description</th><th>Actions</th>
+              <th>Activity name</th><th>Type</th><th>Tags</th><th>Description</th><th>Actions</th>
             </tr>
             <tr class="listHeader">
               <td><input id="nameFilter" class="form-control"></td>
@@ -39,6 +40,8 @@
               <td><input id="descriptionFilter" class="form-control"></td>
               <td></td>
             </tr>
+          </thead>
+          <tbody>
             {% for activity in object_list %}
             <tr>
               <td>{{ activity.name }}</td>
@@ -51,7 +54,8 @@
                       <a class="btn btn-danger" href="javascript:;" onclick="parentNode.submit();">Delete</a></form></td>
             </tr>
             {% endfor %}
-            </table>
+          </tbody>
+          </table>
         </div>
     </div>
 </div>
@@ -69,15 +73,14 @@ $(".workspace-link").click(function(event){
 
     $.extend($.expr[":"], {"containsIN": function(elem, i, match, array) {
     return (elem.textContent || elem.innerText || "").toLowerCase().indexOf((match[3] || "").toLowerCase()) >= 0;
-    }
-    });
+    }});
 
     function isEntryShown(row, col, search) {
       if (search[0] == "") {
         return true;
       }
       for (var word = 0; word < search.length; ++word) {
-        if ($('#activityList tr:nth-child('+row+') td:nth-child('+col+')')
+        if ($('#activityList tbody tr:nth-child('+row+') td:nth-child('+col+')')
             .is(":containsIN('" + search[word] + "')")) {
           return true;
         }
@@ -87,20 +90,16 @@ $(".workspace-link").click(function(event){
 
     function filterActivityList() {
       //create a jquery object of the rows
-      var rows = $("#activityList tr");
+      var rows = $("#activityList tbody tr");
       rows.hide();
 
       //filter the jquery object to get results.
       rows.filter(function (i, v) {
           i = i+1;
-          if (i <= 2) {
-            return true;
-          } else {
-            return isEntryShown(i, 1, $("#nameFilter").val().split(" ")) && 
-                   isEntryShown(i, 2, [$("#typeFilter").val()]) &&
-                   isEntryShown(i, 3, $("#tagFilter").val().split(" ")) &&
-                   isEntryShown(i, 4, $("#descriptionFilter").val().split(" "));
-          }
+          return isEntryShown(i, 1, $("#nameFilter").val().split(" ")) && 
+                 isEntryShown(i, 2, [$("#typeFilter").val()]) &&
+                 isEntryShown(i, 3, $("#tagFilter").val().split(" ")) &&
+                 isEntryShown(i, 4, $("#descriptionFilter").val().split(" "));
       })
       //show the rows that match.
       .show();

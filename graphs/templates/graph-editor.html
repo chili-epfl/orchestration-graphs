@@ -7,12 +7,35 @@
 			<div class="modal-content">
 				<div class="modal-header"><h4 class="modal-title">Activity</h4></div>
 				<div class="modal-body">
-					<select id="activitySelector" class="form-control">
-						<option value="choose" href="#">Choose an activity...</option>
-						{% for act in activities %}
-						<option value="{{act.pk}}" href="#">{{ act.name }}</option>
-						{% endfor %}
-					</select>
+
+					<input id="filterActivityModal" class="form-control" placeholder="Filter activities by name, type or tags">
+					<form action="">
+					<div id="tableContainer">
+						<table id="activityList" class="table table-striped">
+							<colgroup>
+								<col style="width:10%">
+								<col style="width:40%">
+								<col style="width:20%">
+								<col style="width:30%">
+							</colgroup>
+							<thead>
+							<tr class="listHeader">
+								<th></th><th>Activity name</th><th>Type</th><th>Tags</th>
+							</tr>
+							</thead>
+							<tbody>
+							{% for activity in activities %}
+								<tr>
+									<td><input type="radio" name="chosenActivity" value="{{activity.pk}}"></td>
+									<td>{{ activity.name }}</td>
+									<td>{{ activity.type }}</td>
+									<td>{{ activity.tags }}</td>
+								</tr>
+							{% endfor %}
+							</tbody>
+						</table>
+					</div>
+					</form>
 				</div>
 				<div class="modal-footer">
 					<button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
@@ -86,6 +109,8 @@
 	    background-position: 6px center; background-repeat: no-repeat;
 	    outline: none; padding: 1px 5px; }
 	.contextMenu LI.hover { cursor: pointer; color: #FFF; background-color: #3399FF; color: #FFF;}
+	#tableContainer { width: 100%; height: 200px; overflow: scroll; display: block; }
+	#activityList tr { width: 100%; display: table-row; table-layout: fixed; }
 	</style>
 
     <div class="row">
@@ -161,6 +186,44 @@
 		$('#scenarioForm #id_name').val("{{ duplicatedScenario.name|escapejs }} - copy");
 		oldScenario = JSON.parse("{{ duplicatedScenario.raphaelJson|escapejs }}");
 	{% endif %}
+
+    function isEntryShown(row, search) {
+    	// Remove empty words
+    	for (var word = search.length; word >= 0; --word) {
+    		if (search[word] == "") {
+    			search.splice(word, 1);
+    		}
+    	}
+    	// Show if no search
+      	if (search.length == 0) {
+        	return true;
+      	}
+      	// Hide if one of the words is not here
+    	var res = true;
+    	for (var word = 0; word < search.length; ++word) {
+	        if ($('#activityList tbody tr:nth-child('+row+')')
+	        	.is(":containsIN('" + search[word] + "')")) {
+	          	res = res && true;
+	        } else {
+	        	res = false;
+	        }
+	    }
+    	return res;
+    }
+
+    function filterActivityList() {
+      //create a jquery object of the rows
+      var rows = $("#activityList tbody tr");
+      rows.hide();
+      //filter the jquery object to get results.
+      rows.filter(function (i, v) {
+          i = i+1;
+          return isEntryShown(i, $("#filterActivityModal").val().split(" "));
+      })
+      //show the rows that match.
+      .show();
+    }
+
 	</script>
 
 

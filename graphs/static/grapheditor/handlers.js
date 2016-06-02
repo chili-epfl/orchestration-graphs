@@ -20,7 +20,8 @@ var graphHandlers = {
 				position.x = event.offsetX;
 				position.y = event.offsetY;
 				graph.storeData(position);
-				$('#activitySelector').val('choose');
+				$('#filterActivityModal').val('').keyup();
+				$('input[name="chosenActivity"]:checked').prop('checked', false);
 				$('#activityChoice').modal('show');
 			}
 		}
@@ -55,12 +56,13 @@ var graphHandlers = {
 	 * Handles Submit on Activity Modal
 	 */
 	onActivityModalSubmit: function(e) {
-		var value = $('#activitySelector').val();
-		if (value != "choose") {
+		var value = $('input[name="chosenActivity"]:checked').val();
+		if (value) {
 			$('#activityChoice').modal('hide');
 			var data = graph.retrieveData();
-			var dbid = parseInt($('#activitySelector').val());
-			$('#activitySelector').val('choose');
+			var dbid = parseInt(value);
+			$('#filterActivityModal').val('').keyup();
+			$('input[name="chosenActivity"]:checked').prop('checked', false);
 			
 			if (data.rectangle) {
 				// Data is the Activity object to edit
@@ -184,8 +186,8 @@ var activityHandlers = {
 		    callback: function(key, options) {
 		    	switch (key) {
 		    		case "edit":
-			        	$('#activitySelector').val(activity.get().dbid);
-			        	graph.storeData(activity.get());
+		    			$('input[value="'+activity.dbid+'"]').prop('checked', true);
+			        	graph.storeData(activity);
 						$('#activityChoice').modal('show');
 						break;
 		    		case "connect":

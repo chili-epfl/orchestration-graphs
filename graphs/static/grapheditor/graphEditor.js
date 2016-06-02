@@ -26,5 +26,14 @@ window.onload = function () {
 	$("#operatorSubtype").hide();
 	$("#operatorSublabel").hide();
 
+
+	$.extend($.expr[":"], {"containsIN": function(elem, i, match, array) {
+    	return (elem.textContent || elem.innerText || "").toLowerCase().indexOf((match[3] || "").toLowerCase()) >= 0;
+    }});
+    $("#filterActivityModal").keyup(filterActivityList);
+    $("#activityList tr").click(function() {
+    	$(this).find('input:radio').prop('checked', true);
+    });
+
 	graph = SingletonGraph.getInstance("graph");
 }

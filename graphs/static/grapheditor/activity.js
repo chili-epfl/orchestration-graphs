@@ -71,8 +71,6 @@ var Activity = function() {
 	activity.Ox = 0;
 	activity.Oy = 0;
 
-
-	activity.get = function() { return activity; };
 	activity.getWidth = function() { return width; };
 	/**
 	 * Bind Raphael elements to the activity
