@@ -21,15 +21,29 @@
 	</div>
 
     <div class="row">
-        <div class="table-responsive">
-            <table class="table table-striped">
-            <tr>
-            <th>Activity name</th><th>Type</th><th>Description</th><th>Actions</th>
+      <div class="table-responsive">
+      <table id="activityList" class="table table-striped">
+            <tr class="listHeader">
+              <th>Activity name</th><th>Type</th><th data-priority="1">Tags</th><th>Description</th><th>Actions</th>
+            </tr>
+            <tr class="listHeader">
+              <td><input id="nameFilter" class="form-control"></td>
+              <td><select id="typeFilter" class="form-control">
+                <option value="" href="#">All</option>
+                <option value="text" href="#">Text</option>
+                <option value="quiz" href="#">Quiz</option>
+                <option value="link" href="#">Link</option>
+                <option value="psycho" href="#">Psycho</option>
+              </select></td>
+              <td><input id="tagFilter" class="form-control"></td>
+              <td><input id="descriptionFilter" class="form-control"></td>
+              <td></td>
             </tr>
             {% for activity in object_list %}
             <tr>
               <td>{{ activity.name }}</td>
               <td>{{ activity.type }}</td>
+              <td>{{ activity.tags }}</td>
               <td>{{ activity.description }}</td>
               <td><a class="btn btn-default workspace-link" href="{% url 'activity' activity.id %}">Preview</a>
                   <a class="btn btn-default" href="{% url 'activity-editor' activity.id %}">Edit</a>
@@ -52,5 +66,48 @@ $(".workspace-link").click(function(event){
                 document.getElementById('act-list').innerHTML = "";
                 document.getElementById('back-button').style.visibility = "visible";
                });
+
+    $.extend($.expr[":"], {"containsIN": function(elem, i, match, array) {
+    return (elem.textContent || elem.innerText || "").toLowerCase().indexOf((match[3] || "").toLowerCase()) >= 0;
+    }
+    });
+
+    function isEntryShown(row, col, search) {
+      if (search[0] == "") {
+        return true;
+      }
+      for (var word = 0; word < search.length; ++word) {
+        if ($('#activityList tr:nth-child('+row+') td:nth-child('+col+')')
+            .is(":containsIN('" + search[word] + "')")) {
+          return true;
+        }
+      }
+      return false
+    }
+
+    function filterActivityList() {
+      //create a jquery object of the rows
+      var rows = $("#activityList tr");
+      rows.hide();
+
+      //filter the jquery object to get results.
+      rows.filter(function (i, v) {
+          i = i+1;
+          if (i <= 2) {
+            return true;
+          } else {
+            return isEntryShown(i, 1, $("#nameFilter").val().split(" ")) && 
+                   isEntryShown(i, 2, [$("#typeFilter").val()]) &&
+                   isEntryShown(i, 3, $("#tagFilter").val().split(" ")) &&
+                   isEntryShown(i, 4, $("#descriptionFilter").val().split(" "));
+          }
+      })
+      //show the rows that match.
+      .show();
+    }
+
+    $("#nameFilter, #tagFilter, #descriptionFilter").keyup(filterActivityList);
+    $("#typeFilter").change(filterActivityList);
+
     </script>
 {% endblock extra-scripts %}

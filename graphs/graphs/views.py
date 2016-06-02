@@ -87,7 +87,7 @@ class ActivityUpdateView(LoginRequiredMixin, UpdateView):
     """UpdateView subclass for the activity editor"""
     model = Activity
     template_name = 'activity-editor.html'
-    fields = ['name', 'type', 'source', 'description']
+    fields = ['name', 'type', 'source', 'description', 'tags']
     success_url = reverse_lazy("activity-list")
 
     def get_form(self, form_class):
@@ -110,7 +110,7 @@ class ActivityCreateView(LoginRequiredMixin, CreateView):
     """CreateView subclass for the activity editor"""
     model = Activity
     template_name = 'activity-editor.html'
-    fields = ['name', 'type', 'source', 'description']
+    fields = ['name', 'type', 'source', 'description', 'tags']
     success_url = reverse_lazy('activity-list')
 
     def get_form(self, form_class):
