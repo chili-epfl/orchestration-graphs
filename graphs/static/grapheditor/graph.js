@@ -32,16 +32,11 @@ var Graph = function(divId) {
     		build: graphHandlers.onContextMenu,
     	});
     	$("#saveButton").on('click', graphHandlers.onSaveButtonClick);
-    	$("#confirmSaveModal").on('click', saveToDatabase);
 
-    	$("#confirmActivityModal").on('click', graphHandlers.onActivityModalSubmit);
-
-    	$("#operatorTypeSelector").on('change', graphHandlers.onOperatorTypeSelect);
-    	$("#operatorLabelSelector").on('change', graphHandlers.onOperatorLabelSelect);
-    	$("#confirmOperatorModal").on('click', graphHandlers.onOperatorModalSubmit);
-    	$("#cancelOperatorModal").on('click', graphHandlers.onOperatorModalCancel);
 
     	$('#inspectContainer .close').on('click', inspectPanelHandlers.onClear);
+
+    	$("#confirmSaveModal").on('click', saveToDatabase);
     }
 
 
@@ -304,7 +299,6 @@ var Graph = function(divId) {
      * Retrieved by onActivityModalSubmit handler
      * @param {Object} data - position of the new activity (ADD)
      * 						  Activity object to edit (EDIT)
-     * 						  Raphael elements to load (LOAD)
      */
 	graph.storeData = function (data) { storedData = data; }
 	graph.retrieveData = function () { return storedData; }

@@ -34,6 +34,12 @@ window.onload = function () {
     $("#activityList tr").click(function() {
     	$(this).find('input:radio').prop('checked', true);
     });
+    $("#confirmActivityModal").on('click', modalHandlers.onActivityModalSubmit);
+    $("#operatorTypeSelector").on('change', modalHandlers.onOperatorTypeSelect);
+    $("#operatorLabelSelector").on('change', modalHandlers.onOperatorLabelSelect);
+    $("#confirmOperatorModal").on('click', modalHandlers.onOperatorModalSubmit);
+   	$("#cancelOperatorModal").on('click', modalHandlers.onOperatorModalCancel);
 
 	graph = SingletonGraph.getInstance("graph");
+
 }
