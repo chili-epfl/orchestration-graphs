@@ -47,10 +47,10 @@ var DeleteButton = function() {
 
 	/**
 	 * Custom handlers related to this delete button
-	 * - Click on circle/text => delete the target
 	 *
 	 */
 	deleteButton.setCustomHandlers = function() {
+		// Delete target on click
 		var nodes = [deleteButton.circle.node, deleteButton.text.node];
 		$(nodes).on('click', {target: deleteButton.getTarget()}, deleteButtonHandlers.onClick);
 	};

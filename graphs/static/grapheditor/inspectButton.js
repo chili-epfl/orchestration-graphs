@@ -47,10 +47,10 @@ var InspectButton = function() {
 
 	/**
 	 * Custom handlers related to this inspect button
-	 * - Click on circle/text => inspect the target
 	 *
 	 */
 	inspectButton.setCustomHandlers = function() {
+		// Inspect target on click
 		var nodes = [inspectButton.circle.node, inspectButton.text.node];
 		$(nodes).on('click', {target: inspectButton.getTarget()}, inspectButtonHandlers.onClick);
 	};

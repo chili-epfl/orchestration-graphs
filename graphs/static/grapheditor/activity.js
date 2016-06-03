@@ -93,12 +93,12 @@ var Activity = function() {
 	/**
 	 * Bind Raphael elements to the activity
 	 * Called by the Activity builder
-	 * @param {Object} data - containing:
+	 * @param {Object} params - containing:
 	 *		  {dbid, x, y}				if creating new activity
 	 *		  {dbid, raphael elements}	if loading activity
 	 */
 	activity.initRaphaelElements = function(params) {
-		// Initialize elements from data
+		// Initialize elements from params
 		if (params.x && params.y) {
 			activity.x = params.x;
 			activity.y = graph.getNewY(params.y);

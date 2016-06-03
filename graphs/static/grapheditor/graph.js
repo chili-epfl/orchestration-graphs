@@ -5,7 +5,7 @@
  */
 var Graph = function(divId) {
 	
-	// Instance to return
+	// Private varuabkes
 	var graph = {};
 
 	var raphaelJson, graphJson;
@@ -15,40 +15,45 @@ var Graph = function(divId) {
 	var height = (nPlanes+1)*interPlanes; // total height of the paper in px
 	var width = 2000; //px
 	var possibleConnection = null;
-	// When creating new activity, stores x and y before showing the modal
-	// When editing an activity, stores the Activity object before showing the modal
+	
+	// When creating new activity, storedData contains the new position
+	// When editing an activity, storedData contains the Activity object
 	var storedData = null;
 	var inspectedObject = null;
 
 	/**
 	 * Custom handlers related to the graph
+	 *
 	 */
 	function setCustomHandlers() {
+		// Update RaphaelJS cursor element and possible connection on mouse move
     	$("#"+divId).on('mousemove', {nFixedElements: nFixedElements}, graphHandlers.onMouseMove);
+    	// Cancel Connection creation or init Activity creation on click
     	$("#"+divId).on('click', {nFixedElements: nFixedElements}, graphHandlers.onClick);
-    	$("#"+divId).contextMenu({
-    		selector: "*",
-    		nFixedElements: nFixedElements,
+    	// Build a context menu on right click
+    	$("#"+divId).contextMenu({ selector: "*", nFixedElements: nFixedElements,
     		build: graphHandlers.onContextMenu,
     	});
+    	// Display save modal when clicking save button
     	$("#saveButton").on('click', graphHandlers.onSaveButtonClick);
-
-
+    	// Clear the inspector panel when clicking on the close button
     	$('#inspectContainer .close').on('click', inspectPanelHandlers.onClear);
-
+    	// Save the scenario when confirming the save modal
     	$("#confirmSaveModal").on('click', saveToDatabase);
     }
 
 
 	/**
-	 * Builds activities and connections from json
+	 * Builds activities and connections from raphaelJson
 	 * @param {string} json - RaphaelJson from database
+	 *
 	 */
 	function loadScenario(json) {
 	    // Generate graph from JSON
 	    graph.paper.fromJSON(nFixedElements, json, function(el, data) {
+	    	// If last RaphaelJS element of an activity is found
 	      	if (data.description == 'activityDeleteText') {
-	    		// Creates new Activity
+	    		// Build a new Activity
 	    		var activity = graph.buildActivity({
 	          		dbid : data.dbid,
 	          		counter : data.counter,
@@ -59,8 +64,9 @@ var Graph = function(divId) {
 	            	deleteCircle : graph.paper.getById(el.id - 1),
 	            	deleteText : el
 	            });
+	        // If last RaphaelJS element of a connection is found
 			} else if (data.description == 'connectionDeleteText') {
-	        	// Creates new Connection
+	    		// Build a new Connection
 	            graph.buildConnection({
 	            	sId: data.startId,
 	            	sCount: data.startCount,
@@ -83,7 +89,7 @@ var Graph = function(divId) {
 
 	/**
 	 * Generates Jsons using private functions
-	 * Submits Django form
+	 * Submits form that saves the scenario in database
 	 *
 	 */
    	function saveToDatabase() {
@@ -95,8 +101,8 @@ var Graph = function(divId) {
    	};
  
 	/**
-	 * Generates JSON containing all raphael elements (using plugin)
-	 * ignores fixed elements (planes, cursors, etc.)
+	 * Serialize the graph for future edition (ignores fixed elements)
+	 * Save custom attributes of Raphael elements in the json output
 	 * @return {String} 
 	 *
 	 */
@@ -119,7 +125,9 @@ var Graph = function(divId) {
 	}
 
 	/**
-	 * Generates JSON containing scenario
+	 * Serialize the graph for path generation
+	 * Activity (and start) format: { 'id': dbid, 'counter': counter }
+	 * Connection format : { 'a1': { 'id': dbid, 'counter': counter }, 'a2': { 'id': dbid, 'counter': counter }, }
 	 * @return {String} 
 	 *
 	 */
@@ -141,8 +149,8 @@ var Graph = function(divId) {
 	}
 
 	/**
-	 * Generates start object for GraphJson
-	 * @return {Object} - id & counter 
+	 * Generates start object for GraphJson: find the leftest activity in the graph
+	 * @return {Object} - Activity in the graphJson format
 	 *
 	 */
 	function getStartActivity() {
@@ -164,18 +172,21 @@ var Graph = function(divId) {
 
 	// Public variables and functions
 
-	graph.connections = [];
-	graph.activities = [];
 	graph.paper = Raphael(divId, width, height);
 	graph.id = divId;
-	graph.blockActivityCreation = false;
+	// List of all activities and connections objects in the graph
+	graph.connections = [];
+	graph.activities = [];
+
 	graph.selectedActivities = [];
+	graph.blockActivityCreation = false;
 	graph.counterMap = {};
 
 	/**
-	 * Called on instantiation of the Singleton
-	 * Initialize fixed elements (planes, possibleConnection, cursor)
-	 * If editing existing scenario, loadScenario
+	 * Called on instantiation of the Singleton graph
+	 * Initialize fixed elements (planes, possibleConnection, cursor, ...)
+	 * If editing an existing scenario, load it
+	 *
 	 */
     graph.init = function() {
     	// Create social planes
@@ -204,6 +215,14 @@ var Graph = function(divId) {
 		}
 	};
 
+	/**
+	 * Get the Activity object in the graph from its dbid and counter
+	 * Called in Connection initRaphaelElements when creating or loading (to get the from and to Raphael elements)
+	 * Called in the graphHandlers on context menu to find on which activity the right click was
+	 * @param {int} dbid
+	 * @param {int} counter
+	 *
+	 */
 	graph.getActivityFromDbid = function(dbid, counter) {
 		var res = null;
 		graph.activities.forEach(function(activity) {
@@ -215,7 +234,9 @@ var Graph = function(divId) {
 	};
 
 	/**
-	 * Compute new y such that the activity is on the nearest plane
+	 * Find the y coordinate of the nearest plane from an oldy position
+	 * Called from Activity initRaphaelElements when creating or loading
+	 * Called from the up function in the activityHandlers (end of drag and drop)
 	 * @param {int} oldy - current y position of the activity
 	 * @return {int} - new y position of the activity
 	 */
@@ -230,7 +251,9 @@ var Graph = function(divId) {
 	};
 
 	/**
-	 * Calls update function (path and BBox) for each connection
+	 * Update path and BBox for each connection
+	 * Called in the move and up functions of the activityHandlers (drag and drop)
+	 *
 	 */
 	graph.updateConnections = function() {
 		for (var i = graph.connections.length; i--;) {
@@ -255,6 +278,10 @@ var Graph = function(divId) {
 		}
    	};
 
+   	/**
+   	 * Delete all activities (and connections) from the graph
+   	 *
+   	 */
    	graph.clear = function() {
    		for (var i = graph.activities.length-1; i >= 0; i--) {
    			graph.activities[i].delete();
@@ -279,7 +306,8 @@ var Graph = function(divId) {
 	};
 	
     /**
-     * Return true if selectedActivities are not already connected
+     * @return {boolean} - true if selectedActivities are not already connected
+     *
      */
 	graph.isConnectionValid = function() {
 		var existingConnections = 0;
@@ -294,13 +322,7 @@ var Graph = function(divId) {
     	return true;
 	};
 
-    /**
-     * Allows to store data to distinguish activity creation and edition
-     * Retrieved by onActivityModalSubmit handler
-     * @param {Object} data - position of the new activity (ADD)
-     * 						  Activity object to edit (EDIT)
-     */
-	graph.storeData = function (data) { storedData = data; }
+    graph.storeData = function (data) { storedData = data; }
 	graph.retrieveData = function () { return storedData; }
 	graph.setInspectedObject = function (object) {
 		if (inspectedObject) {

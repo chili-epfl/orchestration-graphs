@@ -65,16 +65,12 @@ var Connection = function() {
 	        x3 = [0, 0, 0, 0, x4, x4, x4 - dx, x4 + dx][res[1]].toFixed(3),
 	        y3 = [0, 0, 0, 0, y1 + dy, y1 - dy, y4, y4][res[1]].toFixed(3);
 	    
-	    // Update path and delete button
+	    // Update path and reposition buttons
 	    connection.path.attr({path: ["M", x1.toFixed(3), y1.toFixed(3), "C", x2, y2, x3, y3, x4.toFixed(3), y4.toFixed(3)].join(",")});
 		
 		if (connection.deleteButton && connection.inspectButton) {
-			connection.inspectButton.setPosition(
-				connection.path.getPointAtLength(
-					1/3 * connection.path.getTotalLength()));
-			connection.deleteButton.setPosition(
-				connection.path.getPointAtLength(
-					2/3 * connection.path.getTotalLength()));
+			connection.inspectButton.setPosition(connection.path.getPointAtLength(1/3 * connection.path.getTotalLength()));
+			connection.deleteButton.setPosition(connection.path.getPointAtLength(2/3 * connection.path.getTotalLength()));
 		}
 	}
 
@@ -97,41 +93,48 @@ var Connection = function() {
 
 	// Public variables and functions
 
-	// Raphael rectangles
+	// Raphael elements
 	connection.from = null;
 	connection.to = null;
+	connection.path = null;
+	connection.inspectSet = paper.set(); // set of elements that will change style when inspected
+
+	// Buttons
+	connection.inspectButton = null;
+	connection.deleteButton = null;
+
+	// Complex operator information
 	connection.type = null;
 	connection.subtype = null;
 	connection.label = null;
 	connection.sublabel = null;
 
-	connection.path = null;
-	connection.inspectButton = null;
-	connection.deleteButton = null;
-	connection.inspectSet = paper.set(); // set of elements that will change style when inspected
-
 	/**
-	 * Initialize the connection by setting from, to and path
+	 * Bind Raphael elements to the connection
+	 * Called by the Connection builder
 	 * @param {Object} params - containing :
-	 *		  {sId, sCount, eId, eCount} if creating new connection
-	 *		  {sId, sCount, eId, eCount, raphael elements} if loading connection
+	 *		  {sId, sCount, eId, eCount}					if creating new connection
+	 *		  {sId, sCount, eId, eCount, raphael elements}	if loading connection
 	 * data also contains type, subtype, label and sublabel if operator is complex
+	 *
 	 */
 	connection.initRaphaelElements = function(params) {
+		// Initialize elements from params
 		if (params.sId && params.sCount && params.eId && params.eCount) {
 			connection.from = graph.getActivityFromDbid(params.sId, params.sCount).rectangle;
 			connection.to = graph.getActivityFromDbid(params.eId, params.eCount).rectangle;
-			
 			if (params.path) {
 				connection.path = params.path;
 			} else {
 				connection.path = paper.path();
 			}
-			connection.inspectSet.push(connection.path);
 		} else {
 			throw new Error('Impossible to create connection.');
 		}
 		connection.update();
+
+		// Initialize sets
+		connection.inspectSet.push(connection.path);
 		set.push(connection.path);
 	};
 
@@ -145,8 +148,10 @@ var Connection = function() {
 	};
 
 	/**
-	 * Set Raphael elements custom attributes
-	 * Called when creating connection or after editing activity
+	 * Set Connection type, label, and Raphael elements custom attributes
+	 * Called from the Connection builder when creating of loading activity
+	 * Called after updating the counter of an activity
+	 * @param {Object} data (optional) - contains type and label if loading or creating
 	 *
 	 */
 	connection.setAttributes = function(data) {
@@ -161,6 +166,7 @@ var Connection = function() {
 			elem.startCount = connection.from.counter;
 			elem.endId = connection.to.dbid;
 			elem.endCount = connection.to.counter;
+			// Type is stored as 'otype' attribute (type of element is 'path')
     		elem.optype = connection.type;
     		elem.subtype = connection.subtype;
     		elem.label = connection.label;
@@ -180,6 +186,11 @@ var Connection = function() {
 		connection = null;
 	};
 
+	/**
+	 * Fill the inspector panel with information about the Connection
+	 * Set the inspected object to this Connection
+	 *
+	 */
 	connection.inspect = function() {
 		$('#inspectContainer .panel-heading #inspectTitle')
 		.html('Operator');
@@ -229,13 +240,11 @@ var Connection = function() {
 	 *
 	 */
 	connection.setCustomHandlers = function() {
+		// Show buttons if moving over BBox
 		$("#"+graph.id).on('mousemove', {connection: connection}, connectionHandlers.onMouseMove);
 	};
 
-	/**
-	 * Getter and setters for private variables
-	 *
-	 */
+	// Getter and setters for private variables
 	connection.setFrom = function(rectangle) { connection.from = rectangle; };
 	connection.setTo = function(rectangle) { connection.to = rectangle; };
 	connection.setPath = function(path) { connection.path = path; };
